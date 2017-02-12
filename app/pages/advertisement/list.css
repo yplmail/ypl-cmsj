@@ -1,1 +1,101 @@
-list.css
+.adv-list-wrapper{
+    position: relative;
+    width:100%;
+}
+
+.adv-list-wrapper ul > li {
+    position: relative;
+    height:4.22rem;
+    background: url(../../images/adv_bg_01.jpg) repeat;
+    background-size: cover;
+    border-bottom: 4px solid #eee;
+}
+
+.adv-list-wrapper li > a{
+    display: block;
+}
+
+.adv-list-wrapper li > a > div:nth-child(1){
+    line-height: 1rem;
+    height:1rem;
+    min-height: 1rem;
+    background: url(../../images/adv_top_bg.png) repeat;
+    background-size: cover;
+}
+
+.adv-list-wrapper li > a > div:nth-child(1) h2{
+    color:#fff;
+    font-size: 15px;
+    padding-left:.45rem;
+}
+
+.adv-list-wrapper li > a > div:nth-child(2){
+    line-height: 2.22rem;
+    height:2.22rem;
+    min-height: 2.22rem;
+   text-align: center;
+}
+
+.adv-list-wrapper li > a > div:nth-child(3){
+    line-height: 1rem;
+    height:1rem;
+    min-height: 1rem;
+    background: url(../../images/adv_bottom_bg.png) repeat;
+    background-size: cover;
+}
+
+.adv-list-wrapper li > a > div:nth-child(3) p{
+    width:25%;
+    height:100%;
+    color:#fff;
+    text-align: center;
+    font-size: 10px;
+}
+
+.adv-list-wrapper .video-play{
+   display: inline-block;
+   width:1.11rem;
+   height:1.11rem;
+   background: url(../../images/video_play_btn.png) repeat;
+   background-size: 100% 100%;
+}
+
+.adv-list-wrapper p.adv-invest:before{
+   content:'';
+   display: inline-block;
+   width:.28rem;
+   height:.28rem;
+   background: url(../../images/adv_amt_icon.png) repeat;
+   background-size: 100%;
+   margin-right: 5px;
+   vertical-align:text-bottom;
+}
+
+.adv-list-wrapper p.adv-packetcount:before{
+   content:'';
+   display: inline-block;
+   width:.28rem;
+   height:.29rem;
+   background: url(../../images/adv_packet_icon.png) repeat;
+   background-size: 100%;
+   margin-right: 5px;
+   vertical-align:text-bottom;
+}
+
+.adv-list-wrapper p.adv-score:before{
+   content:'';
+   display: inline-block;
+   width:.28rem;
+   height:.29rem;
+   background: url(../../images/adv_score_icon.png) repeat;
+   background-size: 100%;
+   margin-right: 5px;
+   vertical-align:text-bottom;
+}
+
+.adv-list-wrapper p.adv-time span{
+   background-color: #adaca8;
+   color:#000;
+   padding:3.5px 10px;
+   border-radius: 10px;
+}
