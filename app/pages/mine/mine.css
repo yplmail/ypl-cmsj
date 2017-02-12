@@ -1,0 +1,391 @@
+
+    .personal-content{
+        position: relative;
+        height: 100%;
+    }
+    .personal-header {
+        position: relative;
+        height: 1.46rem;
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+    }
+
+    .personal-header .header-left{
+        float: left;
+        height:1.04rem;
+        margin:.22rem 0 .22rem .24rem;
+        display: flex;
+    }
+
+    .personal-header .head-portrait{
+        flex: 1;
+    }
+
+    .personal-header .head-portrait img{
+        width: 1.04rem;
+    }
+
+    .personal-header .personal-detail{
+        margin-left:.25rem;
+    }
+    .personal-header .personal-msg{
+        position: relative;
+        padding-left: .24rem;
+        padding-top: .1rem;
+    }
+    .personal-msg img{
+        width: .37rem;
+        height: .29rem;
+    }
+    .personal-msg a{
+        display: block;
+        position: relative;
+        line-height: 0;
+    }
+    .personal-header .mobile{
+        color: #646464;
+        font-size: .33rem;
+    }
+
+    .personal-header .idenfity{
+        display: inline-block;
+        font-size: 0.22rem;
+        color: #fff;
+        background-color: #12b7f5;
+        border-radius: 10px;
+        padding: 0 8px;
+    }
+
+    .personal-header .noIdenfity{
+        display: inline-block;
+        font-size: 0.22rem;
+        color: #fff;
+        background-color: #dcdcdc;
+        border-radius: 10px;
+        padding: 0 8px;
+        cursor: pointer;
+    }
+
+    .personal-header .header-right{
+        position: relative;
+        float: right;
+        padding-right: .24rem;
+        line-height: 1.46rem;
+        height:1.46rem;
+    }
+    .personal-header .header-right button{
+        border:1px solid #12b7f5;
+        background-color: #fff;
+        color:#12b7f5;
+        font-size: .24rem;
+        border-radius: 5px;
+        padding:3px 10px;
+        margin-top: .5rem;
+    }
+
+    .personal-header .header-right img{
+        width:.48rem;
+    }
+
+    .personal-header .msg-count {
+        position: absolute;
+        top: -.15rem;
+        left: .2rem;
+        background-color: #fa3e3e;
+        border-radius:50%;
+        display: inline-block;
+        width: .33rem;
+        height: .33rem;
+        line-height: .33rem;
+        color: #fff;
+        font-size: .2rem;
+        text-align: center;
+    }
+    .personal-header .msg-beyond{
+        font-size: .15rem;
+    }
+
+    .personal-account{
+        position: relative;
+        height: 1.98rem;
+        background-color: #fff;
+        margin-bottom:.25rem;
+    }
+
+    .personal-account .link-widthraw{
+        width:100%;
+    }
+
+    .personal-account .account-text {
+        padding:.4rem 0 0 .26rem;
+        font-size: .27rem;
+        color: #969696;
+    }
+
+    .personal-account .eye{
+        display: inline-block;
+        width: .38rem;
+        height: .22rem;
+        margin-left: .2rem;
+        background-image : url(../../images/mine/mine_eye_open.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        font-size: .27rem;
+    }
+
+    .personal-account .close {
+        background-image: url(../../images/mine/mine_eye_close.png);
+    }
+
+    .personal-account .account-money {
+        position: relative;
+        padding-left: .26rem;
+        color: #12b7f5;
+        font-size: .7rem;
+    }
+
+    .personal-account .account-money a{
+        position: absolute;
+        display: inline;
+    }
+
+    .personal-account .account-money img{
+        width: .33rem;
+    }
+
+    .personal-account .account-money img.mask-q-icon{
+        vertical-align: .15rem;
+    }
+
+    .personal-account .widthdraw{
+        position: absolute;
+        top:.8rem;
+        right:.6rem;
+        font-size: .25rem;
+        color:#969696;
+    }
+
+    .customer-planner{
+        background: #fff;
+        height: .9rem;
+        line-height: .9rem;
+        margin: .26rem 0;
+        color: #323232;
+        font-size: .3rem;
+        padding-left: .26rem;
+    }
+
+    .customer-planner a {
+        display: block;
+        padding-right: .4rem;
+        color: #323232;
+    }
+
+    .router-nav {
+        background-color: #fff;
+        text-align: center;
+        height: 1.55rem;
+    }
+
+    .router-nav ul {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .router-nav ul li {
+        flex: 1;
+    }
+
+    .router-nav ul li > a {
+        display: block;
+        height: 1.55rem;
+        width: 100%;
+    }
+
+    .router-nav ul li a img {
+        width: .4rem;
+        margin-top: .4rem;
+    }
+
+    .router-nav ul li a p {
+        color: #646464;
+        margin-top: .1rem;
+        font-size: .23rem
+    }
+
+    .planner-product{
+        margin-top: .26rem;
+        background-color: #fff;
+    }
+
+    .planner-product h1 {
+        padding-left: .26rem;
+        font-size: .32rem;
+        color: #323232;
+        line-height: .74rem;
+        height: .74rem;
+        border: 1px solid #eee;
+    }
+
+    .planner-product li {
+        background-color: #fff;
+    }
+
+    .planner-product li > a {
+        display: block;
+    }
+
+    .planner-product .product-name{
+        margin: 0 .26rem;
+    }
+
+    .planner-product .product-name h2 {
+        float: left;
+        font-size: .28rem;
+        height: .83rem;
+        line-height: .83rem;
+        width: 4.5rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color:#646464;
+    }
+
+    .planner-product .product-name img {
+        float: right;
+        width: .97rem;
+        margin-left: .2rem;
+        margin-top: -1px;
+    }
+
+    .planner-product .product-detail{
+        position: relative;
+        border-top: 1px dashed #eee;
+        height: 2.08rem;
+        overflow: hidden;
+        margin: 0 .26rem;
+    }
+
+    .detail-top {
+        margin: .3rem 0 .2rem 0;
+    }
+
+    .planner-product .detail-top > div {
+        float: left;
+    }
+
+    .planner-product .detail-top > div:nth-child(1) {
+        width: 25%;
+    }
+
+    .planner-product .detail-top > div:nth-child(2) {
+        width: 35%;
+    }
+
+    .planner-product .detail-top > div:nth-child(3) {
+        width: 25%;
+        color: #323232;
+    }
+
+    .planner-product .detail-top > div:nth-child(4) {
+        text-align: right;
+        width: 15%;
+    }
+
+    .planner-product .detail-top .recommand {
+        display: inline-block;
+        width: .9rem;
+        height: .9rem;
+        background: url(../../images/mine/mine_recommand_icon.png) no-repeat;
+        background-size: contain;
+    }
+
+    .planner-product .detail-top .recommand-agin {
+        display: inline-block;
+        width: .9rem;
+        height: .9rem;
+        background: url(../../images/mine/mine_recommand_agin.png) no-repeat;
+        background-size: contain;
+    }
+
+    .planner-product .product-detail h3 {
+        color: #969696;
+        font-size: .24rem;
+        line-height: 2em;
+    }
+
+    .planner-product .product-detail p {
+        padding: .05rem 0;
+        color: #12b7f5;
+        font-size: .32rem;
+        line-height: 1em;
+    }
+    .product-detail p >span :first-child{
+        line-height: 1em;
+    }
+    .planner-product .product-detail p > span.unit{
+        font-size: .2rem;
+        line-height: 1.2em;
+        vertical-align: bottom;
+    }
+
+    .planner-product .detail-top > div:nth-child(3) p {
+        color: #323232;
+    }
+
+    .planner-product .detail-bottom {
+        font-size: 0;
+    }
+
+    .planner-product .detail-bottom .progress {
+        display: inline-block;
+        width: 6.1rem;
+        height: 5px;
+        background-color: #dcdcdc;
+        border-radius: 2.5px;
+    }
+
+    .planner-product .detail-bottom .percentage {
+        display: inline-block;
+        background-color: #10abe5;
+        height: 5px;
+        border-radius: 2.5px;
+    }
+
+    .planner-product .detail-bottom .percentageText {
+        vertical-align: -2px;
+        margin-left: .1rem;
+        font-size: .16rem;
+        color: #969696;
+    }
+
+    .planner-product .product-footer {
+        height: .62rem;
+        background-color: #fafafa;
+        border-top: 1px dashed #eee;
+        padding:.13rem .26rem 0;
+    }
+
+    .planner-product .product-footer span {
+        float: left;
+        box-sizing: content-box;
+        color: #fe4747;
+        font-size: .2rem;
+        border: 1px solid #fe4747;
+        border-radius: 100px;
+        padding: 0 .1rem;
+        height: .34rem;
+        line-height: .34rem;
+        margin-left: .1rem;
+    }
+    /* 底部下载 */
+    .download{
+        position:fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 10rem;
+        margin: 0 auto;
+    }
+
