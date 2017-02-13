@@ -56,7 +56,13 @@ module.exports = {
             test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
             exclude: /^node_modules$/,
             loader: 'url?limit=10240&name=images/[name]_[hash:7].[ext]'
-        }]
+        }
+        // , {
+        //     test: /\.(png|jpe?g)(\?.*)?$/,
+        //     exclude: /^node_modules$/,
+        //     loader: 'file?limit=10240&name=images/[name]_[hash:7].[ext]'
+        // }
+        ]
     },    
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss', '.css','.less'],
