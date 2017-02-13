@@ -13,21 +13,26 @@ class Login extends React.Component{
                <div className="login-content">
                  <ul>
                      <li>
-                        <label for="mobile"></label>
+                        <label></label>
                         <input id="mobile" type="text" placeholder="请输入您的手机号"/>
                      </li>
 
                      <li>
-                        <input id="code" type="tel" placeholder="请输入验证码"/>
-                        <label for="code">获取验证密码</label>
-                     </li>
-                     <li>
+                        <label></label>
                         <input id="password" type="text" placeholder="请设置您的密码"/>
-                        <label for="password"></label>
+                        <span></span>
                      </li>
 
-                     <li>
-                         <a>立即注册</a>
+                    <li>
+                        <a>忘记密码？</a>
+                     </li>
+
+                    <li>
+                        <a>登陆</a>
+                     </li>
+
+                    <li>
+                        <a>没有账号、立即注册</a>
                      </li>
                  </ul>
                </div>
