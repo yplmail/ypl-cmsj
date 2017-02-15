@@ -57,10 +57,11 @@ class List extends React.Component{
       return (
           <div className="mine-list-wrapper">
               <ul>
-                  <li>红包记录</li>
-                  <li>意见反馈</li>
-                  <li>关于产品</li>
-                  <li>联系我们</li>
+                  <li><Link to="/wallet">我的钱包</Link></li>
+                  <li><Link to="/feedback">意见反馈</Link></li>
+                  <li><Link>关于产品</Link></li>
+                  <li><Link>联系我们</Link></li>
+                  <li><Link to="/setting">设置</Link></li>
               </ul>
           </div>
       )

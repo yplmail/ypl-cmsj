@@ -62,7 +62,6 @@
     margin:0 .29rem;
     border-bottom: 1px solid #999;
     font-size: 17px;
-    color:#333;
     padding-left:0.8rem;
 }
 
@@ -79,7 +78,7 @@
 }
 
 .mine-list-wrapper li:nth-child(1){
-   background:url(../../images/packet_recrod_icon.png) no-repeat;
+   background:url(../../images/mine_wallet_icon.png) no-repeat;
    background-size: .43rem .51rem;
    background-position: left center;
 }
@@ -100,4 +99,15 @@
    background:url(../../images/link_us_icon.png) no-repeat;
    background-size: .48rem .51rem;
    background-position: left center;
+}
+
+.mine-list-wrapper li:nth-child(5){
+   background:url(../../images/setting_icon.png) no-repeat;
+   background-size: .51rem .51rem;
+   background-position: left center;
+}
+
+.mine-list-wrapper li a{
+   display: block;
+   color:#333;
 }
