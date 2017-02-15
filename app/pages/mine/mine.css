@@ -40,15 +40,17 @@
     height: 1.5rem;
     text-align: center;
     color:#fff;
+
 }
 
-.mine-header-wrapper .springgrass-wallet > div{
-    border-right: 1px solid #fff;
+.mine-header-wrapper .springgrass-wallet p:first-child{
+  font-size: 24px;
 }
 
-.mine-header-wrapper .springgrass-wallet > div:nth-child(3){
-    border-right: none;
+.mine-header-wrapper .springgrass-wallet p:last-child{
+  font-size: 12px;
 }
+
 
 .mine-list-wrapper{
     position: relative;

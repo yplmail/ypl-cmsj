@@ -30,19 +30,9 @@ class Header extends React.Component{
               <div>
                   <span>不仅仅是看客</span>
               </div>
-              <div className="springgrass-wallet" data-flex="box:mean main:center cross:center">
-                  <div>
-                      <p>￥637.25</p>
-                      <p>获赠总额</p>
-                  </div>
-                  <div>
-                      <p>￥637.25</p>
-                      <p>我的零钱</p>
-                  </div>
-                  <div>
-                      <p>1.22</p>
-                      <p>转入微信</p>
-                  </div>                  
+              <div className="springgrass-wallet" data-flex="dir:top main:center cross:center">
+                  <p>￥637.25</p>
+                  <p>获赠总额</p>              
               </div>
           </div>
       )

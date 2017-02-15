@@ -1,102 +1,101 @@
-.login-wrapper{
-	position: relative;
-	width:100%;
-	height:100%;
-	background-color: #eee;
-	background: url(../../images/login_bg.png) no-repeat;
-	background-size: cover;
+.login-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
+    background: url(../../images/login_bg.png) no-repeat;
+    background-size: cover;
 }
 
-.login-content{
-	position: relative;
-	padding:1.8rem .75rem 0 .75rem;
+.login-content {
+    position: relative;
+    padding: 1.8rem .75rem 0 .75rem;
 }
 
-.login-content li{
-	position: relative;
-    height:.86rem;
-    border:1px solid #333237;
+.login-content li {
+    position: relative;
+    height: .86rem;
+    border: 1px solid #333237;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: .32rem;
 }
 
-.login-content li label{
-	display: inline-block;
-	height:.56rem;
-	width:.8rem;
-	margin:.15rem 0;
-	border-right: 1px solid #999;
-}
-
-.login-content li input{
-	display: inline-block;
-	height:100%;
-	width:5rem;
-	padding-left:15px;
-	background-color: #eee;
-	color:#999;
-	font-size: 14px;
-}
-
-.login-content li:nth-child(1) label{
-	background: url(../../images/account_icon.png) no-repeat;
-	background-position: center;
-	background-size: .35rem .38rem;
-}
-
-.login-content li:nth-child(2) label{
-	background: url(../../images/password_icon.png) no-repeat;
-	background-position: center;
-	background-size: .34rem .4rem;
-}
-
-.login-content li:nth-child(2) span{
-    position: absolute;
-    right:0;
-    top:0;
+.login-content li label {
     display: inline-block;
-    width:.7rem;
-    height:.86rem;
+    height: .56rem;
+    width: .8rem;
+    margin: .15rem 0;
+    border-right: 1px solid #999;
+}
+
+.login-content li input {
+    display: inline-block;
+    height: 100%;
+    width: 5rem;
+    padding-left: 15px;
+    background-color: #eee;
+    color: #999;
+    font-size: 14px;
+}
+
+.login-content li:nth-child(1) label {
+    background: url(../../images/account_icon.png) no-repeat;
+    background-position: center;
+    background-size: .35rem .38rem;
+}
+
+.login-content li:nth-child(2) label {
+    background: url(../../images/password_icon.png) no-repeat;
+    background-position: center;
+    background-size: .34rem .4rem;
+}
+
+.login-content li:nth-child(2) span {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    width: .7rem;
+    height: .86rem;
     background: url(../../images/open_password_icon.png) no-repeat;
     background-size: .44rem .27rem;
     background-position: left center;
 }
 
-.login-content li:nth-child(3){
-    border:none;
-    height:.5rem;
+.login-content li:nth-child(3) {
+    border: none;
+    height: .5rem;
     text-align: right;
     margin-bottom: 1.8rem;
 }
 
-.login-content li:nth-child(3) span{
-   font-size: 14px;
-   color:#333;
+.login-content li:nth-child(3) span {
+    font-size: 14px;
+    color: #333;
 }
 
-.login-content li:nth-child(4),.login-content li:nth-child(5){
-   text-align: center;
-   line-height: .86rem;
-   border:none;
+.login-content li:nth-child(4),
+.login-content li:nth-child(5) {
+    text-align: center;
+    line-height: .86rem;
+    border: none;
 }
 
-.login-content li:nth-child(4) a,.login-content li:nth-child(5) a{
-   display: inline-block;
-   width:100%;
-   height:100%;
-   font-size:17px;
-   color:#fff;
-   border-radius:10px;
+.login-content li:nth-child(4) a,
+.login-content li:nth-child(5) a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 10px;
 }
 
-.login-content li:nth-child(4) a{
-   background-color: #811b10;
+.login-content li:nth-child(4) a {
+    background-color: #811b10;
 }
 
-.login-content li:nth-child(5) a{
-   background-color: #dddddd;
+.login-content li:nth-child(5) a {
+    background-color: #dddddd;
 }
-
-
-

@@ -13,6 +13,7 @@ import advRecord   from './wallet/record.jsx';
 import advFeedback   from './feedback/feedback.jsx';
 import advSetting   from './setting/setting.jsx';
 import advModifyPassword   from './modifyPassword/modifyPassword.jsx';
+import advMobileAuth   from './mobileAuth/mobileAuth.jsx';
 
 ReactDOM.render(
 	<Router history={hashHistory}>
@@ -28,6 +29,7 @@ ReactDOM.render(
 			<Route path="feedback" component={advFeedback} />
 			<Route path="setting" component={advSetting} />
 			<Route path="modifyPassword" component={advModifyPassword} />
+			<Route path="mobileAuth" component={advMobileAuth} />
 		</Route>
 	</Router>,
 	document.querySelector('.container')
