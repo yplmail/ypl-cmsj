@@ -5,8 +5,9 @@ import advNav    from './nav.jsx';
 import advList   from './advertisement/list.jsx';
 import advDetail from './advertisement/detail.jsx';
 import advMine   from './mine/Mine.jsx';
-import advLogin  from './login/login.jsx';
 import advHot    from './hot/hot.jsx';
+import advLogin from './login/login.jsx';
+import advRegister from './register/register.jsx';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -16,7 +17,7 @@ ReactDOM.render(
       <Route path="hot"    component={advHot} />
       <Route path="mine"   component={advMine} />
       <Route path="detail" component={advDetail} />
-    </Route>
-  </Router>,
-  document.body.appendChild(document.createElement('div'))
+      <Route path="register" component={advRegister} />
+    </Route>,
+    document.body.appendChild(document.createElement('div'))
 );

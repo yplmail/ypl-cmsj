@@ -1,7 +1,7 @@
 import './detail.css';
 import React from 'react';
 import {Link} from 'react-router';
-import 'animate.css'
+import '../../reset/animate.min.css'
 
 class Detail extends React.Component{
    constructor(props){
@@ -140,12 +140,12 @@ class Score extends React.Component{
               <div className="score-content slideInUp animated">
                 <h2>评分有惊喜！</h2>
                 <p className="start">
-                  <span></span>          
-                  <span></span>          
-                  <span></span>          
-                  <span></span>          
-                  <span></span> 
-                  <strong>4分</strong>         
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <strong>4分</strong>
                 </p>
                 <p className="score-description">你们的脑洞我服了！</p>
               </div>
