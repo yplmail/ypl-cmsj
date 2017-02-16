@@ -9,14 +9,16 @@ class Nav extends React.Component{
 
 	render(){
        return(
-       	   <div>
+       	   <div className="container">
        	       {this.props.children}
 	           <div className="nav-wrapper">
-	              <ul data-flex="dir:left box:mean">
-	                 <li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
-	                 <li><Link to="/hot"   activeClassName="active">热门</Link></li>
-	                 <li><Link to="/mine"  activeClassName="active">我的</Link></li>
-	              </ul>
+	              <div className="nav">
+		              <ul data-flex="dir:left box:mean">
+		                 <li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
+		                 <li><Link to="/hot"   activeClassName="active">热门</Link></li>
+		                 <li><Link to="/mine"  activeClassName="active">我的</Link></li>
+		              </ul>
+	              </div>
 	           </div>
            </div>
        )

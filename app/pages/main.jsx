@@ -32,5 +32,5 @@ ReactDOM.render(
 			<Route path="mobileAuth" component={advMobileAuth} />
 		</Route>
 	</Router>,
-	document.querySelector('.container')
+	document.querySelector('.container-wrapper')
 );

@@ -2,25 +2,94 @@
  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
  * http://cssreset.com
  */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, input {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font-weight: normal;
-  vertical-align: middle;
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-weight: normal;
+    vertical-align: middle;
 }
 
 html {
@@ -79,17 +148,19 @@ a {
     display: inline-block;
     text-decoration: none;
     -webkit-backface-visibility: hidden;
-    color:#969696;
+    color: #969696;
 }
 
 li {
     list-style: none;
 }
-img{
-    border:none;
+
+img {
+    border: none;
     vertical-align: middle;
-    width:100%;
+    width: 100%;
 }
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
@@ -122,7 +193,9 @@ img{
     visibility: hidden;
 }
 
+
 /*placeholder 样式*/
+
 input:-moz-placeholder,
 textarea:-moz-placeholder {
     color: #dcdcdc;
@@ -137,23 +210,38 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
     color: #dcdcdc;
 }
-.container{
+
+.container-wrapper {
     position: relative;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .nav-wrapper{
-    position: fixed;
-    left:0;
+    position: relative;
+    left: 0;
     bottom: 0;
-    width:100%;
-    height:.95rem;
+    width: 100%;
+    height: .95rem;   
+}
+
+.nav-wrapper .nav{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: .95rem;
     background-color: #e2e2e2;
     text-align: center;
 }
 
-.nav-wrapper li a{
+.nav-wrapper li a {
     display: block;
     font-size: 11px;
     color: #3333;
@@ -161,38 +249,38 @@ textarea::-webkit-input-placeholder {
     padding-top: 0.6rem;
 }
 
-.nav-wrapper li:nth-child(1) a{
+.nav-wrapper li:nth-child(1) a {
     background-image: url(../images/first_gray.png);
     background-repeat: no-repeat;
     background-position: center 20%;
     background-size: .53rem .5rem;
 }
 
-.nav-wrapper li:nth-child(2) a{
+.nav-wrapper li:nth-child(2) a {
     background-image: url(../images/hot_gray.png);
     background-repeat: no-repeat;
     background-position: center 20%;
     background-size: .37rem .43rem;
 }
 
-.nav-wrapper li:nth-child(3) a{
+.nav-wrapper li:nth-child(3) a {
     background-image: url(../images/mine_gray.png);
     background-repeat: no-repeat;
     background-position: center 20%;
     background-size: .37rem .41rem;
 }
 
-.nav-wrapper li:nth-child(1) a.active{
+.nav-wrapper li:nth-child(1) a.active {
     color: #811b10;
     background-image: url(../images/first_light.png);
 }
 
-.nav-wrapper li:nth-child(2) a.active{
+.nav-wrapper li:nth-child(2) a.active {
     color: #811b10;
     background-image: url(../images/hot_light.png);
 }
 
-.nav-wrapper li:nth-child(3) a.active{
+.nav-wrapper li:nth-child(3) a.active {
     color: #811b10;
     background-image: url(../images/mine_light.png);
 }

@@ -12,6 +12,9 @@ class Detail extends React.Component{
       return(
           <div className="adv-detial-wrapper">
              <Player />
+             <DetailBar />
+             <Record />
+             <Correlation/>             
           </div>
       )
    }
@@ -25,10 +28,6 @@ class Player extends React.Component{
         return (
           <div className="adv-player">
              <video controls src="http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4"/>
-             <DetailBar />
-             <Record />
-             <Correlation/>
-             <Score />
           </div>
         )
     }
@@ -41,8 +40,8 @@ class DetailBar extends React.Component{
     render(){
         return (
           <div className="adv-detial-bar" data-flex="dir:left main:center cross:center">
-            <div>2500.00</div>
-            <div>红包已领236个</div>
+            <div>250000.00</div>
+            <div>红包已领2322226个</div>
             <div>8452</div>
           </div>
         )
@@ -61,20 +60,20 @@ class Record extends React.Component{
                 <div><img src="../../images/user_header_icon.png" /></div>
                 <div>老师能烦死你</div>
                 <div>18682243486</div>
-                <div>获赠<span></span></div>
+                <div>获赠78.5元<span></span></div>
               </li>
               <li data-flex="dir:left main:center cross:center">
                 <div><img src="../../images/user_header_icon.png" /></div>
                 <div>老师能烦死你</div>
                 <div>18682243486</div>
-                <div>获赠<span></span></div>
+                <div>获赠78.5元<span></span></div>
               </li>
 
               <li data-flex="dir:left main:center cross:center">
                 <div><img src="../../images/user_header_icon.png" /></div>
                 <div>老师能烦死你</div>
                 <div>18682243486</div>
-                <div>获赠<span></span></div>
+                <div>获赠78.5元<span></span></div>
               </li>
             </ul>
           </div>
@@ -88,7 +87,7 @@ class Correlation extends React.Component{
     }
 
     render(){
-       return (<div className="correlation-wrapper">
+       return (<div className="adv-correlation">
           <h2>相关视频</h2>
           <ul>
              <li data-flex="box:last">
