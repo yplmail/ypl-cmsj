@@ -13,13 +13,13 @@ class Login extends React.Component{
                <div className="mobileAuth-content">
                  <ul>
                      <li>
-                        <label for="mobile"></label>
+                        <label htmlFor="mobile"></label>
                         <input id="mobile" type="text" placeholder="请输入您的手机号"/>
                      </li>
 
                      <li>
                         <input id="code" type="tel" placeholder="请输入验证码"/>
-                        <label for="code">获取验证密码</label>
+                        <label htmlFor="code">获取验证密码</label>
                      </li>
 
                      <li>

@@ -1,0 +1,50 @@
+.transfer-wrapper{
+	position: relative;
+	width:100%;
+}
+
+.transfer-wrapper .conent{
+    margin:0 .3rem;
+
+}
+
+.transfer-wrapper .account-amount{
+	height:1.13rem;
+	border-bottom:1px solid #999;
+}
+
+.transfer-wrapper .account-amount span{
+	display: inline-block;
+    font-size: 17px;
+    color:#333;
+    margin-top: .5rem;
+}
+
+.transfer-wrapper .transfer-amount{
+   margin:.33rem 0;
+   text-align: center;
+}
+
+
+.transfer-wrapper .transfer-amount input{
+	display: none;
+}
+
+.transfer-wrapper .transfer-amount label{
+   display: inline-block;
+   width:2.05rem;
+   height:.89rem;
+   line-height: .89rem;
+   border:1px solid #811b10;
+   border-radius: 10px;
+   text-align: center;
+   margin-left:.18rem;
+   margin-bottom: .18rem;
+   font-size:17px;
+   color:#811b10;
+}
+
+.transfer-wrapper .transfer-amount input:checked + label{
+	background: #811b10;
+	color:#fff;
+}

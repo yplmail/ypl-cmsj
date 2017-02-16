@@ -22,7 +22,7 @@ class Wallet extends React.Component{
                    <ul>
 	                   <li data-flex="box:mean main:center">
 							<div><Link className="packet-record" to="/record">获赠记录</Link></div>
-							<div><Link className="transfer-wechet">转让微信</Link></div>
+							<div><Link className="transfer-wechet" to="/transfer">转让微信</Link></div>
 	                   </li>
 	                   <li data-flex="box:mean">
                           <div></div>

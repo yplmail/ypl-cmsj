@@ -11,13 +11,17 @@ class Setting extends React.Component{
            <div className="setting-wrapper">
               <ul>
                   <li>
-	                  <Link to="/mobileAuth">手机绑定</Link>
-	                  <span></span>
+	                  <Link to="/mobileAuth">
+                    手机绑定
+	                  <span>18682243486</span>
+                    </Link>
                   </li>
 
                   <li>
-	                  <Link to="/wechatAuth">微信绑定</Link>
+	                  <Link to="/wechatAuth">
+                    微信绑定
 	                  <span>去绑定</span>
+                    </Link>
                   </li>
 
                   <li>
