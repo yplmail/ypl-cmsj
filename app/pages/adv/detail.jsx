@@ -7,7 +7,13 @@ class Detail extends React.Component{
    constructor(props){
       super(props);
    }
-
+   componentDidMount(){
+      layer.open({
+        content: '通过style设置你想要的样式',
+        style: 'background-color:rgba(0, 0, 0, .5); color:#fff;',
+        time: 60
+      });
+   }
    render(){
       return(
           <div className="adv-detial-wrapper">
@@ -56,22 +62,142 @@ class Record extends React.Component{
         return (
           <div className="adv-packet-record">
             <ul>
-              <li data-flex="dir:left main:center cross:center box:mean">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
               <li data-flex="dir:left main:center cross:center">
                 <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你</div>
+                <div>老师能烦死你1</div>
                 <div>18682243486</div>
                 <div>获赠78.5元<span></span></div>
               </li>
 
               <li data-flex="dir:left main:center cross:center">
                 <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你</div>
+                <div>老师能烦死你2</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你3</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你4</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你5</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你6</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你7</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你8</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你9</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你10</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+              
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你1</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你2</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你3</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你4</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你5</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你6</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你7</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你8</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你9</div>
+                <div>18682243486</div>
+                <div>获赠78.5元<span></span></div>
+              </li>
+
+              <li data-flex="dir:left main:center cross:center">
+                <div><img src="../../images/user_header_icon.png" /></div>
+                <div>老师能烦死你10</div>
                 <div>18682243486</div>
                 <div>获赠78.5元<span></span></div>
               </li>

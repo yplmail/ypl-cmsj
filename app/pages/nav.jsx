@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {IndexLink,Link} from 'react-router';
+import '../components/layer/layer.css';
+import '../components/layer/layer.js';
 
 class Nav extends React.Component{
 	constructor(props){
