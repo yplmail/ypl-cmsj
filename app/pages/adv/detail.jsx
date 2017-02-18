@@ -111,6 +111,7 @@ class Record extends React.Component{
                 <div>获赠78.5元<span></span></div>
               </li>
 
+
               <li data-flex="dir:left main:center cross:center">
                 <div><img src="../../images/user_header_icon.png" /></div>
                 <div>老师能烦死你8</div>
