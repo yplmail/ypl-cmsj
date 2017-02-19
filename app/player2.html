@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>springGrass</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="./favicon.ico" rel="shortcut icon" >
+    <link href="./reset/reset.css" rel="stylesheet" >
+    <link href="./reset/data-flex.css" rel="stylesheet" >
+    <link href="./css/app.css" rel="stylesheet" >
+</head>
+
+<body>
+<div class="top"></div>
+    <div id="containner">
+
+        <div style="width: 78px; height: 30px; border-radius: 11px; text-align: center; margin:0px auto; ">
+            <div><img id="icon" src="played.jpg" onclick="play()" width="30" height="30" /></div>
+
+         </div>
+        <div style="width:100%; height:22px; padding-right:50px;"><span id="showtime" >00:00</span><span>/</span><span id="currenttime">00:00</span></div>
+
+        <div id="barbox" class="graph" style="width:98%">
+            <strong id="bar" class="bar" style="width: 0%;"></strong>
+        </div>
+
+        <div id="divplayer">
+            <video id="player" src="http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4" width="100%" height="200px"></video>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="./reset/reset.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="./js/vendors.js"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+ <script language="javascript">
+    //成员变量
+    var url = 'mp3/myeye.mp3';//（设定文件路径）
+    var pausedimg = "paused.png";
+    var playedimg = "played.jpg";
+    var div = document.getElementById('divplayer');
+    var player = document.getElementsByTagName('audio')[0];
+    player.src = url;
+    //文件长度(秒)
+    var fileseconds = 0;
+    //定时器对象
+    var progressStateTimer;
+    //进度条父容器宽度
+    var barboxwidth = 0;
+    //进度条当前宽度
+    var currentbarwidth = 0;
+    //每秒追加宽度
+    var appendwidth = 0;
+    //进度条对象
+    var bar;
+    //当前运行秒数
+    var currentseconds = 0;
+
+    function play() {
+        if (player && player.paused) {
+
+            //获取文件时长
+            fileseconds = parseInt(player.duration);
+            //显示文件时长
+            document.getElementById("showtime").innerHTML = (formatTime(fileseconds));
+            //获取进度条的容器宽度
+            barboxwidth = document.getElementById("barbox").style.width;
+
+            //获取容器变量备用
+            bar = document.getElementById("bar");
+            //开始播放
+            player.play();
+            //显示暂停按钮
+            document.getElementById("icon").src = pausedimg;
+            //执行进度条方法
+            progressStateTimer = setInterval(prossbar, 1000);
+        } else if (player && player.played) {
+            //暂停并停止进度条
+            player.pause();
+            //显示播放按钮
+            document.getElementById("icon").src = playedimg;
+            //停止进度条
+            clearInterval(progressStateTimer);
+        }
+        else {
+            //进到此处说明player未实例化 或者状态不是播放和暂停
+            //dosomething
+        }
+    }
+
+
+
+
+    var prossbar = function () {
+
+        if (fileseconds > 0) {
+            //重新计算新的宽度
+
+            if (currentseconds == 0) {
+                appendwidth = 0;
+            } else
+            {
+                appendwidth = (currentseconds / fileseconds) * 100;
+            }
+
+            bar.style.width = appendwidth + "%";
+            //显示当前播放的时间
+            document.getElementById("currenttime").innerHTML = formatTime(currentseconds);
+            currentseconds++;
+            if (currentseconds > fileseconds || currentbarwidth >= barboxwidth) {
+                //停止播放并清除进度条计时器
+                player.pause();
+                clearInterval(progressStateTimer);
+            }
+        }
+    }
+
+    function formatTime(second) {
+        return [parseInt(second / 60 % 60), parseInt(second % 60)].join(":")
+        .replace(/\b(\d)\b/g, "0$1");
+    }
+</script>
+</body>
+
+</html>
+
