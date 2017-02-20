@@ -43,7 +43,7 @@ class ServerRequest {
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.send(null);
         } else {
-            this._timeout(this.xhr);
+            this._timeout(this.xhr)
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             this.xhr.send(this.str);
