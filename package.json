@@ -47,6 +47,7 @@
     "flex.css": "^1.1.6",
     "ghooks": "^1.0.3",
     "html-webpack-plugin": "^2.8.1",
+    "json-loader": "^0.5.4",
     "jsx-loader": "^0.13.2",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",

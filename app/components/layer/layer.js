@@ -22,7 +22,7 @@ var Layer = function(win) {
     var config = {
         type: 0,
         shade: true,
-        shadeClose: true,
+        shadeClose: false,
         fixed: true,
         anim: 'scale' //默认动画类型
     };
