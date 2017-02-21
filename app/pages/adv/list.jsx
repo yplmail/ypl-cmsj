@@ -53,7 +53,7 @@ class List extends React.Component{
 
     getScrollData(isRefresh){
         var self = this;
-        let server = new ServerRequest();  
+        let server = new ServerRequest();
         if(isRefresh){
           this.pageIndex = 1;
         }
@@ -67,14 +67,14 @@ class List extends React.Component{
                           items: response.data
                       });
                       self.initScroll();
-                  }                
+                  }
                }else{
                   if (self.state.pullUpStatus == 2) {
                     self.setState({
                         pullUpStatus: 0,
                         items: self.state.items.concat(response.data)
                     });
-                  }                
+                  }
                }
                ++self.pageIndex;
             }
@@ -89,39 +89,34 @@ class List extends React.Component{
         this.scroll = new BScroll('.adv-list-wrapper', {
             probeType: 3,
             click:true
-        })  
-        var height = this.refs.pullDown.offsetHeight;
-        this.scroll.scrollTo(0, -height, 500);
+        })
+        this.loadingHeight = this.refs.pullDown.offsetHeight;
+        this.scroll.scrollTo(0, -this.loadingHeight, 500);
         this.scroll.on('scroll', this.onScroll);
-        this.scroll.on('scrollEnd', this.onScrollEnd);   
+        this.scroll.on('scrollEnd', this.onScrollEnd);
     }
 
-    onScroll(pos){
+    onScroll(pos,q,z){
         let pullDown = this.refs.pullDown;
-        // 上拉区域
-        // if (pos.y > -1 * pullDown.offsetHeight) {
-        //   this.onPullUp();
-        // } else {
-        //     this.state.pullDownStatus != 0 && this.setState({pullDownStatus: 0});
-        // }
-        // 下拉区域
-        // if (pos.y <= this.scroll.maxScrollY + 5) {
-        //     this.onPullDown();
-        // }
-        // 
-        console.log(pos.y)
-        if (pos.y > -40) {
+        //下拉刷新最新数据
+        if (pos.y > -1 * this.loadingHeight) {
             this.onPullDown();
+        }else{
+            this.state.pullDownStatus != 0 && this.setState({pullDownStatus: 0});
+        }
+
+        //上拉加载老数据
+        if(pos.y <= this.scroll.maxScrollY + 5){
+            this.onPullUp();
         }
     }
 
     onScrollEnd(){
-
        let pullDown = this.refs.pullDown;
         // 滑动结束后，停在刷新区域
-        if (this.scroll.y > -1 * pullDown.offsetHeight) {                   
+        if (this.scroll.y > -1 * this.loadingHeight) {
             if (this.state.pullDownStatus <= 1) {   // 没有发起刷新,那么弹回去
-                this.scroll.scrollTo(0, -1 * pullDown.offsetHeight, 200);
+                this.scroll.scrollTo(0, -1 * this.loadingHeight, 200);
             } else if (this.state.pullDownStatus == 2) { // 发起了刷新,那么更新状态
                 this.setState({pullDownStatus: 3});
                 this.getScrollData(true);
@@ -135,14 +130,6 @@ class List extends React.Component{
                 this.getScrollData(false);
             }
         }
-    }
-
-    onTouchStart(ev) {
-        this.isTouching = true;
-    }
-
-    onTouchEnd(ev) {
-        this.isTouching = false;
     }
 
     onPullDown() {
@@ -163,6 +150,14 @@ class List extends React.Component{
             this.state.pullUpStatus != 0 && this.setState({pullUpStatus: 0});
         }
       }
+    }
+
+    onTouchStart(ev) {
+        this.isTouching = true;
+    }
+
+    onTouchEnd(ev) {
+        this.isTouching = false;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -192,7 +187,7 @@ class List extends React.Component{
                       <div className="loading-center">
                       <p>{this.pullDownTips[this.state.pullDownStatus]}</p>
                       </div>
-                      </div>         
+                      </div>
                     </div>
                     {
                       this.state.items.map((item, index) => {
@@ -207,7 +202,7 @@ class List extends React.Component{
                       <div className="loading-center">
                       <p>{this.pullUpTips[this.state.pullUpStatus]}</p>
                       </div>
-                      </div>         
+                      </div>
                     </div>
                 </ul>
             </div>
