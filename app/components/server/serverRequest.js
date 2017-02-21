@@ -39,7 +39,7 @@ class ServerRequest {
         this.url = this.url + '?' + Date.now();
         if (this.method == 'GET') {
             if (this.str) this.url = this.url + '&' + this.str;
-            layer.open({type: 2});
+            //layer.open({type: 2});
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.send(null);
         } else {
