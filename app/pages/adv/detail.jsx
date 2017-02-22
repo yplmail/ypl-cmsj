@@ -1,7 +1,6 @@
 import './detail.css';
 import React from 'react';
 import {Link} from 'react-router';
-import '../../reset/animate.min.css'
 import ServerRequest from 'server/serverRequest';
 
 class Detail extends React.Component{
@@ -21,9 +20,6 @@ class Detail extends React.Component{
 
    initData(){
       let server = new ServerRequest();
-      if(isRefresh){
-        this.pageIndex = 1;
-      }
       server.get({
           url:'/mock/list.json',
           success:this.success
