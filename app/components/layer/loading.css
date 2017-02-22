@@ -20,14 +20,7 @@
     position: relative;
     height: .8rem;
     width: 100%;
-}
-
-.scroll-load-false {
     display: none;
-}
-
-.scroll-load-true {
-    display: block;
 }
 
 .scroll-loading .loading-box {
@@ -72,9 +65,10 @@
 
 .scroll-loading .loading-center p {
     position: absolute;
-    color: #000;
+    color: #999;
     left: .6rem;
-    font-size: 8px;
+    font-size: 10px;
     width: 100px;
     text-align: left;
+    top: .02rem;
 }

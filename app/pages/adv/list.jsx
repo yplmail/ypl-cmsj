@@ -2,18 +2,30 @@ import React from 'react';
 import {Link} from 'react-router';
 import './list.css';
 import ServerRequest from 'server/serverRequest';
-import Scroll from 'scroll/scroll';
 import BScroll from 'better-scroll'
-import {ScrollUp,ScrollDown} from 'layer/loading';
 import 'layer/loading.css';
+
 class List extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            items: [],
-            pullDownStatus: 3,
-            pullUpStatus: 0
-        };
+
+        this.state = { items: [] };
+
+        this.pageIndex = 1;
+
+        this.pullDownStatus = 3;
+
+        this.pullUpStatus = 0;
+
+        this.isRefresh = true;
+
+        this.onScroll = this.onScroll.bind(this);
+
+        this.onScrollEnd = this.onScrollEnd.bind(this);
+
+        this.timeout = this.timeout.bind(this);
+
+        this.success  = this.success.bind(this);
 
         this.pullDownTips = {
             0: '下拉发起刷新',
@@ -29,60 +41,51 @@ class List extends React.Component{
             2: '正在加载',
             3: '加载成功'
         };
-
-        this.pageIndex = 1;
-
-        this.isTouching = true;
-
-        this.itemsChanged = false;
-
-        this.onScroll = this.onScroll.bind(this);
-
-        this.onScrollEnd = this.onScrollEnd.bind(this);
-
-        this.onTouchStart = this.onTouchStart.bind(this);
-
-        this.onTouchEnd = this.onTouchEnd.bind(this);
-
-        this.timeout = this.timeout.bind(this);
     }
 
     componentDidMount(){
         this.getScrollData(true);
     }
 
+    setPullDownTips(status){
+        this.pullDownStatus = status;
+        this.refs.pullDownTips.innerText = this.pullDownTips[status];
+    }
+
+    setPullUpTips(status){
+        this.pullUpStatus = status;
+        this.refs.pullUpTips.innerText = this.pullUpTips[status];
+    }
+
     getScrollData(isRefresh){
-        var self = this;
         let server = new ServerRequest();
         if(isRefresh){
           this.pageIndex = 1;
         }
         server.get({
             url:'/mock/list.json',
-            success:function(response){
-               if(isRefresh){
-                  if (self.state.pullDownStatus == 3) {
-                      self.setState({
-                          pullDownStatus: 4,
-                          items: response.data
-                      });
-                      self.initScroll();
-                  }
-               }else{
-                  if (self.state.pullUpStatus == 2) {
-                    self.setState({
-                        pullUpStatus: 0,
-                        items: self.state.items.concat(response.data)
-                    });
-                  }
-               }
-               ++self.pageIndex;
-            }
+            success:this.success
         })
     }
 
+    success(response){
+      if(this.isRefresh){
+          if (this.pullDownStatus == 3) {
+              this.setPullDownTips(4);
+              this.setState({items: response.data});
+              this.initScroll();
+          }
+      }else{
+          if (this.pullUpStatus == 2) {
+              this.setPullUpTips(3);
+              this.setState({items: this.state.items.concat(response.data)});
+          }
+      }
+      ++this.pageIndex;
+    }
+
     initScroll(){
-        setTimeout(this.timeout,320)
+        setTimeout(this.timeout,50)
     }
 
     timeout(){
@@ -90,119 +93,109 @@ class List extends React.Component{
             probeType: 3,
             click:true
         })
-        this.loadingHeight = this.refs.pullDown.offsetHeight;
-        this.scroll.scrollTo(0, -this.loadingHeight, 500);
+        this.loadHeight = this.refs.pullDown.offsetHeight;
+        this.scroll.scrollTo(0, -this.loadHeight, 500);
         this.scroll.on('scroll', this.onScroll);
         this.scroll.on('scrollEnd', this.onScrollEnd);
     }
 
-    onScroll(pos,q,z){
-        let pullDown = this.refs.pullDown;
+    onScroll(){
         //下拉刷新最新数据
-        if (pos.y > -1 * this.loadingHeight) {
+        if (this.scroll.y > -1 * this.loadHeight) {
             this.onPullDown();
         }else{
-            this.state.pullDownStatus != 0 && this.setState({pullDownStatus: 0});
+            this.setPullDownTips(0);
         }
-
         //上拉加载老数据
-        if(pos.y <= this.scroll.maxScrollY + 5){
+        if(this.scroll.y < this.scroll.maxScrollY){
             this.onPullUp();
+        }
+    }
+
+    onPullDown() {
+        if(this.pullDownStatus != 3){
+            if(this.scroll.y < 0){
+                this.setPullDownTips(1);
+            }else{
+                this.setPullDownTips(2);
+            }
+        }
+    }
+
+    onPullUp() {
+        if(this.pullUpStatus != 2){
+            if (this.scroll.y <= this.scroll.maxScrollY) {
+                this.setPullUpTips(1);
+            } else {
+                this.setPullUpTips(0);
+            }
         }
     }
 
     onScrollEnd(){
        let pullDown = this.refs.pullDown;
-        // 滑动结束后，停在刷新区域
-        if (this.scroll.y > -1 * this.loadingHeight) {
-            if (this.state.pullDownStatus <= 1) {   // 没有发起刷新,那么弹回去
-                this.scroll.scrollTo(0, -1 * this.loadingHeight, 200);
-            } else if (this.state.pullDownStatus == 2) { // 发起了刷新,那么更新状态
-                this.setState({pullDownStatus: 3});
-                this.getScrollData(true);
+        // 下拉滑动结束后，停在刷新区域
+        if (this.scroll.y > -1 * this.loadHeight) {
+            if (this.pullDownStatus <= 1) {   
+                // 没有发起刷新,那么弹回去
+                this.scroll.scrollTo(0, -1 * this.loadHeight, 500);
+            } else if (this.pullDownStatus == 2) { // 发起了刷新,那么更新状态
+                this.setPullDownTips(3);
+                this.isRefresh = true;
+                this.getScrollData();
             }
         }
 
-        // 滑动结束后，停在加载区域
+        // 上拉滑动结束后，停在加载区域
         if (this.scroll.y <= this.scroll.maxScrollY) {
-            if (this.state.pullUpStatus == 1) { // 发起了加载，那么更新状态
-                this.setState({pullUpStatus: 2});
-                this.getScrollData(false);
+            if (this.pullUpStatus == 1) { // 发起了加载，那么更新状态
+                this.setPullUpTips(2);
+                this.isRefresh = false;
+                this.getScrollData();
             }
         }
     }
 
-    onPullDown() {
-      if (this.isTouching) {
-          if(this.scroll.y < 0){
-              this.state.pullDownStatus != 1 && this.setState({pullDownStatus: 1});
-          }else{
-              this.state.pullDownStatus != 2 && this.setState({pullDownStatus: 2});
-          }
-      }
-    }
-
-    onPullUp() {
-      if (this.isTouching) {
-        if (this.scroll.y <= this.scroll.maxScrollY - 5) {
-            this.state.pullUpStatus != 1 && this.setState({pullUpStatus: 1});
-        } else {
-            this.state.pullUpStatus != 0 && this.setState({pullUpStatus: 0});
-        }
-      }
-    }
-
-    onTouchStart(ev) {
-        this.isTouching = true;
-    }
-
-    onTouchEnd(ev) {
-        this.isTouching = false;
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        // 列表发生了变化, 那么应该在componentDidUpdate时调用iscroll进行refresh
-        this.itemsChanged = nextState.items !== this.state.items;
-        return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return true;
+    // }
 
     componentDidUpdate() {
-      // 仅当列表发生了变更，才调用iscroll的refresh重新计算滚动条信息
-      if (this.itemsChanged && this.scroll) {
-        this.scroll.refresh();
-      }
+      this.scroll && this.scroll.refresh();
+      if(!this.isRefresh) this.setPullUpTips(0);
+      this.refs.pullDown.style.display='block';
+      this.refs.pullUp.style.display='block';
       return true;
     }
 
     render(){
-        var scrollHeight = (window.innerHeight-47.5) + 'px';
         return (
-            <div ref="list-wrapper" className="adv-list-wrapper" style={{height:scrollHeight}}>
-                    <ul className="adv-list-scroll" onTouchStart={this.onTouchStart} onTouchEnd={this.onTouchEnd}>
+            <div className="adv-list-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
+                <ul className="adv-list-scroll">
                     <div ref="pullDown" className="scroll-loading">
-                      <div className="loading-box">
-                      <div className="loading-rond">
-                      <div className="rond"></div>
-                      </div>
-                      <div className="loading-center">
-                      <p>{this.pullDownTips[this.state.pullDownStatus]}</p>
-                      </div>
-                      </div>
+                        <div className="loading-box">
+                            <div className="loading-rond">
+                                <div className="rond"></div>
+                            </div>
+                            <div className="loading-center">
+                                <p ref="pullDownTips">{this.pullDownTips[this.pullDownStatus]}</p>
+                            </div>
+                        </div>
                     </div>
                     {
-                      this.state.items.map((item, index) => {
-                          return <ListItem item={item} key={index}/>
-                      })
+                        this.state.items.map((item, index) => {
+                            return <ListItem item={item} key={index}/>
+                        })
                     }
-                    <div ref="pullUp"className="scroll-loading">
-                      <div className="loading-box">
-                      <div className="loading-rond">
-                      <div className="rond"></div>
-                      </div>
-                      <div className="loading-center">
-                      <p>{this.pullUpTips[this.state.pullUpStatus]}</p>
-                      </div>
-                      </div>
+                    <div ref="pullUp" className="scroll-loading">
+                        <div className="loading-box">
+                            <div className="loading-rond">
+                                <div className="rond"></div>
+                            </div>
+                            <div className="loading-center">
+                                <p ref="pullUpTips">{this.pullUpTips[this.pullUpStatus]}</p>
+                            </div>
+                        </div>
                     </div>
                 </ul>
             </div>
@@ -241,4 +234,5 @@ return(
 
 
 export default List;
+
 

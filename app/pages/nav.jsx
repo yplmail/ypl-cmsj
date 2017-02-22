@@ -9,7 +9,7 @@ class Nav extends React.Component{
 
 	render(){
        return(
-       	   <div className="container">
+       	   <div className="container" style={{height:window.innerHeight+'px'}}>
        	       {this.props.children}
 	           <div className="nav-wrapper">
 	              <div className="nav">

@@ -2,18 +2,38 @@ import './detail.css';
 import React from 'react';
 import {Link} from 'react-router';
 import '../../reset/animate.min.css'
+import ServerRequest from 'server/serverRequest';
 
 class Detail extends React.Component{
    constructor(props){
       super(props);
+      this.state = {arr:[]};
+      this.success  = this.success.bind(this);
    }
+
+   componentWillMount(){
+      this.initData();
+   }  
+
    componentDidMount(){
-      layer.open({
-        content: '通过style设置你想要的样式',
-        style: 'background-color:rgba(0, 0, 0, .5); color:#fff;',
-        time: 60
-      });
+
    }
+
+   initData(){
+      let server = new ServerRequest();
+      if(isRefresh){
+        this.pageIndex = 1;
+      }
+      server.get({
+          url:'/mock/list.json',
+          success:this.success
+      })   
+   }
+
+   success(response){
+      this.setState({arr:response.data})
+   }
+
    render(){
       return(
           <div className="adv-detial-wrapper">
