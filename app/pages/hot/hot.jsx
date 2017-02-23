@@ -13,6 +13,7 @@ class Hot extends React.Component{
 		this.touchStart = this.touchStart.bind(this);
 		this.touchMove = this.touchMove.bind(this);
 		this.touchEnd = this.touchEnd.bind(this);
+		this.iosFlag = true;
 	}
 
 	componentWillMount(){
@@ -20,7 +21,7 @@ class Hot extends React.Component{
 	}  
 
 	componentDidMount(){	
-		this.wrapper = document.querySelector('.container-wrapper')
+		this.wrapper = document.querySelector('.container')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault);
 	}
@@ -49,7 +50,7 @@ class Hot extends React.Component{
 		var zIndex = document.defaultView.getComputedStyle(t,null)['zIndex'] * 1;
 		if(zIndex < 3) return false;
         //向上滑动最大距离
-        let moveMaxTop = t.offsetHeight + t.offsetTop - 20;
+        let moveMaxTop = t.offsetHeight+ t.offsetTop - 20;
         //向下滑动最大距离
         var footerHeight = document.querySelector('.nav-wrapper').offsetHeight
         let moveMaxBottom = window.innerHeight - t.offsetTop - footerHeight - 20;
@@ -72,19 +73,29 @@ class Hot extends React.Component{
         if(x <= -moveMaxLeft){
         	x = -moveMaxLeft
         }
+        //向右移动最大的距离
         if(x >= moveMaxLeft){
         	x = moveMaxLeft
         }
 
-        t.style.webkitTransform = 'translate3d('+x+'px, '+y+'px, 0)';
+        this.moveAnimation(t,x,y);
+ 
+		if(event.touches[0].clientY < 0){	
+			if(x >= 50 || x <= -50){
+				this.silderAnimation(t);				
+			}else{
+				this.backAnimation(t);
+			}
+		} 
 	}
 
 	touchEnd(event){
 		let t = event.currentTarget;
 		var zIndex = document.defaultView.getComputedStyle(t,null)['zIndex'] * 1;
 		if(zIndex < 3) return false;
-        //滑动的距离
+        //滑动的方向
         let directionX = event.changedTouches[0].pageX - this.startPageX;
+
         let directionY = event.changedTouches[0].pageY - this.startPageY;
         
 		if(!directionX && !directionY){
@@ -92,38 +103,65 @@ class Hot extends React.Component{
             	location.hash = '/detail?advId=123'
             }
 		}else{
+	        //还原位置
+	        if((directionX => 0 && directionX < 50) || (directionX <= 0 && directionX > -50)){
+                this.backAnimation(t);
+	        }
 	        //向右滑动
-	        console.log( directionX +"---->"+ directionY)
-	        if(directionX => 0 && directionX < 50){
-               t.style.webkitTransform = '';
-	        }
-
-	        if(directionX <= 0 && directionX > -50){
-               t.style.webkitTransform = '';
-	        }
-
 	        if(directionX >= 50){
-	        	var currentTarget = event.currentTarget;
-		        currentTarget.style.webkitTransition= 'transform 0.2s linear';
-		        currentTarget.style.webkitTransform = 'translate3d(100%, 0, 0)';
-		        currentTarget.nextSibling.id='ani-scale';
-		        var parentNode = event.currentTarget.parentNode;   
-		        setTimeout(function(){
-		        	parentNode.removeChild(currentTarget);
-		        }.bind(this),320)  
+			    this.silderAnimation(t,150)
 	        }
-
+            //向左滑动
 	        if(directionX <= -50){
-	        	var currentTarget = event.currentTarget;
-		        currentTarget.style.webkitTransition= 'transform 0.2s linear';
-		        currentTarget.style.webkitTransform = 'translate3d(-100%, 0, 0)';
-		        currentTarget.nextSibling.id='ani-scale';
-		        var parentNode = event.currentTarget.parentNode;   
-		        setTimeout(function(){
-		        	parentNode.removeChild(currentTarget);
-		        }.bind(this),320)  	        	
+                this.silderAnimation(t,-150)
 	        }
 		}
+	}
+
+	moveAnimation(t,x,y){
+		t.style.transition= '';
+        t.style.webkitTransition= '';	
+        t.style.transform = 'translate3d('+x+'px, '+y+'px, 0)';
+        t.style.webkitTransform = '-webkit-translate3d('+x+'px, '+y+'px, 0)';
+
+        if(t.nextSibling){
+	        t.nextSibling.style.transition= 'transform 0.6s linear';
+	        t.nextSibling.style.webkitTransition= '-webkit-transform 0.6s linear';
+
+	        t.nextSibling.style.transform = 'translateY(0) scale3d(0.95,0.95,0.95)';
+	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(0.95,0.95,0.95)';      	
+        }		
+	}
+
+	backAnimation(t){
+        t.style.transition= 'transform 0.2s linear';
+        t.style.webkitTransition= '-webkit-transform 0.2s linear';		
+		t.style.transform = '';
+		t.style.webkitTransform = '';
+		if(t.nextSibling){
+			t.nextSibling.style.transform = '';
+			t.nextSibling.style.webkitTransition = '';					
+		}
+	}
+
+	silderAnimation(t,direction){
+        t.style.transition= 'transform 0.2s linear';
+        t.style.webkitTransition= '-webkit-transform 0.2s linear';
+
+        t.style.transform = 'translateX('+direction+'%) scale3d(1,1,1)';
+        t.style.webkitTransform = '-webkit-translateX('+direction+'%) scale3d(1,1,1)';
+
+        if(t.nextSibling){
+			t.nextSibling.style.transform = 'translateY(0) scale3d(1,1,1)';
+			t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';
+	        setTimeout(function(){
+		        var parentNode = t.parentNode;   
+		        parentNode.removeChild(t);
+	        }.bind(this),320)  	        	
+        }else{
+			t.style.transform = '';
+			t.style.webkitTransition = '';		
+        }      
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
