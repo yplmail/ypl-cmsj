@@ -1,56 +1,101 @@
 import './detail.css';
 import React from 'react';
 import {Link} from 'react-router';
+import 'player/player.js';
+import 'player/player.css';
 import ServerRequest from 'server/serverRequest';
 
 class Detail extends React.Component{
-   constructor(props){
-      super(props);
-      this.state = {arr:[]};
-      this.success  = this.success.bind(this);
-   }
-
-   componentWillMount(){
-      this.initData();
-   }  
-
-   componentDidMount(){
-
-   }
-
-   initData(){
-      let server = new ServerRequest();
-      server.get({
-          url:'/mock/list.json',
-          success:this.success
-      })   
-   }
-
-   success(response){
-      this.setState({arr:response.data})
-   }
-
-   render(){
-      return(
-          <div className="adv-detial-wrapper">
-             <Player />
-             <DetailBar />
-             <Record />
-             <Correlation/>             
-          </div>
-      )
-   }
-}
-
-class Player extends React.Component{
     constructor(props){
-        super(props)
+        super(props);
+        this.state = {arr:[]};
+        this.success  = this.success.bind(this);
     }
+
+    componentWillMount(){
+        this.initData();
+    }  
+
+    componentDidMount(){
+         this.initPlayer();
+    }
+
+    initData(){
+        let server = new ServerRequest();
+        server.get({
+            url:'/mock/list.json',
+            success:this.success
+        })   
+    }
+
+    initPlayer(){
+        this.player = new prismplayer({
+            id: "springGrassPlayer",
+            source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",
+            width : "100%",
+            height: "220px",
+            cover:'../../images/adv_bg_02.jpg',
+            preload : true,
+            playsinline:true,
+            autoplay:true,
+            skinLayout:[{
+                "name":"bigPlayButton",
+                "align":"cc"
+            },{
+                "name":"controlBar",
+                "align":"blabs",
+                "x":0,
+                "y":0,
+                "children":[{
+                "name":"progress",
+                "align":"tlabs"
+                },{
+                "name":"playButton",
+                "align":"blabs",
+                "x":10,
+                "y":8
+                },{
+                "name":"timeDisplay",
+                "align":"blabs",
+                "x":135,
+                "y":10
+                },{
+                "name":"volume",
+                "align":"brabs",
+                "x":80,
+                "y":8
+                },{
+                "name":"fullScreenButton",
+                "align":"brabs",
+                "x":10,
+                "y":8
+                }]
+            }]
+        });
+        //document.getElementsByClassName('prism-big-play-btn')[0].click();
+        this.player.on('ended',function(){
+            alert('播放完毕');
+        })
+    }
+
+    success(response){
+        this.setState({arr:response.data})
+    }
+
+    componentWillUnmount(){
+        this.player = null;
+    }
+
     render(){
-        return (
-          <div className="adv-player">
-             <video controls src="http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4"/>
-          </div>
+        return(
+            <div className="adv-detial-wrapper">
+            <div className="adv-player prism-player" id="springGrassPlayer">
+               
+            </div>
+            <DetailBar />
+            <Record />
+            <Correlation/>             
+            </div>
         )
     }
 }
