@@ -7,6 +7,12 @@ class Nav extends React.Component{
 		super(props)
 	}
 
+	componentDidMount(){
+		this.wrapper = document.querySelector('.container')
+		this._preventDefault = function (e){ e.preventDefault(); }
+		this.wrapper.addEventListener('touchmove', this._preventDefault);		
+	}
+
 	render(){
        return(
        	   <div className="container" style={{height:window.innerHeight+'px'}}>

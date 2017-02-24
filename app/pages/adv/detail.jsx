@@ -10,7 +10,8 @@ class Detail extends React.Component{
         super(props);
         this.state = {
           arr   : [] ,
-          scoreAnimation : 'score-mask-wrapper'
+          display:'',
+          scoreAnimation : ''
         };
         this.success  = this.success.bind(this);
     }
@@ -79,7 +80,8 @@ class Detail extends React.Component{
         //document.getElementsByClassName('prism-big-play-btn')[0].click();
         this.player.on('ended',function(){
             self.setState({
-              scoreAnimation:'score-mask-wrapper scoreAnimation'
+              display:'block',
+              scoreAnimation:'scoreAnimation'
             })
         })
     }
@@ -105,7 +107,8 @@ class Detail extends React.Component{
             <DetailBar handler={this.shareHandler}/>
             <Record />
             <Correlation/>   
-            <Score scoreAnimation={this.state.scoreAnimation}/>       
+            <Score scoreAnimation={this.state.scoreAnimation} display={this.state.display}/>   
+            <Packet />    
             </div>
         )
     }
@@ -134,146 +137,6 @@ class Record extends React.Component{
         return (
           <div className="adv-packet-record">
             <ul>
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你1</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你2</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你3</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你4</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你5</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你6</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你7</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你8</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你9</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你10</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-              
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你1</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你2</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你3</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你4</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你5</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你6</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你7</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你8</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你9</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
-
-              <li data-flex="dir:left main:center cross:center">
-                <div><img src="../../images/user_header_icon.png" /></div>
-                <div>老师能烦死你10</div>
-                <div>18682243486</div>
-                <div>获赠78.5元<span></span></div>
-              </li>
             </ul>
           </div>
         )
@@ -334,8 +197,8 @@ class Score extends React.Component{
 
     render(){
       return(
-          <div className={this.props.scoreAnimation} >
-              <div className="score-content">
+          <div className='score-wrapper' style={{display:this.props.display}}>
+              <div className={'score-content ' + this.props.scoreAnimation}>
                 <h2>评分有惊喜！</h2>
                 <p className="starability-slot clearfix">
                     <input type="radio" id="rate5-2" name="rating" value="5" />
@@ -356,6 +219,25 @@ class Score extends React.Component{
                 <p className="score-description">你们的脑洞我服了！</p>
                 <p className="score-button">确定</p>
               </div>
+          </div>
+      )
+    }
+}
+
+class Packet extends React.Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+      return(
+          <div className='packet-wrapper'>
+            <div className="packet-content">
+                <p className="packet-header"></p>
+                <p className="packet-title">兰博基尼</p>
+                <p className="packet-desprition">企业广告标题或标语</p>
+                <p className="packet-wish">恭喜发财，大吉大利！</p>
+                <p className="packet-button"></p>
+            </div>
           </div>
       )
     }

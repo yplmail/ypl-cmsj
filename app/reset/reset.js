@@ -7,6 +7,7 @@
         html.style.fontSize = (width / 7.5) * (1/window.devicePixelRatio) + 'px';
         var body = document.querySelector("body");
         body.style.minHeight = window.innerHeight + 'px';
+        body.style.minWidth = window.innerWidth + 'px';
     };
     window.addEventListener('load',function(){
         setFontSize();       
