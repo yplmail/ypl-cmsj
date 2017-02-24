@@ -8,7 +8,10 @@ import ServerRequest from 'server/serverRequest';
 class Detail extends React.Component{
     constructor(props){
         super(props);
-        this.state = {arr:[]};
+        this.state = {
+          arr   : [] ,
+          scoreAnimation : 'score-mask-wrapper'
+        };
         this.success  = this.success.bind(this);
     }
 
@@ -29,6 +32,7 @@ class Detail extends React.Component{
     }
 
     initPlayer(){
+        var self = this;
         this.player = new prismplayer({
             id: "springGrassPlayer",
             source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",
@@ -37,7 +41,7 @@ class Detail extends React.Component{
             cover:'../../images/adv_bg_02.jpg',
             preload : true,
             playsinline:true,
-            autoplay:true,
+            autoplay:false,
             skinLayout:[{
                 "name":"bigPlayButton",
                 "align":"cc"
@@ -74,12 +78,18 @@ class Detail extends React.Component{
         });
         //document.getElementsByClassName('prism-big-play-btn')[0].click();
         this.player.on('ended',function(){
-            alert('播放完毕');
+            self.setState({
+              scoreAnimation:'score-mask-wrapper scoreAnimation'
+            })
         })
     }
 
     success(response){
         this.setState({arr:response.data})
+    }
+
+    shareHandler(){
+        alert(11);
     }
 
     componentWillUnmount(){
@@ -92,9 +102,10 @@ class Detail extends React.Component{
             <div className="adv-player prism-player" id="springGrassPlayer">
                
             </div>
-            <DetailBar />
+            <DetailBar handler={this.shareHandler}/>
             <Record />
-            <Correlation/>             
+            <Correlation/>   
+            <Score scoreAnimation={this.state.scoreAnimation}/>       
             </div>
         )
     }
@@ -109,7 +120,7 @@ class DetailBar extends React.Component{
           <div className="adv-detial-bar" data-flex="dir:left main:center cross:center">
             <div>250000.00</div>
             <div>红包已领2322226个</div>
-            <div>8452</div>
+            <div onClick={this.props.handler}>8452</div>
           </div>
         )
     }
@@ -323,18 +334,27 @@ class Score extends React.Component{
 
     render(){
       return(
-          <div className="score-mask-wrapper">
-              <div className="score-content slideInUp animated">
+          <div className={this.props.scoreAnimation} >
+              <div className="score-content">
                 <h2>评分有惊喜！</h2>
-                <p className="start">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <strong>4分</strong>
+                <p className="starability-slot clearfix">
+                    <input type="radio" id="rate5-2" name="rating" value="5" />
+                    <label htmlFor="rate5-2" title="Amazing">5 stars</label>
+
+                    <input type="radio" id="rate4-2" name="rating" value="4" />
+                    <label htmlFor="rate4-2" title="Very good">4 stars</label>
+
+                    <input type="radio" id="rate3-2" name="rating" value="3" />
+                    <label htmlFor="rate3-2" title="Average">3 stars</label>
+
+                    <input type="radio" id="rate2-2" name="rating" value="2" />
+                    <label htmlFor="rate2-2" title="Not good">2 stars</label>
+
+                    <input type="radio" id="rate1-2" name="rating" value="1" />
+                    <label htmlFor="rate1-2" title="Terrible">1 star</label>
                 </p>
                 <p className="score-description">你们的脑洞我服了！</p>
+                <p className="score-button">确定</p>
               </div>
           </div>
       )

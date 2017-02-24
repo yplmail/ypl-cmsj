@@ -102,9 +102,7 @@ class Hot extends React.Component{
             if(event.target.className == "video-play"){
             	location.hash = '/detail?advId=123&player=true'
             }else{
-            	//location.hash = '/detail?advId=123&player=false'
-            	//
-            	location="../../player.html"
+            	location.hash = '/detail?advId=123&player=false'
             }
 		}else{
 	        //还原位置
