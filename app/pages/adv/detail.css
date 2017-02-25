@@ -66,6 +66,7 @@
     height: 138px;
     background-color: #eee;
     overflow: hidden;
+    display:none;
 }
 
 .adv-packet-record li {

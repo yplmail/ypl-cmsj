@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 import './loading.css';
 
 class ScrollUp extends React.Component{

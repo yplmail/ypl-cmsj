@@ -9,8 +9,9 @@ class Detail extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-          arr   : [] ,
-          display:'',
+          detail : {},
+          packetList:[],
+          display: '',
           scoreAnimation : ''
         };
         this.success  = this.success.bind(this);
@@ -18,6 +19,7 @@ class Detail extends React.Component{
 
     componentWillMount(){
         this.initData();
+        this.getPacketList();
     }  
 
     componentDidMount(){
@@ -26,10 +28,29 @@ class Detail extends React.Component{
 
     initData(){
         let server = new ServerRequest();
-        server.get({
-            url:'/mock/list.json',
+        server.post({
+            url:'advDetail',
+            data:{
+              publishId: this.props.params.id,
+              token    : '',
+              openId   : ''
+            },
             success:this.success
         })   
+    }
+
+    getPacketList(){
+        let self = this;
+        let server = new ServerRequest();
+        server.post({
+            url :'usedRewards',
+            data:{
+              publishId: this.props.params.id,
+            },
+            success:function(response){
+              self.setState({packetList:response.datas})
+            }
+        })        
     }
 
     initPlayer(){
@@ -39,7 +60,7 @@ class Detail extends React.Component{
             source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",
             width : "100%",
             height: "220px",
-            cover:'../../images/adv_bg_02.jpg',
+            cover : this.state.detail.coverUrl,
             preload : true,
             playsinline:true,
             autoplay:false,
@@ -77,17 +98,29 @@ class Detail extends React.Component{
                 }]
             }]
         });
-        //document.getElementsByClassName('prism-big-play-btn')[0].click();
-        this.player.on('ended',function(){
-            self.setState({
-              display:'block',
-              scoreAnimation:'scoreAnimation'
-            })
-        })
+
+        document.getElementsByClassName('prism-big-play-btn')[0].click(); 
+
+        // if(this.props.params.play == "1"){
+        //   this.player.play();
+        // }
+
+        // document.addEventListener("WeixinJSBridgeReady", function () { 
+
+        // }, false); 
+
+
+        // this.player.on('ended',function(){
+        //     self.setState({
+        //       display:'block',
+        //       scoreAnimation:'scoreAnimation'
+        //     })
+        // })
     }
 
-    success(response){
-        this.setState({arr:response.data})
+    success(response){    
+        this.setState({detail:response})
+        //this.initPlayer();
     }
 
     shareHandler(){
@@ -104,11 +137,10 @@ class Detail extends React.Component{
             <div className="adv-player prism-player" id="springGrassPlayer">
                
             </div>
-            <DetailBar handler={this.shareHandler}/>
+            <DetailBar detail={this.state.detail} handler={this.shareHandler}/>
             <Record />
             <Correlation/>   
-            <Score scoreAnimation={this.state.scoreAnimation} display={this.state.display}/>   
-            <Packet />    
+            <Score scoreAnimation={this.state.scoreAnimation} display={this.state.display}/>    
             </div>
         )
     }
@@ -121,9 +153,9 @@ class DetailBar extends React.Component{
     render(){
         return (
           <div className="adv-detial-bar" data-flex="dir:left main:center cross:center">
-            <div>250000.00</div>
-            <div>红包已领2322226个</div>
-            <div onClick={this.props.handler}>8452</div>
+            <div>{this.props.detail.totalAmount}</div>
+            <div>红包已领{this.props.detail.usedCount}个</div>
+            <div onClick={this.props.handler}>{this.props.detail.shareCount}</div>
           </div>
         )
     }
@@ -137,6 +169,7 @@ class Record extends React.Component{
         return (
           <div className="adv-packet-record">
             <ul>
+
             </ul>
           </div>
         )

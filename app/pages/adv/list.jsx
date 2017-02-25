@@ -1,9 +1,10 @@
+import './list.css';
+import 'layer/loading.css';
 import React from 'react';
 import {Link} from 'react-router';
-import './list.css';
 import ServerRequest from 'server/serverRequest';
-import BScroll from 'better-scroll'
-import 'layer/loading.css';
+import BScroll from 'better-scroll';
+import common from '../../common/common';
 
 class List extends React.Component{
     constructor(props){
@@ -39,12 +40,13 @@ class List extends React.Component{
             0: '上拉发起加载',
             1: '松手即可加载',
             2: '正在加载',
-            3: '加载成功'
+            3: '加载成功',
+            4: '没有更多...'
         };
     }
 
     componentDidMount(){
-        this.getScrollData(true);
+        this.getScrollData();
     }
 
     setPullDownTips(status){
@@ -62,8 +64,8 @@ class List extends React.Component{
         if(isRefresh){
           this.pageIndex = 1;
         }
-        server.get({
-            url:'/mock/list.json',
+        server.post({
+            url:'advList',
             success:this.success
         })
     }
@@ -72,16 +74,19 @@ class List extends React.Component{
       if(this.isRefresh){
           if (this.pullDownStatus == 3) {
               this.setPullDownTips(4);
-              this.setState({items: response.data});
-              this.initScroll();
+              this.setState({items: response.datas});
+              if(this.scroll){
+                this.scroll.scrollTo(0, -this.loadHeight, 500);
+              }else{
+                this.initScroll();
+              }
           }
       }else{
           if (this.pullUpStatus == 2) {
               this.setPullUpTips(3);
-              this.setState({items: this.state.items.concat(response.data)});
+              this.setState({items: this.state.items.concat(response.datas)});
           }
       }
-      ++this.pageIndex;
     }
 
     initScroll(){
@@ -151,14 +156,19 @@ class List extends React.Component{
             if (this.pullUpStatus == 1) { // 发起了加载，那么更新状态
                 this.setPullUpTips(2);
                 this.isRefresh = false;
-                this.getScrollData();
+                ++this.pageIndex;
+                if(this.pageIndex <= this.pageCount){
+                    this.getScrollData();                    
+                }else{
+                    this.setPullUpTips(4);
+                    var self = this;
+                    setTimeout(function(){
+                       self.scroll.scrollTo(0, self.scroll.y + self.loadHeight, 500);                       
+                    },500)
+                }
             }
         }
     }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return true;
-    // }
 
     componentDidUpdate() {
       this.scroll && this.scroll.refresh();
@@ -205,33 +215,40 @@ class List extends React.Component{
 
 
 class ListItem extends React.Component{
-constructor(props){
-super(props);
-}
+    constructor(props){
+        super(props);
+    }
 
-render(){
-return(
-<li>
-<Link to="detail">
-<div>
-<h2>{this.props.item.title}</h2>
-</div>
-<div data-flex="main:center cross:center">
-<span className="video-play"></span>
-</div>
-<div data-flex="dir:left">
-<p className="adv-invest">{this.props.item.invest}</p>
-<p className="adv-packetcount">红包已领{this.props.item.packetcount}个</p>
-<p className="adv-score">{this.props.item.score}分</p>
-<p className="adv-time"><span>{this.props.item.time}</span></p>
-</div>
-</Link>
-</li>
-)
-}
-}
+    handler(event){
+       let id = event.currentTarget.getAttribute('id')
+       if(event.target.className == 'video-play'){
+           location.hash = '/detail/1/' + id;
+       }else{
+           location.hash = '/detail/0/' + id;
+       }
+    }
 
+    render(){
+        return(
+            <li id={this.props.item.publishId} style={{backgroundImage : "url(" +this.props.item.coverUrl + ")"}} onClick={this.handler} >
+                <div>
+                    <h2>{this.props.item.title}</h2>
+                </div>
 
+                <div data-flex="main:center cross:center">
+                    <span className="video-play"></span>
+                </div>
+
+                <div data-flex="dir:left">
+                    <p className="adv-invest">{this.props.item.totalAmount}</p>
+                    <p className="adv-packetcount">红包已领{this.props.item.usedCount}个</p>
+                    <p className="adv-score">{this.props.item.score}分</p>
+                    <p className="adv-time"><span>{common.minutes(this.props.item.duration)}</span></p>
+                </div>
+            </li>
+        )
+    }
+}
 
 export default List;
 

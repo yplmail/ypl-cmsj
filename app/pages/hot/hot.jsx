@@ -7,7 +7,7 @@ class Hot extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			items:[]
+			items:[1,2,3,4,5,6]
 		};
         this.success  = this.success.bind(this);
 		this.touchStart = this.touchStart.bind(this);
@@ -29,6 +29,7 @@ class Hot extends React.Component{
 	initData(){
 		let server = new ServerRequest();
 		server.get({
+			mock:true,
 			url:'/mock/list.json',
 			success:this.success
 		})   

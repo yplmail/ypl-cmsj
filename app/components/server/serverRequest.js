@@ -1,11 +1,16 @@
 import 'layer/layer.css';
 import layer from 'layer/layer.js';
+import ENVIRONMENT from '../../config/config.js'
+import API from '../../config/api.js'
+
+
 class ServerRequest {
-    constructor(url = window.location.pathname) {
+    constructor() {
         this.arr = [];
         this.str = '';
         this.data = {};
-        this.url = url;
+        this.domain = ENVIRONMENT[process.env.NODE_ENV];
+        this.url = '';
         this.async = true;
         this.dataType = 'json';
         this.timeout = 3000;
@@ -32,11 +37,20 @@ class ServerRequest {
     }
 
     _request() {
+        Object.assign(this.data, this._getDefaultData());
+
         for (let d in this.data) {
             this.arr.push(d + '=' + encodeURIComponent(this.data[d]));
         }
+
         this.str = this.arr.join("&");
-        this.url = this.url + '?' + Date.now();
+
+        if(this.mock){
+            this.url = this.url + '?' + Date.now();       
+        }else{
+            this.url = this.domain + API[this.url] + '?' + Date.now();            
+        }
+
         if (this.method == 'GET') {
             if (this.str) this.url = this.url + '&' + this.str;
             //layer.open({type: 2});
@@ -51,19 +65,23 @@ class ServerRequest {
     }
 
     _readystatechange() {
-        var self = this;
+        let self = this;
         this.xhr.onreadystatechange = function() {
-            if (self.xhr.readyState == 4) {
-                var head = self.xhr.getAllResponseHeaders();
-                var response = self.xhr.responseText;
-                if (/application\/json/.test(head) || self.params.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
+            if (this.readyState == 4) {
+                var head = this.getAllResponseHeaders();
+                var response = this.responseText;
+                if (/application\/json/.test(head) || self.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
                     response = JSON.parse(response);
                 }
-                layer.closeAll({type: 2});
-                if (self.xhr.status == 200) {
-                    self._success(response);
+                //layer.closeAll({type: 2});
+                if (this.status == 200) {
+                    if(response.code == 0){
+                        self._success(response.data);                                
+                    }else{
+                        self._fail(response.msg);
+                    }
                 } else {
-                    self._fail(self.xhr.statusText);
+                    self._fail(this.statusText);
                 }
             }
         }
@@ -83,6 +101,15 @@ class ServerRequest {
                 clearTimeout(timer);
             }, this.timeout);
         }
+    }
+
+    _getDefaultData(){
+       return{
+            app_key     : 'channel_wechat_1',
+            app_version : '1.0.0',
+            api_version : '1.0.0',
+            timestamp   : new Date().Format("yyyy-MM-dd hh:mm:ss")       
+       }
     }
 
     _success(result) {

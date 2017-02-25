@@ -24,7 +24,7 @@ ReactDOM.render(
 			<Route path="login"  component={Login} />
 			<Route path="hot"    component={Hot} />
 			<Route path="mine"   component={Mine} />
-			<Route path="detail" component={Detail} />
+			<Route path="detail/:play/:id" component={Detail} />
 			<Route path="register" component={Register} />
 			<Route path="wallet" component={Wallet} />
 			<Route path="record" component={Record} />

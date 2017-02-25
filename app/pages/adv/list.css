@@ -14,16 +14,17 @@
 .adv-list-wrapper ul > li {
     position: relative;
     height: 4.22rem;
-    background: url(../../images/adv_bg_01.jpg) repeat;
+    background-image: url(../../images/adv_bg_01.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
     border-bottom: 4px solid #fff;
 }
 
-.adv-list-wrapper li > a {
+.adv-list-wrapper li {
     display: block;
 }
 
-.adv-list-wrapper li > a > div:nth-child(1) {
+.adv-list-wrapper li > div:nth-child(1) {
     line-height: 1rem;
     height: 1rem;
     min-height: 1rem;
@@ -31,20 +32,20 @@
     background-size: cover;
 }
 
-.adv-list-wrapper li > a > div:nth-child(1) h2 {
+.adv-list-wrapper li > div:nth-child(1) h2 {
     color: #fff;
     font-size: 15px;
     padding-left: .45rem;
 }
 
-.adv-list-wrapper li > a > div:nth-child(2) {
+.adv-list-wrapper li > div:nth-child(2) {
     line-height: 2.22rem;
     height: 2.22rem;
     min-height: 2.22rem;
     text-align: center;
 }
 
-.adv-list-wrapper li > a > div:nth-child(3) {
+.adv-list-wrapper li > div:nth-child(3) {
     line-height: 1rem;
     height: 1rem;
     min-height: 1rem;
@@ -52,7 +53,7 @@
     background-size: cover;
 }
 
-.adv-list-wrapper li > a > div:nth-child(3) p {
+.adv-list-wrapper li > div:nth-child(3) p {
     height: 100%;
     color: #fff;
     text-align: center;
