@@ -62,7 +62,12 @@ class Login extends React.Component{
             data: data,
             success:function(response){
               common.setcookies('token',response.token,7);
-              location.hash="/detail/0/"+this.props.params.id+'/1';
+              let params = this.props.params;
+              if(params.videoId && params.playId){
+                  location.hash="/detail/"+params.videoId+'/'+params.playId;
+              }else{
+                  location.hash="/list";
+              }
             }.bind(this)
         });
     }
@@ -74,7 +79,7 @@ class Login extends React.Component{
                  <ul>
                      <li>
                         <label htmlFor="mobile"></label>
-                        <input id="mobile" type="text" placeholder="请输入您的手机号" name="mobile" value={this.state.mobile} 
+                        <input id="mobile" type="text" placeholder="请输入您的手机号" name="mobile" value={this.state.mobile}
                         onChange={this.mobileChange} maxLength="11"/>
                      </li>
 

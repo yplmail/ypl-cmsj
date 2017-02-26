@@ -7,6 +7,7 @@ const API = {
     'advStartPlay': 'publish/startPlay',
     'advEndPlay': 'publish/endPlay',
     'usedRewards': 'publish/newestUsedRewards',
+    'receive' :'reward/receive'
 }
 
 export default API
