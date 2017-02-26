@@ -353,6 +353,7 @@
     background-size: contain;
 }
 
+
 .packet-wrapper .packet-header{
    position: relative;
    width:1.25rem;
@@ -395,3 +396,38 @@
    background:url(../../images/packet_open_icon.png) no-repeat;
    background-size: contain;
 }
+
+@-webkit-keyframes scaleIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(.3, .3, .3);
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animation{
+  -webkit-animation-name: scaleIn;
+  animation-name: scaleIn;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;  
+}
+
+
