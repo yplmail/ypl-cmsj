@@ -4,6 +4,7 @@ import {Link} from 'react-router';
 import 'player/player.js';
 import 'player/player.css';
 import ServerRequest from 'server/serverRequest';
+import common from '../../common/common';
 
 class Detail extends React.Component{
     constructor(props){
@@ -18,6 +19,7 @@ class Detail extends React.Component{
         };
         this.playId = '';
         this.isFirstPlay = true;
+        this.openHandler = this.openHandler.bind(this);
     }
 
     componentWillMount(){
@@ -112,7 +114,7 @@ class Detail extends React.Component{
       if(common.getcookies('token')){
           this.getPacketAmount();
       }else{
-          location.hash = 'login';
+          location.hash = '/register/1/'+ this.props.params.id;
       }
     }
 

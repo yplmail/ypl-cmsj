@@ -1,10 +1,21 @@
+import './login.css';
 import React from 'react';
 import {Link} from 'react-router';
-import './login.css';
+import md5 from 'md5/md5.js'
+import ServerRequest from 'server/serverRequest';
+import common from '../../common/common';
 
 class Login extends React.Component{
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount(){
+        this.button = this.refs.loginButton;
+    }
+
+    loginHandler(){
+
     }
 
     render(){
@@ -13,13 +24,13 @@ class Login extends React.Component{
                <div className="login-content">
                  <ul>
                      <li>
-                        <label></label>
+                        <label htmlFor="mobile"></label>
                         <input id="mobile" type="text" placeholder="请输入您的手机号"/>
                      </li>
 
                      <li>
-                        <label></label>
-                        <input id="password" type="text" placeholder="请设置您的密码"/>
+                        <label htmlFor="password"></label>
+                        <input id="password" type="password" placeholder="请设置您的密码"/>
                         <span></span>
                      </li>
 
@@ -28,11 +39,11 @@ class Login extends React.Component{
                      </li>
 
                     <li>
-                        <a>登陆</a>
+                        <a ref="loginButton" onClick={this.loginHandler}>登陆</a>
                      </li>
 
                     <li>
-                        <a>没有账号、立即注册</a>
+                        <Link path="register/0">没有账号、立即注册</Link>
                      </li>
                  </ul>
                </div>

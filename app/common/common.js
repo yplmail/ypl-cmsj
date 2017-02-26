@@ -17,7 +17,7 @@ const common = {
             let start = document.cookie.indexOf(name + "=")
             if (start != -1) {
                 start = start + name.length + 1
-                end = document.cookie.indexOf(";", start)
+                let end = document.cookie.indexOf(";", start)
                 if (end == -1) end = document.cookie.length
                 return unescape(document.cookie.substring(start, end))
             }

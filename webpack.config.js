@@ -70,7 +70,8 @@ module.exports = {
             'player': path.resolve(__dirname, './app/components/player'),
             'scroll': path.resolve(__dirname, './app/components/scroll'),
             'server': path.resolve(__dirname, './app/components/server'),
-            'share': path.resolve(__dirname, './app/components/share')
+            'share': path.resolve(__dirname, './app/components/share'),
+            'md5'  : path.resolve(__dirname, './app/components/md5'),
         }
     },
     plugins: [

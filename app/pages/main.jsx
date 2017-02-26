@@ -21,10 +21,11 @@ ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav}>
 			<IndexRoute component={List} />
+			<Route path="register/:page(/:id)"  component={Register} />
 			<Route path="login"  component={Login} />
 			<Route path="hot"    component={Hot} />
 			<Route path="mine"   component={Mine} />
-			<Route path="detail/:play/:id(/:shareId)" component={Detail} />
+			<Route path="detail/:play/:id(/:shareId)(/:packet)" component={Detail} />
 			<Route path="register" component={Register} />
 			<Route path="wallet" component={Wallet} />
 			<Route path="record" component={Record} />

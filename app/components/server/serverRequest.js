@@ -1,5 +1,5 @@
-import 'layer/layer.css';
 import layer from 'layer/layer.js';
+import 'layer/layer.css';
 import ENVIRONMENT from '../../config/config.js'
 import API from '../../config/api.js'
 
@@ -14,7 +14,7 @@ class ServerRequest {
         this.async = true;
         this.dataType = 'json';
         this.timeout = 3000;
-        this.success = function(){};
+        this.success = function() {};
         this.error = this._fail;
         this._timeout = this._timeout.bind(this)
         this.xhr = new XMLHttpRequest();
@@ -66,11 +66,11 @@ class ServerRequest {
         }
     }
 
-    _onreadystatechange(){
+    _onreadystatechange() {
         if (this.xhr.readyState == 4) {
             this._complete();
             layer.closeAll({ type: 2 });
-        }        
+        }
     }
 
     _complete() {
@@ -83,10 +83,10 @@ class ServerRequest {
             if (response.code == 0) {
                 this._success(response.data);
             } else {
-                this.error(response.msg,this.xhr);
+                this.error(response.msg, this.xhr);
             }
         } else {
-            this.error(this.xhr.statusText,this.xhr);
+            this.error(this.xhr.statusText, this.xhr);
         }
     }
 
@@ -94,12 +94,12 @@ class ServerRequest {
         if ('timeout' in this.xhr) {
             this.xhr.timeout = this.timeout;
             this.xhr.ontimeout = function() {
-                this.error('请求超时...',this.xhr);
+                this.error('请求超时...', this.xhr);
             }.bind(this);
         } else {
             let timer = setTimeout(function() {
                 this.xhr.abort();
-                this.error('请求超时...',this.xhr);
+                this.error('请求超时...', this.xhr);
                 clearTimeout(timer);
             }.bind(this), this.timeout);
         }
@@ -116,19 +116,15 @@ class ServerRequest {
 
     _success(result) {
         /**
-        * 
-        * 这里做一些中间处理，暂时无
-        *
-        **/
-        this.success(result,this.xhr)
+         * 
+         * 这里做一些中间处理，暂时无
+         *
+         **/
+        this.success(result, this.xhr)
     }
 
     _fail(msg) {
-        layer.open({
-          content: msg,
-          style: 'background-color:#09C1FF; color:#fff; border:none;',
-          time: 3
-        });        
+        layer.open({ content: msg, time: 3 });
     }
 }
 
