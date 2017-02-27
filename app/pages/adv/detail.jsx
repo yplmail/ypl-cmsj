@@ -10,9 +10,9 @@ class Detail extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            detail : {},
-            packetList:[],
-            display: '',
+            videoDetail: {},
+            packetList : [],
+            videoList  : [],
             packetAnimation:'',
             scoreAnimation : ''
         };
@@ -23,8 +23,53 @@ class Detail extends React.Component{
     }
 
     componentWillMount(){
-        this.getVideoInfo();
+        this.getVideoDetail();
         this.getPacketList();
+        this.getCorrelationVideo();
+    }
+
+    getVideoDetail(){
+        let server = new ServerRequest();
+        server.post({
+            url:'advDetail',
+            data:{
+              publishId: this.props.params.videoId,
+              token    : common.getcookies('token'),
+              openId   : ''
+            },
+            success:function(response){
+              this.setState({videoDetail:response});
+            }.bind(this)
+        })
+    }
+
+    getPacketList(){
+        let server = new ServerRequest();
+        server.get({
+            mock:true,
+            url :'newestUsedRewards',
+            data:{
+              publishId: this.props.params.videoId,
+            },
+            success:function(response){
+              this.setState({packetList:response.datas});
+            }.bind(this)
+        })
+    }
+
+    getCorrelationVideo(){
+        let server = new ServerRequest();
+        server.post({
+            url :'correlationVideo',
+            data:{
+              publishId: this.props.params.videoId,
+              token    : common.getcookies('token'),
+              openId   : ''
+            },
+            success:function(response){
+              this.setState({videoList:response.datas})
+            }.bind(this)
+        })
     }
 
     componentDidMount(){
@@ -35,35 +80,6 @@ class Detail extends React.Component{
               this.setState({packetAnimation:'animation'})
            }
          }.bind(this),320)
-    }
-
-
-    getVideoInfo(){
-        let server = new ServerRequest();
-        server.post({
-            url:'advDetail',
-            data:{
-              publishId: this.props.params.videoId,
-              token    : common.getcookies('token'),
-              openId   : ''
-            },
-            success:function(response){
-              this.setState({detail:response});
-            }.bind(this)
-        })
-    }
-
-    getPacketList(){
-        let server = new ServerRequest();
-        server.post({
-            url :'usedRewards',
-            data:{
-              publishId: this.props.params.videoId,
-            },
-            success:function(response){
-              this.setState({packetList:response.datas})
-            }.bind(this)
-        })
     }
 
     startPlay(){
@@ -148,7 +164,7 @@ class Detail extends React.Component{
             source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",
             width : "100%",
             height: "220px",
-            cover : this.state.detail.coverUrl,
+            cover : this.state.videoDetail.coverUrl,
             preload : true,
             playsinline:true,
             autoplay:false,
@@ -218,20 +234,29 @@ class Detail extends React.Component{
 
     render(){
         return(
-            <div className="adv-detial-wrapper">
-              <div className="adv-player prism-player" id="springGrassPlayer">
-
-              </div>
-              <DetailBar detail={this.state.detail} handler={this.shareHandler}/>
-              <Record />
-              <Correlation/>
+            <div className="detail-wrapper">
+              <VideoPlayer />
+              <VideoDetail detail={this.state.videoDetail} handler={this.shareHandler}/>
+              <PacketRecord list={this.state.packetList}/>
+              <CorrelationVideo videoList={this.state.videoList}/>
               <Packet animation={this.state.packetAnimation} handler={this.openPacketHandle} close={this.closePacketHandle}/>
             </div>
         )
     }
 }
 
-class DetailBar extends React.Component{
+class VideoPlayer extends React.Component{
+    constructor(props){
+        super(props)
+    }
+    render(){
+        return (
+            <div className="adv-player prism-player" id="springGrassPlayer"></div>
+        )
+    }
+}
+
+class VideoDetail extends React.Component{
     constructor(props){
         super(props)
     }
@@ -246,62 +271,81 @@ class DetailBar extends React.Component{
     }
 }
 
-class Record extends React.Component{
+class PacketRecord extends React.Component{
     constructor(props){
         super(props)
     }
-    render(){
-        return (
-          <div className="adv-packet-record">
-            <ul>
 
+    render(){
+        let list = this.props.list;
+        return (
+          <div className="adv-packet-record" style={{display:(list.length > 0) ? 'block' : 'none'}}>
+            <ul>
+               {
+                  list.map((item,index)=>{
+                      return (
+                        <li data-flex="dir:left main:center cross:center" key={index + item.packageAmount}>
+                            <div><img src="../../images/user_header_icon.png" /></div>
+                            <div>{item.nickname}</div>
+                            <div>{item.mobile}</div>
+                            <div>获赠<span>{item.packageAmount}</span>元</div>
+                        </li>
+                      )
+                  })                
+               }
+            </ul>
+            <ul>
+               {
+                  list.map((item,index)=>{
+                      return (
+                        <li data-flex="dir:left main:center cross:center" key={index}>
+                            <div><img src="../../images/user_header_icon.png" /></div>
+                            <div>{item.nickname}</div>
+                            <div>{item.mobile}</div>
+                            <div>获赠<span>{item.packageAmount}</span>元</div>
+                        </li>
+                      )
+                  })                
+               }
             </ul>
           </div>
         )
     }
 }
 
-class Correlation extends React.Component{
+class CorrelationVideo extends React.Component{
     constructor(props){
         super(props)
     }
+    
+    loopVideoList(){
+      return this.props.videoList.map((item,index)=>{
+           return(
+              <li data-flex="box:last" key={index}>
+                  <div data-flex="dir:top box:last">
+                      <h3>{item.title}</h3>
+                      <div className="video-property" data-flex="cross:center box:mean">
+                        <p>魔鬼广告人</p>
+                        <p>{item.palyCount}次播放</p>
+                      </div>
+                  </div>
+                  <div><img src="../../images/adv_temp_icon.png" /></div>
+              </li>
+           )
+      })
+    }
 
     render(){
+       var list = this.props.videoList;
+       if( list.length > 0 ){
+            var content = this.loopVideoList();
+       }else{
+            var content = ('<div></div>');
+       }
        return (<div className="adv-correlation">
           <h2>相关视频</h2>
           <ul>
-             <li data-flex="box:last">
-               <div data-flex="dir:top box:last">
-                   <h3>我们要越狱，可怎么跟说好的不一样了</h3>
-                   <div className="video-property" data-flex="cross:center box:mean">
-                       <p>魔鬼广告人</p>
-                       <p>21万次播放</p>
-                   </div>
-               </div>
-               <div><img src="../../images/adv_temp_icon.png" /></div>
-             </li>
-
-             <li data-flex="box:last">
-               <div data-flex="dir:top box:last">
-                   <h3>我们要越狱，可怎么跟说好的不一样了</h3>
-                   <div className="video-property" data-flex="cross:center box:mean">
-                       <p>魔鬼广告人</p>
-                       <p>21万次播放</p>
-                   </div>
-               </div>
-               <div><img src="../../images/adv_temp_icon.png" /></div>
-             </li>
-
-             <li data-flex="box:last">
-               <div data-flex="dir:top box:last">
-                   <h3>我们要越狱</h3>
-                   <div className="video-property" data-flex="cross:center box:mean">
-                       <p>魔鬼广告人</p>
-                       <p>21万次播放</p>
-                   </div>
-               </div>
-               <div><img src="../../images/adv_temp_icon.png" /></div>
-             </li>
+            {content}
           </ul>
        </div>
        )
@@ -312,7 +356,6 @@ class Score extends React.Component{
     constructor(props){
         super(props)
     }
-
     render(){
       return(
           <div className='score-wrapper' style={{display:this.props.display}}>

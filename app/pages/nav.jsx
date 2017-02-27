@@ -2,20 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {IndexLink,Link} from 'react-router';
 import Load from './load';
+import BScroll from 'better-scroll';
+
 class Nav extends React.Component{
 	constructor(props){
 		super(props)
 	}
+    componentWillMount(){
+        var wrapper = document.querySelector(".container-wrapper");
+        wrapper.style.height = window.innerHeight + 'px';
+        wrapper.style.width = window.innerWidth + 'px';    	
+    }
 
 	componentDidMount(){
-		this.wrapper = document.querySelector('.container')
-		this._preventDefault = function (e){ e.preventDefault(); }
-		this.wrapper.addEventListener('touchmove', this._preventDefault);		
+		// this.wrapper = document.querySelector('.container')
+		// this._preventDefault = function (e){ e.preventDefault(); }
+		// this.wrapper.addEventListener('touchmove', this._preventDefault);			
+		// this.scroll = new BScroll(this.wrapper.childNodes[0], {
+  //           probeType: 3,
+  //           click:true
+  //       })
 	}
-
 	render(){
        return(
-       	   <div className="container" style={{height:window.innerHeight+'px'}}>
+       	   <div className="container">
        	       {this.props.children}
 	           <div className="nav-wrapper">
 	              <div className="nav">

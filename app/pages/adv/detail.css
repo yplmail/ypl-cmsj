@@ -1,3 +1,10 @@
+.detail-wrapper{
+   position: relative;
+   width:100%;
+   height:100%;
+   overflow-y: auto;
+}
+
 .adv-player {
     width: 100%;
     height: 220px;
@@ -66,7 +73,6 @@
     height: 138px;
     background-color: #eee;
     overflow: hidden;
-    display:none;
 }
 
 .adv-packet-record li {
@@ -93,12 +99,18 @@
     text-align: left;
 }
 
+.adv-packet-record li > div:nth-child(4) span{
+    color:#f02800;
+    font-size: 20px;
+}
+
 .adv-packet-record li img {
     width: .63rem;
 }
 
 .adv-correlation {
     background-color: #fff;
+    border-top: 1px solid #999;
 }
 
 .adv-correlation h2 {

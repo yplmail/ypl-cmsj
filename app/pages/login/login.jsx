@@ -10,11 +10,14 @@ class Login extends React.Component{
         super(props);
         this.state = {
             mobile : '',
-            pwd    : ''
+            pwd    : '',
+            passwordType:'password'
         }
         this.mobileChange = this.mobileChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.loginHandle = this.loginHandle.bind(this);
+        this.validate = this.validate.bind(this);
+        this.changePasswordType = this.changePasswordType.bind(this);
     }
 
     componentDidMount(){
@@ -31,6 +34,34 @@ class Login extends React.Component{
         this.setState({
             pwd: event.target.value
         });
+    }
+
+    changePasswordType(){
+        let type = 'password';
+        if(this.state.passwordType == 'password'){
+            type = 'text';
+        }
+        this.setState({passwordType: type});        
+    }
+
+    validate(){
+        if(this.state.mobile == ''){
+          layer.open({content:'请输入您的手机号码',time:2});
+          return false;
+        }
+        if(!/^1\d{10}$/.test(this.state.mobile)){
+          layer.open({content:'请输入正确的手机号码',time:2});
+          return false;
+        }
+        if(this.state.pwd == ''){
+          layer.open({content:'请输入您的登录密码',time:2});
+          return false;
+        }
+        if(this.state.pwd.length < 6 || this.state.pwd.length > 20){
+          layer.open({content:'请输入6到20位长度的登录密码',time:2});
+          return false;
+        }   
+        this.loginHandle();   
     }
 
     loginHandle(){
@@ -59,34 +90,34 @@ class Login extends React.Component{
               linkPath = linkPath + '/' + params.videoId + '/' + params.playId;
           }
           return (
-           <div className="login-wrapper">
-               <div className="login-content">
-                 <ul>
-                     <li>
-                        <label htmlFor="mobile"></label>
-                        <input id="mobile" type="text" placeholder="请输入您的手机号" value={this.state.mobile}  onChange={this.mobileChange}/>
-                     </li>
+              <div className="login-wrapper">
+              <div className="login-content">
+              <ul>
+              <li>
+              <label htmlFor="mobile"></label>
+              <input id="mobile" type="tel" placeholder="请输入您的手机号" value={this.state.mobile}  onChange={this.mobileChange} maxLength="11" />
+              </li>
 
-                     <li>
-                        <label htmlFor="password"></label>
-                        <input id="password" type="password" placeholder="请设置您的密码" value={this.state.pwd}  onChange={this.passwordChange}/>
-                        <span></span>
-                     </li>
+              <li>
+              <label htmlFor="password"></label>
+              <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
+              <span onClick={this.changePasswordType}></span>
+              </li>
 
-                    <li>
-                        <Link to="forgetPassword">忘记密码？</Link>
-                     </li>
+              <li>
+              <Link to="forgetPassword">忘记密码？</Link>
+              </li>
 
-                    <li>
-                        <a onClick={this.loginHandle}>登陆</a>
-                     </li>
+              <li>
+              <a onClick={this.validate}>登陆</a>
+              </li>
 
-                    <li>
-                        <Link to={linkPath}>没有账号、立即注册</Link>
-                     </li>
-                 </ul>
-               </div>
-           </div>
+              <li>
+              <Link to={linkPath}>没有账号、立即注册</Link>
+              </li>
+              </ul>
+              </div>
+              </div>
         )
     }
 }

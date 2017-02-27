@@ -13,7 +13,7 @@ class ServerRequest {
         this.url = '';
         this.async = true;
         this.dataType = 'json';
-        this.timeout = 3000;
+        this.timeout = 30000;
         this.success = function() {};
         this.error = this._fail;
         this._timeout = this._timeout.bind(this)
@@ -47,7 +47,7 @@ class ServerRequest {
         this.str = this.arr.join("&");
 
         if (this.mock) {
-            this.url = this.url + '?' + Date.now();
+            this.url = '/mock/' + this.url + '.json?' + Date.now();
         } else {
             this.url = this.domain + API[this.url] + '?' + Date.now();
         }
