@@ -255,21 +255,21 @@ textarea::-webkit-input-placeholder {
     background-image: url(../images/first_gray.png);
     background-repeat: no-repeat;
     background-position: center 20%;
-    background-size: .53rem .5rem;
+    background-size: .5rem .48rem;
 }
 
 .nav-wrapper li:nth-child(2) a {
     background-image: url(../images/hot_gray.png);
     background-repeat: no-repeat;
     background-position: center 20%;
-    background-size: .37rem .43rem;
+    background-size: .5rem .48rem;
 }
 
 .nav-wrapper li:nth-child(3) a {
     background-image: url(../images/mine_gray.png);
     background-repeat: no-repeat;
     background-position: center 20%;
-    background-size: .37rem .41rem;
+    background-size: .5rem .48rem;
 }
 
 .nav-wrapper li:nth-child(1) a.active {

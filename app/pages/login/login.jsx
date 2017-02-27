@@ -74,11 +74,11 @@ class Login extends React.Component{
                      </li>
 
                     <li>
-                        <a>忘记密码？</a>
+                        <Link to="forgetPassword">忘记密码？</Link>
                      </li>
 
                     <li>
-                        <a ref="loginButton" onClick={this.loginHandle}>登陆</a>
+                        <a onClick={this.loginHandle}>登陆</a>
                      </li>
 
                     <li>

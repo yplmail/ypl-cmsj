@@ -343,16 +343,26 @@
     background: rgba(0, 0, 0, 0.5);
 }
 
+
 .packet-wrapper .packet-content{
     position: absolute;
     width:5.74rem;
     height:8.66rem;
-    top:2.3rem;
+    top:2rem;
     left:.9rem;
     background: url(../../images/packet_bg.png) no-repeat;
     background-size: contain;
 }
 
+.packet-wrapper .packet-close{
+    position: absolute;
+    width:.58rem;
+    height:.58rem;
+    top:.6rem;
+    left:.6rem;
+    background: url(../../images/packet_close_icon.png) no-repeat;
+    background-size: contain;
+}
 
 .packet-wrapper .packet-header{
    position: relative;

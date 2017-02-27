@@ -14,6 +14,7 @@ import Transfer   from './wallet/transfer.jsx';
 import Feedback   from './feedback/feedback.jsx';
 import Setting   from './setting/setting.jsx';
 import ModifyPassword   from './modifyPassword/modifyPassword.jsx';
+import ForgetPassword   from './modifyPassword/forgetPassword.jsx';
 import MobileAuth   from './mobileAuth/mobileAuth.jsx';
 import WechatAuth   from './wechatAuth/wechatAuth.jsx';
 
@@ -23,6 +24,7 @@ ReactDOM.render(
 			<IndexRoute component={List} />
 			<Route path="register(/:playId)(/:videoId)"  component={Register} />
 			<Route path="login(/:playId)(/:videoId)"  component={Login} />
+			<Route path="forgetPassword"  component={ForgetPassword} />
 			<Route path="hot"    component={Hot} />
 			<Route path="mine"   component={Mine} />
 			<Route path="detail/:videoId(/:playId)(/:shareId)" component={Detail} />

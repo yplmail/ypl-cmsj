@@ -18,7 +18,8 @@ class Detail extends React.Component{
         };
         this.playId = '';
         this.isFirstPlay = true;
-        this.openHandler = this.openHandler.bind(this);
+        this.openPacketHandle  = this.openPacketHandle.bind(this);
+        this.closePacketHandle = this.closePacketHandle.bind(this);
     }
 
     componentWillMount(){
@@ -103,7 +104,7 @@ class Detail extends React.Component{
            url : 'receive',
            data:{
              publishId : this.props.params.videoId,
-             videoPlayRecordId : this.props.params.playId,
+             videoPlayRecordId : this.props.params.playId || this.playId,
              token : common.getcookies('token')
            },
            success:function(response){
@@ -113,7 +114,7 @@ class Detail extends React.Component{
     }
 
 
-    setInterval(){
+    interval(){
        let count = parseInt(this.player.getDuration() / 100 * 1000);
        let timer = window.setInterval(function(){
            var ratio = parseFloat(this.player.getCurrentTime() / this.player.getDuration());
@@ -128,12 +129,16 @@ class Detail extends React.Component{
         alert(11);
     }
 
-    openHandler(){
+    openPacketHandle(){
       if(common.getcookies('token')){
           this.getPacketAmount();
       }else{
           location.hash = '/login/'+this.props.params.videoId+'/'+ this.playId;
       }
+    }
+
+    closePacketHandle(){
+      this.setState({packetAnimation:''})
     }
 
     initPlayer(){
@@ -185,13 +190,7 @@ class Detail extends React.Component{
         this.player.on('play',function(){
             if(this.isFirstPlay){
                this.startPlay()
-            }
-        }.bind(this))
-
-        this.player.on('play',function(){
-            if(this.isFirstPlay){
-               this.startPlay()
-               this.setInterval();
+               this.interval();
             }
         }.bind(this))
 
@@ -226,7 +225,7 @@ class Detail extends React.Component{
               <DetailBar detail={this.state.detail} handler={this.shareHandler}/>
               <Record />
               <Correlation/>
-              <Packet animation={this.state.packetAnimation} handler={this.openHandler}/>
+              <Packet animation={this.state.packetAnimation} handler={this.openPacketHandle} close={this.closePacketHandle}/>
             </div>
         )
     }
@@ -347,10 +346,12 @@ class Packet extends React.Component{
     constructor(props){
         super(props)
     }
+
     render(){
       return(
           <div className="packet-wrapper" style={{display:this.props.animation ? 'block':'none'}}>
             <div className= {"packet-content " + this.props.animation} >
+                <p className="packet-close" onClick={this.props.close}></p>
                 <p className="packet-header"></p>
                 <p className="packet-title">兰博基尼</p>
                 <p className="packet-desprition">企业广告标题或标语</p>
