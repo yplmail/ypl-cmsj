@@ -14,6 +14,7 @@ class ServerRequest {
         this.async = true;
         this.dataType = 'json';
         this.timeout = 30000;
+        this.maskLayer = false;
         this.success = function() {};
         this.error = this._fail;
         this._timeout = this._timeout.bind(this)
@@ -52,7 +53,9 @@ class ServerRequest {
             this.url = this.domain + API[this.url] + '?' + Date.now();
         }
 
-        //layer.open({type: 2});
+        if(this.maskLayer){
+            layer.open({type: 2});            
+        }
 
         if (this.method == 'GET') {
             if (this.str) this.url = this.url + '&' + this.str;
@@ -69,11 +72,11 @@ class ServerRequest {
     _onreadystatechange() {
         if (this.xhr.readyState == 4) {
             this._complete();
-            layer.closeAll({ type: 2 });
         }
     }
 
     _complete() {
+        layer.closeAll();
         var head = this.xhr.getAllResponseHeaders();
         var response = this.xhr.responseText;
         if (/application\/json/.test(head) || this.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
@@ -124,7 +127,7 @@ class ServerRequest {
     }
 
     _fail(msg) {
-        layer.open({ content: msg, time: 3 });
+        layer.open({content:msg,time:2});
     }
 }
 

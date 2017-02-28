@@ -13,6 +13,7 @@ class Detail extends React.Component{
             videoDetail: {},
             packetList : [],
             videoList  : [],
+            packetType : 0,
             packetAnimation:'',
             scoreAnimation : ''
         };
@@ -20,6 +21,7 @@ class Detail extends React.Component{
         this.isFirstPlay = true;
         this.openPacketHandle  = this.openPacketHandle.bind(this);
         this.closePacketHandle = this.closePacketHandle.bind(this);
+        this.scoreHandle = this.scoreHandle.bind(this);
     }
 
     componentWillMount(){
@@ -39,14 +41,15 @@ class Detail extends React.Component{
             },
             success:function(response){
               this.setState({videoDetail:response});
+              this.initPlayer();
             }.bind(this)
         })
     }
 
     getPacketList(){
         let server = new ServerRequest();
-        server.get({
-            mock:true,
+        server.post({
+            // mock:true,
             url :'newestUsedRewards',
             data:{
               publishId: this.props.params.videoId,
@@ -73,7 +76,6 @@ class Detail extends React.Component{
     }
 
     componentDidMount(){
-         this.initPlayer();
          setTimeout(function(){
            let params = this.props.params;
            if(params.videoId && params.playId){
@@ -85,6 +87,7 @@ class Detail extends React.Component{
     startPlay(){
         let server = new ServerRequest();
         server.post({
+
           url:'advStartPlay',
           data:{
               publishId: this.props.params.videoId,
@@ -124,8 +127,11 @@ class Detail extends React.Component{
              token : common.getcookies('token')
            },
            success:function(response){
-              debugger;
-           }
+              this.setState({packetType:1})
+           }.bind(this),
+           error:function(){
+              this.setState({packetType:1})
+           }.bind(this)
        });
     }
 
@@ -154,14 +160,31 @@ class Detail extends React.Component{
     }
 
     closePacketHandle(){
-      this.setState({packetAnimation:''})
+      this.setState({packetAnimation :''});
+      this.setState({'scoreAnimation':'scoreAnimation'})
+    }
+
+    scoreHandle(val){
+      if(val == 0){
+          layer.open({content:'么么哒，请参与下评分',timeout:2});
+      }else{
+          this.setState({'scoreAnimation':''})
+          let server = new ServerRequest();
+          server.post({
+              url : 'score',
+              data:{
+                  publishId : this.props.params.videoId,
+                  score : val,
+                  token : common.getcookies('token')
+              }
+          });          
+      }
     }
 
     initPlayer(){
-        var self = this;
         this.player = new prismplayer({
             id: "springGrassPlayer",
-            source: "http://cloud.video.taobao.com/play/u/2554695624/p/1/e/6/t/1/fv/102/28552077.mp4",
+            source: this.state.videoDetail.playUrl,
             width : "100%",
             height: "220px",
             cover : this.state.videoDetail.coverUrl,
@@ -239,7 +262,9 @@ class Detail extends React.Component{
               <VideoDetail detail={this.state.videoDetail} handler={this.shareHandler}/>
               <PacketRecord list={this.state.packetList}/>
               <CorrelationVideo videoList={this.state.videoList}/>
-              <Packet animation={this.state.packetAnimation} handler={this.openPacketHandle} close={this.closePacketHandle}/>
+              <Packet packetType={this.state.packetType} animation={this.state.packetAnimation} 
+              handler={this.openPacketHandle} close={this.closePacketHandle} detail={this.state.videoDetail}/>
+              <Score animation={this.state.scoreAnimation} handle={this.scoreHandle}/>
             </div>
         )
     }
@@ -262,7 +287,7 @@ class VideoDetail extends React.Component{
     }
     render(){
         return (
-          <div className="adv-detial-bar" data-flex="dir:left main:center cross:center">
+          <div className="adv-detial-bar" data-flex="dir:left cross:center">
             <div>{this.props.detail.totalAmount}</div>
             <div>红包已领{this.props.detail.usedCount}个</div>
             <div onClick={this.props.handler}>{this.props.detail.shareCount}</div>
@@ -340,7 +365,7 @@ class CorrelationVideo extends React.Component{
        if( list.length > 0 ){
             var content = this.loopVideoList();
        }else{
-            var content = ('<div></div>');
+            var content = <div></div>;
        }
        return (<div className="adv-correlation">
           <h2>相关视频</h2>
@@ -355,30 +380,42 @@ class CorrelationVideo extends React.Component{
 class Score extends React.Component{
     constructor(props){
         super(props)
+        this.score = 0 ;
+        this.change = this.change.bind(this);
+        this.clickHandle = this.clickHandle.bind(this);
     }
+
+    change(event){
+        this.score = event.target.value;
+    }
+
+    clickHandle(){
+        this.props.handle(this.score);
+    }
+
     render(){
       return(
-          <div className='score-wrapper' style={{display:this.props.display}}>
-              <div className={'score-content ' + this.props.scoreAnimation}>
+          <div className='score-wrapper' style={{display:this.props.animation ? 'block':'none'}}>
+              <div className={'score-content ' + this.props.animation}>
                 <h2>评分有惊喜！</h2>
                 <p className="starability-slot clearfix">
-                    <input type="radio" id="rate5-2" name="rating" value="5" />
+                    <input type="radio" id="rate5-2" name="rating" value="100" onChange={this.change}/>
                     <label htmlFor="rate5-2" title="Amazing">5 stars</label>
 
-                    <input type="radio" id="rate4-2" name="rating" value="4" />
+                    <input type="radio" id="rate4-2" name="rating" value="80"  onChange={this.change} />
                     <label htmlFor="rate4-2" title="Very good">4 stars</label>
 
-                    <input type="radio" id="rate3-2" name="rating" value="3" />
+                    <input type="radio" id="rate3-2" name="rating" value="60"  onChange={this.change} />
                     <label htmlFor="rate3-2" title="Average">3 stars</label>
 
-                    <input type="radio" id="rate2-2" name="rating" value="2" />
+                    <input type="radio" id="rate2-2" name="rating" value="40"  onChange={this.change} />
                     <label htmlFor="rate2-2" title="Not good">2 stars</label>
 
-                    <input type="radio" id="rate1-2" name="rating" value="1" />
+                    <input type="radio" id="rate1-2" name="rating" value="20"  onChange={this.change} />
                     <label htmlFor="rate1-2" title="Terrible">1 star</label>
                 </p>
                 <p className="score-description">你们的脑洞我服了！</p>
-                <p className="score-button">确定</p>
+                <p className="score-button" onClick={this.clickHandle}>确定</p>
               </div>
           </div>
       )
@@ -388,19 +425,36 @@ class Score extends React.Component{
 class Packet extends React.Component{
     constructor(props){
         super(props)
+
     }
 
     render(){
-      return(
-          <div className="packet-wrapper" style={{display:this.props.animation ? 'block':'none'}}>
-            <div className= {"packet-content " + this.props.animation} >
+      var detail = this.props.detail;
+      var content = null;
+      if(this.props.packetType){
+         var content =<div className= {"packet-result"} >
+                <p className="packet-close" onClick={this.props.close}></p>
+                <p className="result-header"></p>
+                <p className="packet-title">{detail.publishNickName}</p>
+                <p className="packet-desprition">{detail.rewardsSlogan}</p>
+                <p className="packet-money">27.82</p>
+                <p className="packet-remind">已存入账户零钱</p>
+                <p className="packet-ranking">{detail.thanksWords}</p>
+                <p className="packet-more">真爽，我还要更多</p>
+            </div>;        
+      }else{
+         var content =<div className= {"packet-content " + this.props.animation} >
                 <p className="packet-close" onClick={this.props.close}></p>
                 <p className="packet-header"></p>
-                <p className="packet-title">兰博基尼</p>
-                <p className="packet-desprition">企业广告标题或标语</p>
-                <p className="packet-wish">恭喜发财，大吉大利！</p>
+                <p className="packet-title">{detail.publishNickName}</p>
+                <p className="packet-desprition">{detail.rewardsSlogan}</p>
+                <p className="packet-wish">{detail.rewardsWish}</p>
                 <p className="packet-button" onClick={this.props.handler}></p>
-            </div>
+            </div>;
+      }
+      return(
+          <div className="packet-wrapper" style={{display:this.props.animation ? 'block':'none'}}>
+            {content}
           </div>
       )
     }

@@ -9,7 +9,8 @@ const API = {
     'advEndPlay': 'publish/endPlay',
     'receive' :'reward/receive',
     'newestUsedRewards' :'publish/newestUsedRewards',
-    'correlationVideo' :'video/relatedVideos'
+    'correlationVideo' :'video/relatedVideos',
+    'score' :'comment/score',
 }
 
 export default API

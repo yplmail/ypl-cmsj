@@ -55,7 +55,7 @@ class Login extends React.Component{
                 this.refs.smsCode.style.opacity = 0.3;
                 this.time = 60;
                 this.timer = setInterval(function(){
-                    this.setState({'codeTips':"重新获取("+(--this.time)+"s)"});
+                    this.setState({'codeTips':(--this.time) + "S后重新获取"});
                     if(this.time == 0){
                         this.refs.smsCode.style.opacity = 1;
                         this.setState({'codeTips':"重新获取"});
@@ -106,11 +106,13 @@ class Login extends React.Component{
 
     registerHandler(){
         let server = new ServerRequest();
-        let data = this.state;
-        data.pwd = md5(data.pwd);
         server.post({
             url : 'resetLoginPwd',
-            data: data,
+            data: {
+              mobile:this.state.mobile,
+              smsCode:this.state.smsCode,
+              newPwd:md5(this.state.pwd)
+            },
             success:function(response){
               common.setcookies('token',response.token,7);
               let params = this.props.params;
@@ -144,7 +146,7 @@ class Login extends React.Component{
                      </li>
 
                      <li>
-                         <a ref="registerButton" onClick={this.validate}>立即注册</a>
+                         <a ref="registerButton" onClick={this.validate}>重置密码</a>
                      </li>
                  </ul>
                </div>

@@ -55,7 +55,7 @@ class Login extends React.Component{
                 this.refs.smsCode.style.opacity = 0.3;
                 this.time = 60;
                 this.timer = setInterval(function(){
-                    this.setState({'codeTips':"重新获取("+(--this.time)+"s)"});
+                    this.setState({'codeTips':(--this.time) + "S后重新获取"});
                     if(this.time == 0){
                         this.refs.smsCode.style.opacity = 1;
                         this.setState({'codeTips':"重新获取"});
