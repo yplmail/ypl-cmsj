@@ -54,7 +54,7 @@ class ServerRequest {
         }
 
         if(this.maskLayer){
-            layer.open({type: 2});            
+            layer.open({type: 2});
         }
 
         if (this.method == 'GET') {
@@ -86,7 +86,11 @@ class ServerRequest {
             if (response.code == 0) {
                 this._success(response.data);
             } else {
-                this.error(response.msg, this.xhr);
+                if(response.code == 900003){
+                    location.hash = '/login';
+                }else{
+                    this.error(response.msg, this.xhr);
+                }
             }
         } else {
             this.error(this.xhr.statusText, this.xhr);
@@ -119,7 +123,7 @@ class ServerRequest {
 
     _success(result) {
         /**
-         * 
+         *
          * 这里做一些中间处理，暂时无
          *
          **/
@@ -127,7 +131,7 @@ class ServerRequest {
     }
 
     _fail(msg) {
-        layer.open({content:msg,time:2});
+        layer.open({content:msg||'服务恼情绪',time:2});
     }
 }
 

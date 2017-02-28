@@ -5,6 +5,7 @@ import 'player/player.js';
 import 'player/player.css';
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
+import BScroll from 'better-scroll';
 
 class Detail extends React.Component{
     constructor(props){
@@ -48,15 +49,26 @@ class Detail extends React.Component{
 
     getPacketList(){
         let server = new ServerRequest();
-        server.post({
+        server.get({
+            mock:true,
             url :'newestUsedRewards',
             data:{
               publishId: this.props.params.videoId,
             },
             success:function(response){
-              this.setState({packetList:response.datas});
               if(response.datas.length > 3){
-                document.querySelector('#slideWrapper').className="slide";
+                  var arr = response.datas;
+                  for(var i = 0 ; i < 2 ; i++){
+                      console.log(response.datas.length);
+                      response.datas.map(function(item,index){
+                          arr.push(item);
+                      })
+                  }
+                  arr = arr.slice(0);
+                  this.setState({packetList:arr});
+                  document.querySelector('#slideWrapper').className="slide";
+              }else{
+                  this.setState({packetList:response.datas});
               }
             }.bind(this)
         })
@@ -131,7 +143,7 @@ class Detail extends React.Component{
               let data = this.state.videoDetail;
               let packetType = 1;
               if(result.amount == '0'){
-                 result.remindTips = '一步之遥';  
+                 result.remindTips = '一步之遥';
                  packetType = 3;
               }
               Object.assign(data,result);
@@ -185,7 +197,7 @@ class Detail extends React.Component{
                   score : val,
                   token : common.getcookies('token')
               }
-          });          
+          });
       }
     }
 
@@ -265,14 +277,16 @@ class Detail extends React.Component{
 
     render(){
         return(
-            <div className="detail-wrapper">
-              <VideoPlayer />
-              <VideoDetail detail={this.state.videoDetail} handler={this.shareHandler}/>
-              <PacketRecord list={this.state.packetList}/>
-              <CorrelationVideo videoList={this.state.videoList}/>
-              <Packet packetType={this.state.packetType} animation={this.state.packetAnimation} 
-              handler={this.openPacketHandle} close={this.closePacketHandle} detail={this.state.videoDetail}/>
-              <Score animation={this.state.scoreAnimation} handle={this.scoreHandle}/>
+            <div className="detail-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
+              <div className="detail-scroll">
+                  <VideoPlayer />
+                  <VideoDetail detail={this.state.videoDetail} handler={this.shareHandler}/>
+                  <PacketRecord list={this.state.packetList}/>
+                  <CorrelationVideo videoList={this.state.videoList}/>
+                  <Packet packetType={this.state.packetType} animation={this.state.packetAnimation}
+                  handler={this.openPacketHandle} close={this.closePacketHandle} detail={this.state.videoDetail}/>
+                  <Score animation={this.state.scoreAnimation} handle={this.scoreHandle}/>
+              </div>
             </div>
         )
     }
@@ -324,21 +338,21 @@ class PacketRecord extends React.Component{
                             <div>获赠<span>{item.packageAmount}</span>元</div>
                         </li>
                       )
-                  })                
+                  })
                }
             </ul>
             <ul>
                {
                   list.map((item,index)=>{
                       return (
-                        <li data-flex="dir:left main:center cross:center" key={index}>
+                        <li data-flex="dir:left main:center cross:center" key={index + item.packageAmount}>
                             <div><img src="../../images/user_header_icon.png" /></div>
                             <div>{item.nickname}</div>
                             <div>{item.mobile}</div>
                             <div>获赠<span>{item.packageAmount}</span>元</div>
                         </li>
                       )
-                  })                
+                  })
                }
             </ul>
           </div>
@@ -350,7 +364,7 @@ class CorrelationVideo extends React.Component{
     constructor(props){
         super(props)
     }
-    
+
     loopVideoList(){
       return this.props.videoList.map((item,index)=>{
            return(
@@ -438,8 +452,8 @@ class Packet extends React.Component{
 
     render(){
       var detail = this.props.detail;
-      var content = null;      
-      if(this.props.packetType == 0){     
+      var content = null;
+      if(this.props.packetType == 0){
          var content =<div className= {"packet-content " + this.props.animation} >
                 <p className="packet-close" onClick={this.props.close}></p>
                 <p className="packet-header"></p>
@@ -457,16 +471,16 @@ class Packet extends React.Component{
                 <p className="packet-money">{detail.amount}</p>
                 <p className="packet-ranking">恭喜超过<span>{detail.beyondUserRate+'%'}</span>的草莓哦！</p>;
                 <p className="packet-more">More 》》》</p>
-            </div>;   
+            </div>;
       }else{
          var content =<div className= {"packet-result"} >
                 <p className="packet-close" onClick={this.props.close}></p>
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-remindTip">{detail.remindTips}</p>;                
+                <p className="packet-remindTip">{detail.remindTips}</p>;
                 <p className="packet-more">More 》》》</p>
-            </div>;          
+            </div>;
       }
       return(
           <div className="packet-wrapper" style={{display:this.props.animation ? 'block':'none'}}>

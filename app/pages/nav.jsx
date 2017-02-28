@@ -11,19 +11,27 @@ class Nav extends React.Component{
     componentWillMount(){
         var wrapper = document.querySelector(".container-wrapper");
         wrapper.style.height = window.innerHeight + 'px';
-        wrapper.style.width = window.innerWidth + 'px';    	
+        wrapper.style.width = window.innerWidth + 'px';
     }
 
 	componentDidMount(){
-		// this.wrapper = document.querySelector('.container')
-		// this._preventDefault = function (e){ e.preventDefault(); }
-		// this.wrapper.addEventListener('touchmove', this._preventDefault);			
-		// this.scroll = new BScroll(this.wrapper.childNodes[0], {
-  //           probeType: 3,
-  //           click:true
-  //       })
+		this.wrapper = document.querySelector('.container')
+		this._preventDefault = function (e){ e.preventDefault(); }
+		this.wrapper.addEventListener('touchmove', this._preventDefault);
 	}
+    initBScroll(){
+        setTimeout(function(){
+            window.iscroll = null;
+            var wrapper = document.querySelector('.container').childNodes[0];
+            wrapper.style.height = (window.innerHeight-48) + 'px';
+            window.iscroll = new BScroll(wrapper, {
+                probeType: 3,
+                click:true
+            })
+        },320)
+    }
 	render(){
+       this.initBScroll();
        return(
        	   <div className="container">
        	       {this.props.children}
@@ -38,7 +46,7 @@ class Nav extends React.Component{
 	           </div>
            </div>
        )
-	}	
+	}
 }
 
 export default Nav;

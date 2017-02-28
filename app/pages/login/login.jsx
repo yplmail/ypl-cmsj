@@ -41,7 +41,7 @@ class Login extends React.Component{
         if(this.state.passwordType == 'password'){
             type = 'text';
         }
-        this.setState({passwordType: type});        
+        this.setState({passwordType: type});
     }
 
     validate(){
@@ -60,8 +60,8 @@ class Login extends React.Component{
         if(this.state.pwd.length < 6 || this.state.pwd.length > 20){
           layer.open({content:'请输入6到20位长度的登录密码',time:2});
           return false;
-        }   
-        this.loginHandle();   
+        }
+        this.loginHandle();
     }
 
     loginHandle(){
@@ -77,7 +77,7 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    location.hash="/list";
+                    location.hash="/";
                 }
             }.bind(this)
         });

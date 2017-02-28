@@ -7,53 +7,23 @@
         "pageCount": 10,
         "totalCount": 10,
         "datas": [{
-            "faceUrl": "images", 
+            "faceUrl": "images",
             "nickname": "艾可思1",
             "mobile": "188****6534",
             "packageAmount": "8.88"
         }, {
-            "faceUrl": "images", 
+            "faceUrl": "images",
             "nickname": "艾可思2",
             "mobile": "188****6534",
             "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
+        },{
+            "faceUrl": "images",
             "nickname": "艾可思3",
             "mobile": "188****6534",
             "packageAmount": "8.88"
         }, {
-            "faceUrl": "images", 
+            "faceUrl": "images",
             "nickname": "艾可思4",
-            "mobile": "188****6534",
-            "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
-            "nickname": "艾可思5",
-            "mobile": "188****6534",
-            "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
-            "nickname": "艾可思6",
-            "mobile": "188****6534",
-            "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
-            "nickname": "艾可思7",
-            "mobile": "188****6534",
-            "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
-            "nickname": "艾可思8",
-            "mobile": "188****6534",
-            "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
-            "nickname": "艾可思9",
-            "mobile": "188****6534",
-            "packageAmount": "8.88"
-        }, {
-            "faceUrl": "images", 
-            "nickname": "艾可思10",
             "mobile": "188****6534",
             "packageAmount": "8.88"
         }]
