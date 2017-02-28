@@ -49,13 +49,15 @@ class Detail extends React.Component{
     getPacketList(){
         let server = new ServerRequest();
         server.post({
-            // mock:true,
             url :'newestUsedRewards',
             data:{
               publishId: this.props.params.videoId,
             },
             success:function(response){
               this.setState({packetList:response.datas});
+              if(response.datas.length > 3){
+                document.querySelector('#slideWrapper').className="slide";
+              }
             }.bind(this)
         })
     }
@@ -87,7 +89,6 @@ class Detail extends React.Component{
     startPlay(){
         let server = new ServerRequest();
         server.post({
-
           url:'advStartPlay',
           data:{
               publishId: this.props.params.videoId,
@@ -126,11 +127,18 @@ class Detail extends React.Component{
              videoPlayRecordId : this.props.params.playId || this.playId,
              token : common.getcookies('token')
            },
-           success:function(response){
-              this.setState({packetType:1})
-           }.bind(this),
-           error:function(){
-              this.setState({packetType:1})
+           success:function(result){
+              let data = this.state.videoDetail;
+              let packetType = 1;
+              if(result.amount == '0'){
+                 result.remindTips = '一步之遥';  
+                 packetType = 3;
+              }
+              Object.assign(data,result);
+              this.setState({
+                videoDetail:data,
+                packetType :packetType
+              });
            }.bind(this)
        });
     }
@@ -252,7 +260,7 @@ class Detail extends React.Component{
         // })
     }
     componentWillUnmount(){
-        this.player = null;
+        //this.player = null;
     }
 
     render(){
@@ -305,7 +313,7 @@ class PacketRecord extends React.Component{
         let list = this.props.list;
         return (
           <div className="adv-packet-record" style={{display:(list.length > 0) ? 'block' : 'none'}}>
-            <ul>
+            <ul id="slideWrapper">
                {
                   list.map((item,index)=>{
                       return (
@@ -430,19 +438,8 @@ class Packet extends React.Component{
 
     render(){
       var detail = this.props.detail;
-      var content = null;
-      if(this.props.packetType){
-         var content =<div className= {"packet-result"} >
-                <p className="packet-close" onClick={this.props.close}></p>
-                <p className="result-header"></p>
-                <p className="packet-title">{detail.publishNickName}</p>
-                <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-money">27.82</p>
-                <p className="packet-remind">已存入账户零钱</p>
-                <p className="packet-ranking">{detail.thanksWords}</p>
-                <p className="packet-more">真爽，我还要更多</p>
-            </div>;        
-      }else{
+      var content = null;      
+      if(this.props.packetType == 0){     
          var content =<div className= {"packet-content " + this.props.animation} >
                 <p className="packet-close" onClick={this.props.close}></p>
                 <p className="packet-header"></p>
@@ -451,6 +448,25 @@ class Packet extends React.Component{
                 <p className="packet-wish">{detail.rewardsWish}</p>
                 <p className="packet-button" onClick={this.props.handler}></p>
             </div>;
+      }else if(this.props.packetType == 1){
+         var content =<div className= {"packet-result"} >
+                <p className="packet-close" onClick={this.props.close}></p>
+                <p className="result-header"></p>
+                <p className="packet-title">{detail.publishNickName}</p>
+                <p className="packet-desprition">{detail.rewardsSlogan}</p>
+                <p className="packet-money">{detail.amount}</p>
+                <p className="packet-ranking">恭喜超过<span>{detail.beyondUserRate+'%'}</span>的草莓哦！</p>;
+                <p className="packet-more">More 》》》</p>
+            </div>;   
+      }else{
+         var content =<div className= {"packet-result"} >
+                <p className="packet-close" onClick={this.props.close}></p>
+                <p className="result-header"></p>
+                <p className="packet-title">{detail.publishNickName}</p>
+                <p className="packet-desprition">{detail.rewardsSlogan}</p>
+                <p className="packet-remindTip">{detail.remindTips}</p>;                
+                <p className="packet-more">More 》》》</p>
+            </div>;          
       }
       return(
           <div className="packet-wrapper" style={{display:this.props.animation ? 'block':'none'}}>
