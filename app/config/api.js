@@ -11,6 +11,7 @@ const API = {
     'newestUsedRewards' :'publish/newestUsedRewards',
     'correlationVideo' :'video/relatedVideos',
     'score' :'comment/score',
+    'hotVideos' : '/video/hotVideos'
 }
 
 export default API
