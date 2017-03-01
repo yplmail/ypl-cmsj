@@ -14,6 +14,7 @@ import Transfer   from './wallet/transfer.jsx';
 import Feedback   from './feedback/feedback.jsx';
 import Setting   from './setting/setting.jsx';
 import ModifyPassword   from './modifyPassword/modifyPassword.jsx';
+import ForgetPassword   from './modifyPassword/forgetPassword.jsx';
 import MobileAuth   from './mobileAuth/mobileAuth.jsx';
 import WechatAuth   from './wechatAuth/wechatAuth.jsx';
 
@@ -21,11 +22,12 @@ ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav}>
 			<IndexRoute component={List} />
-			<Route path="register/:page(/:id)"  component={Register} />
-			<Route path="login"  component={Login} />
+			<Route path="register(/:playId)(/:videoId)"  component={Register} />
+			<Route path="login(/:videoId)(/:playId)"  component={Login} />
+			<Route path="forgetPassword"  component={ForgetPassword} />
 			<Route path="hot"    component={Hot} />
 			<Route path="mine"   component={Mine} />
-			<Route path="detail/:play/:id(/:shareId)(/:packet)" component={Detail} />
+			<Route path="detail/:videoId(/:playId)(/:shareId)" component={Detail} />
 			<Route path="register" component={Register} />
 			<Route path="wallet" component={Wallet} />
 			<Route path="record" component={Record} />

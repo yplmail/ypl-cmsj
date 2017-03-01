@@ -2,25 +2,25 @@ import React from 'react';
 import {Link} from 'react-router';
 import './hot.css';
 import ServerRequest from 'server/serverRequest';
+import common from '../../common/common';
 
 class Hot extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			items:[1,2,3,4,5,6]
+			items:[]
 		};
+		this.pageIndex = 1;
+		this.pageCount = 0;
         this.success  = this.success.bind(this);
 		this.touchStart = this.touchStart.bind(this);
 		this.touchMove = this.touchMove.bind(this);
 		this.touchEnd = this.touchEnd.bind(this);
 		this.iosFlag = true;
 	}
-
-	componentWillMount(){
-		this.initData();
-	}  
-
+ 
 	componentDidMount(){	
+		this.initData();
 		this.wrapper = document.querySelector('.container')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault);
@@ -28,15 +28,20 @@ class Hot extends React.Component{
 
 	initData(){
 		let server = new ServerRequest();
-		server.get({
-			mock:true,
-			url:'/mock/list.json',
+		server.post({
+			url:'hotVideos',
+			data:{
+				pageSize  : 10,
+				pageIndex : this.pageIndex,
+				token     : common.getcookies('token')
+			},
 			success:this.success
 		})   
 	}
 
 	success(response){
-		this.setState({items:response.data})
+		this.pageCount = response.pageCount;
+		this.setState({items:this.state.items.concat(response.datas)});
 	}
 
 	touchStart(event){
@@ -157,9 +162,15 @@ class Hot extends React.Component{
         if(t.nextSibling){
 			t.nextSibling.style.transform = 'translateY(0) scale3d(1,1,1)';
 			t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';
-	        setTimeout(function(){
+	        setTimeout(function(){	        	
 		        var parentNode = t.parentNode;   
 		        parentNode.removeChild(t);
+		        if(parentNode.childNodes.length <= 3){
+		           ++this.pageIndex;
+		           if(this.pageIndex <= this.pageCount){
+	                   this.initData();		           	
+		           }
+		        }
 	        }.bind(this),320)  	        	
         }else{
 			t.style.transform = '';
@@ -168,16 +179,11 @@ class Hot extends React.Component{
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log(this.state.items.length + " --->" + nextState.items.length)
         return true;
     }
 
     componentDidUpdate() {
       return true;
-    }
-
-    componentWillUnmount(){
-         this.wrapper.removeEventListener('touchmove', this._preventDefault);
     }
 
 	render(){
@@ -192,10 +198,10 @@ class Hot extends React.Component{
 									<span className="video-play"></span>
 									</div>
 									<div data-flex="dir:left">
-									<p className="adv-invest">{item.invest}</p>
+									<p className="adv-invest">{item.totalAmount}</p>
 									<p className="adv-packetcount">红包已领23622个</p>
-									<p className="adv-score">3.6分</p>
-									<p className="adv-time"><span>3:26</span></p>
+									<p className="adv-score">{item.score}分</p>
+									<p className="adv-time"><span>{common.minutes(item.duration)}</span></p>
 								</div>
 							</li>)	
 						})

@@ -56,57 +56,37 @@
 .adv-list-wrapper li > div:nth-child(3) p {
     height: 100%;
     color: #fff;
-    text-align: center;
     font-size: 10px;
 }
 
 .adv-list-wrapper p.adv-invest {
-    width: 30%;
-}
-
-.adv-list-wrapper p.adv-invest:before {
-    content: '';
-    display: inline-block;
-    width: .28rem;
-    height: .28rem;
-    background: url(../../images/adv_amt_icon.png) repeat;
-    background-size: 100%;
-    margin-right: 5px;
-    vertical-align: sub;
+    width: 32%;
+    background: url(../../images/adv_amt_icon.png) no-repeat;
+    background-position: .45rem center;
+    background-size: .34rem .34rem;
+    padding-left:.85rem;
 }
 
 .adv-list-wrapper p.adv-packetcount {
-    width: 35%;
-}
-
-.adv-list-wrapper p.adv-packetcount:before {
-    content: '';
-    display: inline-block;
-    width: .28rem;
-    height: .29rem;
-    background: url(../../images/adv_packet_icon.png) repeat;
-    background-size: 100%;
-    margin-right: 5px;
-    vertical-align: sub;
+    width: 32%;
+    background: url(../../images/adv_packet_icon.png) no-repeat;
+    background-position: left center;
+    background-size: .34rem .34rem;
+    padding-left:.4rem;
 }
 
 .adv-list-wrapper p.adv-score {
-    width: 20%;
-}
-
-.adv-list-wrapper p.adv-score:before {
-    content: '';
-    display: inline-block;
-    width: .28rem;
-    height: .28rem;
-    background: url(../../images/adv_score_icon.png) repeat;
-    background-size: 100%;
-    margin-right: 5px;
-    vertical-align: sub;
+    width: 18%;
+    background: url(../../images/adv_score_icon.png) no-repeat;
+    background-position: left center;
+    background-size: .34rem .34rem; 
+    padding-left:.4rem;   
 }
 
 .adv-list-wrapper p.adv-time {
-    width: 15%;
+    width: 18%;
+    text-align: right;
+    padding-right:.6rem;
 }
 
 .adv-list-wrapper p.adv-time span {

@@ -23,7 +23,7 @@
 }
 
 .layui-m-layershade {
-    background-color: rgba(0, 0, 0, .7);
+    background-color: rgba(0, 0, 0, .2);
     pointer-events: auto;
 }
 
@@ -126,8 +126,10 @@
 }
 
 .layui-m-layer0 .layui-m-layerchild {
-    width: 80%;
+    width: 60%;
     max-width: 640px;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
 }
 
 .layui-m-layer1 .layui-m-layerchild {
@@ -163,7 +165,7 @@
 }
 
 .layui-m-layercont {
-    padding: 50px 30px;
+    padding: 30px 30px;
     line-height: 22px;
     text-align: center;
 }
@@ -247,9 +249,9 @@
 }
 
 .layui-m-layerbtn {
-    display: box;
-    display: -moz-box;
-    display: -webkit-box;
+    display: flex;
+    display: -moz-flex;
+    display: -webkit-flex;
     width: 100%;
     position: relative;
     height: 50px;

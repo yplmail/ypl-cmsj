@@ -141,7 +141,7 @@ class List extends React.Component{
        let pullDown = this.refs.pullDown;
         // 下拉滑动结束后，停在刷新区域
         if (this.scroll.y > -1 * this.loadHeight) {
-            if (this.pullDownStatus <= 1) {   
+            if (this.pullDownStatus <= 1) {
                 // 没有发起刷新,那么弹回去
                 this.scroll.scrollTo(0, -1 * this.loadHeight, 500);
             } else if (this.pullDownStatus == 2) { // 发起了刷新,那么更新状态
@@ -158,12 +158,12 @@ class List extends React.Component{
                 this.isRefresh = false;
                 ++this.pageIndex;
                 if(this.pageIndex <= this.pageCount){
-                    this.getScrollData();                    
+                    this.getScrollData();
                 }else{
                     this.setPullUpTips(4);
                     var self = this;
                     setTimeout(function(){
-                       self.scroll.scrollTo(0, self.scroll.y + self.loadHeight, 500);                       
+                       self.scroll.scrollTo(0, self.scroll.y + self.loadHeight, 500);
                     },500)
                 }
             }
@@ -222,9 +222,9 @@ class ListItem extends React.Component{
     handler(event){
        let id = event.currentTarget.getAttribute('id')
        if(event.target.className == 'video-play'){
-           location.hash = '/detail/1/' + id;
+           location.hash = '/detail/' + id;
        }else{
-           location.hash = '/detail/0/' + id;
+           location.hash = '/detail/' + id;
        }
     }
 

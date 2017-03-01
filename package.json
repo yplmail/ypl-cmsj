@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack-dev-server --devtool eval --progress --hot --colors --host 0.0.0.0 --content-base app",
-    "deploy": "webpack -p --config webpack.production.config.js",
+    "production": "webpack -p --config webpack.production.config.js",
     "validate": "npm ls",
     "commit": "git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1"

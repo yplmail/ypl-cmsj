@@ -13,7 +13,8 @@ class ServerRequest {
         this.url = '';
         this.async = true;
         this.dataType = 'json';
-        this.timeout = 3000;
+        this.timeout = 30000;
+        this.maskLayer = false;
         this.success = function() {};
         this.error = this._fail;
         this._timeout = this._timeout.bind(this)
@@ -47,12 +48,14 @@ class ServerRequest {
         this.str = this.arr.join("&");
 
         if (this.mock) {
-            this.url = this.url + '?' + Date.now();
+            this.url = '/mock/' + this.url + '.json?' + Date.now();
         } else {
             this.url = this.domain + API[this.url] + '?' + Date.now();
         }
 
-        //layer.open({type: 2});
+        if(this.maskLayer){
+            layer.open({type: 2});
+        }
 
         if (this.method == 'GET') {
             if (this.str) this.url = this.url + '&' + this.str;
@@ -69,11 +72,11 @@ class ServerRequest {
     _onreadystatechange() {
         if (this.xhr.readyState == 4) {
             this._complete();
-            layer.closeAll({ type: 2 });
         }
     }
 
     _complete() {
+        layer.closeAll();
         var head = this.xhr.getAllResponseHeaders();
         var response = this.xhr.responseText;
         if (/application\/json/.test(head) || this.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
@@ -83,7 +86,11 @@ class ServerRequest {
             if (response.code == 0) {
                 this._success(response.data);
             } else {
-                this.error(response.msg, this.xhr);
+                if(response.code == 900003){
+                    location.hash = '/login';
+                }else{
+                    this.error(response.msg, this.xhr);
+                }
             }
         } else {
             this.error(this.xhr.statusText, this.xhr);
@@ -116,7 +123,7 @@ class ServerRequest {
 
     _success(result) {
         /**
-         * 
+         *
          * 这里做一些中间处理，暂时无
          *
          **/
@@ -124,7 +131,7 @@ class ServerRequest {
     }
 
     _fail(msg) {
-        layer.open({ content: msg, time: 3 });
+        layer.open({content:msg||'服务恼情绪',time:2});
     }
 }
 

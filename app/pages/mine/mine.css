@@ -81,31 +81,31 @@
 
 .mine-list-wrapper li:nth-child(1){
    background:url(../../images/mine_wallet_icon.png) no-repeat;
-   background-size: .43rem .51rem;
+   background-size: .54rem .54rem;
    background-position: left center;
 }
 
 .mine-list-wrapper li:nth-child(2){
    background:url(../../images/feedback_icon.png) no-repeat;
-   background-size: .48rem .49rem;
+   background-size: .54rem .54rem;
    background-position: left center;
 }
 
 .mine-list-wrapper li:nth-child(3){
    background:url(../../images/about_product_icon.png) no-repeat;
-   background-size: .49rem .48rem;
+   background-size: .54rem .54rem;
    background-position: left center;
 }
 
 .mine-list-wrapper li:nth-child(4){
    background:url(../../images/link_us_icon.png) no-repeat;
-   background-size: .48rem .51rem;
+   background-size: .54rem .54rem;
    background-position: left center;
 }
 
 .mine-list-wrapper li:nth-child(5){
    background:url(../../images/setting_icon.png) no-repeat;
-   background-size: .51rem .51rem;
+   background-size: .54rem .54rem;
    background-position: left center;
 }
 

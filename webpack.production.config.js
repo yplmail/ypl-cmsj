@@ -5,6 +5,8 @@ var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var isGzip = true;
+
 var webpackConfig = module.exports = {
     entry: {
         app: path.resolve(__dirname, 'app/pages/main.jsx'),
@@ -54,7 +56,12 @@ var webpackConfig = module.exports = {
             'player': path.resolve(__dirname, './app/components/player'),
             'scroll': path.resolve(__dirname, './app/components/scroll'),
             'server': path.resolve(__dirname, './app/components/server'),
+<<<<<<< HEAD
             'share' : path.resolve(__dirname, './app/components/share')
+=======
+            'share': path.resolve(__dirname, './app/components/share'),
+            'md5'  : path.resolve(__dirname, './app/components/md5')
+>>>>>>> ab1870c6247d1d505ac23a01db4abc797a4b46d3
         }
     },
     plugins: [
@@ -73,6 +80,7 @@ var webpackConfig = module.exports = {
             }
         }),
         new CopyWebpackPlugin([
+            { from: './app/reset/data-flex.css', to: 'reset/data-flex.css'},
             { from: './app/reset/reset.css', to: 'reset/reset.css' },
             { from: './app/reset/reset.js', to: 'reset/reset.js' }
         ]),
@@ -91,7 +99,7 @@ var webpackConfig = module.exports = {
     ]
 };
 
-if (true) {
+if (isGzip) {
   var CompressionWebpackPlugin = require('compression-webpack-plugin');
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({

@@ -1,4 +1,4 @@
-import './register.css';
+import './forgetPassword.css';
 import React from 'react';
 import {Link} from 'react-router';
 import md5 from 'md5/md5.js'
@@ -107,11 +107,11 @@ class Login extends React.Component{
     registerHandler(){
         let server = new ServerRequest();
         server.post({
-            url : 'register',
+            url : 'resetLoginPwd',
             data: {
-              mobile : this.state.mobile,
-              smsCode: this.state.smsCode,
-              pwd    : md5(this.state.pwd)             
+              mobile:this.state.mobile,
+              smsCode:this.state.smsCode,
+              newPwd:md5(this.state.pwd)
             },
             success:function(response){
               common.setcookies('token',response.token,7);
@@ -146,7 +146,7 @@ class Login extends React.Component{
                      </li>
 
                      <li>
-                         <a ref="registerButton" onClick={this.validate}>立即注册</a>
+                         <a ref="registerButton" onClick={this.validate}>重置密码</a>
                      </li>
                  </ul>
                </div>
