@@ -29,7 +29,7 @@
         preload : true,
         playsinline:true,
         autoplay:false,
-        skinLayout:[{
+            skinLayout:[{
                 "name":"bigPlayButton",
                 "align":"cc"
             },{
@@ -37,34 +37,31 @@
                 "align":"blabs",
                 "x":0,
                 "y":0,
-                "children":[
-                    {
-                        "name":"progress",
-                        "align":"tlabs"
-                    },{
-                        "name":"playButton",
-                        "align":"blabs",
-                        "x":10,
-                        "y":8
-                    },{
-                        "name":"timeDisplay",
-                        "align":"blabs",
-                        "x":80,
-                        "y":10
-                    },{
-                        "name":"volume",
-                        "align":"brabs",
-                        "x":80,
-                        "y":8
-                    },{
-                        "name":"fullScreenButton",
-                        "align":"brabs",
-                        "x":10,
-                        "y":8
-                    }
-                ]
-            }
-        ]
+                "children":[{
+                "name":"progress",
+                "align":"tlabs"
+                },{
+                "name":"playButton",
+                "align":"blabs",
+                "x":10,
+                "y":8
+                },{
+                "name":"timeDisplay",
+                "align":"blabs",
+                "x":135,
+                "y":10
+                },{
+                "name":"volume",
+                "align":"brabs",
+                "x":80,
+                "y":8
+                },{
+                "name":"fullScreenButton",
+                "align":"brabs",
+                "x":10,
+                "y":8
+                }]
+            }]
     });
     setTimeout(function(){
         window.player.play()

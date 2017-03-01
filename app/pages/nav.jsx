@@ -31,7 +31,6 @@ class Nav extends React.Component{
         },320)
     }
 	render(){
-       this.initBScroll();
        return(
        	   <div className="container">
        	       {this.props.children}

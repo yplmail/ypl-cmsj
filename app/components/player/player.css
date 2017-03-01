@@ -1,11 +1,22 @@
 .prism-player .prism-big-play-btn {
-    width: 90px;
+/*    width: 90px;
     height: 90px;
     left:50%!important;
     bottom:50%!important;
     margin-left:-45px;
     margin-bottom:-45px;
-    background: url(//gw.alicdn.com/tps/TB1YuE3KFXXXXaAXFXXXXXXXXXX-256-512.png) -2px -2px no-repeat
+    background: url(//gw.alicdn.com/tps/TB1YuE3KFXXXXaAXFXXXXXXXXXX-256-512.png) -2px -2px no-repeat*/
+    position: absolute;
+    width:55.5px;
+    height:55.5px;
+    bottom:50%!important; 
+    left:50%!important;
+    z-index: 91;
+    margin-left:-25.25px;
+    margin-bottom:-25.25px;
+    background-image: url(../../images/video_play_btn.png);
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 
 .prism-player .prism-play-btn {
@@ -87,7 +98,9 @@
 .prism-player .prism-time-display {
     height: 33px;
     line-height: 33px;
-    color: #666
+    color: #666;
+    margin-left: 100px!important;
+    margin-top: 20px!important;    
 }
 
 .prism-player .prism-time-display .current-time {

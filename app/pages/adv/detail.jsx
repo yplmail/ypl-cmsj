@@ -95,6 +95,10 @@ class Detail extends React.Component{
            if(params.videoId && params.playId){
               this.setState({packetAnimation:'animation'})
            }
+          var scroll = new BScroll('.detail-wrapper', {
+              probeType: 3,
+              click:true
+          })        
          }.bind(this),320)
     }
 
@@ -160,8 +164,10 @@ class Detail extends React.Component{
        let count = parseInt(this.player.getDuration() / 100 * 1000);
        let timer = window.setInterval(function(){
            var ratio = parseFloat(this.player.getCurrentTime() / this.player.getDuration());
-           if(ratio > 0.94){
+           if(ratio > 0.98){
               clearInterval(timer);
+              document.querySelector('.video-player').style.display = 'none';
+              document.querySelector('.video-cover').style.display = 'block';
               this.endPlay();
            }
        }.bind(this),count)
@@ -210,40 +216,7 @@ class Detail extends React.Component{
             cover : this.state.videoDetail.coverUrl,
             preload : true,
             playsinline:true,
-            autoplay:false,
-            skinLayout:[{
-                "name":"bigPlayButton",
-                "align":"cc"
-            },{
-                "name":"controlBar",
-                "align":"blabs",
-                "x":0,
-                "y":0,
-                "children":[{
-                "name":"progress",
-                "align":"tlabs"
-                },{
-                "name":"playButton",
-                "align":"blabs",
-                "x":10,
-                "y":8
-                },{
-                "name":"timeDisplay",
-                "align":"blabs",
-                "x":135,
-                "y":10
-                },{
-                "name":"volume",
-                "align":"brabs",
-                "x":80,
-                "y":8
-                },{
-                "name":"fullScreenButton",
-                "align":"brabs",
-                "x":10,
-                "y":8
-                }]
-            }]
+            autoplay:false
         });
 
         this.player.on('play',function(){
@@ -253,42 +226,45 @@ class Detail extends React.Component{
             }
         }.bind(this))
 
-        //document.getElementsByClassName('prism-big-play-btn')[0].click();
+        this.player.on('ended',function(){
+              document.querySelector('.video-player').style.display = 'none';
+              document.querySelector('.video-cover').style.display  = 'block';
+        }.bind(this))
 
-        // if(this.props.params.play == "1"){
-        //   this.player.play();
-        // }
+        var videoPause = document.getElementsByClassName('video-pause')[0];
+        videoPause.addEventListener("click", function () {
+              document.querySelector('.video-player').style.display = 'block';
+              document.querySelector('.video-cover').style.display  = 'none';
+              this.player.replay();              
+        }.bind(this), false);
+
+        
+
+        // document.getElementsByClassName('prism-big-play-btn')[0].click();
 
         // document.addEventListener("WeixinJSBridgeReady", function () {
 
         // }, false);
-
-
-        // this.player.on('ended',function(){
-        //     self.setState({
-        //       display:'block',
-        //       scoreAnimation:'scoreAnimation'
-        //     })
-        // })
-    }
-    componentWillUnmount(){
-        //this.player = null;
     }
 
     render(){
         return(
             <div className="detail-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
-              <div className="detail-scroll">
-                  <VideoPlayer />
-                  <VideoDetail detail={this.state.videoDetail} handler={this.shareHandler}/>
-                  <PacketRecord list={this.state.packetList}/>
-                  <CorrelationVideo videoList={this.state.videoList}/>
-                  <Packet packetType={this.state.packetType} animation={this.state.packetAnimation}
-                  handler={this.openPacketHandle} close={this.closePacketHandle} detail={this.state.videoDetail}/>
-                  <Score animation={this.state.scoreAnimation} handle={this.scoreHandle}/>
-              </div>
+                <div className="detail-scroll">
+                    <VideoPlayer video={this.state.videoDetail} /> 
+                    <VideoDetail detail={this.state.videoDetail} handler={this.shareHandler}/>
+                    <PacketRecord list={this.state.packetList}/>
+                    <CorrelationVideo videoList={this.state.videoList}/>
+                </div>
+                <Packet packetType={this.state.packetType} animation={this.state.packetAnimation}
+                    handler={this.openPacketHandle} close={this.closePacketHandle} detail={this.state.videoDetail}/>
+                <Score animation={this.state.scoreAnimation} handle={this.scoreHandle}/>
             </div>
         )
+    }
+
+    componentWillUnmount(){
+        //this.player = null;
     }
 }
 
@@ -296,9 +272,17 @@ class VideoPlayer extends React.Component{
     constructor(props){
         super(props)
     }
+    clickHandle(){
+
+    }
     render(){
         return (
-            <div className="adv-player prism-player" id="springGrassPlayer"></div>
+            <div className="video-wrapper">
+                <div className="video-cover" style={{backgroundImage:'url('+this.props.video.coverUrl+')'}}>
+                  <span className="video-pause" onClick={this.clickHandle}></span>
+                </div>
+                <div className="video-player prism-player" id="springGrassPlayer"></div>
+            </div>
         )
     }
 }
