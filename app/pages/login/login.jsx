@@ -65,12 +65,13 @@ class Login extends React.Component{
     }
 
     loginHandle(){
-        let params = this.state;
-        params.pwd = md5(params.pwd);
         let server = new ServerRequest();
         server.post({
             url : 'login',
-            data:params,
+            data: {
+              mobile : this.state.mobile,
+              pwd    : md5(this.state.pwd),              
+            },
             success:function(response){
                 common.setcookies('token',response.token,7);
                 let params = this.props.params;
