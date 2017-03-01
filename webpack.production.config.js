@@ -50,11 +50,11 @@ var webpackConfig = module.exports = {
         extensions: ['', '.js', '.jsx', '.scss', '.css', '.less'],
         fallback: [path.join(__dirname, '../node_modules')],
         alias: {
-            'layer': path.resolve(__dirname, './app/components/layer'),
+            'layer' : path.resolve(__dirname, './app/components/layer'),
             'player': path.resolve(__dirname, './app/components/player'),
             'scroll': path.resolve(__dirname, './app/components/scroll'),
             'server': path.resolve(__dirname, './app/components/server'),
-            'share': path.resolve(__dirname, './app/components/share')
+            'share' : path.resolve(__dirname, './app/components/share')
         }
     },
     plugins: [
