@@ -555,8 +555,9 @@
     margin-top: .6rem;
 }
 
-.packet-wrapper .packet-more {
+.packet-wrapper .packet-more a{
     position: absolute;
+    display: inline-block;
     font-size: 14px;
     color: #fff;
     bottom: 1.2rem;

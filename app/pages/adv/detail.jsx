@@ -1,7 +1,7 @@
 import './detail.css';
 import React from 'react';
 import {Link} from 'react-router';
-import 'player/player.js';
+// import 'player/player.js';
 import 'player/player.css';
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
@@ -49,8 +49,7 @@ class Detail extends React.Component{
 
     getPacketList(){
         let server = new ServerRequest();
-        server.get({
-            mock:true,
+        server.post({
             url :'newestUsedRewards',
             data:{
               publishId: this.props.params.videoId,
@@ -456,7 +455,7 @@ class Packet extends React.Component{
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-money"><span>{detail.amount}</span></p>
                 <p className="packet-ranking">恭喜超过&nbsp;<span>{detail.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>;
-                <p className="packet-more">真爽，还想看更多</p>
+                <p className="packet-more"><Link to="/">真爽，还想看更多</Link></p>
             </div>;
       }else{
          var content =<div className= {"packet-result"} >
@@ -465,7 +464,7 @@ class Packet extends React.Component{
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-remindTip">{detail.remindTips}</p>;
-                <p className="packet-more">真爽，还想看更多</p>
+                <p className="packet-more"><Link to="/">真爽，还想看更多</Link></p>
             </div>;
       }
       return(

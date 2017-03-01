@@ -1,0 +1,94 @@
+
+.container-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-wrapper{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: .95rem;   
+}
+
+.nav-wrapper .nav{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: .95rem;
+    background-color: #e2e2e2;
+    text-align: center;
+}
+
+.nav-wrapper li a {
+    display: block;
+    font-size: 11px;
+    color: #3333;
+    text-align: center;
+    padding-top: 0.6rem;
+}
+
+.nav-wrapper li:nth-child(1) a {
+    background-image: url(../images/first_gray.png);
+    background-repeat: no-repeat;
+    background-position: center 20%;
+    background-size: .5rem .48rem;
+}
+
+.nav-wrapper li:nth-child(2) a {
+    background-image: url(../images/hot_gray.png);
+    background-repeat: no-repeat;
+    background-position: center 20%;
+    background-size: .5rem .48rem;
+}
+
+.nav-wrapper li:nth-child(3) a {
+    background-image: url(../images/mine_gray.png);
+    background-repeat: no-repeat;
+    background-position: center 20%;
+    background-size: .5rem .48rem;
+}
+
+.nav-wrapper li:nth-child(1) a.active {
+    color: #811b10;
+    background-image: url(../images/first_light.png);
+}
+
+.nav-wrapper li:nth-child(2) a.active {
+    color: #811b10;
+    background-image: url(../images/hot_light.png);
+}
+
+.nav-wrapper li:nth-child(3) a.active {
+    color: #811b10;
+    background-image: url(../images/mine_light.png);
+}
+
+.load-wrapper{
+    position: fixed;
+    bottom: 0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.share-wrapper{
+    position: fixed;
+    bottom: 0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, .5);    
+}

@@ -249,9 +249,9 @@
 }
 
 .layui-m-layerbtn {
-    display: box;
-    display: -moz-box;
-    display: -webkit-box;
+    display: flex;
+    display: -moz-flex;
+    display: -webkit-flex;
     width: 100%;
     position: relative;
     height: 50px;

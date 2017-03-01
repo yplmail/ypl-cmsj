@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {IndexLink,Link} from 'react-router';
 import Load from './load';
 import BScroll from 'better-scroll';
+import '../common/common.css';
 
 class Nav extends React.Component{
 	constructor(props){

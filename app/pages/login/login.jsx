@@ -1,7 +1,7 @@
 import './login.css';
 import React from 'react';
 import {Link} from 'react-router';
-import md5 from 'md5/md5.js'
+import md5 from 'md5/md5'
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
 
