@@ -333,7 +333,7 @@ class PacketRecord extends React.Component{
                             <div><img src="../../images/user_header_icon.png" /></div>
                             <div>{item.nickname}</div>
                             <div>{item.mobile}</div>
-                            <div>获赠<span>{item.packageAmount}</span>元</div>
+                            <div>获赠&nbsp;<span>&nbsp;{item.packageAmount}&nbsp;</span>&nbsp;元</div>
                         </li>
                       )
                   })
@@ -356,11 +356,13 @@ class CorrelationVideo extends React.Component{
                   <div data-flex="dir:top box:last">
                       <h3>{item.title}</h3>
                       <div className="video-property" data-flex="cross:center box:mean">
-                        <p>魔鬼广告人</p>
+                        <p>{item.publishUserName}</p>
                         <p>{item.palyCount}次播放</p>
                       </div>
                   </div>
-                  <div><img src="../../images/adv_temp_icon.png" /></div>
+                  <div>
+                      <img src={item.coverUrl} />
+                  </div>
               </li>
            )
       })
@@ -405,19 +407,19 @@ class Score extends React.Component{
               <div className={'score-content ' + this.props.animation}>
                 <h2>评分有惊喜！</h2>
                 <p className="starability-slot clearfix">
-                    <input type="radio" id="rate5-2" name="rating" value="100" onChange={this.change}/>
+                    <input type="radio" id="rate5-2" name="rating" value="5" onChange={this.change}/>
                     <label htmlFor="rate5-2" title="Amazing">5 stars</label>
 
-                    <input type="radio" id="rate4-2" name="rating" value="80"  onChange={this.change} />
+                    <input type="radio" id="rate4-2" name="rating" value="4"  onChange={this.change} />
                     <label htmlFor="rate4-2" title="Very good">4 stars</label>
 
-                    <input type="radio" id="rate3-2" name="rating" value="60"  onChange={this.change} />
+                    <input type="radio" id="rate3-2" name="rating" value="3"  onChange={this.change} />
                     <label htmlFor="rate3-2" title="Average">3 stars</label>
 
-                    <input type="radio" id="rate2-2" name="rating" value="40"  onChange={this.change} />
+                    <input type="radio" id="rate2-2" name="rating" value="2"  onChange={this.change} />
                     <label htmlFor="rate2-2" title="Not good">2 stars</label>
 
-                    <input type="radio" id="rate1-2" name="rating" value="20"  onChange={this.change} />
+                    <input type="radio" id="rate1-2" name="rating" value="1"  onChange={this.change} />
                     <label htmlFor="rate1-2" title="Terrible">1 star</label>
                 </p>
                 <p className="score-description">你们的脑洞我服了！</p>
@@ -452,9 +454,9 @@ class Packet extends React.Component{
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-money">{detail.amount}</p>
-                <p className="packet-ranking">恭喜超过<span>{detail.beyondUserRate+'%'}</span>的草莓哦！</p>;
-                <p className="packet-more">More 》》》</p>
+                <p className="packet-money"><span>{detail.amount}</span></p>
+                <p className="packet-ranking">恭喜超过&nbsp;<span>{detail.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>;
+                <p className="packet-more">真爽，还想看更多</p>
             </div>;
       }else{
          var content =<div className= {"packet-result"} >
@@ -463,7 +465,7 @@ class Packet extends React.Component{
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-remindTip">{detail.remindTips}</p>;
-                <p className="packet-more">More 》》》</p>
+                <p className="packet-more">真爽，还想看更多</p>
             </div>;
       }
       return(
