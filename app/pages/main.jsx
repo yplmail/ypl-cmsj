@@ -23,7 +23,7 @@ ReactDOM.render(
 		<Route path="/" component={Nav}>
 			<IndexRoute component={List} />
 			<Route path="register(/:playId)(/:videoId)"  component={Register} />
-			<Route path="login(/:playId)(/:videoId)"  component={Login} />
+			<Route path="login(/:videoId)(/:playId)"  component={Login} />
 			<Route path="forgetPassword"  component={ForgetPassword} />
 			<Route path="hot"    component={Hot} />
 			<Route path="mine"   component={Mine} />

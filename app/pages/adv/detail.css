@@ -598,3 +598,9 @@
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
+
+.no-video{
+    height: 5rem;
+    line-height: 5rem;
+    text-align: center;
+}

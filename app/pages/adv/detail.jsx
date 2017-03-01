@@ -1,7 +1,6 @@
 import './detail.css';
 import React from 'react';
 import {Link} from 'react-router';
-// import 'player/player.js';
 import 'player/player.css';
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
@@ -372,7 +371,7 @@ class CorrelationVideo extends React.Component{
        if( list.length > 0 ){
             var content = this.loopVideoList();
        }else{
-            var content = <div></div>;
+            var content = <div className="no-video">暂无相关视频</div>;
        }
        return (<div className="adv-correlation">
           <h2>相关视频</h2>
