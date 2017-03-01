@@ -347,19 +347,24 @@ class CorrelationVideo extends React.Component{
         super(props)
     }
 
+    linkHandle(id){
+
+    }
+
     loopVideoList(){
-      return this.props.videoList.map((item,index)=>{
+      let videos = this.props.videoList;
+      return videos.map((item,index)=>{
            return(
-              <li data-flex="box:last" key={index}>
+              <li data-flex="box:last" key={index} onClick={this.linkHandle.bind(this,item.publishId)}>
                   <div data-flex="dir:top box:last">
                       <h3>{item.title}</h3>
                       <div className="video-property" data-flex="cross:center box:mean">
-                        <p>{item.publishUserName}</p>
-                        <p>{item.palyCount}次播放</p>
+                          <p>{item.publishUserName}</p>
+                          <p>{item.palyCount}次播放</p>
                       </div>
                   </div>
                   <div>
-                      <img src={item.coverUrl} />
+                      <img src={item.coverUrl}/>
                   </div>
               </li>
            )
@@ -373,7 +378,7 @@ class CorrelationVideo extends React.Component{
        }else{
             var content = <div className="no-video">暂无相关视频</div>;
        }
-       return (<div className="adv-correlation">
+       return (<div className="correlation-wrapper">
           <h2>相关视频</h2>
           <ul>
             {content}

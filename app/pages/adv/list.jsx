@@ -1,7 +1,7 @@
 import './list.css';
 import 'layer/loading.css';
 import React from 'react';
-import {Link} from 'react-router';
+import {Link,History} from 'react-router';
 import ServerRequest from 'server/serverRequest';
 import BScroll from 'better-scroll';
 import common from '../../common/common';
@@ -240,10 +240,10 @@ class ListItem extends React.Component{
                 </div>
 
                 <div data-flex="dir:left">
-                    <p className="adv-invest">{this.props.item.totalAmount}</p>
-                    <p className="adv-packetcount">红包已领{this.props.item.usedCount}个</p>
+                    <p className="adv-invest">{this.props.item.totalAmount}元</p>
+                    <p className="adv-packetcount">已领{this.props.item.usedCount}个</p>
                     <p className="adv-score">{this.props.item.score}分</p>
-                    <p className="adv-time"><span>{common.minutes(this.props.item.duration)}</span></p>
+                    <p className="adv-time"><span>{this.props.item.duration}</span></p>
                 </div>
             </li>
         )

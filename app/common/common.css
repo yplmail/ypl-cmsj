@@ -12,7 +12,7 @@
 }
 
 .nav-wrapper{
-    position: relative;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -91,4 +91,14 @@
     height:100%;
     z-index: 99;
     background-color: rgba(0, 0, 0, .5);    
+}
+
+.clearfix:after,
+.clearfix:before {
+    display: block;
+    content: "";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
 }
