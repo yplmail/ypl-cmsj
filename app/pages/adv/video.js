@@ -22,13 +22,13 @@ class Video extends React.Component{
             success:function(response){
                 this.setState({videoList:response.datas})
             }.bind(this)
-        })      
+        })
     }
 
     linkHandle(id){
         location.hash ='detail/'+id;
         // setTimeout(function(){
-        //     location.reload();         
+        //     location.reload();
         // },50)
 
     }
@@ -42,7 +42,7 @@ class Video extends React.Component{
                       <h3>{item.title}</h3>
                       <div className="video-property" data-flex="cross:center box:mean">
                           <p>{item.publishUserName}</p>
-                          <p>{item.palyCount}次播放</p>
+                          <p>{item.playTimes}次播放</p>
                       </div>
                   </div>
                   <div>

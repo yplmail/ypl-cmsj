@@ -5,6 +5,7 @@ import Player  from './player';
 import Packet  from './Packet';
 import Record  from './Record';
 import Video   from './Video';
+import Score   from './Score';
 import './detail.css';
 import 'player/player.css';
 
@@ -15,13 +16,11 @@ class Detail extends React.Component{
         	packetType      : 0,
         	packetAnimation :'',
         	packetDetail    :{},
-        	playRecordId    :''
+        	playRecordId    :'',
+        	scoreAnimation  :''
         }
         this.playHandle = this.playHandle.bind(this);
-	}
-
-	componentWillMount(){
-         
+        this.scoreHandle = this.scoreHandle.bind(this);
 	}
 
 	componentDidMount(){
@@ -29,16 +28,12 @@ class Detail extends React.Component{
 	        new BScroll('.detail-wrapper', {
 				probeType: 3,
 				click:true
-			})  			
-		},320)
+			})
+		},500)
 	}
 
 	componentWillReceiveProps(prop){
          //debugger;
-	}
-
-	componentWillUnmount(){
-
 	}
 
 	playHandle(data,id){
@@ -46,9 +41,17 @@ class Detail extends React.Component{
 	       this.setState({
 	        	packetAnimation : 'animation',
 	        	packetDetail    : data,
-	        	playRecordId    : id || this.props.params.playId      	
-	       });	   	
+	        	playRecordId    : id || this.props.params.playId
+	       });
 	   }
+	}
+
+	scoreHandle(){
+		this.setState({
+			packetType      : 0,
+			packetAnimation : '',
+			scoreAnimation:'animation'
+		})
 	}
 
 	render(){
@@ -59,7 +62,8 @@ class Detail extends React.Component{
 	               <Record parameter={this.props.params}/>
 	               <Video {...this.props.params}/>
 			   </div>
-			   <Packet parameter={this.state} />
+			   <Packet {...this.state} handle={this.scoreHandle}/>
+			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
 			</div>
 		);
 	}

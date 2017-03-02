@@ -13,7 +13,8 @@ class Record extends React.Component{
 
     componentDidMount(){
         let server = new ServerRequest();
-        server.post({
+        server.get({
+            mock : true,
             url :'newestUsedRewards',
             data:{
               publishId: this.props.parameter.videoId
@@ -26,16 +27,17 @@ class Record extends React.Component{
 
     changeState(arr){
         if(arr.length > 3){
-            let list = new Array();
-            for(var i = 0 ; i < 2 ; i++){
-                arr.map(function(item,index){
-                  list.push(item);
-                })
+            let len = Math.ceil((20-arr.length)/arr.length);
+            let newArr = []
+            for(var i = 0 ; i < len ; i++){
+               arr.map(function(item,index){
+                  newArr.push(item)
+               })
             }
-            arr = arr.concat(list);
+            arr = arr.concat(newArr);
             this.setState({
                 packetList:arr,
-                slide     : 'slide'
+                slide: 'slide'
             });
         }else{
             this.setState({packetList:arr});
@@ -45,8 +47,8 @@ class Record extends React.Component{
     render(){
         let list = this.state.packetList;
         return (
-          <div className="record-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
-            <ul id="slideWrapper">
+          <div className="packetRecord-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
+            <ul id="slideWrapper" className={this.state.slide}>
                {
                   list.map((item,index)=>{
                       return (
@@ -54,7 +56,7 @@ class Record extends React.Component{
                             <div><img src="../../images/user_header_icon.png" /></div>
                             <div>{item.nickname}</div>
                             <div>{item.mobile}</div>
-                            <div>获赠<span>{item.packageAmount}</span>元</div>
+                            <div>获赠&nbsp;<span>{item.packageAmount}</span>&nbsp;元</div>
                         </li>
                       )
                   })
@@ -68,7 +70,7 @@ class Record extends React.Component{
                             <div><img src="../../images/user_header_icon.png" /></div>
                             <div>{item.nickname}</div>
                             <div>{item.mobile}</div>
-                            <div>获赠&nbsp;<span>&nbsp;{item.packageAmount}&nbsp;</span>&nbsp;元</div>
+                            <div>获赠&nbsp;<span>{item.packageAmount}</span>&nbsp;元</div>
                         </li>
                       )
                   })

@@ -12,15 +12,15 @@ class Packet extends React.Component{
             packetDetail    :{},
             playRecordId    :''
         }
-        this.openHandle = this.openHandle.bind(this);      
-        this.closePacket = this.closePacket.bind(this);      
+        this.openHandle = this.openHandle.bind(this);
+        this.closePacket = this.closePacket.bind(this);
     }
-  
+
     openHandle(){
         if(common.getcookies('token')){
             this.openPacket();
         }else{
-            let videoId  = this.state.packetDetail.publishId; 
+            let videoId  = this.state.packetDetail.publishId;
             let recordId = this.state.playRecordId;
             location.hash = '/login/'+videoId+'/'+recordId;
         }
@@ -36,45 +36,41 @@ class Packet extends React.Component{
                 token : common.getcookies('token')
             },
             success:function(result){
-                if(result.amount == '0'){    
+                if(result.amount == '0'){
                     this.setState({
                       packetType : 2,
                       remindTips : '一步之遥'
-                    }) 
+                    });
                 }else{
-                    this.state = {
+                    this.setState({
                       packetType : 1,
-                      amount     : '',
-                      beyondUserRate:''
-                    }                   
+                      amount : result.amount,
+                      beyondUserRate : result.beyondUserRate
+                    });
                 }
             }.bind(this)
-        });      
+        });
     }
 
     closePacket(){
-        this.setState({
-            packetType      : 0,
-            packetAnimation : ''      
-        });               
+        this.props.handle();
     }
 
-    componentWillReceiveProps(data){
+    componentWillReceiveProps(props){
         this.setState({
-            packetType      : data.parameter.packetType,
-            packetAnimation : data.parameter.packetAnimation,
-            packetDetail    : data.parameter.packetDetail,
-            playRecordId    : data.parameter.playRecordId          
+            packetType      : props.packetType,
+            packetAnimation : props.packetAnimation,
+            packetDetail    : props.packetDetail,
+            playRecordId    : props.playRecordId
         });
     }
 
 
     render(){
-      var parameter = this.state;
-      var detail = parameter.packetDetail;
+      var detail = this.state.packetDetail;
       var content = null;
-      if(parameter.packetType == 0){
-         var content =<div className= {"packet-content " + parameter.packetAnimation} >
+      if(this.state.packetType == 0){
+         var content =<div className= {"packet-content " + this.state.packetAnimation} >
                 <p className="packet-close" onClick={this.closePacket}></p>
                 <p className="packet-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
@@ -82,15 +78,15 @@ class Packet extends React.Component{
                 <p className="packet-wish">{detail.rewardsWish}</p>
                 <p className="packet-button" onClick={this.openHandle}></p>
             </div>;
-      }else if(parameter.packetType == 1){
+      }else if(this.state.packetType == 1){
          var content =<div className= {"packet-result"} >
                 <p className="packet-close" onClick={this.closePacket}></p>
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-money"><span>{parameter.amount}</span></p>
-                <p className="packet-ranking">恭喜超过&nbsp;<span>{parameter.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>;
-                <p className="packet-more"><Link to="/">真爽，还想看更多</Link></p>
+                <p className="packet-money"><span>{this.state.amount}</span></p>
+                <p className="packet-ranking">恭喜超过&nbsp;<span>{this.state.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>;
+                <p className="packet-more"><Link to="/">更多</Link></p>
             </div>;
       }else{
          var content =<div className= {"packet-result"} >
@@ -98,12 +94,12 @@ class Packet extends React.Component{
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-remindTip">{parameter.remindTips}</p>;
-                <p className="packet-more"><Link to="/">真爽，还想看更多</Link></p>
+                <p className="packet-remindTip">{this.state.remindTips}</p>;
+                <p className="packet-more"><Link to="/">更多</Link></p>
             </div>;
       }
       return(
-          <div className="packet-wrapper" style={{display:parameter.packetAnimation ? 'block':'none'}}>
+          <div className="packet-wrapper" style={{display:this.state.packetAnimation ? 'block':'none'}}>
             {content}
           </div>
       )

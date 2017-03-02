@@ -9,12 +9,12 @@ class Player extends React.Component{
             video  :{},
             videoId:''
         }
-        this.first = true;    
-        this.pauseHandle = this.pauseHandle.bind(this); 
+        this.first = true;
+        this.pauseHandle = this.pauseHandle.bind(this);
     }
 
     pauseHandle(){
-       
+
     }
 
     componentDidMount(){
@@ -43,7 +43,7 @@ class Player extends React.Component{
                 this.props.handle(response);
                 this.initPlayer();
             }.bind(this)
-        })           
+        })
     }
 
 
@@ -64,16 +64,16 @@ class Player extends React.Component{
         }.bind(this))
 
         this.player.on('ended',function(){
-            document.querySelector('.video-player').style.display = 'none';
+            document.querySelector('.prism-player').style.display = 'none';
             document.querySelector('.video-cover').style.display  = 'block';
         }.bind(this))
 
         var pause = document.getElementsByClassName('video-pause')[0];
         pause.addEventListener("click", function () {
-            document.querySelector('.video-player').style.display = 'block';
+            document.querySelector('.prism-player').style.display = 'block';
             document.querySelector('.video-cover').style.display  = 'none';
-            this.player.replay();              
-        }.bind(this), false);        
+            this.player.replay();
+        }.bind(this), false);
     }
 
     notice(){
@@ -89,9 +89,9 @@ class Player extends React.Component{
             },
             success:function(response){
                 this.first = false;
-                this.clock(response.videoPlayRecordId); 
+                this.clock(response.videoPlayRecordId);
             }.bind(this)
-        })        
+        })
     }
 
     clock(id){
@@ -102,7 +102,7 @@ class Player extends React.Component{
                 this.end(id);
                 clearInterval(timer);
             }
-        }.bind(this),count)        
+        }.bind(this),count)
     }
 
     end(id){
