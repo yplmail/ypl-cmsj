@@ -1,0 +1,73 @@
+import React   from 'react';
+import common from '../../common/common';
+import ServerRequest from 'server/serverRequest';
+
+class Video extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+           videoList : []
+        }
+    }
+
+    componentDidMount(){
+        let server = new ServerRequest();
+            server.post({
+            url :'correlationVideo',
+            data:{
+                publishId: this.props.videoId,
+                token    : common.getcookies('token'),
+                openId   : ''
+            },
+            success:function(response){
+                this.setState({videoList:response.datas})
+            }.bind(this)
+        })      
+    }
+
+    linkHandle(id){
+        location.hash ='detail/'+id;
+        // setTimeout(function(){
+        //     location.reload();         
+        // },50)
+
+    }
+
+    loopVideoList(){
+      let videos = this.state.videoList;
+      return videos.map((item,index)=>{
+           return(
+              <li data-flex="box:last" key={index} onClick={this.linkHandle.bind(this,item.publishId)}>
+                  <div data-flex="dir:top box:last">
+                      <h3>{item.title}</h3>
+                      <div className="video-property" data-flex="cross:center box:mean">
+                          <p>{item.publishUserName}</p>
+                          <p>{item.palyCount}次播放</p>
+                      </div>
+                  </div>
+                  <div>
+                      <img src={item.coverUrl}/>
+                  </div>
+              </li>
+           )
+      })
+    }
+
+    render(){
+       var list = this.state.videoList;
+       if( list.length > 0 ){
+            var content = this.loopVideoList();
+       }else{
+            var content = <div className="no-video">暂无相关视频</div>;
+       }
+       return (<div className="correlation-wrapper">
+          <h2>相关视频</h2>
+          <ul>
+            {content}
+          </ul>
+       </div>
+       )
+    }
+}
+
+export default Video;
