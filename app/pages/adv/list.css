@@ -17,24 +17,22 @@
     background-image: url(../../images/adv_bg_01.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    border-bottom: 4px solid #fff;
-}
-
-.adv-list-wrapper li {
-    display: block;
+    border-bottom: 4px solid #eee;
 }
 
 .adv-list-wrapper li > div:nth-child(1) {
     line-height: 1rem;
     height: 1rem;
     min-height: 1rem;
-    background: url(../../images/adv_top_bg.png) repeat;
-    background-size: cover;
+/*    background: url(../../images/adv_top_bg.png) repeat;
+    background-size: cover;*/
+/*    background-color: rgba(0,0,0,0.4)*/
 }
 
 .adv-list-wrapper li > div:nth-child(1) h2 {
     color: #fff;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 700;
     padding-left: .45rem;
 }
 
@@ -49,8 +47,9 @@
     line-height: 1rem;
     height: 1rem;
     min-height: 1rem;
-    background: url(../../images/adv_bottom_bg.png) repeat;
-    background-size: cover;
+/*    background: url(../../images/adv_bottom_bg.png) repeat;
+    background-size: cover;*/
+/*    background-color: rgba(0,0,0,0.4)*/
 }
 
 .adv-list-wrapper li > div:nth-child(3) p {
@@ -60,7 +59,7 @@
 }
 
 .adv-list-wrapper p.adv-invest {
-    width: 32%;
+    width: 30%;
     background: url(../../images/adv_amt_icon.png) no-repeat;
     background-position: .45rem center;
     background-size: .34rem .34rem;
@@ -68,7 +67,7 @@
 }
 
 .adv-list-wrapper p.adv-packetcount {
-    width: 32%;
+    width: 30%;
     background: url(../../images/adv_packet_icon.png) no-repeat;
     background-position: left center;
     background-size: .34rem .34rem;
@@ -76,7 +75,7 @@
 }
 
 .adv-list-wrapper p.adv-score {
-    width: 18%;
+    width: 20%;
     background: url(../../images/adv_score_icon.png) no-repeat;
     background-position: left center;
     background-size: .34rem .34rem; 
@@ -84,7 +83,7 @@
 }
 
 .adv-list-wrapper p.adv-time {
-    width: 18%;
+    width: 20%;
     text-align: right;
     padding-right:.6rem;
 }
@@ -93,7 +92,19 @@
     background-color: #adaca8;
     color: #fff;
     padding: 0 5px;
-    border-radius: 10px;
+    border-radius: 8px;
+}
+
+.adv-list-wrapper ul > li:after{
+  position: absolute;
+  content:'';
+  top:0;
+  left:0;
+  display: block;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 3;
 }
 
 

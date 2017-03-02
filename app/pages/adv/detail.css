@@ -166,6 +166,7 @@
     color: #333;
     border-bottom: 1px solid #999;
     margin: 0 .28rem;
+    font-weight: 700;
 }
 
 .correlation-wrapper ul {
@@ -193,6 +194,7 @@
 .correlation-wrapper li h3 {
     color: #333;
     font-size: 15px;
+    font-weight: 700;
 }
 
 .correlation-wrapper .video-property > p {
@@ -371,7 +373,7 @@
     text-align: center;
     font-size: 17px;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-top: 1rem
 }
 
