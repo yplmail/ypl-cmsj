@@ -7,6 +7,7 @@ import Login    from './login/login.jsx';
 import Hot      from './hot/hot.jsx';
 import Mine     from './mine/mine.jsx';
 import Detail   from  './adv/detail.jsx';
+import HtmlVideo   from  './adv/htmlVideo.jsx';
 import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
@@ -39,6 +40,7 @@ ReactDOM.render(
 			<Route path="mobileAuth" component={MobileAuth} />
 			<Route path="wechatAuth" component={WechatAuth} />
 			<Route path="transfer" component={Transfer} />
+			<Route path="htmlVideo" component={HtmlVideo} />
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')
