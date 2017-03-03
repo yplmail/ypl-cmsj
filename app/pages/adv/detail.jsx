@@ -1,11 +1,10 @@
 import React   from 'react';
-import BScroll from 'better-scroll';
-import ServerRequest from 'server/serverRequest';
 import Player  from './player';
 import Packet  from './Packet';
 import Record  from './Record';
 import Video   from './Video';
 import Score   from './Score';
+import BScroll from 'better-scroll';
 import './detail.css';
 import 'player/player.css';
 

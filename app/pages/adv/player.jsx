@@ -70,7 +70,9 @@ class Player extends React.Component{
             if(this.android){
                 document.querySelector('.prism-player').style.display = 'none';
                 document.querySelector('.video-cover').style.display  = 'block';
-                this.videoPlayId && this.end();                
+                if(this.videoPlayId){
+                    this.end();
+                }               
             }
         }.bind(this))
     }
@@ -115,6 +117,10 @@ class Player extends React.Component{
             },
             success:function(response){
                 this.props.handle(this.state.video,this.videoPlayId);
+                let timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    this.videoPlayId = undefined;                    
+                }.bind(this),300)
             }.bind(this)
         })
     }
