@@ -27,7 +27,9 @@ class Player extends React.Component{
     }
 
     pauseHandle(){
-
+        document.querySelector('.prism-player').style.display = 'block';
+        document.querySelector('.video-cover').style.display  = 'none';
+        this.player.replay();
     }
 
     getVideos(){
@@ -71,14 +73,6 @@ class Player extends React.Component{
                 this.videoPlayId && this.end();                
             }
         }.bind(this))
-
-        var pause = document.getElementsByClassName('video-pause')[0];
-
-        pause.addEventListener("click", function () {
-            document.querySelector('.prism-player').style.display = 'block';
-            document.querySelector('.video-cover').style.display  = 'none';
-            this.player.replay();
-        }.bind(this), false);
     }
 
     notice(){
