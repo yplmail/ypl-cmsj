@@ -26,11 +26,11 @@ class Video extends React.Component{
     }
 
     linkHandle(id){
-        location.hash ='detail/'+id;
-        // setTimeout(function(){
-        //     location.reload();
-        // },50)
-
+        if(/^#\/detail/.test(location.hash)){
+            location.hash ='video/'+id;          
+        }else{
+            location.hash ='detail/'+id;    
+        }
     }
 
     loopVideoList(){

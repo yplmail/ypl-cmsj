@@ -7,6 +7,7 @@ import Login    from './login/login.jsx';
 import Hot      from './hot/hot.jsx';
 import Mine     from './mine/mine.jsx';
 import Detail   from  './adv/detail.jsx';
+import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
 import Record   from './wallet/record.jsx';
@@ -28,7 +29,7 @@ ReactDOM.render(
 			<Route path="hot"    component={Hot} />
 			<Route path="mine"   component={Mine} />
 			<Route path="detail/:videoId(/:playId)(/:shareId)" component={Detail} />
-			<Redirect from="profile/:videoId" to="detail/:videoId" />
+			<Route path="video/:videoId(/:playId)(/:shareId)" component={VideoDetail} />
 			<Route path="register" component={Register} />
 			<Route path="wallet" component={Wallet} />
 			<Route path="record" component={Record} />
