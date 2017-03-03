@@ -72,6 +72,7 @@ module.exports = {
             'server': path.resolve(__dirname, './app/components/server'),
             'share': path.resolve(__dirname, './app/components/share'),
             'md5'  : path.resolve(__dirname, './app/components/md5'),
+            'common'  : path.resolve(__dirname, './app/common')
         }
     },
     plugins: [

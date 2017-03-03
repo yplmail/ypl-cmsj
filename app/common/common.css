@@ -102,3 +102,9 @@
     overflow: hidden;
     visibility: hidden;
 }
+
+.ellipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
