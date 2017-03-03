@@ -3,15 +3,16 @@ const API = {
     'register': 'user/register',
     'sendSmsCode': 'user/sendSmsCode',
     'resetLoginPwd': 'user/resetLoginPwd',
+    'wechatShare' : 'user/wechatShare',
     'advList': 'publish/list',
     'advDetail': 'publish/detail',
     'advStartPlay': 'publish/startPlay',
     'advEndPlay': 'publish/endPlay',
-    'receive' :'reward/receive',
     'newestUsedRewards' :'publish/newestUsedRewards',
-    'correlationVideo' :'video/relatedVideos',
+    'receive' :'reward/receive',
     'score' :'comment/score',
-    'hotVideos' : '/video/hotVideos'
+    'correlationVideo' :'video/relatedVideos',
+    'hotVideos' : 'video/hotVideos'
 }
 
 export default API

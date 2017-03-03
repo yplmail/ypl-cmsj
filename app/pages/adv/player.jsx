@@ -138,7 +138,7 @@ class Player extends React.Component{
                 <div className="video-detail" data-flex="dir:left cross:center">
                     <div>{video.totalAmount}</div>
                     <div>红包已领{video.usedCount}个</div>
-                    <div onClick={this.clickHandle}>{video.shareCount}</div>
+                    <div onClick={this.props.share}>{video.shareCount}</div>
                 </div>
             </div>
         )

@@ -16,7 +16,7 @@
     position: relative;
     height: .86rem;
     border: 1px solid #333237;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
     margin-bottom: .32rem;
 }
@@ -89,7 +89,7 @@
     height: 100%;
     font-size: 17px;
     color: #fff;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .login-content li:nth-child(4) a {

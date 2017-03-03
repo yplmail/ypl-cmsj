@@ -16,18 +16,6 @@ class Nav extends React.Component{
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault);
 	}
-
-  initBScroll(){
-      setTimeout(function(){
-          window.iscroll = null;
-          var wrapper = document.querySelector('.container').childNodes[0];
-          wrapper.style.height = (window.innerHeight-48) + 'px';
-          window.iscroll = new BScroll(wrapper, {
-              probeType: 3,
-              click:true
-          })
-      },320)
-  }
   
 	render(){
        return(
