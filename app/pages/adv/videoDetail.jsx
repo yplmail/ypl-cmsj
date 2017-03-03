@@ -32,10 +32,6 @@ class Detail extends React.Component{
 		},500)
 	}
 
-	componentWillReceiveProps(prop){
-         //debugger;
-	}
-
 	playHandle(data,id){
 	   if(id || this.props.params.playId){
 	       this.setState({

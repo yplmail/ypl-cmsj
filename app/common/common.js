@@ -25,5 +25,14 @@ const common = {
         return ""
     },
 
+    isWechat:() => {
+        var ua = navigator.userAgent;
+        if(/MicroMessenger/i.test(ua)){
+            return true;
+        }else{
+            return false;            
+        }
+    }
+
 }
 export default common;

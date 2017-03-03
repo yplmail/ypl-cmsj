@@ -13,20 +13,21 @@ class Player extends React.Component{
         this.pauseHandle = this.pauseHandle.bind(this);
     }
 
-    pauseHandle(){
-
+    componentWillMount(){
+        var ua = navigator.userAgent;
+        if(/MicroMessenger/i.test(ua) && /Android/i.test(ua)){
+            this.android = true;
+        }else{
+            this.android = false;
+        }
     }
 
     componentDidMount(){
-        this.getVideos(true);
+        this.getVideos();
     }
 
-    componentWillReceiveProps(prop){
+    pauseHandle(){
 
-    }
-
-    shouldComponentUpdate(nextProps, state){
-        return true;
     }
 
     getVideos(){
@@ -64,11 +65,15 @@ class Player extends React.Component{
         }.bind(this))
 
         this.player.on('ended',function(){
-            document.querySelector('.prism-player').style.display = 'none';
-            document.querySelector('.video-cover').style.display  = 'block';
+            if(this.android){
+                document.querySelector('.prism-player').style.display = 'none';
+                document.querySelector('.video-cover').style.display  = 'block';
+                this.videoPlayId && this.end();                
+            }
         }.bind(this))
 
         var pause = document.getElementsByClassName('video-pause')[0];
+
         pause.addEventListener("click", function () {
             document.querySelector('.prism-player').style.display = 'block';
             document.querySelector('.video-cover').style.display  = 'none';
@@ -89,38 +94,38 @@ class Player extends React.Component{
             },
             success:function(response){
                 this.first = false;
-                this.clock(response.videoPlayRecordId);
+                this.videoPlayId = response.videoPlayRecordId;
+                !this.android && this.clock();
             }.bind(this)
         })
     }
 
-    clock(id){
+    clock(){
         let count = parseInt(this.player.getDuration() / 100 * 1000);
         let timer = window.setInterval(function(){
             var ratio = parseFloat(this.player.getCurrentTime() / this.player.getDuration());
             if(ratio > 0.95){
-                this.end(id);
+                this.end();
                 clearInterval(timer);
             }
         }.bind(this),count)
     }
 
-    end(id){
+    end(){
         let server = new ServerRequest();
         server.post({
             url:'advEndPlay',
             data:{
-                videoPlayRecordId : id,
+                videoPlayRecordId : this.videoPlayId,
                 token : common.getcookies('token')
             },
             success:function(response){
-                this.props.handle(this.state.video,id);
+                this.props.handle(this.state.video,this.videoPlayId);
             }.bind(this)
         })
     }
 
     render(){
-        //this.initPlayer();
         let video = this.state.video;
         return (
             <div className="video-wrapper">

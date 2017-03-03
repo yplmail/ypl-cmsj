@@ -10,6 +10,10 @@ class Video extends React.Component{
         }
     }
 
+    componentWillMount(){
+
+    }
+
     componentDidMount(){
         let server = new ServerRequest();
             server.post({
