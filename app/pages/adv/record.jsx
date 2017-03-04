@@ -17,7 +17,7 @@ class Record extends React.Component{
             mock : true,
             url :'newestUsedRewards',
             data:{
-              publishId: this.props.parameter.videoId
+              publishId: this.props.videoId
             },
             success:function(response){
               this.changeState(response.datas)

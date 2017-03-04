@@ -6,7 +6,6 @@ import Video   from './Video';
 import Score   from './Score';
 import BScroll from 'better-scroll';
 import Share   from 'share/share';
-
 import './detail.css';
 import 'player/player.css';
 
@@ -70,8 +69,8 @@ class Detail extends React.Component{
 			<div className="detail-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
 			   <div className="scroll-wrapper">
 	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle}/>
-	               <Record parameter={this.props.params}/>
-	               <Video {...this.props.params}/>
+	               <Record {...this.props.params}/>
+	               <Video  {...this.props.params}/>
 			   </div>
 			   <Packet {...this.state} handle={this.scoreHandle}/>
 			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
