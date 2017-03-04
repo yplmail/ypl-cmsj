@@ -60,13 +60,13 @@ class Detail extends React.Component{
 			packetType      : 0,
 			packetAnimation : '',
 			display         :'none',				
-			scoreAnimation:'animation'
+			scoreAnimation  :'animation'
 		})
 	}
 
 	render(){
 		return(
-			<div className="detail-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
+			<div className="detail-wrapper" style={{height:window.innerHeight+'px'}}>
 			   <div className="scroll-wrapper">
 	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle}/>
 	               <Record {...this.props.params}/>

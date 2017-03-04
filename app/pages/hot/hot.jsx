@@ -12,11 +12,9 @@ class Hot extends React.Component{
 		};
 		this.pageIndex = 1;
 		this.pageCount = 0;
-        this.success  = this.success.bind(this);
 		this.touchStart = this.touchStart.bind(this);
 		this.touchMove = this.touchMove.bind(this);
 		this.touchEnd = this.touchEnd.bind(this);
-		this.iosFlag = true;
 	}
  
 	componentDidMount(){	
@@ -35,13 +33,11 @@ class Hot extends React.Component{
 				pageIndex : this.pageIndex,
 				token     : common.getcookies('token')
 			},
-			success:this.success
+			success:function(response){
+				this.pageCount = response.pageCount;
+				this.setState({items:this.state.items.concat(response.datas)});
+			}.bind(this)
 		})   
-	}
-
-	success(response){
-		this.pageCount = response.pageCount;
-		this.setState({items:this.state.items.concat(response.datas)});
 	}
 
 	touchStart(event){
@@ -178,13 +174,9 @@ class Hot extends React.Component{
         }      
 	}
 
-	shouldComponentUpdate(nextProps, nextState) {
-        return true;
-    }
-
-    componentDidUpdate() {
-      return true;
-    }
+	linkHandle(videoId){
+		location.hash = '/detail/'+ videoId;
+	}
 
 	render(){
        return(
@@ -193,16 +185,16 @@ class Hot extends React.Component{
                     {
                         this.state.items.map((item, index) => {
 							return (<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} 
-								key={index}>
-								<div data-flex="main:center cross:center">
-									<span className="video-play"></span>
+								key={item.publishId} onClick={this.linkHandle.bind(this,item.publishId)}>
+								    <div data-flex="main:center cross:center">
+										<span className="video-play"></span>
 									</div>
 									<div data-flex="dir:left">
-									<p className="adv-invest">{item.totalAmount}</p>
-									<p className="adv-packetcount">红包已领23622个</p>
-									<p className="adv-score">{item.score}分</p>
-									<p className="adv-time"><span>{common.minutes(item.duration)}</span></p>
-								</div>
+										<p className="adv-invest">{item.totalAmount}</p>
+										<p className="adv-packetcount">红包已领23622个</p>
+										<p className="adv-score">{item.score}分</p>
+										<p className="adv-time"><span>{item.duration}</span></p>
+								    </div>
 							</li>)	
 						})
                     }

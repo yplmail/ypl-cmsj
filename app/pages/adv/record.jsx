@@ -6,67 +6,65 @@ class Record extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            packetList : [],
-            slide      : ''
+            packetList : []
         }
     }
 
     componentDidMount(){
+        this.getList();
+    }
+
+    getList(){
         let server = new ServerRequest();
         server.get({
             mock : true,
             url :'newestUsedRewards',
             data:{
-              publishId: this.props.videoId
+              publishId: this.props.videoId,
+              count    : 100
             },
             success:function(response){
-              this.changeState(response.datas)
+                this.setState({
+                    packetList: this.state.packetList.concat(response.datas)
+                });
+                this.moveTimer = setTimeout(function(){
+                  //clearInterval(this.intervalTimer)
+                  this.move();
+                }.bind(this),320)
             }.bind(this)
-        })
+        })      
     }
 
-    changeState(arr){
-        if(arr.length > 3){
-            let len = Math.ceil((20-arr.length)/arr.length);
-            let newArr = []
-            for(var i = 0 ; i < len ; i++){
-               arr.map(function(item,index){
-                  newArr.push(item)
-               })
-            }
-            arr = arr.concat(newArr);
-            this.setState({
-                packetList:arr,
-                slide: 'slide'
-            });
-        }else{
-            this.setState({packetList:arr});
-        }
+    move(){
+        clearInterval(this.moveTimer);
+        let target = this.refs.vertical;
+        let size   = this.state.packetList.length;
+        let height = target.offsetHeight + target.offsetTop/(window.devicePixelRatio || 1);
+        let moveH  = height / size;
+        let count  = 1;
+        // this.intervalTimer  = setInterval(function(){
+        //       target.style.transform = 'translate3d(0, '+(-count*moveH)+'px, 0)';
+        //       target.style.webkitTransform = '-webkit-translate3d(0, '+(-count*moveH)+'px, 0)';
+        //       if(count >= size-1){                
+        //           this.changeParentHeight(height,count,moveH);
+        //       }
+        //       count++;
+        // }.bind(this),4000)
+    }
+
+    changeParentHeight(){
+        this.getList();
     }
 
     render(){
         let list = this.state.packetList;
         return (
           <div className="packetRecord-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
-            <ul id="slideWrapper" className={this.state.slide}>
+            <ul ref="vertical">
                {
                   list.map((item,index)=>{
                       return (
-                        <li data-flex="dir:left main:center cross:center" key={index + item.packageAmount}>
-                            <div><img src="../../images/user_header_icon.png" /></div>
-                            <div>{item.nickname}</div>
-                            <div>{item.mobile}</div>
-                            <div>获赠&nbsp;<span>{item.packageAmount}</span>&nbsp;元</div>
-                        </li>
-                      )
-                  })
-               }
-            </ul>
-            <ul>
-               {
-                  list.map((item,index)=>{
-                      return (
-                        <li data-flex="dir:left main:center cross:center" key={index + item.packageAmount}>
+                        <li data-flex="dir:left cross:center" key={index + item.packageAmount}>
                             <div><img src="../../images/user_header_icon.png" /></div>
                             <div>{item.nickname}</div>
                             <div>{item.mobile}</div>

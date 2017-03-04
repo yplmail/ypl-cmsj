@@ -39,7 +39,7 @@ class Video extends React.Component{
            return(
               <li data-flex="box:last" key={index} onClick={this.linkHandle.bind(this,item.publishId)}>
                   <div data-flex="dir:top box:last">
-                      <h3>{item.title}</h3>
+                      <h3>{item.title.length > 28 ? (item.title.substr(0,28) + '...') : item.title}</h3>
                       <div className="video-property" data-flex="cross:center box:mean">
                           <p>{item.publishUserName}</p>
                           <p>{item.playTimes}次播放</p>

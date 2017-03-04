@@ -69,6 +69,7 @@ class Detail extends React.Component{
 			<div className="detail-wrapper" style={{height:window.innerHeight+'px'}}>
 			   <div className="scroll-wrapper">
 	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle}/>
+	               <Record {...this.props.params}/>
 	               <Video  {...this.props.params}/>
 			   </div>
 			   <Packet {...this.state} handle={this.scoreHandle}/>
