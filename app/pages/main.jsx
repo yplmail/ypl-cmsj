@@ -27,7 +27,7 @@ ReactDOM.render(
 			<Route path="register(/:videoId)(/:videoId)"  component={Register} />
 			<Route path="login(/:videoId)(/:playId)"  component={Login} />
 			<Route path="forgetPassword"  component={ForgetPassword} />
-			<Route path="hot"    component={Hot} />
+			<Route path="hot"    component={Hot}/>
 			<Route path="mine"   component={Mine} />
 			<Route path="detail/:videoId(/:playId)(/:shareId)" component={Detail} />
 			<Route path="video/:videoId(/:playId)(/:shareId)" component={VideoDetail} />

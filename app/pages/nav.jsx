@@ -8,28 +8,48 @@ import '../common/common.css';
 class Nav extends React.Component{
 	constructor(props){
 		super(props)
+		this.state = {
+			display : 'block'
+		}
 	}
 
+    componentWillMount(){
+	    let path = this.props.location.pathname;
+        if(path == "/" || path == "/hot" || path == "/mine"){
+        	this.setState({'display':'block'});
+        }else{
+        	this.setState({'display':'none'});
+        }
+    }
 
 	componentDidMount(){
 		this.wrapper = document.querySelector('.container')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault);
 	}
+
+	componentWillReceiveProps(props){
+	    let path = props.location.pathname;
+        if(path == "/" || path == "/hot" || path == "/mine"){
+        	this.setState({'display':'block'});
+        }else{
+        	this.setState({'display':'none'});
+        }
+	}
   
 	render(){
        return(
        	   <div className="container">
-       	       {this.props.children}
-	           <div className="nav-wrapper">
-	              <div className="nav">
-		              <ul data-flex="dir:left box:mean">
-		                 <li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
-		                 <li><Link to="/hot"   activeClassName="active">热门</Link></li>
-		                 <li><Link to="/mine"  activeClassName="active">我的</Link></li>
-		              </ul>
-	              </div>
-	           </div>
+				{this.props.children}
+				<div className="nav-wrapper" style={{display:this.state.display}}>
+					<div className="nav">
+						<ul data-flex="dir:left box:mean">
+							<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
+							<li><Link to="/hot"   activeClassName="active">热门</Link></li>
+							<li><Link to="/mine"  activeClassName="active">我的</Link></li>
+						</ul>
+					</div>
+				</div>
            </div>
        )
 	}

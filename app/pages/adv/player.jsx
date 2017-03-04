@@ -75,6 +75,8 @@ class Player extends React.Component{
                 }               
             }
         }.bind(this))
+
+        document.querySelector('.duration').innerText = this.state.video.duration;
     }
 
     notice(){
