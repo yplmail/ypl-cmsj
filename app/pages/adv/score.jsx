@@ -45,12 +45,15 @@ class Score extends React.Component{
     }
 
     hideHandle(event){
-
+        var el = this.refs.scoreWrapper;
+        if(event.target == el){
+            this.setState({animation:''});
+        }
     }
 
     render(){
       return(
-          <div className='score-wrapper' style={{display:this.state.animation ? 'block':'none'}} onClick={this.hideHandle}>
+          <div ref='scoreWrapper' className='score-wrapper' style={{display:this.state.animation ? 'block':'none'}} onClick={this.hideHandle}>
               <div className={'score-content ' + this.state.animation}>
                 <h2>评分有惊喜！</h2>
                 <p className="starability-slot clearfix">

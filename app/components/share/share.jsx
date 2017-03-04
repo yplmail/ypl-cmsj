@@ -12,19 +12,6 @@ class Share extends React.Component{
         this.touchHandle = this.touchHandle.bind(this);
     }
     
-    componentDidMount(){
-    	var server = new ServerRequest(); 
-    	server.post({
-    		url :'wechatShare',
-            data:{
-                url : location.href
-            },
-    		success:function(result){
-               this.share(result);
-    		}
-    	})   	
-    }
-
     componentWillReceiveProps(nextProps){
         this.setState({
             display : nextProps.display,
@@ -32,8 +19,22 @@ class Share extends React.Component{
         });
     }
 
+    componentDidMount(){
+        var server = new ServerRequest(); 
+        server.post({
+            url :'wechatShare',
+            data:{
+                url : location.href
+            },
+            success:function(result){
+               this.share(result);
+            }.bind(this)
+        })      
+    }
+
+
     share(data) {
-        let content = data.shareContent;
+        let content = data.shareContent || {};
         let config  = data.wxConfig;
         var shareContent = {
             title   : content.shareTitle, // 分享标题
@@ -46,12 +47,12 @@ class Share extends React.Component{
                 // 用户确认分享后执行的回调函数
             }      
         };
-        initWechatConfig(shareContent,config);
+        this.initWechatConfig(shareContent,config);
     };
 
     initWechatConfig(share,config) {
         wx.config({
-            appId    : config.appid,
+            appId    : config.appId,
             timestamp: config.timestamp,
             nonceStr : config.nonceStr,
             signature: config.signature,
@@ -59,10 +60,10 @@ class Share extends React.Component{
         });
 
         wx.error(function(res) {
-            layer.open({
-                content: '微信初始化信息验证失败',
-                time   : 2
-            });
+            // layer.open({
+            //     content: '微信初始化信息验证失败',
+            //     time   : 2
+            // });
         });
 
         wx.ready(function() {
