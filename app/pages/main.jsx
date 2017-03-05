@@ -20,15 +20,36 @@ import ForgetPassword   from './modifyPassword/forgetPassword.jsx';
 import MobileAuth   from './mobileAuth/mobileAuth.jsx';
 import WechatAuth   from './wechatAuth/wechatAuth.jsx';
 
+function change(pre, next) {  
+	if(next.routes[1].title){
+		document.title = next.routes[1].title;		
+	}else{
+		document.title = '草莓视界';			
+	}
+	const iframe = document.createElement('iframe');
+	iframe.src = '../images/hot_gray.png';
+	const listener = () => {
+	    setTimeout(() => {
+	        iframe.removeEventListener('load', listener);
+	        setTimeout(() => {
+	            document.body.removeChild(iframe);
+	        }, 0);
+	    }, 0);
+	};
+	iframe.addEventListener('load', listener);
+	document.body.appendChild(iframe);
+}
+
 ReactDOM.render(
 	<Router history={hashHistory}>
-		<Route path="/" component={Nav}>
+		<Route path="/" component={Nav} onChange={change} title="草莓视界">
 			<IndexRoute component={List} />
+			<Redirect from="list" to="/" />
 			<Route path="register(/:videoId)(/:videoId)"  component={Register} />
 			<Route path="login(/:videoId)(/:playId)"  component={Login} />
 			<Route path="forgetPassword"  component={ForgetPassword} />
 			<Route path="hot"    component={Hot}/>
-			<Route path="mine"   component={Mine} />
+			<Route path="mine"   component={Mine} title="我的"/>
 			<Route path="detail/:videoId(/:playId)(/:shareId)" component={Detail} />
 			<Route path="video/:videoId(/:playId)(/:shareId)" component={VideoDetail} />
 			<Route path="register" component={Register} />
