@@ -1,115 +1,108 @@
-.mine-wrapper{
+.mine-wrapper {
     position: relative;
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
+    background-color: #eee;
 }
 
-.mine-header-wrapper{
+.mine-header-wrapper {
     position: relative;
-    height:5.15rem;
-    width:100%;
-    background:url(../../images/mine_header_bg.png) no-repeat;
-    background-size: cover;
+    height: 3.16rem;
+    width: 100%;
+    margin-bottom: .1rem;
+    background-color: #fff;
 }
 
-.mine-header-wrapper > div:first-child{
-    padding-top:1rem;
+.mine-header-wrapper > div {
     text-align: center;
 }
 
-.mine-header-wrapper > div:first-child .header-img{
+.mine-header-wrapper > div:nth-child(1) img {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: .3rem;
     display: inline-block;
-    width:1.35rem;
-    height:1.35rem;
-    background:url(../../images/user_header_icon.png) no-repeat;
-    background-size: cover;
 }
 
-.mine-header-wrapper > div:nth-child(2){
-    height: 1.3rem;
-    line-height: 1.3rem;
-    text-align: center;
+.mine-header-wrapper > div:nth-child(2) span {
+    font-size: 14px;
+    color: #333;
+    line-height: 2.5em;
 }
 
-.mine-header-wrapper > div:nth-child(2) span{
-    font-size: 17px;
-    color:#fff;
+.mine-header-wrapper > div:nth-child(3) {
+    font-size: 12px;
+    color: #333;
 }
 
-.mine-header-wrapper > div:nth-child(3){
-    height: 1.5rem;
-    text-align: center;
-    color:#fff;
-
+.mine-header-wrapper > div:nth-child(3) span {
+    font-size: 20px;
+    color: #333;
 }
 
-.mine-header-wrapper .springgrass-wallet p:first-child{
-  font-size: 24px;
-}
-
-.mine-header-wrapper .springgrass-wallet p:last-child{
-  font-size: 12px;
-}
-
-
-.mine-list-wrapper{
+.mine-list-wrapper {
     position: relative;
-    width:100%;
+    width: 100%;
 }
 
-.mine-list-wrapper li{
+.mine-list-wrapper li {
     position: relative;
-    height: 1.15rem;
-    line-height: 1.15rem;
-    margin:0 .29rem;
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 15px;
+    padding-left: 1.1rem;
+    color: #333;
     border-bottom: 1px solid #999;
-    font-size: 17px;
-    padding-left:0.8rem;
+    background-color: #fff!important;
 }
 
-.mine-list-wrapper li:after{
-   content: '';
-   position: absolute;
-   right:.15rem;
-   top:.4rem;
-   display: block;
-   width:.19rem;
-   height:.34rem;
-   background:url(../../images/arrow_right_icon.png) no-repeat;
-   background-size: 100%;
+.mine-list-wrapper li:nth-child(1) {
+    background: url(../../images/mine_wallet_icon.png) no-repeat;
+    background-size: .54rem .54rem;
+    background-position: .38rem center;
 }
 
-.mine-list-wrapper li:nth-child(1){
-   background:url(../../images/mine_wallet_icon.png) no-repeat;
-   background-size: .54rem .54rem;
-   background-position: left center;
+.mine-list-wrapper li:nth-child(2) {
+    background: url(../../images/feedback_icon.png) no-repeat;
+    background-size: .54rem .54rem;
+    background-position: .38rem center;
 }
 
-.mine-list-wrapper li:nth-child(2){
-   background:url(../../images/feedback_icon.png) no-repeat;
-   background-size: .54rem .54rem;
-   background-position: left center;
+.mine-list-wrapper li:nth-child(3) {
+    background: url(../../images/about_product_icon.png) no-repeat;
+    background-size: .54rem .54rem;
+    background-position: .38rem center;
 }
 
-.mine-list-wrapper li:nth-child(3){
-   background:url(../../images/about_product_icon.png) no-repeat;
-   background-size: .54rem .54rem;
-   background-position: left center;
+.mine-list-wrapper li:nth-child(4) {
+    margin-bottom: .58rem
 }
 
-.mine-list-wrapper li:nth-child(4){
-   background:url(../../images/link_us_icon.png) no-repeat;
-   background-size: .54rem .54rem;
-   background-position: left center;
+.mine-list-wrapper li:nth-child(4) {
+    background: url(../../images/link_us_icon.png) no-repeat;
+    background-size: .54rem .54rem;
+    background-position: .38rem center;
 }
 
-.mine-list-wrapper li:nth-child(5){
-   background:url(../../images/setting_icon.png) no-repeat;
-   background-size: .54rem .54rem;
-   background-position: left center;
+.mine-list-wrapper li:nth-child(5) {
+    background: url(../../images/setting_icon.png) no-repeat;
+    background-size: .54rem .54rem;
+    background-position: .38rem center;
 }
 
-.mine-list-wrapper li a{
-   display: block;
-   color:#333;
+.mine-list-wrapper li:after {
+    content: '';
+    position: absolute;
+    right: .5rem;
+    top: .4rem;
+    display: block;
+    width: .19rem;
+    height: .34rem;
+    background: url(../../images/arrow_right_icon.png) no-repeat;
+    background-size: 100%;
+}
+
+.mine-list-wrapper li a {
+    display: block;
+    color: #333;
 }

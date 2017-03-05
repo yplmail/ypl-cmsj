@@ -141,12 +141,12 @@
 }
 
 .packetRecord-wrapper li > div:nth-child(2) {
-    width: 27%;
+    width: 25%;
     margin-left:.28rem;
 }
 
 .packetRecord-wrapper li > div:nth-child(3) {
-    width: 22%;
+    width: 25%;
     margin-left:.35rem;
 }
 

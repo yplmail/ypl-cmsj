@@ -16,8 +16,7 @@ class Record extends React.Component{
 
     getList(){
         let server = new ServerRequest();
-        server.get({
-            mock : true,
+        server.post({
             url :'newestUsedRewards',
             data:{
               publishId: this.props.videoId,
@@ -40,7 +39,7 @@ class Record extends React.Component{
         }
         this.element.innerHTML += this.element.innerHTML;
         this.element.scrollTop = 0;
-        setTimeout(this.move.bind(this),500)
+        setTimeout(this.move.bind(this),500);
     }
 
     move(){  

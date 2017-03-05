@@ -24,16 +24,9 @@ class Header extends React.Component{
    render(){
       return (
           <div className="mine-header-wrapper">
-              <div>
-                  <i className="header-img"></i>
-              </div>
-              <div>
-                  <span>不仅仅是看客</span>
-              </div>
-              <div className="springgrass-wallet" data-flex="dir:top main:center cross:center">
-                  <p>￥637.25</p>
-                  <p>获赠总额</p>              
-              </div>
+              <div><img src="../../images/user_header_icon.png" /></div>
+              <div><span>不仅仅是看客</span></div>
+              <div>获赠总金额&nbsp;￥<span>637.35</span></div>
           </div>
       )
    }
