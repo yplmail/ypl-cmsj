@@ -24,49 +24,55 @@ class Record extends React.Component{
               count    : 100
             },
             success:function(response){
+                let arr = response.datas;         
                 this.setState({
-                    packetList: this.state.packetList.concat(response.datas)
+                    packetList: arr
                 });
-                this.moveTimer = setTimeout(function(){
-                  //clearInterval(this.intervalTimer)
-                  this.move();
-                }.bind(this),320)
+                this.startMove();
             }.bind(this)
         })      
     }
 
-    move(){
-        clearInterval(this.moveTimer);
-        let target = this.refs.vertical;
-        let size   = this.state.packetList.length;
-        let height = target.offsetHeight + target.offsetTop/(window.devicePixelRatio || 1);
-        let moveH  = height / size;
-        let count  = 1;
-        // this.intervalTimer  = setInterval(function(){
-        //       target.style.transform = 'translate3d(0, '+(-count*moveH)+'px, 0)';
-        //       target.style.webkitTransform = '-webkit-translate3d(0, '+(-count*moveH)+'px, 0)';
-        //       if(count >= size-1){                
-        //           this.changeParentHeight(height,count,moveH);
-        //       }
-        //       count++;
-        // }.bind(this),4000)
+    startMove(){     
+        this.element = this.refs.vertical;
+        if(this.state.packetList.length < 3){
+            this.element.style.height = (this.state.packetList.length * 30) + 'px';          
+        }
+        this.element.innerHTML += this.element.innerHTML;
+        this.element.scrollTop = 0;
+        setTimeout(this.move.bind(this),500)
     }
 
-    changeParentHeight(){
-        this.getList();
+    move(){  
+        this.timer && clearTimeout(this.timer); 
+        this.element.scrollTop ++;
+        this.interval = setInterval(this.scroll.bind(this),40)      
+    }
+
+    scroll(){
+        if(this.element.scrollTop % 30 == 0){
+            this.interval && clearInterval(this.interval);
+            this.timer = setTimeout(this.move.bind(this),2000)
+        }else{
+            this.element.scrollTop++;
+            if(this.element.scrollTop == this.element.scrollHeight/2){
+               this.element.scrollTop = 0;
+            }
+        } 
     }
 
     render(){
         let list = this.state.packetList;
+        console.log(list.length)
         return (
-          <div className="packetRecord-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
-            <ul ref="vertical">
+          <div ref="vertical" className="packetRecord-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
+            <ul>
                {
                   list.map((item,index)=>{
                       return (
-                        <li data-flex="dir:left cross:center" key={index + item.packageAmount}>
+                        <li data-flex="dir:left cross:center" key={index}>
                             <div><img src="../../images/user_header_icon.png" /></div>
-                            <div>{item.nickname}</div>
+                            <div>{item.nickname.length > 6 ? (item.nickname.substr(0,6) + '...') : item.nickname}</div>
                             <div>{item.mobile}</div>
                             <div>获赠&nbsp;<span>{item.packageAmount}</span>&nbsp;元</div>
                         </li>
