@@ -7,7 +7,6 @@
 
 .mine-header-wrapper {
     position: relative;
-    height: 3.16rem;
     width: 100%;
     margin-bottom: .1rem;
     background-color: #fff;
@@ -17,27 +16,39 @@
     text-align: center;
 }
 
-.mine-header-wrapper > div:nth-child(1) img {
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-top: .3rem;
-    display: inline-block;
+.mine-header-wrapper .personal-header {
+    background: url(../../images/mine_header_bg.png) no-repeat;
+    background-size: contain;
+    width: 7.5rem;
+    text-align: center;
 }
 
-.mine-header-wrapper > div:nth-child(2) span {
-    font-size: 14px;
-    color: #333;
+.mine-header-wrapper .headerImg {
+    display: inline-block;
+    margin-top: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: url(../../images/user_header_icon.png) no-repeat;
+    background-size: contain;
+}
+
+.mine-header-wrapper .headerTip {
     line-height: 2.5em;
 }
 
-.mine-header-wrapper > div:nth-child(3) {
-    font-size: 12px;
-    color: #333;
+.mine-header-wrapper .personal-money {
+    padding-bottom: .5rem;
 }
 
-.mine-header-wrapper > div:nth-child(3) span {
-    font-size: 20px;
+.mine-header-wrapper .personal-money span:nth-child(1) {
     color: #333;
+    font-size: 12px;
+    vertical-align: sub;
+}
+
+.mine-header-wrapper .personal-money span:nth-child(2) {
+    color: #333;
+    font-size: 20px;
 }
 
 .mine-list-wrapper {
@@ -105,4 +116,81 @@
 .mine-list-wrapper li a {
     display: block;
     color: #333;
+}
+
+.mine-mask-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0,.2);
+    text-align: center;
+}
+
+/*.mine-mask-wrapper a {
+    position: relative;
+    display: inline-block;
+    top: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background: #ddd;
+    border: 2px solid #0CF;
+    border-bottom-color: #0CF;
+    border-radius: 50%;
+    color: #811b10;
+}*/
+
+.mine-mask-wrapper .mask-content a:first-child {
+    margin-right: .5rem;
+}
+
+
+.mine-mask-wrapper .cercle {
+    position: absolute;
+    height: 1.2rem;
+    width: 1.2rem;
+    top: 1.3rem;
+    left: 50%;
+    margin-left: -0.6rem;
+    border-radius: 50%;
+    background: linear-gradient(#D8A6FF, #FFECEE);
+    animation: turnCercle 2s infinite;
+    -webkit-animation: turnCercle 5s infinite;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.mine-mask-wrapper .cercle-login {
+    position: absolute;
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    top: 1.3rem;
+    left: 50%;
+    margin-left: -0.6rem;
+    border-radius: 50%;
+    z-index: 100;
+    transform: scale(.97,.97);
+    background: #ddd;
+}
+
+@-webkit-keyframes turnCercle {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(10080deg);
+    }
+}
+
+@keyframes turnCercle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(10080deg);
+    }
 }
