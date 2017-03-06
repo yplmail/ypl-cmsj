@@ -1,21 +1,40 @@
 import React from 'react';
 import Scroll from 'scroll/scroll';
+import common from '../../common/common';
+import ServerRequest from 'server/serverRequest';
 import './list.css';
 
 class List extends React.Component{
-   constructor(props){
-       super(props);
-       this.data = {
-       	  el  : '.adv-list-wrapper',
-       	  url : 'advList',
-       	  row : ListItem
-       }
-   }
-
+    constructor(props){
+        super(props);
+        this.data = {
+            el  : '.adv-list-wrapper',
+            url : 'advList',
+            row : ListItem
+        }
+    }
+    
+    componentDidMount(){
+        var query = this.props.location.query;
+        if(query.code && query.state){
+            let server = new ServerRequest();
+            server.post({
+                url : 'wechatLogin',
+                data:{
+                    code:query.code,
+                    state:query.state
+                },
+                success:function(response){
+                    common.setcookies('token',response.token,7);                    
+                }
+            });       
+        }
+    }
+    
     render(){
         return (
             <div className="adv-list-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
-                 <Scroll {...this.data} />
+                <Scroll {...this.data} />
             </div>
         )
     }

@@ -141,6 +141,7 @@ class Login extends React.Component{
                         <label ref="smsCode" htmlFor="code" onClick={this.handleCode}>{this.state.codeTips}</label>
                      </li>
                      <li>
+                        <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
                         <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>
                         <label htmlFor="password" onClick={this.changePasswordType}></label>
                      </li>

@@ -4,6 +4,7 @@ const API = {
     'sendSmsCode': 'user/sendSmsCode',
     'resetLoginPwd': 'user/resetLoginPwd',
     'wechatShare' : 'user/wechatShare',
+    'wechatLogin':'user/wechatLogin',
     'advList': 'publish/list',
     'advDetail': 'publish/detail',
     'advStartPlay': 'publish/startPlay',

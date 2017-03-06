@@ -87,6 +87,11 @@ module.exports = {
             filename: path.resolve(__dirname, './dist/index.html'),
             template: './app/index.html'
         }),
+        new HtmlWebpackPlugin({
+            filename: path.resolve(__dirname, './dist/redirect.html'),
+            template: './app/redirect.html',
+            inject: false
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(), //启用报错不打断模式     
         new OpenBrowserPlugin({ url: 'http://localhost:8080/' })

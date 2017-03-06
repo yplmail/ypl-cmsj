@@ -11,7 +11,9 @@ class Login extends React.Component{
         this.state = {
             mobile : '',
             pwd    : '',
-            passwordType:'password'
+            passwordType:'password',
+            display:'none'
+            
         }
         this.mobileChange = this.mobileChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
@@ -21,7 +23,11 @@ class Login extends React.Component{
     }
 
     componentDidMount(){
-
+        if(common.isWechat()){
+            this.setState({
+                display: 'block'
+            });                 
+        }
     }
 
     mobileChange(event){
@@ -78,7 +84,11 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    location.hash="/";
+                    if(common.isWechat()){
+                        location = './redirect.html';
+                    }else{
+                        location.hash = '/';
+                    }
                 }
             }.bind(this)
         });
@@ -92,32 +102,40 @@ class Login extends React.Component{
           }
           return (
               <div className="login-wrapper">
-              <div className="login-content">
-              <ul>
-              <li>
-              <label htmlFor="mobile"></label>
-              <input id="mobile" type="tel" placeholder="请输入您的手机号" value={this.state.mobile}  onChange={this.mobileChange} maxLength="11" />
-              </li>
+                  <div className="login-content">
+                      <ul>
+                      <li>
+                      <label htmlFor="mobile"></label>
+                      <input id="mobile" type="tel" placeholder="请输入您的手机号" value={this.state.mobile}  onChange={this.mobileChange} maxLength="11" />
+                      </li>
 
-              <li>
-              <label htmlFor="password"></label>
-              <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
-              <span onClick={this.changePasswordType}></span>
-              </li>
+                      <li>
+                      <label htmlFor="password"></label>
+                      <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
+                      <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
+                      <span onClick={this.changePasswordType}></span>
+                      </li>
 
-              <li>
-              <Link to="forgetPassword">忘记密码？</Link>
-              </li>
+                      <li>
+                      <Link to="forgetPassword">忘记密码？</Link>
+                      </li>
 
-              <li>
-              <a onClick={this.validate}>登陆</a>
-              </li>
+                      <li>
+                      <a onClick={this.validate}>登陆</a>
+                      </li>
 
-              <li>
-              <Link to={linkPath}>没有账号、立即注册</Link>
-              </li>
-              </ul>
-              </div>
+                      <li>
+                      <Link to={linkPath}>没有账号、立即注册</Link>
+                      </li>
+                      </ul>
+
+                      <div className="third-login" style={{display:this.state.display}}>
+                        <h2>
+                          <span>第三方账号登陆</span>
+                        </h2>
+                        <a href="./redirect.html"></a>
+                      </div>
+                  </div>
               </div>
         )
     }

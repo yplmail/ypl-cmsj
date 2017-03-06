@@ -7,7 +7,6 @@ import Login    from './login/login.jsx';
 import Hot      from './hot/hot.jsx';
 import Mine     from './mine/mine.jsx';
 import Detail   from  './adv/detail.jsx';
-import HtmlVideo   from  './adv/htmlVideo.jsx';
 import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
@@ -44,7 +43,7 @@ ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav} onChange={change} title="草莓视界">
 			<IndexRoute component={List} />
-			<Redirect from="list" to="/" />
+			<Route path="list"  component={List} />
 			<Route path="register(/:videoId)(/:videoId)"  component={Register} />
 			<Route path="login(/:videoId)(/:playId)"  component={Login} />
 			<Route path="forgetPassword"  component={ForgetPassword} />
@@ -61,7 +60,6 @@ ReactDOM.render(
 			<Route path="mobileAuth" component={MobileAuth} />
 			<Route path="wechatAuth" component={WechatAuth} />
 			<Route path="transfer" component={Transfer} />
-			<Route path="htmlVideo" component={HtmlVideo} />
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')
