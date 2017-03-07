@@ -157,9 +157,7 @@
     border-radius: 50%;
     background: linear-gradient(#D8A6FF, #FFECEE);
     animation: turnCercle 2s infinite;
-    -webkit-animation: turnCercle 5s infinite;
-    animation-timing-function: ease-in-out;
-    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation: turnCercle 2s infinite linear;
 }
 
 .mine-mask-wrapper .cercle-login {
@@ -173,7 +171,7 @@
     margin-left: -0.6rem;
     border-radius: 50%;
     z-index: 100;
-    transform: scale(.97,.97);
+    transform: scale(.96,.96);
     background: #ddd;
 }
 
@@ -182,7 +180,7 @@
         -webkit-transform: rotate(0deg);
     }
     100% {
-        -webkit-transform: rotate(10080deg);
+        -webkit-transform: rotate(720deg);
     }
 }
 
@@ -191,6 +189,6 @@
         transform: rotate(0deg);
     }
     100% {
-        transform: rotate(10080deg);
+        transform: rotate(720deg);
     }
 }

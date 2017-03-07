@@ -1,31 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router';
-import common from '../../common/common';
+import common from 'common/common';
 import './mine.css';
-
-class Mine extends React.Component{
-   constructor(props){
-      super(props);
-   }
-
-   componentDidMount(){
-
-   }
-
-   render(){
-      return (
-         <div className="mine-wrapper">
-             <Header />
-             <List />
-             <Mask/>
-         </div>
-      )
-   }
-}
 
 class Header extends React.Component{
    constructor(props){
-      super(props)
+      super(props);
+      this.state={
+         amount : '0.00'
+      }
+   }
+
+   componentDidMount(){
+      if(common.getcookies()){
+         this.getData();
+      }
+   }
+
+   getData(){
+
    }
 
    render(){
@@ -37,7 +30,7 @@ class Header extends React.Component{
               </div>
               <div className="personal-money">
                   <span>获赠总额&nbsp;￥</span>
-                  <span>637.35</span>
+                  <span>{this.state.amount}</span>
               </div>
           </div>
       )
@@ -66,7 +59,7 @@ class List extends React.Component{
 class Mask extends React.Component{
    constructor(props){
       super(props);
-      this.state = {
+      this.state = {       
          display : 'block'
       }
    }
@@ -76,7 +69,6 @@ class Mask extends React.Component{
           this.setState({
               display:'block'
           })
-             //<Link to="/register">登陆</Link>
       }
    }
 
@@ -86,6 +78,22 @@ class Mask extends React.Component{
               <div className="cercle"></div>
               <Link className="cercle-login" to="/login">登录</Link>
           </div>
+      )
+   }
+}
+
+class Mine extends React.Component{
+   constructor(props){
+      super(props);
+   }
+
+   render(){
+      return (
+         <div className="mine-wrapper">
+             <Header />
+             <List />
+             <Mask/>
+         </div>
       )
    }
 }

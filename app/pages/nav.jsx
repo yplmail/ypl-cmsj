@@ -14,12 +14,7 @@ class Nav extends React.Component{
 	}
 
     componentWillMount(){
-	    let path = this.props.location.pathname;
-        if(path == "/" || path == "/hot" || path == "/mine"){
-        	this.setState({'display':'block'});
-        }else{
-        	this.setState({'display':'none'});
-        }
+        this.nav(this.props);
     }
 
 	componentDidMount(){
@@ -29,12 +24,16 @@ class Nav extends React.Component{
 	}
 
 	componentWillReceiveProps(props){
+        this.nav(props);
+	}
+
+	nav(props){
 	    let path = props.location.pathname;
         if(path == "/" || path == "/hot" || path == "/mine"){
         	this.setState({'display':'block'});
         }else{
         	this.setState({'display':'none'});
-        }
+        }		
 	}
   
 	render(){

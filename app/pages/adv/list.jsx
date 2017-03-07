@@ -33,7 +33,7 @@ class List extends React.Component{
     
     render(){
         return (
-            <div className="adv-list-wrapper" style={{height:(window.innerHeight-48) + 'px'}}>
+            <div className="adv-list-wrapper" style={{height:(window.innerHeight-49) + 'px'}}>
                 <Scroll {...this.data} />
             </div>
         )
