@@ -9,7 +9,7 @@ const API = {
     'advDetail': 'publish/detail',
     'advStartPlay': 'publish/startPlay',
     'advEndPlay': 'publish/endPlay',
-    'newestUsedRewards' :'publish/newestUsedRewards',
+    'newestUsedRewards' :'reward/newestUsedRewards',
     'receive' :'reward/receive',
     'score' :'comment/score',
     'correlationVideo' :'video/relatedVideos',

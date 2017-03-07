@@ -16,9 +16,10 @@ class Packet extends React.Component{
         this.closePacket = this.closePacket.bind(this);
     }
 
-    openHandle(){
+    openHandle(event){
         if(common.getcookies('token')){
-            this.openPacket();
+            event.target.className="packet-open rotateAnimation";
+            this.openPacket();                
         }else{
             let videoId  = this.state.packetDetail.publishId;
             let recordId = this.state.playRecordId;
@@ -26,7 +27,7 @@ class Packet extends React.Component{
         }
     }
 
-    openPacket(){
+    openPacket(event){
         let server = new ServerRequest();
         server.post({
             url : 'receive',
@@ -36,18 +37,22 @@ class Packet extends React.Component{
                 token : common.getcookies('token')
             },
             success:function(result){
-                if(result.amount == '0'){
-                    this.setState({
-                      packetType : 2,
-                      remindTips : '一步之遥'
-                    });
-                }else{
-                    this.setState({
-                      packetType : 1,
-                      amount : result.amount,
-                      beyondUserRate : result.beyondUserRate
-                    });
-                }
+                let timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    document.querySelector('.packet-open').className='packet-open';
+                    if(result.amount == '0'){
+                        this.setState({
+                          packetType : 2,
+                          remindTips : '一步之遥'
+                        });
+                    }else{
+                        this.setState({
+                          packetType : 1,
+                          amount : result.amount,
+                          beyondUserRate : result.beyondUserRate
+                        });
+                    }                
+                }.bind(this),320)
             }.bind(this)
         });
     }
@@ -76,7 +81,7 @@ class Packet extends React.Component{
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-wish">{detail.rewardsWish}</p>
-                <p className="packet-button" onClick={this.openHandle}></p>
+                <p className="packet-button"><span className="packet-open" onClick={this.openHandle}></span></p>
             </div>;
       }else if(this.state.packetType == 1){
          var content =<div className= {"packet-result"} >
