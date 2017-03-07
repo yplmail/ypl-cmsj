@@ -60,7 +60,7 @@ class Mask extends React.Component{
    constructor(props){
       super(props);
       this.state = {       
-         display : 'block'
+         display : 'none'
       }
    }
 

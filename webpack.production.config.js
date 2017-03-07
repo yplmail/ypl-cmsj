@@ -79,7 +79,8 @@ var webpackConfig = module.exports = {
         new CopyWebpackPlugin([
             { from: './app/reset/data-flex.css', to: 'reset/data-flex.css'},
             { from: './app/reset/reset.css', to: 'reset/reset.css' },
-            { from: './app/reset/reset.js', to: 'reset/reset.js' }
+            { from: './app/reset/reset.js', to: 'reset/reset.js' },
+            { from: './app/favicon.ico', to: 'favicon.ico' }
         ]),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, './dist/index.html'),

@@ -26,7 +26,7 @@ function change(pre, next) {
 		document.title = '草莓视界';			
 	}
 	const iframe = document.createElement('iframe');
-	iframe.src = '../images/hot_gray.png';
+	iframe.src = '../favicon.ico';
 	const listener = () => {
 	    setTimeout(() => {
 	        iframe.removeEventListener('load', listener);

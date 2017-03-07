@@ -129,10 +129,14 @@ class Player extends React.Component{
 
     render(){
         let video = this.state.video;
+        let coverUrl = '';
+        if(video.coverUrl){
+            coverUrl = "backgroundImage:url("+video.coverUrl+")";
+        }
         return (
             <div className="video-wrapper">
                 <div className="video-player">
-                    <div className="video-cover" style={{backgroundImage:'url('+video.coverUrl+')'}}>
+                    <div className="video-cover" style={{coverUrl}}>
                         <span className="video-pause" onClick={this.pauseHandle}></span>
                     </div>
                     <div id="springGrassPlayer" className="prism-player" ></div>
