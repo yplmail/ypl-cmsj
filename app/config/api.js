@@ -17,6 +17,7 @@ const API = {
     'home':'mine/home',
     'rewardList':'reward/list',
     'bindMobile':'user/bindMobile',
+    'bindWechat':'user/bindWechat',
 }
 
 export default API

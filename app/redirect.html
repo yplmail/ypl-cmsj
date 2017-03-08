@@ -18,10 +18,15 @@
         data[arr[i].substring(0, pos)] = decodeURIComponent(arr[i].substring(pos + 1));
     }
     if (data.code) {
-        location.href = 'http://' + location.hostname + '/#/?code=' + data.code + '&state=' + data.state;
+        if(data.scope){
+            location.href = 'http://' + location.hostname + '/#/wechatAuth?code=' + data.code + '&state=' + data.state;   
+        }else{
+            location.href = 'http://' + location.hostname + '/#/?code=' + data.code + '&state=' + data.state;            
+        }
     } else {
-        var url = 'http://' + location.hostname + '/redirect.html';
-        location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope=snsapi_base&state=chuncao#wechat_redirect"
+        var scope = data.scope;
+        var url   = encodeURIComponent('http://' + location.hostname + '/redirect.html?scope='+scope);
+        location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope="+scope+"&state=chuncao#wechat_redirect"
     }
     </script>
 </body>

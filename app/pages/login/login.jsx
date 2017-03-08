@@ -134,7 +134,7 @@ class Login extends React.Component{
                         <h2>
                           <span>第三方账号登陆</span>
                         </h2>
-                        <a href="./redirect.html"></a>
+                        <a href="./redirect.html?scope=snsapi_base"></a>
                       </div>
                   </div>
               </div>

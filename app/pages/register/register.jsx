@@ -119,7 +119,7 @@ class Login extends React.Component{
               if(params.videoId && params.playId){
                   location.hash="/detail/"+params.videoId+'/'+params.playId;
               }else{
-                  location.hash="/list";
+                  location.hash="/";
               }
             }.bind(this)
         });

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import ServerRequest from 'server/serverRequest';
 import './wechatAuth.css';
 
 class Login extends React.Component{
@@ -7,9 +8,27 @@ class Login extends React.Component{
         super(props);
     }
 
-    authHandle(){
-    	let url = location.href.split('?')[0];
-        location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope=snsapi_userinfo&state=chuncao#wechat_redirect";
+    componentDidMount(){
+        var query = this.props.location.query;
+        if(query.code && query.state){
+            let server = new ServerRequest();
+            server.post({
+                url : 'bindWechat',
+                data:{
+                    code:query.code,
+                    state:query.state
+                },
+                success:function(response){
+                    layer.open({content:'认证成功！',time:2, end:function(index){
+                        location.hash = '/setting';
+                    }.bind(this)});              
+                }
+            });       
+        }
+    }    
+
+    authHandle(){      
+        location.href = './redirect.html?scope=snsapi_userinfo';
     }
 
     render(){
