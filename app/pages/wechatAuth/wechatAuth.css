@@ -12,13 +12,19 @@
 .wechatAuth-wrapper .logo-outer{
     height: 2.44rem;
     border-bottom: 1px solid #999;
+    text-align: center;
 }
 
-.wechatAuth-wrapper .content img{
-	width:1.36rem;
+
+.wechatAuth-wrapper .springrass_logo{  
+    width:1.36rem;
+    height:1.36rem;
+    margin:0 auto;
+    background: url(../../images/springGrass_logo.png) no-repeat;
+    background-size: contain;
 }
 
-.wechatAuth-wrapper .content p{
+.wechatAuth-wrapper .springrass_name{
 	font-size: 17px;
 	color:#333;
     line-height: 2.5em;

@@ -20,7 +20,7 @@ class Login extends React.Component{
                 },
                 success:function(response){
                     layer.open({content:'认证成功！',time:2, end:function(index){
-                        location.hash = '/setting';
+                        //location.hash = '/setting';
                     }.bind(this)});              
                 }
             });       
@@ -36,8 +36,8 @@ class Login extends React.Component{
            <div className="wechatAuth-wrapper">
 	           <div className="content">	
 		           <div className="logo-outer">
-			           <img src="../../images/springGrass_logo.png" />
-			           <p>春草传播</p>
+                       <p className="springrass_logo"></p>
+			           <p className="springrass_name">春草传播</p>
 		           </div>
 
 		           <div className="wechat-detail">
