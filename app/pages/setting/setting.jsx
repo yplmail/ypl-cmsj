@@ -1,10 +1,42 @@
 import React from 'react';
 import {Link} from 'react-router';
+import ServerRequest from 'server/serverRequest';
 import './setting.css';
 class Setting extends React.Component{
 	constructor(props){
-		super(props)
+		super(props);
+    this.state = {
+        isBindMobile:'',
+        isBindWechat:''
+    }
 	}
+
+  componentDidMount(){
+      let server = new ServerRequest();
+      server.post({
+          url: 'home',
+          success:function(response){
+             let mobile = '去绑定';
+             let wachat = '去绑定';
+             let bindMobile = false;
+             let bindWechat = false;
+             if(response.mobile){
+                bindMobile = true;
+                mobile = response.mobile.substr(0,3) + '*****' + response.mobile.substr(8,3);
+             }
+             if(response.isWechatBinded == 'true'){
+                bindWechat = true;
+                wachat = '已绑定';
+             }
+             this.setState({
+                mobile      : mobile,
+                wachat      : wachat,
+                isBindMobile:bindMobile,
+                isBindWechat:bindWechat               
+             })
+          }.bind(this)
+      })    
+  }
 
 	render(){
        return(
@@ -12,15 +44,15 @@ class Setting extends React.Component{
               <ul>
                   <li>
 	                  <Link to="/mobileAuth">
-                    手机绑定
-	                  <span>18682243486</span>
+                        <span>手机绑定</span>
+    	                  <span>{this.state.mobile}</span>
                     </Link>
                   </li>
 
                   <li>
 	                  <Link to="/wechatAuth">
-                    微信绑定
-	                  <span>去绑定</span>
+                        <span>微信绑定</span>
+    	                  <span>{this.state.wachat}</span>
                     </Link>
                   </li>
 

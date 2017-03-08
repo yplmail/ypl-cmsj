@@ -7,6 +7,11 @@ class Login extends React.Component{
         super(props);
     }
 
+    authHandle(){
+    	let url = location.href.split('?')[0];
+        location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope=snsapi_userinfo&state=chuncao#wechat_redirect";
+    }
+
     render(){
         return (
            <div className="wechatAuth-wrapper">
@@ -21,7 +26,7 @@ class Login extends React.Component{
 			           <p>获得你的公开信息（昵称、头像等）</p>
 		           </div>
 
-		           <a className="auth-button">确定认证</a>
+		           <a className="auth-button" onClick={this.authHandle}>确定认证</a>
 	           </div>
            </div>
         )

@@ -1,7 +1,8 @@
 import layer from 'layer/layer.js';
 import 'layer/layer.css';
-import ENVIRONMENT from '../../config/config.js'
-import API from '../../config/api.js'
+import ENVIRONMENT from 'config/config';
+import common from 'common/common';
+import API from 'config/api';
 
 
 class ServerRequest {
@@ -117,6 +118,7 @@ class ServerRequest {
             app_key: 'channel_wechat_1',
             app_version: '1.0.0',
             api_version: '1.0.0',
+            token : common.getcookies('token'),
             timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")
         }
     }

@@ -6,66 +6,80 @@
 
 .wallet-wrapper .wallet-header {
     position: relative;
-    height: 2.55rem;
+    height: 1.96rem;
     width: 100%;
-    background: url(../../images/mine_header_bg.png) no-repeat;
-    background-size: cover;
+    background-color: #1b1a1f;
+    text-align: center;
+    color: #fff;
 }
 
-.wallet-wrapper .wallet-header p:nth-child(1) {
-    color: #fff;
+.wallet-header > div:nth-child(1) p:nth-child(1) {
     font-size: 24px;
-    text-align: center;
 }
 
-.wallet-wrapper .wallet-header p:nth-child(1):before {
-    content: '￥'
+.wallet-header > div:nth-child(1) p:nth-child(1):before {
+    content: '￥';
+    font-size: 12px;
 }
 
-.wallet-wrapper .wallet-header p:nth-child(2) {
-    color: #fff;
-    font-size: 14px;
-    text-align: center;
+.wallet-header > div p:nth-child(2) {
     margin-top: .1rem;
+    font-size: 14px;
+}
+
+.wallet-header > div:nth-child(2) p:nth-child(1) {
+    width: 100%;
+    height: 36px;
+    background: url(../../images/transfer_wechet_icon2.png) no-repeat;
+    background-size: .64rem .59rem;
+    background-position: center center;
 }
 
 .wallet-wrapper .wallet-list {
     position: relative;
-    background: #eee;
+    /*    background: #eee;*/
+}
+
+.wallet-wrapper .wallet-list h2 {
+    height: .96rem;
+    line-height: .96rem;
+    padding: 0 .36rem;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
 }
 
 .wallet-wrapper .wallet-list li {
     height: 1.48rem;
-    line-height: 1.48rem;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #d2d2d2;
     text-align: center;
+    font-size: 14px;
+    margin: 0 .36rem;
 }
 
-.wallet-wrapper .wallet-list li:last-child {
-    border-bottom: none;
+.wallet-scroll {
+    height: 10.4rem;
 }
 
-.wallet-wrapper .wallet-list li > div:last-child {
-    border-left: 1px solid #ccc;
+.wallet-list li > div {
+    margin-top: .23rem;
+    height: 1.02rem;
 }
 
-.wallet-wrapper .wallet-list li a {
-    display: block;
-    height: 100%;
-    font-size: 17px;
-    color:#333;
+.wallet-list li > div:nth-child(1) {
+    width: 1.4rem;
 }
 
-.wallet-wrapper li a.packet-record{
-   background: url(../../images/packet_recrod_icon.png) no-repeat;
-   background-size: .43rem .51rem;
-   background-position: .5rem center;
-} 
+.wallet-list li > div:nth-child(2) {
+    text-align: left;
+}
 
-.wallet-wrapper li a.transfer-wechet{
-   background: url(../../images/transfer_wechet_icon.png) no-repeat;
-   background-size: .53rem .49rem;
-   background-position: .5rem center;
-} 
+.wallet-list li > div:nth-child(3) {
+    width: 1rem;
+}
 
-
+.wallet-list li > div h3 {
+    color: #333;
+    font-size: 15px;
+    font-weight: 700;
+}

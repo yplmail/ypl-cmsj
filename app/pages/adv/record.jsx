@@ -62,7 +62,6 @@ class Record extends React.Component{
 
     render(){
         let list = this.state.packetList;
-        console.log(list.length)
         return (
           <div ref="vertical" className="packetRecord-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
             <ul>

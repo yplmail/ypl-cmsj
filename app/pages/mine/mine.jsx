@@ -1,32 +1,49 @@
 import React from 'react';
 import {Link} from 'react-router';
 import common from 'common/common';
+import ServerRequest from 'server/serverRequest';
 import './mine.css';
 
 class Header extends React.Component{
    constructor(props){
       super(props);
       this.state={
-         amount : '0.00'
+         nickname: '不仅仅是看客',
+         amount  : '0.00',
+         url     : ''
       }
    }
 
    componentDidMount(){
-      if(common.getcookies()){
+      if(common.getcookies('token')){
          this.getData();
       }
    }
 
    getData(){
-
+      let server = new ServerRequest();
+      server.post({
+          url: 'home',
+          success:function(response){
+             this.setState({
+                nickname: response.nickname    ||  '不仅仅是看客',
+                amount  : response.totalIncome || '0.00',
+                url     : response.faceUrl            
+             });
+          }.bind(this)
+      })
    }
 
    render(){
+      let url = '';
+      if(this.state.url){
+          url = "backgroundImage:url("+this.state.url+")";
+      }
       return (
           <div className="mine-header-wrapper">
               <div className="personal-header">
-                  <p className="headerImg"></p>
-                  <p className="headerTip">不仅仅是看客</p>
+                  <p className="headerImg" style={{url}}></p>
+                  <p className="headerTip">{this.state.nickname}</p>
               </div>
               <div className="personal-money">
                   <span>获赠总额&nbsp;￥</span>
@@ -65,7 +82,7 @@ class Mask extends React.Component{
    }
 
    componentDidMount(){
-      if(common.getcookies()){
+      if(!common.getcookies('token')){
           this.setState({
               display:'block'
           })

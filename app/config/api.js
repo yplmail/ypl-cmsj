@@ -13,7 +13,10 @@ const API = {
     'receive' :'reward/receive',
     'score' :'comment/score',
     'correlationVideo' :'video/relatedVideos',
-    'hotVideos' : 'video/hotVideos'
+    'hotVideos' : 'video/hotVideos',
+    'home':'mine/home',
+    'rewardList':'reward/list',
+    'bindMobile':'user/bindMobile',
 }
 
 export default API

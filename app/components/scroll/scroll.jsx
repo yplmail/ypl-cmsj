@@ -29,6 +29,8 @@ class Scroll extends React.Component{
 
         this.isRefresh = true;
 
+        this.loadHeight = 40;
+
         this.onScroll = this.onScroll.bind(this);
 
         this.onScrollEnd = this.onScrollEnd.bind(this);
@@ -87,7 +89,7 @@ class Scroll extends React.Component{
                     this.scroll.scrollTo(0, -this.loadHeight, 500);                   
                 }.bind(this),0)
               }else{
-                this.timer = setTimeout(this.initScroll,50)
+                this.timer = setTimeout(this.initScroll,500);
               }
           }
       }else{
@@ -107,8 +109,8 @@ class Scroll extends React.Component{
             probeType: 3,
             click:true
         })
-        this.loadHeight = this.refs.pullDown.offsetHeight;
-        this.scroll.scrollTo(0, -this.loadHeight, 500);
+        //this.loadHeight = this.refs.pullDown.offsetHeight;
+        this.scroll.scrollTo(0, -this.loadHeight, 320);
         this.scroll.on('scroll', this.onScroll);
         this.scroll.on('scrollEnd', this.onScrollEnd);
         this.timer && clearInterval(this.timer);

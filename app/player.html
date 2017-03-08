@@ -13,33 +13,47 @@
 </head>
 
 <body>
-    <!-- ios -->
-    <a id="loadAppButton" href="lcds://lcdsApp/LINEAction=agentDetailLINEOPEN_HEXINDAI_WEB" 
+    <a id="loadAppButton" href="lcds://lcdsApp/LINEAction=agentDetailLINE OPEN_HEXINDAI_WEB" 
     style=" display:none;width:0px;height:0px; "></a>
-
     <script>
-        var ua = navigator.userAgent;
-        var platform = /MicroMessenger/i.test(ua) ? "weixin " : /Android/i.test(ua) ? "android " : /iPhone|iPad|iPod/i.test(ua) ? "ios " : "pc ";
-        function loadApp() {
-            //var chrome = ua.match(/Chrome/i) != null && ua.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i) == null ? true : false;    
-            if (platform == "android ") {
-                location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.privatekitchen.huijia";
-            } else if (platform == "ios ") {
-                location.href = 'https://itunes.apple.com/app/id922791815';
-            } else if (platform == "weixin ") {
-                alert('在浏览器中打开');
-            } else if (platform == "pc ") {
-                
+
+    function getParams() {
+        var url = decodeURIComponent(location.search);
+        var request = {};
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            arr = str.split("&");
+            for (var i = 0; i < arr.length; i++) {
+                request[arr[i].split("=")[0]] = unescape(arr[i].split("=")[1]);
             }
         }
+        return request || {};
+    }
 
-        var doOpenApp = function() {
-            setTimeout('loadApp();', 3000);
-            document.getElementById('loadAppButton').click();               
-        };
+    var ua = navigator.userAgent;
 
-        window.onload = function() {
-            doOpenApp();
-        };
+    var platform = /MicroMessenger/i.test(ua) ? "weixin " : /Android/i.test(ua) ? "android " : /iPhone|iPad|iPod/i.test(ua) ? "ios " : "pc ";
+
+    function loadApp() {
+        //var chrome = ua.match(/Chrome/i) != null && ua.match(/Version\/\d+\.\d+(\.\d+)?\sChrome\//i) == null ? true : 
+        //  
+        if (platform == "android ") {
+            location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.privatekitchen.huijia";
+        } else if (platform == "ios ") {
+            location.href = 'https://itunes.apple.com/app/id922791815';
+        } else if (platform == "weixin ") {
+            alert('在浏览器中打开');
+        } else if (platform == "pc ") {
+
+        }
+    }
+
+    var doOpenApp = function() {
+        document.getElementById('loadAppButton').click();
+    };
+
+    window.onload = function() {
+        doOpenApp();
+    };
     </script>
 </body>
