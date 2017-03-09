@@ -9,7 +9,7 @@ class Packet extends React.Component{
         this.state = {
             packetType      : 0,
             packetAnimation :'',
-            packetDetail    :{},
+            video    :{},
             playRecordId    :''
         }
         this.openHandle = this.openHandle.bind(this);
@@ -19,9 +19,9 @@ class Packet extends React.Component{
     openHandle(event){
         if(common.getcookies('token')){
             event.target.className="packet-open rotateAnimation";
-            this.openPacket();                
+            this.openPacket();
         }else{
-            let videoId  = this.state.packetDetail.publishId;
+            let videoId  = this.state.video.publishId;
             let recordId = this.state.playRecordId;
             location.hash = '/login/'+videoId+'/'+recordId;
         }
@@ -32,7 +32,7 @@ class Packet extends React.Component{
         server.post({
             url : 'receive',
             data:{
-                publishId : this.state.packetDetail.publishId,
+                publishId : this.state.video.publishId,
                 videoPlayRecordId : this.state.playRecordId,
                 token : common.getcookies('token')
             },
@@ -51,7 +51,7 @@ class Packet extends React.Component{
                           amount : result.amount,
                           beyondUserRate : result.beyondUserRate
                         });
-                    }                
+                    }
                 }.bind(this),320)
             }.bind(this)
         });
@@ -65,14 +65,14 @@ class Packet extends React.Component{
         this.setState({
             packetType      : props.packetType,
             packetAnimation : props.packetAnimation,
-            packetDetail    : props.packetDetail,
+            video    : props.video,
             playRecordId    : props.playRecordId
         });
     }
 
 
     render(){
-      var detail = this.state.packetDetail;
+      var detail = this.state.video;
       var content = null;
       if(this.state.packetType == 0){
          var content =<div className= {"packet-content " + this.state.packetAnimation} >

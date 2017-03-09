@@ -38,7 +38,6 @@ class Player extends React.Component{
             url:'advDetail',
             data:{
                 publishId: this.props.videoId,
-                token    : common.getcookies('token'),
                 openId   : ''
             },
             success:function(response){
@@ -72,7 +71,7 @@ class Player extends React.Component{
                 document.querySelector('.video-cover').style.display  = 'block';
                 if(this.videoPlayId){
                     this.end();
-                }               
+                }
             }
         }.bind(this))
 
@@ -120,7 +119,7 @@ class Player extends React.Component{
                 this.props.handle(this.state.video,this.videoPlayId);
                 let timer = setTimeout(function(){
                     clearTimeout(timer);
-                    this.videoPlayId = undefined;                    
+                    this.videoPlayId = undefined;
                 }.bind(this),300)
             }.bind(this)
         })
@@ -140,7 +139,7 @@ class Player extends React.Component{
                 <div className="video-detail" data-flex="dir:left cross:center">
                     <div>{video.totalAmount}</div>
                     <div>红包已领{video.usedCount}个</div>
-                    <div onClick={this.props.share}>{video.shareCount}</div>
+                    <div onClick={this.props.share.bind(this,this.state.video)}>{video.shareCount}</div>
                 </div>
             </div>
         )

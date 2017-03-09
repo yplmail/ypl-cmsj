@@ -16,11 +16,18 @@ class Detail extends React.Component{
         this.state = {
         	packetType      : 0,
         	packetAnimation :'',
-        	packetDetail    :{},
+        	video           :{},
         	playRecordId    :'',
         	scoreAnimation  :'',
-        	display         :'none',
-        	video           : {}
+        	share :{
+        	    display :'none',
+				title   : '',  // 分享标题
+				desc    : '',  // 分享描述
+				link    : '',  // 分享链接
+				imgUrl  : '', // 分享图标
+				type    : '', // 分享类型,music、video或link，不填默认为link
+				dataUrl : ''
+        	}
         }
         this.playHandle = this.playHandle.bind(this);
         this.scoreHandle = this.scoreHandle.bind(this);
@@ -28,24 +35,12 @@ class Detail extends React.Component{
 	}
 
 	componentDidMount(){
-		this.getVideo();
         this.refreshToken();
 	}
 
-	getVideo(){
-        let server = new ServerRequest();
-        server.post({
-            url:'advDetail',
-            data:{
-                publishId: this.props.videoId,
-                openId   : ''
-            },
-            success:function(response){
-                this.setState({video:response});
-            }.bind(this)
-        })
-	}
-
+    /**
+     * 刷新token操作
+     */
 	refreshToken(){
         let server = new ServerRequest();
         server.post({
@@ -56,32 +51,47 @@ class Detail extends React.Component{
         });
 	}
 
+    /**
+     *  弹出红包操作
+    */
 	playHandle(data,id){
 	   if(id || this.props.params.playId){
 	       this.setState({
 	        	packetAnimation : 'animation',
-	        	packetDetail    : data,
-	        	playRecordId    : id || this.props.params.playId,
-	        	scoreAnimation  : '',
-			    display         :'none'
+	        	video           : data,
+	        	playRecordId    : this.props.params.playId || id,
+	        	scoreAnimation  : ''
 	       });
 	   }
 	}
 
-	shareHandle(){
+    /**
+     *  分享操作
+    */
+	shareHandle(video){
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',
 			scoreAnimation  : '',
-			display         :'block'
+			share           : {
+				display : 'block',
+				title   : '草莓视频',
+				desc    : video.title,
+				link    : 'http://'+location.hostname+'/#/detail/'+video.publishId,
+				imgUrl  : video.coverUrl,
+				type    : 'video',
+				dataUrl : video.playUrl
+			}
 		});
 	}
 
+    /**
+     * 评分操作
+    */
 	scoreHandle(){
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',
-			display         :'none',
 			scoreAnimation  :'animation'
 		})
 	}
@@ -90,13 +100,13 @@ class Detail extends React.Component{
 		return(
 			<div className="detail-wrapper" style={{height:window.innerHeight+'px'}}>
 			   <div className="scroll-wrapper">
-	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle}/>
+	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle} />
 	               <Record {...this.props.params}/>
 	               <Video  {...this.props.params}/>
 			   </div>
 			   <Packet {...this.state} handle={this.scoreHandle}/>
 			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
-			   <Share display={this.state.display} shareData={this.state.video}/>
+			   <Share {...this.state.share} />
 			</div>
 		);
 	}

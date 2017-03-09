@@ -12,19 +12,17 @@ class Share extends React.Component{
         this.config = {};
         this.touchHandle = this.touchHandle.bind(this);
     }
-    
-    componentWillReceiveProps(nextProps){
+
+    componentWillReceiveProps(props){
         this.setState({
-            display : nextProps.display || 'none',
-            content : nextProps.content || '请点击右上角将本链接发送给指定朋友或分享到朋友圈等'
+            display : props.display || 'none',
+            content : props.content || '请点击右上角将本链接发送给指定朋友或分享到朋友圈等'
         });
-        if(nextProps.shareData){
-            share(nextProps.shareData)
-        }
+        props.link && this.share(props);
     }
 
     componentDidMount(){
-        var server = new ServerRequest(); 
+        var server = new ServerRequest();
         server.post({
             url :'wechatShare',
             data:{
@@ -33,32 +31,30 @@ class Share extends React.Component{
             success:function(result){
                this.config = result.wxConfig
             }.bind(this)
-        })      
+        })
     }
 
     share(data) {
-        let content = data.shareContent || {};
-        let config  = data.wxConfig;
-        var shareContent = {
-            title   : content.shareTitle, // 分享标题
-            desc    : content.shareDesc,  // 分享描述
-            link    : content.shareLink,  // 分享链接
-            imgUrl  : content.shareImgurl, // 分享图标      
-            type    : '', // 分享类型,music、video或link，不填默认为link
-            dataUrl : '', // 如果type是music或video，则要提供数据链接，默认为空,
+        let content = {
+            title   : data.title, // 分享标题
+            desc    : data.desc,  // 分享描述
+            link    : data.link,  // 分享链接
+            imgUrl  : data.imgUrl, // 分享图标
+            type    : data.type, // 分享类型,music、video或link，不填默认为link
+            dataUrl : data.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
             success : function(){
                 // 用户确认分享后执行的回调函数
-            }      
+            }
         };
-        this.initWechatConfig(shareContent,config);
+        this.initWechatConfig(content);
     };
 
-    initWechatConfig(share,config) {
+    initWechatConfig(share) {
         wx.config({
-            appId    : config.appId,
-            timestamp: config.timestamp,
-            nonceStr : config.nonceStr,
-            signature: config.signature,
+            appId    : this.config.appId,
+            timestamp: this.config.timestamp,
+            nonceStr : this.config.nonceStr,
+            signature: this.config.signature,
             jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone']
         });
 
@@ -89,7 +85,7 @@ class Share extends React.Component{
         return (
             <div className="share-wrapper" style={{display:this.state.display}} onClick={this.touchHandle}>
                 <div className="content">
-                    <p>{this.state.content}</p>             
+                    <p>{this.state.content}</p>
                 </div>
             </div>
         )
