@@ -67,9 +67,10 @@ class Record extends React.Component{
             <ul>
                {
                   list.map((item,index)=>{
+                      let url = item.faceUrl ?'url('+item.faceUrl+')' : '';
                       return (
                         <li data-flex="dir:left cross:center" key={index}>
-                            <div><img src="../../images/user_header_icon.png" /></div>
+                            <div><i style={{backgroundImage:url}} className="personal-header"></i></div>
                             <div>{item.nickname.length > 6 ? (item.nickname.substr(0,6) + '...') : item.nickname}</div>
                             <div>{item.mobile}</div>
                             <div>获赠&nbsp;<span>{item.packageAmount}</span>&nbsp;元</div>

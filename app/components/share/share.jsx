@@ -7,16 +7,20 @@ class Share extends React.Component{
         super(props);
         this.state = {
             display :'none',
-            content : '请点击右上角将本链接发送给指定朋友或分享到朋友圈等'
+            content : '请点击右上角将本链接发送给指定朋友或分享到朋友圈等',
         }
+        this.config = {};
         this.touchHandle = this.touchHandle.bind(this);
     }
     
     componentWillReceiveProps(nextProps){
         this.setState({
-            display : nextProps.display,
+            display : nextProps.display || 'none',
             content : nextProps.content || '请点击右上角将本链接发送给指定朋友或分享到朋友圈等'
         });
+        if(nextProps.shareData){
+            share(nextProps.shareData)
+        }
     }
 
     componentDidMount(){
@@ -27,11 +31,10 @@ class Share extends React.Component{
                 url : location.href
             },
             success:function(result){
-               this.share(result);
+               this.config = result.wxConfig
             }.bind(this)
         })      
     }
-
 
     share(data) {
         let content = data.shareContent || {};

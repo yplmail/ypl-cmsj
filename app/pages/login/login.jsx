@@ -84,12 +84,11 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    location.hash = '/';
-                    // if(common.isWechat()){
-                    //     location = './redirect.html';
-                    // }else{
-                    //     location.hash = '/';
-                    // }
+                    if(/springrass.com$/.test(location.hostname) && common.isWechat()){
+                      location = './redirect.html';                  
+                    }else{
+                      location.hash = '/';
+                    }
                 }
             }.bind(this)
         });
@@ -134,7 +133,7 @@ class Login extends React.Component{
                         <h2>
                           <span>第三方账号登陆</span>
                         </h2>
-                        <a href="./redirect.html?scope=snsapi_base"></a>
+                        <a href="./redirect.html"></a>
                       </div>
                   </div>
               </div>

@@ -159,11 +159,23 @@
     color: #f02800;
 }
 
-.packetRecord-wrapper li img {
+/*.packetRecord-wrapper li img {
     width: 20px;
     height:20px;
     border-radius: 50%;
     margin-left:.28rem;
+}*/
+
+
+.packetRecord-wrapper li .personal-header {
+    display: inline-block;
+    width: 20px;
+    height:20px;
+    border-radius: 50%;
+    margin-left:.28rem;
+    background-image : url(../../images/user_header_icon.png);
+    background-repeat:  no-repeat;
+    background-size  : contain;
 }
 
 .packetRecord-wrapper ul {

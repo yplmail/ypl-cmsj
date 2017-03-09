@@ -50,8 +50,9 @@ class ListItem extends React.Component{
     }
 
     render(){
+        let coverUrl = this.props.item.coverUrl ?'url('+this.props.item.coverUrl+')' : '';
         return(
-            <li id={this.props.item.publishId} style={{backgroundImage : "url(" +this.props.item.coverUrl + ")"}} onClick={this.handler} >
+            <li id={this.props.item.publishId} style={{backgroundImage : coverUrl}} onClick={this.handler} >
                 <div><h2 className="ellipsis">{this.props.item.title}</h2></div>
                 <div data-flex="dir:left">
                     <p className="adv-invest">{this.props.item.totalAmount}元</p>

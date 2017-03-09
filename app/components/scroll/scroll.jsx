@@ -98,7 +98,7 @@ class Scroll extends React.Component{
               this.setState({items: this.state.items.concat(response.datas)});
           }
       }
-      if(response.totalCount > 0){
+      if(response.totalCount > 0 && this.refs.pullDown && this.refs.pullUp){
           this.refs.pullDown.style.display='block';
           this.refs.pullUp.style.display='block';
       }
@@ -185,12 +185,16 @@ class Scroll extends React.Component{
 
     setPullDownTips(status){
         this.pullDownStatus = status;
-        this.refs.pullDownTips.innerText = this.pullDownTips[status];
+        if(this.refs.pullDownTips){
+            this.refs.pullDownTips.innerText = this.pullDownTips[status];           
+        }
     }
 
     setPullUpTips(status){
         this.pullUpStatus = status;
-        this.refs.pullUpTips.innerText = this.pullUpTips[status];
+        if(this.refs.pullUpTips){
+            this.refs.pullUpTips.innerText = this.pullUpTips[status];            
+        }
     }
 
     render(){
