@@ -87,8 +87,7 @@ class Player extends React.Component{
                 publishId: this.props.videoId,
                 fromUrl  : document.referrer,
                 shareUserId : this.props.shareId || '',
-                clientType : 1,
-                token    : common.getcookies('token')
+                clientType : 1
             },
             success:function(response){
                 this.first = false;

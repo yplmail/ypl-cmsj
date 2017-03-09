@@ -19,7 +19,8 @@ class Detail extends React.Component{
         	packetDetail    :{},
         	playRecordId    :'',
         	scoreAnimation  :'',
-        	display         :'none'
+        	display         :'none',
+        	video           : {}
         }
         this.playHandle = this.playHandle.bind(this);
         this.scoreHandle = this.scoreHandle.bind(this);
@@ -27,13 +28,32 @@ class Detail extends React.Component{
 	}
 
 	componentDidMount(){
+		this.getVideo();
+        this.refreshToken();
+	}
+
+	getVideo(){
+        let server = new ServerRequest();
+        server.post({
+            url:'advDetail',
+            data:{
+                publishId: this.props.videoId,
+                openId   : ''
+            },
+            success:function(response){
+                this.setState({video:response});
+            }.bind(this)
+        })
+	}
+
+	refreshToken(){
         let server = new ServerRequest();
         server.post({
         	url:'refreshToken',
         	success:function(response){
                 common.setcookies('token',response.token,7);
         	}
-        });
+        });		
 	}
 
 	playHandle(data,id){
@@ -62,7 +82,7 @@ class Detail extends React.Component{
 			packetType      : 0,
 			packetAnimation : '',
 			display         :'none',				
-			scoreAnimation:'animation'
+			scoreAnimation  :'animation'
 		})
 	}
 
@@ -76,7 +96,7 @@ class Detail extends React.Component{
 			   </div>
 			   <Packet {...this.state} handle={this.scoreHandle}/>
 			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
-			   <Share display={this.state.display}/>
+			   <Share display={this.state.display} shareData={this.state.video}/>
 			</div>
 		);
 	}
