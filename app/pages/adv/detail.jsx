@@ -41,7 +41,7 @@ class Detail extends React.Component{
 	        	packetDetail    : data,
 	        	playRecordId    : id || this.props.params.playId,
 	        	scoreAnimation  : '',
-			    display         :'none'	        	
+			    display         :'none'
 	       });
 	   }
 	}
@@ -59,7 +59,7 @@ class Detail extends React.Component{
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',
-			display         :'none',				
+			display         :'none',
 			scoreAnimation:'animation'
 		})
 	}
