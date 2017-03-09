@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import ServerRequest from 'server/serverRequest';
+import common from '../../common/common';
 import './setting.css';
 class Setting extends React.Component{
 	constructor(props){
@@ -9,6 +10,8 @@ class Setting extends React.Component{
         isBindMobile:'',
         isBindWechat:''
     }
+    this.confirm = this.confirm.bind(this);
+    this.logout = this.logout.bind(this);
 	}
 
   componentDidMount(){
@@ -38,6 +41,29 @@ class Setting extends React.Component{
       })    
   }
 
+  confirm(){
+      layer.open({
+          content: '请问您确定要退出当前账号吗？',
+          style:'background-color:#fff; color:#323232;width:70%', //自定风格
+          btn: ['确定', '取消'],
+          yes: function(index){
+              layer.close(index);
+              this.logout();
+          }.bind(this)
+      });    
+  }
+
+  logout(){
+      let server = new ServerRequest();
+      server.post({
+          url: 'logout',
+          success:function(response){
+            common.setcookies('token','',-1); 
+            location.hash = '/login';
+          }.bind(this)
+      })   
+  }
+
 	render(){
        return(
            <div className="setting-wrapper">
@@ -60,7 +86,7 @@ class Setting extends React.Component{
 	                  <Link to="/modifyPassword">修改密码</Link>
                   </li>
               </ul>  
-              <div className="setting-btn">退出当前账号</div>               
+              <div className="setting-btn" onClick={this.confirm}>退出当前账号</div>               
            </div>
        )
 	}	

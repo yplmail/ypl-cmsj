@@ -15,6 +15,7 @@ class Hot extends React.Component{
 		this.touchStart = this.touchStart.bind(this);
 		this.touchMove = this.touchMove.bind(this);
 		this.touchEnd = this.touchEnd.bind(this);
+		this.removeNode = this.removeNode.bind(this);
 	}
  
 	componentDidMount(){	
@@ -112,11 +113,11 @@ class Hot extends React.Component{
 	        }
 	        //向右滑动
 	        if(directionX >= 50){
-			    this.silderAnimation(t,150)
+			    this.silderAnimation(t,150,directionY)
 	        }
             //向左滑动
 	        if(directionX <= -50){
-                this.silderAnimation(t,-150)
+                this.silderAnimation(t,-150,directionY)
 	        }
 		}
 	}
@@ -151,34 +152,38 @@ class Hot extends React.Component{
 		}
 	}
 
-	silderAnimation(t,direction){
+	silderAnimation(t,direction,y){
         t.style.transition= 'transform 0.2s linear';
         t.style.webkitTransition= '-webkit-transform 0.2s linear';
 
-        t.style.transform = 'translateX('+direction+'%) scale3d(1,1,1)';
-        t.style.webkitTransform = '-webkit-translateX('+direction+'%) scale3d(1,1,1)';
+        t.style.transform = 'translate('+direction+'%,'+y+'px) scale3d(1,1,1)';
+        t.style.webkitTransform = '-webkit-translateX('+direction+'%,'+y+'px) scale3d(1,1,1)';
 
         if(t.nextSibling){
             t.nextSibling.style.transition= 'transform 0.2s linear';
 	        t.nextSibling.style.webkitTransition= '-webkit-transform 0.2s linear';
 	        t.nextSibling.style.transform = 'translateY(0) scale3d(1,1,1)';
-	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';    
-	        setTimeout(function(){	        	
-		        var parentNode = t.parentNode;   
-		        parentNode.removeChild(t);
-		        if(parentNode.childNodes.length <= 3){
-		           ++this.pageIndex;
-		           if(this.pageIndex <= this.pageCount){
-	                   this.initData();		           	
-		           }
-		        }
-	        }.bind(this),320)  	        	
+	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';     	  
+	        this.removeNode(t);      	
         }else{
 	        t.style.transition= 'transform 0.2s linear';
 	        t.style.webkitTransition= '-webkit-transform 0.2s linear';		
 			t.style.transform = 'translateY(0) scale3d(1,1,1)';
 			t.style.webkitTransform = 'translateY(0) scale3d(1,1,1)';
         }      
+	}
+
+	removeNode(t){
+		setTimeout(function(){	        	
+			var parentNode = t.parentNode;   
+			parentNode.removeChild(t);
+			if(parentNode.childNodes.length <= 3){
+				++this.pageIndex;
+				if(this.pageIndex <= this.pageCount){
+					this.initData();		           	
+				}
+			}
+		}.bind(this),320) 
 	}
 
 	linkHandle(videoId){

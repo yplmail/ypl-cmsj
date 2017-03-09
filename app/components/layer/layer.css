@@ -273,6 +273,7 @@
     font-size: 14px;
     border-radius: 0 0 10px 10px;
     cursor: pointer;
+    width:50%;
 }
 
 .layui-m-layerbtn span[yes] {

@@ -5,6 +5,8 @@ import Record  from './Record';
 import Video   from './Video';
 import Score   from './Score';
 import Share   from 'share/share';
+import ServerRequest from 'server/serverRequest';
+import common from '../../common/common';
 import './detail.css';
 import 'player/player.css';
 
@@ -22,6 +24,16 @@ class Detail extends React.Component{
         this.playHandle = this.playHandle.bind(this);
         this.scoreHandle = this.scoreHandle.bind(this);
         this.shareHandle = this.shareHandle.bind(this);
+	}
+
+	componentDidMount(){
+        let server = new ServerRequest();
+        server.post({
+        	url:'refreshToken',
+        	success:function(response){
+                common.setcookies('token',response.token,7);
+        	}
+        });
 	}
 
 	playHandle(data,id){

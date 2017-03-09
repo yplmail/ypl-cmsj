@@ -32,6 +32,10 @@ const common = {
         }else{
             return false;            
         }
+    },
+
+    trim: (str) => {
+       return str.replace(/(^\s*)|(\s*$)/g, "");
     }
 
 }
