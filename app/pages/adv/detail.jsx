@@ -4,7 +4,6 @@ import Packet  from './Packet';
 import Record  from './Record';
 import Video   from './Video';
 import Score   from './Score';
-import BScroll from 'better-scroll';
 import Share   from 'share/share';
 import './detail.css';
 import 'player/player.css';
@@ -23,15 +22,6 @@ class Detail extends React.Component{
         this.playHandle = this.playHandle.bind(this);
         this.scoreHandle = this.scoreHandle.bind(this);
         this.shareHandle = this.shareHandle.bind(this);
-	}
-
-	componentDidMount(){
-		setTimeout(function(){
-	        new BScroll('.detail-wrapper', {
-				probeType: 3,
-				click:true
-			})
-		},500)
 	}
 
 	playHandle(data,id){

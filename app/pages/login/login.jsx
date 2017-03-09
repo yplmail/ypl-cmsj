@@ -84,14 +84,10 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    if(location.hostname === 'localhost'){
-                      location.hash = '/';
+                    if(/springrass.com$/.test(location.hostname) && common.isWechat()){
+                      location = './redirect.html';                  
                     }else{
-                      if(common.isWechat()){
-                          location = './redirect.html';
-                      }else{
-                          location.hash = '/';
-                      }                      
+                      location.hash = '/';
                     }
                 }
             }.bind(this)

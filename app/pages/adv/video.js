@@ -1,5 +1,6 @@
 import React   from 'react';
 import common from '../../common/common';
+import BScroll from 'better-scroll';
 import ServerRequest from 'server/serverRequest';
 
 class Video extends React.Component{
@@ -12,7 +13,7 @@ class Video extends React.Component{
 
     componentDidMount(){
         let server = new ServerRequest();
-            server.post({
+        server.post({
             url :'correlationVideo',
             data:{
                 publishId: this.props.videoId,
@@ -21,6 +22,12 @@ class Video extends React.Component{
             },
             success:function(response){
                 this.setState({videoList:response.datas})
+                setTimeout(function(){
+                    new BScroll('.detail-wrapper', {
+                      probeType: 3,
+                      click:true
+                    })
+                },500)                
             }.bind(this)
         })
     }
