@@ -33,11 +33,11 @@ class Load extends React.Component{
     componentWillUnmount(){
     	//组件被卸载的时候调用。一般在componentDidMount里面注册的事件需要在这里删除。
     }
-    
+
     render(){
         return (
            <div className="load-wrapper">
-             
+
            </div>
         )
     }

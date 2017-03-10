@@ -7,14 +7,13 @@ import './scroll.css';
 class Scroll extends React.Component{
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             items: []
         };
 
         this.data = {
             pageIndex : this.pageIndex || 1,
-            pageSize  : props.pageSize || 10,
-            token     : common.getcookies()
+            pageSize  : props.pageSize || 10
         }
 
         this.el  = props.el;
@@ -37,8 +36,6 @@ class Scroll extends React.Component{
 
         this.initScroll = this.initScroll.bind(this);
 
-        this.success  = this.success.bind(this);
-
         this.pullDownTips = {
             0: '下拉发起刷新',
             1: '继续下拉刷新',
@@ -53,7 +50,7 @@ class Scroll extends React.Component{
             2: '正在加载',
             3: '加载成功',
             4: '没有更多...'
-        };        
+        };
     }
 
     componentWillMount(){
@@ -61,30 +58,35 @@ class Scroll extends React.Component{
     }
 
     componentDidMount(){
-        this.getScrollData();
+        this.fetchItems();
+        this.initScroll();
     }
 
     componentDidUpdate() {
-        this.scroll && this.scroll.refresh();
-        return true;
+        setTimeout(function(){
+            if(this.refs.pullUp){
+                this.refs.pullUp.style.display='block';
+            }
+            if(this.refs.pullDown){
+                // this.refs.pullDown.style.display='block';
+                // setTimeout(function(){
+                //     this.scroll.scrollTo(0, -this.loadHeight, 500);
+                // }.bind(this), 300)
+            }
+            this.scroll.refresh();
+        }.bind(this), 500)
     }
 
-    getScrollData(){
+    fetchItems(){
         let server = new ServerRequest();
         server.post({
             url    : this.url,
             data   : this.data,
-            success: this.success
+            success: function(response){
+                this.isRefresh = true;
+                this.next(response);
+            }.bind(this)
         })
-    }
-
-    success(response){
-      this.isRefresh = true;
-      if(response.totalCount > 0){
-           this.next(response);
-      }else{
-           this.setState({items: []});
-      }
     }
 
     next(response){
@@ -92,38 +94,23 @@ class Scroll extends React.Component{
             if (this.pullDownStatus == 3) {
                 this.setPullDownTips(4);
                 this.setState({items: response.datas});
-                if(this.scroll){
-                    let timer = setTimeout(function(){
-                    clearInterval(timer);
-                    this.scroll.scrollTo(0, -this.loadHeight, 500);                   
-                    }.bind(this),0)
-                }else{
-                    this.timer = setTimeout(this.initScroll,500);
-                }
             }
         }else{
             if (this.pullUpStatus == 2) {
-            this.setPullUpTips(3);
-            this.setState({items: this.state.items.concat(response.datas)});
+                this.setPullUpTips(3);
+                this.setState({items: this.state.items.concat(response.datas)});
             }
         }
 
-        if(this.refs.pullDown && this.refs.pullUp){
-            this.refs.pullDown.style.display='block';
-            this.refs.pullUp.style.display='block';            
-        }          
     }
 
-    initScroll(){             
+    initScroll(){
         this.scroll = new BScroll(this.props.el, {
             probeType: 3,
             click:true
         })
-        //this.loadHeight = this.refs.pullDown.offsetHeight;
-        this.scroll.scrollTo(0, -this.loadHeight, 320);
         this.scroll.on('scroll', this.onScroll);
         this.scroll.on('scrollEnd', this.onScrollEnd);
-        this.timer && clearInterval(this.timer);
     }
 
     onScroll(){
@@ -160,16 +147,15 @@ class Scroll extends React.Component{
     }
 
     onScrollEnd(){
-       let pullDown = this.refs.pullDown;
         // 下拉滑动结束后，停在刷新区域
         if (this.scroll.y > -1 * this.loadHeight) {
             if (this.pullDownStatus <= 1) {
                 // 没有发起刷新,那么弹回去
-                this.scroll.scrollTo(0, -1 * this.loadHeight, 500);
+                //this.scroll.scrollTo(0, -1 * this.loadHeight, 500);
             } else if (this.pullDownStatus == 2) { // 发起了刷新,那么更新状态
                 this.setPullDownTips(3);
                 this.pageIndex = 1;
-                this.getScrollData();
+                this.fetchItems();
             }
         }
 
@@ -179,14 +165,14 @@ class Scroll extends React.Component{
                 this.setPullUpTips(2);
                 ++this.pageIndex;
                 if(this.pageIndex <= this.pageCount){
-                    this.getScrollData();
+                    this.fetchItems();
                 }else{
                     --this.pageIndex;
                     this.setPullUpTips(4);
                     let timer = setTimeout(function(){
                        clearInterval(timer);
                        this.scroll.scrollTo(0, this.scroll.y + this.loadHeight, 500);
-                       this.setPullUpTips(0); 
+                       this.setPullUpTips(0);
                     }.bind(this),500)
                 }
             }
@@ -196,17 +182,17 @@ class Scroll extends React.Component{
     setPullDownTips(status){
         this.pullDownStatus = status;
         if(this.refs.pullDownTips){
-            this.refs.pullDownTips.innerText = this.pullDownTips[status];           
+            this.refs.pullDownTips.innerText = this.pullDownTips[status];
         }
     }
 
     setPullUpTips(status){
         this.pullUpStatus = status;
         if(this.refs.pullUpTips){
-            this.refs.pullUpTips.innerText = this.pullUpTips[status];            
+            this.refs.pullUpTips.innerText = this.pullUpTips[status];
         }
     }
- 
+
     elements(){
         let content = '';
         if(this.isRefresh){
@@ -218,10 +204,10 @@ class Scroll extends React.Component{
                 content = <div className="no-video">暂无相关视频</div>;
             }
         }
-        return content;         
+        return content;
     }
-    
-    render(){ 
+
+    render(){
         return (
             <ul>
                 <div className="scroll-loading" ref="pullDown" >
