@@ -21,12 +21,13 @@ class Detail extends React.Component{
         	scoreAnimation  :'',
         	share :{
         	    display :'none',
-				title   : '',  // 分享标题
-				desc    : '',  // 分享描述
-				link    : '',  // 分享链接
-				imgUrl  : '', // 分享图标
-				type    : '', // 分享类型,music、video或link，不填默认为link
-				dataUrl : ''
+				title   : '',
+				desc    : '',  
+				link    : '',  
+				imgUrl  : '', 
+				type    : '', 
+				dataUrl : '',
+				success : ''
         	}
         }
         this.playHandle = this.playHandle.bind(this);
@@ -69,20 +70,54 @@ class Detail extends React.Component{
      *  分享操作
     */
 	shareHandle(video){
+		let tk      = common.getcookies('token');
+		let shareId = '';
+		if(tk){
+			shareId = tk.split("_")[1]
+		}
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',
 			scoreAnimation  : '',
 			share           : {
 				display : 'block',
-				title   : '草莓视频',
-				desc    : video.title,
-				link    : 'http://'+location.hostname+'/#/detail/'+video.publishId,
+				title   : video.title,
+				desc    : video.desc,
+				link    : 'http://'+location.hostname+'/#/share/'+video.publishId+'/'+shareId,
 				imgUrl  : video.coverUrl,
 				type    : 'video',
-				dataUrl : video.playUrl
+				dataUrl : video.playUrl,
+				success : this.shareSuccess.bind(this)
 			}
 		});
+	}
+
+    /**
+     * 分享成功回调
+     * @return {[type]} [description]
+     */
+	shareSuccess(){
+        let server = new ServerRequest();
+
+		this.setState({
+			packetType      : 0,
+			packetAnimation : '',
+			scoreAnimation  : '',
+			share           : {
+				display : 'none',
+				link    : ''
+			}
+		});
+
+        server.post({
+        	url:'shareSuccess',
+        	data:{
+        		publishId:this.props.params.videoId
+        	},
+        	success:function(response){
+        	   //微信自带分享成功提示	
+        	}
+        });      
 	}
 
     /**

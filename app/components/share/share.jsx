@@ -21,50 +21,19 @@ class Share extends React.Component{
         props.link && this.share(props);
     }
 
-    componentDidMount(){
-        var server = new ServerRequest();
-        server.post({
-            url :'wechatShare',
-            data:{
-                url : location.href
-            },
-            success:function(result){
-               this.config = result.wxConfig
-            }.bind(this)
-        })
-    }
-
     share(data) {
-        let content = {
-            title   : data.title, // 分享标题
-            desc    : data.desc,  // 分享描述
-            link    : data.link,  // 分享链接
-            imgUrl  : data.imgUrl, // 分享图标
-            type    : data.type, // 分享类型,music、video或link，不填默认为link
+        let share = {
+            title   : data.title,  // 分享标题
+            desc    : data.desc,   // 分享描述
+            link    : data.link,   // 分享链接
+            imgUrl  : data.imgUrl,  // 分享图标
+            type    : data.type,    // 分享类型,music、video或link，不填默认为link
             dataUrl : data.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
-            success : function(){
-                // 用户确认分享后执行的回调函数
-            }
+            success : data.success,
+            cancel  : function(){
+                 this.setState({display:'none'});
+            }.bind(this)
         };
-        this.initWechatConfig(content);
-    };
-
-    initWechatConfig(share) {
-        wx.config({
-            appId    : this.config.appId,
-            timestamp: this.config.timestamp,
-            nonceStr : this.config.nonceStr,
-            signature: this.config.signature,
-            jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone']
-        });
-
-        wx.error(function(res) {
-            // layer.open({
-            //     content: '微信初始化信息验证失败',
-            //     time   : 2
-            // });
-        });
-
         wx.ready(function() {
             // 分享到朋友圈
             wx.onMenuShareTimeline(share);
@@ -75,6 +44,36 @@ class Share extends React.Component{
             //分享到QQ空间
             wx.onMenuShareWeibo(share);
         });
+    };
+
+    componentDidMount(){
+        var server = new ServerRequest();
+        server.post({
+            url :'wechatShare',
+            data:{
+                url : location.href.replace(/#.+$/, '')
+            },
+            success:function(result){
+               this.initConfig(result.wxConfig);
+            }.bind(this)
+        })
+    }    
+
+    initConfig(config) {
+        wx.config({
+            appId    : config.appId,
+            timestamp: config.timeStamp,
+            nonceStr : config.nonceStr,
+            signature: config.signature,
+            jsApiList: ['showOptionMenu', 'onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareQZone']
+        });
+
+        wx.error(function(res){
+            layer.open({
+                content: '微信初始化信息验证失败',
+                time   : 2
+            });
+        }.bind(this));
     }
 
     touchHandle(){

@@ -27,7 +27,7 @@ class Scroll extends React.Component{
 
         this.pullUpStatus = 0;
 
-        this.isRefresh = true;
+        this.isRefresh = false;
 
         this.loadHeight = 40;
 
@@ -79,29 +79,39 @@ class Scroll extends React.Component{
     }
 
     success(response){
-      if(this.pageIndex == 1){
-          if (this.pullDownStatus == 3) {
-              this.setPullDownTips(4);
-              this.setState({items: response.datas});
-              if(this.scroll){
-                let timer = setTimeout(function(){
+      this.isRefresh = true;
+      if(response.totalCount > 0){
+           this.next(response);
+      }else{
+           this.setState({items: []});
+      }
+    }
+
+    next(response){
+        if(this.pageIndex == 1){
+            if (this.pullDownStatus == 3) {
+                this.setPullDownTips(4);
+                this.setState({items: response.datas});
+                if(this.scroll){
+                    let timer = setTimeout(function(){
                     clearInterval(timer);
                     this.scroll.scrollTo(0, -this.loadHeight, 500);                   
-                }.bind(this),0)
-              }else{
-                this.timer = setTimeout(this.initScroll,500);
-              }
-          }
-      }else{
-          if (this.pullUpStatus == 2) {
-              this.setPullUpTips(3);
-              this.setState({items: this.state.items.concat(response.datas)});
-          }
-      }
-      if(response.totalCount > 0 && this.refs.pullDown && this.refs.pullUp){
-          this.refs.pullDown.style.display='block';
-          this.refs.pullUp.style.display='block';
-      }
+                    }.bind(this),0)
+                }else{
+                    this.timer = setTimeout(this.initScroll,500);
+                }
+            }
+        }else{
+            if (this.pullUpStatus == 2) {
+            this.setPullUpTips(3);
+            this.setState({items: this.state.items.concat(response.datas)});
+            }
+        }
+
+        if(this.refs.pullDown && this.refs.pullUp){
+            this.refs.pullDown.style.display='block';
+            this.refs.pullUp.style.display='block';            
+        }          
     }
 
     initScroll(){             
@@ -196,8 +206,22 @@ class Scroll extends React.Component{
             this.refs.pullUpTips.innerText = this.pullUpTips[status];            
         }
     }
-
-    render(){
+ 
+    elements(){
+        let content = '';
+        if(this.isRefresh){
+            if(this.state.items.length > 0){
+                content = this.state.items.map((item, index) => {
+                            return <this.props.row item={item} key={index}/>
+                          })
+            }else{
+                content = <div className="no-video">暂无相关视频</div>;
+            }
+        }
+        return content;         
+    }
+    
+    render(){ 
         return (
             <ul>
                 <div className="scroll-loading" ref="pullDown" >
@@ -210,11 +234,7 @@ class Scroll extends React.Component{
                 </div>
                 </div>
                 </div>
-                {
-                    this.state.items.map((item, index) => {
-                        return <this.props.row item={item} key={index}/>
-                    })
-                }
+                {this.elements()}
                 <div className="scroll-loading" ref="pullUp">
                 <div className="loading-box">
                 <div className="loading-rond">

@@ -12,6 +12,7 @@ const API = {
     'advDetail': 'publish/detail',
     'advStartPlay': 'publish/startPlay',
     'advEndPlay': 'publish/endPlay',
+    'shareSuccess':'publish/shareSuccess',
     'newestUsedRewards' :'reward/newestUsedRewards',
     'receive' :'reward/receive',
     'score' :'comment/score',

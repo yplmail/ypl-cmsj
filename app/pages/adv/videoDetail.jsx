@@ -4,8 +4,9 @@ import Packet  from './Packet';
 import Record  from './Record';
 import Video   from './Video';
 import Score   from './Score';
-import BScroll from 'better-scroll';
 import Share   from 'share/share';
+import ServerRequest from 'server/serverRequest';
+import common from '../../common/common';
 import './detail.css';
 import 'player/player.css';
 
@@ -15,10 +16,19 @@ class Detail extends React.Component{
         this.state = {
         	packetType      : 0,
         	packetAnimation :'',
-        	packetDetail    :{},
+        	video           :{},
         	playRecordId    :'',
         	scoreAnimation  :'',
-        	display         :'none'
+        	share :{
+        	    display :'none',
+				title   : '',
+				desc    : '',  
+				link    : '',  
+				imgUrl  : '', 
+				type    : '', 
+				dataUrl : '',
+				success : ''
+        	}
         }
         this.playHandle = this.playHandle.bind(this);
         this.scoreHandle = this.scoreHandle.bind(this);
@@ -26,40 +36,86 @@ class Detail extends React.Component{
 	}
 
 	componentDidMount(){
-		setTimeout(function(){
-	        new BScroll('.detail-wrapper', {
-				probeType: 3,
-				click:true
-			})
-		},500)
+        this.refreshToken();
 	}
 
+    /**
+     * 刷新token操作
+     */
+	refreshToken(){
+        let server = new ServerRequest();
+        server.post({
+        	url:'refreshToken',
+        	success:function(response){
+                common.setcookies('token',response.token,7);
+        	}
+        });
+	}
+
+    /**
+     *  弹出红包操作
+    */
 	playHandle(data,id){
 	   if(id || this.props.params.playId){
 	       this.setState({
 	        	packetAnimation : 'animation',
-	        	packetDetail    : data,
-	        	playRecordId    : id || this.props.params.playId,
-	        	scoreAnimation  : '',
-			    display         :'none'	        	
+	        	video           : data,
+	        	playRecordId    : this.props.params.playId || id,
+	        	scoreAnimation  : ''
 	       });
 	   }
 	}
 
-	shareHandle(){
+    /**
+     *  分享操作
+    */
+	shareHandle(video){
+		let tk      = common.getcookies('token');
+		let shareId = '';
+		if(tk){
+			shareId = tk.split("_")[1]
+		}
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',
 			scoreAnimation  : '',
-			display         :'block'
+			share           : {
+				display : 'block',
+				title   : '草莓视频',
+				desc    : video.title,
+				link    : 'http://'+location.hostname+'/#/share/'+video.publishId+'/'+shareId,
+				imgUrl  : video.coverUrl,
+				type    : 'video',
+				dataUrl : video.playUrl,
+				success : this.shareSuccess.bind(this)
+			}
 		});
 	}
 
+    /**
+     * 分享成功回调
+     * @return {[type]} [description]
+     */
+	shareSuccess(){
+        let server = new ServerRequest();
+        server.post({
+        	url:'shareSuccess',
+        	data:{
+        		publishId:this.props.params.videoId
+        	},
+        	success:function(response){
+                layer.open({content:'分享成功！',time:2});
+        	}
+        });      
+	}
+
+    /**
+     * 评分操作
+    */
 	scoreHandle(){
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',
-			display         :'none',				
 			scoreAnimation  :'animation'
 		})
 	}
@@ -68,13 +124,13 @@ class Detail extends React.Component{
 		return(
 			<div className="detail-wrapper" style={{height:window.innerHeight+'px'}}>
 			   <div className="scroll-wrapper">
-	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle}/>
+	               <Player {...this.props.params} handle={this.playHandle} share={this.shareHandle} />
 	               <Record {...this.props.params}/>
 	               <Video  {...this.props.params}/>
 			   </div>
 			   <Packet {...this.state} handle={this.scoreHandle}/>
 			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
-			   <Share display={this.state.display}/>
+			   <Share {...this.state.share} />
 			</div>
 		);
 	}

@@ -57,7 +57,7 @@ class Wallet extends React.Component{
 	constructor(props){
 		super(props);
         this.data = {
-            el  : '."wallet-scroll',
+            el  : '.wallet-scroll',
             url : 'rewardList',
             row : List
         }
@@ -68,10 +68,10 @@ class Wallet extends React.Component{
            <div className="wallet-wrapper">
 				<Header />
 				<div className="wallet-list">
-				<h2>获赠记录</h2>
-				<ul className="wallet-scroll">
-					<Scroll {...this.data}/>
-				</ul>
+					<h2>获赠记录</h2>
+					<ul className="wallet-scroll" style={{height:'500px'}}>
+						<Scroll {...this.data}/>
+					</ul>
 				</div>              
            </div>
        )
