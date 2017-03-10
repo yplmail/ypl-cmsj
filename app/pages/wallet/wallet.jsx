@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Scroll from 'scroll/iscroll';
+import Scroll from 'scroll/scroll';
 import ServerRequest from 'server/serverRequest';
 import './wallet.css';
 
@@ -22,7 +22,7 @@ class Header extends React.Component{
                     account : response
 				});
 			}.bind(this)
-		}) 
+		})
 	}
 
 	transferHandle(){
@@ -37,7 +37,7 @@ class Header extends React.Component{
             layer.open({
             	content:'请绑定微信号',
             	time : 2
-            })       	
+            })
        }
 
        location.hash = '/transfer'
@@ -80,10 +80,10 @@ class List extends React.Component{
 			</p>
 			</div>
 			<div>
-			<p>1111111111111</p>                                  
-			<p>1111111111111</p>                                  
+			<p>1111111111111</p>
+			<p>1111111111111</p>
 			</div>
-			</li>	             
+			</li>
 		)
 	}
 }
@@ -93,10 +93,7 @@ class Wallet extends React.Component{
 		super(props);
         this.data = {
             el  : '.wallet-scroll',
-            url : '',
-            data:{
-            	publishId:'291233567986953216'
-            },
+            url : 'rewardList',
             row : List
         }
 	}
@@ -111,10 +108,10 @@ class Wallet extends React.Component{
 					<ul className="wallet-scroll">
 						<Scroll {...this.data}/>
 					</ul>
-				</div>              
+				</div>
            </div>
        )
-	}	
+	}
 }
 
 export default Wallet;

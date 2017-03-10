@@ -68,10 +68,10 @@ class Scroll extends React.Component{
                 this.refs.pullUp.style.display='block';
             }
             if(this.refs.pullDown){
-                // this.refs.pullDown.style.display='block';
-                // setTimeout(function(){
-                //     this.scroll.scrollTo(0, -this.loadHeight, 500);
-                // }.bind(this), 300)
+                this.refs.pullDown.style.display='block';
+                setTimeout(function(){
+                    this.scroll.scrollTo(0, -this.loadHeight, 500);
+                }.bind(this), 300)
             }
             this.scroll.refresh();
         }.bind(this), 500)
