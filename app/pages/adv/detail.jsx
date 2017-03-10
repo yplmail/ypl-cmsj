@@ -36,7 +36,7 @@ class Detail extends React.Component{
 	}
 
 	componentDidMount(){
-        this.refreshToken();
+        //this.refreshToken();
 	}
 
     /**

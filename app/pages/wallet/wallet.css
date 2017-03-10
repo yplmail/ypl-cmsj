@@ -83,3 +83,8 @@
     font-size: 15px;
     font-weight: 700;
 }
+
+.wallet-scroll{
+    height:8.42rem;
+    overflow: hidden;
+}

@@ -1,11 +1,46 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Scroll from 'scroll/scroll';
+import Scroll from 'scroll/iscroll';
+import ServerRequest from 'server/serverRequest';
 import './wallet.css';
 
 class Header extends React.Component{
 	constructor(props){
-		super(props)
+		super(props);
+		this.state = {
+			account : {}
+		}
+		this.transferHandle = this.transferHandle.bind(this);
+	}
+
+	componentDidMount(){
+		let server = new ServerRequest();
+		server.post({
+			url: 'home',
+			success:function(response){
+				this.setState({
+                    account : response
+				});
+			}.bind(this)
+		}) 
+	}
+
+	transferHandle(){
+       if(!this.state.account.mobile){
+            layer.open({
+            	content:'请绑定手机号',
+            	time : 2
+            })
+       }
+
+       if(!this.state.account.isWechatBinded === "true"){
+            layer.open({
+            	content:'请绑定微信号',
+            	time : 2
+            })       	
+       }
+
+       location.hash = '/transfer'
 	}
 
 	render(){
@@ -13,12 +48,12 @@ class Header extends React.Component{
            <div className="wallet-header" data-flex="main:left box:mean">
                <div data-flex="main:center cross:center">
                    <div>
-	                   <p>437.35</p>
+	                   <p>{this.state.account.accountBalance}</p>
 	                   <p>我的零钱</p>
                    </div>
                </div>
                <div data-flex="main:center cross:center">
-                   <div>
+                   <div onClick={this.transferHandle}>
 	                   <p></p>
 	                   <p>转入微信</p>
                    </div>
@@ -58,18 +93,22 @@ class Wallet extends React.Component{
 		super(props);
         this.data = {
             el  : '.wallet-scroll',
-            url : 'rewardList',
+            url : '',
+            data:{
+            	publishId:'291233567986953216'
+            },
             row : List
         }
 	}
 
+
 	render(){
        return(
            <div className="wallet-wrapper">
-				<Header />
+				<Header/>
 				<div className="wallet-list">
 					<h2>获赠记录</h2>
-					<ul className="wallet-scroll" style={{height:'500px'}}>
+					<ul className="wallet-scroll">
 						<Scroll {...this.data}/>
 					</ul>
 				</div>              

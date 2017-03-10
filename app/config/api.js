@@ -22,6 +22,7 @@ const API = {
     'rewardList':'reward/list',
     'bindMobile':'user/bindMobile',
     'bindWechat':'user/bindWechat',
+    'withdraw':'account/withdraw/wechat'
 }
 
 export default API
