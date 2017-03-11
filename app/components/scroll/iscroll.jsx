@@ -30,8 +30,11 @@ class IScroll extends React.Component{
 
         this.loadHeight = 40;
 
+        this.touching = false;
 
-        // this.touchStart = this.touchStart.bind(this);
+        this.touchStart = this.touchStart.bind(this);
+
+        this.touchEnd = this.touchEnd.bind(this);
 
         this.onScroll = this.onScroll.bind(this);
 
@@ -40,14 +43,14 @@ class IScroll extends React.Component{
 
         this.pullDownTips = {
             1: '下拉刷新',
-            2: '松手即可刷新',
+            2: '松手刷新',
             3: '正在刷新',
             4: '刷新成功'
         };
 
         this.pullUpTips = {
             1: '上拉加载',
-            2: '松手即可加载',
+            2: '松手加载',
             3: '正在加载',
             4: '加载成功'
         };
@@ -84,15 +87,16 @@ class IScroll extends React.Component{
 
     onScroll(){
         //下拉刷新最新数据
-        if(this.scroll.y >= 0){
+        if(this.touching && this.scroll.y >= 0){
+            this.setDownLoadingTips(0)
             this.refs.pullDown.style.display='block';
         }
 
-        if (this.scroll.y > 10 && this.scroll.y < 40) {
+        if (this.touching &&  this.scroll.y > 10 && this.scroll.y < 40) {
             this.setDownLoadingTips(1);
         }
 
-        if (this.scroll.y >= 40) {
+        if (this.touching && this.scroll.y >= 40) {
             this.setDownLoadingTips(2);
         }
 
@@ -113,7 +117,7 @@ class IScroll extends React.Component{
     }
 
     onScrollEnd(){
-       if(this.pullDownStatus == 2){
+       if(this.scroll.y >= 0 && this.pullDownStatus == 2){
              this.setDownLoadingTips(3);
              this.pageIndex = 1;
              this.fetchItems();
@@ -166,9 +170,17 @@ class IScroll extends React.Component{
         return content;
     }
 
+    touchStart(){
+        this.touching = true;
+    }
+
+    touchEnd(){
+        this.touching = false;
+    }
+
     render(){
         return (
-            <ul>
+            <ul onTouchStart={this.touchStart} onTouchEnd={this.touchEnd}>
                 <div className="scroll-loading" ref="pullDown">
                 <div className="loading-box">
                 <div className="loading-rond">
