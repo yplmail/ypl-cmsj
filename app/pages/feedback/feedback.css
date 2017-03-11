@@ -9,27 +9,12 @@
 }
 
 .feedback-wrapper .nav-tab{
-	text-align: center;
+	text-align: left;
 	height:.4rem;
 	margin-bottom: .34rem;
+	padding-left:.48rem;
 }
 
-.feedback-wrapper .nav-tab span{
-	display: inline-block;
-	width  : 1.58rem;
-	font-size: 16px;
-	color:#666;
-}
-
-.feedback-wrapper .nav-tab span.active{
-	color:#333;
-	font-weight: 700;
-}
-
-.feedback-wrapper .nav-tab span:nth-child(2){
-   border-left: 1px solid #666;
-   border-right: 1px solid #666;
-}
 
 .feedback-wrapper .feedback-area{
 	height:2.88rem;
@@ -44,6 +29,7 @@
 	color:#999;
 	font-size: 12px;
 	padding:.2rem;
+	line-height: 1.5em;
 }
 
 .feedback-wrapper .feedback-btn{

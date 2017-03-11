@@ -25,17 +25,30 @@ const common = {
         return ""
     },
 
-    isWechat:() => {
+    isWechat: () => {
         var ua = navigator.userAgent;
-        if(/MicroMessenger/i.test(ua)){
+        if (/MicroMessenger/i.test(ua)) {
             return true;
-        }else{
-            return false;            
+        } else {
+            return false;
         }
     },
 
     trim: (str) => {
-       return str.replace(/(^\s*)|(\s*$)/g, "");
+        return str.replace(/(^\s*)|(\s*$)/g, "");
+    },
+
+    encode: (str) => {
+        if (str.length == 0) return "";
+        var s = "";
+        s = str.replace(/&/g, "&gt;");
+        s = s.replace(/</g, "&lt;");
+        s = s.replace(/>/g, "&gt;");
+        s = s.replace(/ /g, "&nbsp;");
+        s = s.replace(/\'/g, "&#39;");
+        s = s.replace(/\"/g, "&quot;");
+        s = s.replace(/\n/g, "<br>");
+        return s;
     }
 
 }
