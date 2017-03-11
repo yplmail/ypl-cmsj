@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import Scroll from 'scroll/scroll';
+import BScroll from 'better-scroll';
 import ServerRequest from 'server/serverRequest';
 import './wallet.css';
 
@@ -91,13 +92,59 @@ class List extends React.Component{
 class Wallet extends React.Component{
 	constructor(props){
 		super(props);
-        this.data = {
-            el  : '.wallet-scroll',
-            url : 'rewardList',
-            row : List
-        }
+		this.pageIndex = 1;
+		this.pageSize  = 10;
+		this.totalCount = 0;
 	}
 
+	componentDidMount(){
+        this.fetchItem();
+	}
+
+	fetchItem(){
+		let server = new ServerRequest();
+		server.post({
+			url: 'advList',
+			data:{
+               pageIndex : this.pageIndex,
+               pageSize  : this.pageSize
+			},
+			success:function(response){
+                this.totalCount = response.totalCount;
+                this.template(response.datas);
+			}.bind(this)
+		})		
+	}
+
+	template(items){
+       if(this.totalCount == 0){
+           this.refs.scroll.innerHTML = '<div>暂无数据</div>'
+       }else{
+           let arr = this.child(items);
+           this.refs.scroll.innerHTML = arr.join('');
+       }
+	}
+
+	child(items){
+		var arr = []
+		items.map(function(item,index){
+			arr.push('<li data-flex="main:left box:justify">'+
+			'<div>111</div>'+
+			'<div data-flex="dir:top box:mean">'+
+			'<h3>回家的路，阳光灿烂回家的路</h3>'+
+			'<p data-flex="box:mean cross:bottom">'+
+			'<span>11</span>'+
+			'<span>22</span>'+
+			'</p>'+
+			'</div>'+
+			'<div>'+
+			'<p>1111111111111</p>'+
+			'<p>1111111111111</p>'+
+			'</div>'+
+			'</li>');             
+		})
+		return arr;
+	}
 
 	render(){
        return(
@@ -105,8 +152,8 @@ class Wallet extends React.Component{
 				<Header/>
 				<div className="wallet-list">
 					<h2>获赠记录</h2>
-					<ul className="wallet-scroll">
-						<Scroll {...this.data}/>
+					<ul className="wallet-scroll" ref='scroll'>
+
 					</ul>
 				</div>
            </div>

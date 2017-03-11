@@ -8,23 +8,24 @@ class Scroll extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            items: []
+            datas      : [],
+            totalCount : 0,
+            pageIndex  : 1,
+            pageCount  : 0,
+            pageSize   : 10
         };
-
-        this.data = {
-            pageIndex : this.pageIndex || 1,
-            pageSize  : props.pageSize || 10
-        }
 
         this.el  = props.el;
 
         this.url = props.url;
-
+        
         this.pageIndex = 1;
+
+        this.pageSize  = 10;
 
         this.pullDownStatus = 3;
 
-        this.pullUpStatus = 0;
+        this.pullUpStatus   = 0;
 
         this.isRefresh = false;
 
@@ -54,34 +55,47 @@ class Scroll extends React.Component{
     }
 
     componentWillMount(){
-       Object.assign(this.data,this.props.data);
+       this.data = Object.assign({
+           pageSize  : 10,
+           pageIndex : this.pageIndex
+       },this.props.data);
     }
 
     componentDidMount(){
-        this.fetchItems();
+        this.fetchDatas();
         this.initScroll();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(el,props) {
+        if(this.refs.pullUp && props.totalCount > 10){
+            this.refs.pullUp.style.display='block';
+        }
+
+        if(this.refs.pullDown){
+            this.refs.pullDown.style.display='block';
+            this.scroll.scrollTo(0, -this.loadHeight, 500);
+        }
+
         setTimeout(function(){
-            if(this.refs.pullUp){
-                this.refs.pullUp.style.display='block';
-            }
-            if(this.refs.pullDown){
-                this.refs.pullDown.style.display='block';
-                setTimeout(function(){
-                    this.scroll.scrollTo(0, -this.loadHeight, 500);
-                }.bind(this), 300)
-            }
             this.scroll.refresh();
+            if(this.pageIndex > 1){
+                this.scroll.scrollTo(0,this.scroll.maxScrollY-40,1);               
+            }
         }.bind(this), 500)
     }
 
-    fetchItems(){
+    assign(){
+        return Object.assign({
+            pageIndex:this.pageIndex,
+            pageSize :this.pageSize
+        },this.props.data);        
+    }
+
+    fetchDatas(){
         let server = new ServerRequest();
         server.post({
             url    : this.url,
-            data   : this.data,
+            data   : this.assign(),
             success: function(response){
                 this.isRefresh = true;
                 this.next(response);
@@ -91,17 +105,16 @@ class Scroll extends React.Component{
 
     next(response){
         if(this.pageIndex == 1){
-            if (this.pullDownStatus == 3) {
-                this.setPullDownTips(4);
-                this.setState({items: response.datas});
-            }
+            this.setPullDownTips(4);
+            this.setState({...response});
+            this.scroll.scrollTo(0, -40, 500);
         }else{
-            if (this.pullUpStatus == 2) {
-                this.setPullUpTips(3);
-                this.setState({items: this.state.items.concat(response.datas)});
-            }
-        }
+            this.setPullUpTips(3);
+            this.state.datas.concat(response.datas);
+            response.datas = this.state.datas;
+            this.setState({...response});
 
+        }
     }
 
     initScroll(){
@@ -109,74 +122,69 @@ class Scroll extends React.Component{
             probeType: 3,
             click:true
         })
-        this.scroll.on('scroll', this.onScroll);
         this.scroll.on('scrollEnd', this.onScrollEnd);
+        this.scroll.on('scroll', this.onScroll);
     }
 
     onScroll(){
-        //下拉刷新最新数据
-        if (this.scroll.y > -1 * this.loadHeight) {
-            this.onPullDown();
-        }else{
-            this.setPullDownTips(0);
+        if(this.scroll.y > -40){
+            if(this.pullDownStatus != 3){
+                if(this.scroll.y < 0){
+                    this.setPullDownTips(1);
+                }else{    
+                    this.up   = false;
+                    this.down = true;
+                    this.setPullDownTips(2);
+                }
+            }           
+           return false;
         }
-        //上拉加载老数据
+
         if(this.scroll.y < this.scroll.maxScrollY){
-            this.onPullUp();
-        }
-    }
-
-    onPullDown() {
-        if(this.pullDownStatus != 3){
-            if(this.scroll.y < 0){
-                this.setPullDownTips(1);
-            }else{
-                this.setPullDownTips(2);
-            }
-        }
-    }
-
-    onPullUp() {
-        if(this.pullUpStatus != 2){
-            if (this.scroll.y <= this.scroll.maxScrollY) {
-                this.setPullUpTips(1);
-            } else {
-                this.setPullUpTips(0);
-            }
+            if(this.pullUpStatus != 2){
+                if (this.scroll.y <= this.scroll.maxScrollY) {
+                    this.up   = true;
+                    this.down = false;
+                    this.setPullUpTips(1);
+                } else {
+                    this.setPullUpTips(0);
+                }
+            }            
         }
     }
 
     onScrollEnd(){
         // 下拉滑动结束后，停在刷新区域
-        if (this.scroll.y > -1 * this.loadHeight) {
-            if (this.pullDownStatus <= 1) {
-                // 没有发起刷新,那么弹回去
-                //this.scroll.scrollTo(0, -1 * this.loadHeight, 500);
-            } else if (this.pullDownStatus == 2) { // 发起了刷新,那么更新状态
+        if (this.down && this.scroll.y > -40) {
+            if(this.pullDownStatus == 2){
                 this.setPullDownTips(3);
                 this.pageIndex = 1;
-                this.fetchItems();
+                this.fetchDatas();                
             }
+            return false;
         }
 
         // 上拉滑动结束后，停在加载区域
-        if (this.scroll.y <= this.scroll.maxScrollY) {
-            if (this.pullUpStatus == 1) { // 发起了加载，那么更新状态
+        if (this.up && this.scroll.y <= this.scroll.maxScrollY) {     
+            if (this.pullUpStatus == 1) { 
                 this.setPullUpTips(2);
-                ++this.pageIndex;
-                if(this.pageIndex <= this.pageCount){
-                    this.fetchItems();
+                if(this.state.pageIndex < this.state.pageCount){
+                    ++this.pageIndex;
+                    this.fetchDatas();
                 }else{
-                    --this.pageIndex;
-                    this.setPullUpTips(4);
-                    let timer = setTimeout(function(){
-                       clearInterval(timer);
-                       this.scroll.scrollTo(0, this.scroll.y + this.loadHeight, 500);
-                       this.setPullUpTips(0);
-                    }.bind(this),500)
+                    this.nomore();
                 }
             }
         }
+    }
+
+    nomore(){
+        this.setPullUpTips(4);
+        let timer = setTimeout(function(){
+           clearInterval(timer);
+           this.scroll.scrollTo(0, this.scroll.y + this.loadHeight, 500);
+           this.setPullUpTips(0);
+        }.bind(this),500)        
     }
 
     setPullDownTips(status){
@@ -196,10 +204,10 @@ class Scroll extends React.Component{
     elements(){
         let content = '';
         if(this.isRefresh){
-            if(this.state.items.length > 0){
-                content = this.state.items.map((item, index) => {
-                            return <this.props.row item={item} key={index}/>
-                          })
+            if(this.state.datas.length > 0){
+                content = this.state.datas.map((item, index) => {
+                    return <this.props.row item={item} key={index}/>
+                })
             }else{
                 content = <div className="no-video">暂无相关视频</div>;
             }
@@ -208,6 +216,8 @@ class Scroll extends React.Component{
     }
 
     render(){
+        var content = this.elements();
+        console.log(content)
         return (
             <ul>
                 <div className="scroll-loading" ref="pullDown" >
