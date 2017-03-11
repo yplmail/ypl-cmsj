@@ -111,7 +111,8 @@ class Login extends React.Component{
             data: {
               mobile : this.state.mobile,
               smsCode: this.state.smsCode,
-              pwd    : md5(this.state.pwd)             
+              pwd    : md5(this.state.pwd),
+              recommendCode : this.props.params.shareId             
             },
             success:function(response){
               common.setcookies('token',response.token,7);

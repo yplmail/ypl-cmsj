@@ -6,7 +6,7 @@ import Video   from './Video';
 import Score   from './Score';
 import Share   from 'share/share';
 import ServerRequest from 'server/serverRequest';
-import common from '../../common/common';
+import common from 'common/common';
 import './detail.css';
 import 'player/player.css';
 
@@ -70,11 +70,8 @@ class Detail extends React.Component{
      *  分享操作
     */
 	shareHandle(video){
-		let tk      = common.getcookies('token');
-		let shareId = '';
-		if(tk){
-			shareId = tk.split("_")[1]
-		}
+		let tk = common.getcookies('token');
+		let shareId = tk ? tk.split("_")[1] : '';	
 		this.setState({
 			packetType      : 0,
 			packetAnimation : '',

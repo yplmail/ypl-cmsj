@@ -48,7 +48,7 @@ class Login extends React.Component{
         server.post({
             url : 'sendSmsCode',
             data:{
-               type  : 1,
+               type  : 2,
                mobile: this.state.mobile
             },
             success:function(response){

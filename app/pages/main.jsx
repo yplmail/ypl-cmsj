@@ -18,6 +18,8 @@ import ModifyPassword   from './modifyPassword/modifyPassword.jsx';
 import ForgetPassword   from './modifyPassword/forgetPassword.jsx';
 import MobileAuth   from './mobileAuth/mobileAuth.jsx';
 import WechatAuth   from './wechatAuth/wechatAuth.jsx';
+import Invite   from './invite/invite.jsx';
+import About   from './about/about.jsx';
 
 function change(pre, next) {  
 	if(next.routes[1].title){
@@ -51,7 +53,8 @@ ReactDOM.render(
 			<Route path="detail/:videoId(/:playId)" component={Detail} />
 			<Route path="video/:videoId(/:playId)" component={VideoDetail} />
 			<Route path="share/:videoId(/:shareId)" component={Detail} />
-			<Route path="register" component={Register} />
+			<Route path="register(/:videoId)(/:playId)" component={Register} />
+			<Route path="inviteRegister(/:shareId)" component={Register} />
 			<Route path="wallet" component={Wallet} />
 			<Route path="record" component={Record} />
 			<Route path="feedback" component={Feedback} />
@@ -60,6 +63,8 @@ ReactDOM.render(
 			<Route path="mobileAuth" component={MobileAuth} />
 			<Route path="wechatAuth" component={WechatAuth} />
 			<Route path="transfer" component={Transfer} />
+			<Route path="invite" component={Invite} />
+			<Route path="about" component={About} />
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')

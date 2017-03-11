@@ -63,9 +63,9 @@ class List extends React.Component{
           <div className="mine-list-wrapper">
               <ul>
                   <li><Link to="/wallet">我的钱包</Link></li>
-                  <li><Link>邀请朋友</Link></li>
+                  <li><Link to="/invite">邀请朋友</Link></li>
                   <li><Link to="/feedback">意见反馈</Link></li>
-                  <li><Link>关于产品</Link></li>
+                  <li><Link to="/about">关于产品</Link></li>
                   <li><Link to="/setting">设置</Link></li>
               </ul>
           </div>

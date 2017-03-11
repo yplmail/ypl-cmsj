@@ -1,0 +1,64 @@
+.invite-wrapper {
+	width:100%;
+	height:100%;
+}
+
+.invite-wrapper  .invite-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url(../../images/invite_bg.png) no-repeat;
+    background-size: cover;
+    text-align: center;
+    z-index: 0;	
+}
+
+.invite-wrapper .invite-content h1{
+    position: absolute;
+    top: 0.8rem;
+    left: 0;
+    color: #333;
+    font-size: 18px;
+    width: 100%;
+}
+
+.invite-wrapper .invite-content h2{
+    position: absolute;
+    bottom: 2.5rem;
+    left: 0;
+    width: 100%;
+}
+
+.invite-wrapper .invite-content h2 span{
+    color: #333;
+    font-size: 10px;
+    margin:0 .22rem;
+}
+
+.invite-wrapper .invite-content h2:before,
+.invite-wrapper .invite-content h2:after{
+    content:'';
+    display: inline-block;
+    width:1.4rem;   
+    height:1px;
+    background: url(../../images/line_icon.png) no-repeat;
+    background-size: contain;
+    background-position: center center;
+    vertical-align: middle;
+}
+
+.invite-wrapper .invite-content i{
+    position: absolute;
+    display: inline-block;
+    bottom: 1rem;
+    left: 50%;
+    margin-left:-.49rem;
+    color: #333;
+    font-size: 10px;
+    width:.98rem;
+    height:.98rem;
+    background: url(../../images/invite_wx_logo.png) no-repeat;
+    background-size: contain;
+
+
+}

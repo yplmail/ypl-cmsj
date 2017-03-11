@@ -29,7 +29,7 @@ class Share extends React.Component{
             imgUrl  : data.imgUrl,  // 分享图标
             type    : data.type,    // 分享类型,music、video或link，不填默认为link
             dataUrl : data.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
-            success : data.success,
+            success : data.success||function(){},
             cancel  : function(){
                  this.setState({display:'none'});
             }.bind(this)
@@ -61,6 +61,7 @@ class Share extends React.Component{
 
     initConfig(config) {
         wx.config({
+            debug    : true,
             appId    : config.appId,
             timestamp: config.timeStamp,
             nonceStr : config.nonceStr,

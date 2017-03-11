@@ -1,0 +1,54 @@
+.about-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #eee;
+}
+
+.about-wrapper .product-logo {
+    margin-top: .98rem;
+    margin-bottom: .2rem;
+    width: 100%;
+    height: 1rem;
+    background: url(../../images/strawberry_logo.png) no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+
+.about-wrapper > h1 {
+    text-align: center;
+    margin-bottom: .16rem;
+    color: #333;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.about-wrapper > p {
+    text-align: center;
+    margin-bottom: .46rem;
+    word-spacing: 1px;
+}
+
+.about-wrapper ul{
+   background: #fff;
+}
+
+
+.about-wrapper ul li{
+	height:.98rem;
+	border-bottom: 1px solid #c1c1c1;
+}
+
+.about-wrapper ul li > div:nth-child(1){
+   padding-left:.36rem;
+   font-size: 15px;
+   color:#333;
+   font-weight: 700;
+}
+
+.about-wrapper ul li > div:nth-child(2){
+   text-align: right;
+   padding-right: .36rem;
+   font-size: 15px;
+   color:#666;
+}
