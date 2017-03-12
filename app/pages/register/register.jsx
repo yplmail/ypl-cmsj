@@ -106,14 +106,17 @@ class Login extends React.Component{
 
     registerHandler(){
         let server = new ServerRequest();
+        let data = {
+          mobile : this.state.mobile,
+          smsCode: this.state.smsCode,
+          pwd    : md5(this.state.pwd),      
+        }
+        if(this.props.params.shareId) {
+          data['recommendCode'] = this.props.params.shareId;
+        }
         server.post({
             url : 'register',
-            data: {
-              mobile : this.state.mobile,
-              smsCode: this.state.smsCode,
-              pwd    : md5(this.state.pwd),
-              recommendCode : this.props.params.shareId             
-            },
+            data: data,
             success:function(response){
               common.setcookies('token',response.token,7);
               let params = this.props.params;

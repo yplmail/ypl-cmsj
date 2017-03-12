@@ -75,6 +75,9 @@ class Wallet extends React.Component{
 			           <span>￥{this.state.account.accountBalance}</span>
 		           </div>
 		           <div className="transfer-amount" onClick={this.transfer}>
+		           		<input id="one" type="radio" name="transferAmt" value="1"/>
+						<label htmlFor="one">1元</label>
+
 						<input id="one" type="radio" name="transferAmt" value="10"/>
 						<label htmlFor="one">10元</label>
 

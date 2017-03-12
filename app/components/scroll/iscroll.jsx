@@ -7,57 +7,35 @@ import './scroll.css';
 class IScroll extends React.Component{
     constructor(props) {
         super(props);
-        this.state = {
-            items: []
-        };
-
-        this.data = {
-            pageIndex : this.pageIndex || 1,
-            pageSize  : props.pageSize || 10
-        }
-
-        this.el  = props.el;
-
-        this.url = props.url;
 
         this.pageIndex = 1;
 
-        this.pullDownStatus = 0;
+        this.pageSize  = 10;
 
-        this.pullUpStatus = 0;
+        this.totalCount = 0;
 
-        this.isRefresh = false;
+        this.pageCount  = 0;
 
-        this.loadHeight = 40;
+        this.status    = 3;
 
-        this.touching = false;
-
-        this.touchStart = this.touchStart.bind(this);
-
-        this.touchEnd = this.touchEnd.bind(this);
-
-        this.onScroll = this.onScroll.bind(this);
+        this.onScrollStart = this.onScrollStart.bind(this);
 
         this.onScrollEnd = this.onScrollEnd.bind(this);
 
-
         this.pullDownTips = {
-            1: '下拉刷新',
-            2: '松手刷新',
-            3: '正在刷新',
-            4: '刷新成功'
+            0: '下拉刷新',
+            1: '松手刷新',
+            2: '正在刷新',
+            3: '刷新成功'
         };
 
         this.pullUpTips = {
-            1: '上拉加载',
-            2: '松手加载',
-            3: '正在加载',
-            4: '加载成功'
+            0: '上拉加载',
+            1: '松手加载',
+            2: '正在加载',
+            3: '加载成功',
+            4: '没有更多',
         };
-    }
-
-    componentWillMount(){
-       Object.assign(this.data,this.props.data);
     }
 
     componentDidMount(){
@@ -65,134 +43,126 @@ class IScroll extends React.Component{
        this.initScroll();
     }
 
+    assign(){
+        let data = Object.assign({
+            pageIndex:this.pageIndex,
+            pageSize :this.pageSize
+        },this.props.data);
+        return data;
+    }
+
     fetchItems(){
         let server = new ServerRequest();
         server.post({
-            url    : 'correlationVideo',
-            data   : this.data,
+            url    : this.props.url,
+            data   : this.assign(),
             success: function(result){
-                this.setState({
-                    items:result.datas
-                })
-                this.end();
+                this.pageCount  = result.pageCount;
+                this.totalCount = result.totalCount;
+                this.next(result.datas);
             }.bind(this)
         })
     }
 
+    next(data){
+        let container = this.refs.innserscroll;
+        if(this.pageIndex == 1){
+            if(this.totalCount == 0){
+                container.innerHTML = '<div class="no-data">暂无相关数据</div>';
+            }else{
+                container.innerHTML = '';
+                this.template(data);
+            }
+        }else{
+            this.setUpLoadingTips(3);
+            this.template(data);
+        }
+    }
+
+    template(items){
+        if(this.totalCount > 10){
+            this.refs.pullupTips.style.display = 'block';
+        }
+        let container = this.refs.innserscroll;
+        items.map(function(item,index){        
+            container.appendChild(this.props.callback(item));
+        }.bind(this));
+        this.scroll.refresh();
+    }
+
     initScroll(){
-        this.scroll = new BScroll(this.el,{probeType: 3,click:true});
-        this.scroll.on('scroll', this.onScroll);
+        this.scroll = new BScroll(this.props.el,{probeType: 3,click:true});
+        this.scroll.on('scroll', this.onScrollStart);
         this.scroll.on('scrollEnd', this.onScrollEnd);
     }
 
-    onScroll(){
+    onScrollStart(){
         //下拉刷新最新数据
-        if(this.touching && this.scroll.y >= 0){
-            this.setDownLoadingTips(0)
-            this.refs.pullDown.style.display='block';
-        }
+        // if(this.touching && this.scroll.y >= 0){
 
-        if (this.touching &&  this.scroll.y > 10 && this.scroll.y < 40) {
-            this.setDownLoadingTips(1);
-        }
+        //     if(this.status == 3 || this.status == 4){
+        //         this.setDownLoadingTips(0)
+        //     }
 
-        if (this.touching && this.scroll.y >= 40) {
-            this.setDownLoadingTips(2);
-        }
+        //     if(this.status == 0 && this.scroll.y >= 40){
+        //         this.setDownLoadingTips(1)
+        //     }
+        //     return false;
+        // }
 
         //上拉加载老数据
-        if(this.scroll.y >= this.scroll.maxScrollY){
-            this.refs.pullUp.style.display='block';
-        }
+        if(this.scroll.y < this.scroll.maxScrollY - 10){
 
-        if(this.scroll.y > (this.scroll.maxScrollY-40)){
-            if(this.pullUpStatus != 2){
-                this.setUpLoadingTips(1);
+            if(this.status == 3 || this.status == 4){
+                this.setUpLoadingTips(0)
             }
-        }
 
-        if(this.scroll.y <= (this.scroll.maxScrollY-40)){
-            this.setUpLoadingTips(2);
+            if(this.status == 0 && this.scroll.y <= this.scroll.maxScrollY){
+                this.setUpLoadingTips(1)
+            }
         }
     }
 
     onScrollEnd(){
-       if(this.scroll.y >= 0 && this.pullDownStatus == 2){
-             this.setDownLoadingTips(3);
-             this.pageIndex = 1;
-             this.fetchItems();
+       // if(this.status == 1 && this.scroll.y >= 0){
+       //       this.setDownLoadingTips(2);
+       //       this.pageIndex = 1;
+       //       this.fetchItems();
+       //       return false;
+       // }
+
+       if(this.status == 1 && this.scroll.y >= this.scroll.maxScrollY){
+             if(this.pageIndex < this.pageCount){
+                 this.setUpLoadingTips(2);
+                 ++this.pageIndex;
+                 this.fetchItems();               
+             }else{
+                 this.setUpLoadingTips(4);
+                 this.scroll.refresh();
+                 setTimeout(function(){
+                     this.scroll.scrollTo(0,this.scroll.maxScrollY+40,500);                    
+                 }.bind(this),320);
+             }
        }
-
-       if(this.pullUpStatus == 2){
-             this.setUpLoadingTips(3);
-             ++this.pageIndex;
-             this.fetchItems();
-       }
     }
 
-    setDownLoadingTips(status){
-         this.pullDownStatus = status;
-         this.refs.downLoadingTips.innerText = this.pullDownTips[status]
-    }
+    // setDownLoadingTips(state){
+    //      this.status = state;
+    //      this.refs.downLoadingTips.innerText = this.pullDownTips[this.status]
+    // }
 
-    setUpLoadingTips(status){
-         this.pullUpStatus = status;
-         this.refs.upLoadingTips.innerText = this.pullUpTips[status]
-    }
-
-    end(){
-        if(this.pageIndex == 1){
-            this.pullDownStatus = 4;
-            this.refs.downLoadingTips.innerText = this.pullDownTips[4]
-        }else{
-            this.pullUpStatus = 4;
-            this.refs.upLoadingTips.innerText = this.pullUpTips[4];
-        }
-
-        setTimeout(function(){
-           if(this.pageIndex == 1){
-               this.refs.pullDown.style.display='none';
-           }else{
-               this.refs.pullUp.style.display='none';
-           }
-           this.scroll.refresh();
-        }.bind(this), 300)
-    }
-
-    elements(){
-        if(this.state.items.length > 0){
-            var content = this.state.items.map((item, index) => {
-                return <this.props.row item={item} key={index}/>
-            })
-        }else{
-            var content = <div className="no-video">暂无相关视频</div>;
-        }
-        return content;
-    }
-
-    touchStart(){
-        this.touching = true;
-    }
-
-    touchEnd(){
-        this.touching = false;
+    setUpLoadingTips(state){
+         this.status = state;
+         this.refs.upLoadingTips.innerText = this.pullUpTips[this.status]
     }
 
     render(){
         return (
-            <ul onTouchStart={this.touchStart} onTouchEnd={this.touchEnd}>
-                <div className="scroll-loading" ref="pullDown">
-                <div className="loading-box">
-                <div className="loading-rond">
-                <div className="rond"></div>
-                </div>
-                <div className="loading-center">
-                <p ref="downLoadingTips"> {this.pullDownTips[this.pullDownStatus]}</p>
-                </div>
-                </div>
-                </div>
-                {this.elements()}
-                <div className="scroll-loading" ref="pullUp" >
+            <div>
+                <ul ref="innserscroll">
+                  
+                </ul>
+                <div className="scroll-loading" ref="pullupTips" >
                 <div className="loading-box">
                 <div className="loading-rond">
                 <div className="rond"></div>
@@ -202,14 +172,8 @@ class IScroll extends React.Component{
                 </div>
                 </div>
                 </div>
-            </ul>
+            </div>
         )
-    }
-
-    componentDidUpdate(){
-        setTimeout(function(){
-           this.scroll && this.scroll.refresh();
-        }.bind(this),500)
     }
 }
 
