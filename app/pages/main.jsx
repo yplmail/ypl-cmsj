@@ -10,7 +10,6 @@ import Detail   from  './adv/detail.jsx';
 import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
-import Record   from './wallet/record.jsx';
 import Transfer   from './wallet/transfer.jsx';
 import Feedback   from './feedback/feedback.jsx';
 import Setting   from './setting/setting.jsx';
@@ -56,7 +55,6 @@ ReactDOM.render(
 			<Route path="register(/:videoId)(/:playId)" component={Register} />
 			<Route path="inviteRegister(/:shareId)" component={Register} />
 			<Route path="wallet" component={Wallet} />
-			<Route path="record" component={Record} />
 			<Route path="feedback" component={Feedback} />
 			<Route path="setting" component={Setting} />
 			<Route path="modifyPassword" component={ModifyPassword} />
