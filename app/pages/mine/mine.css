@@ -25,7 +25,7 @@
 
 .mine-header-wrapper .headerImg {
     display: inline-block;
-    margin-top: 1.3rem;
+    margin-top: .5rem;
     width: 1.2rem;
     height: 1.2rem;
     background: url(../../images/user_header_icon.png) no-repeat;
