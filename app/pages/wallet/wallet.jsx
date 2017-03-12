@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import Scroll from 'scroll/iscroll';
 import BScroll from 'better-scroll';
 import ServerRequest from 'server/serverRequest';
+import common from 'common/common';
 import './wallet.css';
 
 class Header extends React.Component{
@@ -64,31 +65,6 @@ class Header extends React.Component{
 	}
 }
 
-class List extends React.Component{
-	constructor(props){
-		super(props)
-	}
-
-	render(){
-		return(
-			<li data-flex="main:left box:justify">
-			<div>111</div>
-			<div data-flex="dir:top box:mean">
-			<h3>回家的路，阳光灿烂回家的路</h3>
-			<p data-flex="box:mean cross:bottom">
-			<span>11</span>
-			<span>22</span>
-			</p>
-			</div>
-			<div>
-			<p>1111111111111</p>
-			<p>1111111111111</p>
-			</div>
-			</li>
-		)
-	}
-}
-
 class Wallet extends React.Component{
     constructor(props){
         super(props);
@@ -97,28 +73,26 @@ class Wallet extends React.Component{
             url : 'rewardList',
             callback : this.template.bind(this)
         }
+        this.originType = {
+            1:'观看获赠',
+            2:'分享获赠',
+            3:'邀请注册获赠'
+        }
     }
 
     template(item){
         let element = document.createElement('li');
-        element.setAttribute('data-flex', 'main:left box:justify')
+        element.setAttribute('data-flex', 'main:left box:first')
         element.innerHTML = this.innerHtml(item);
         return element;
     }
 
     innerHtml(item){
-        return '<div>111</div>'+
-        '<div data-flex="dir:top box:mean">'+
-        '<h3>回家的路，阳光灿烂回家的路</h3>'+
-        '<p data-flex="box:mean cross:bottom">'+
-        '<span>11</span>'+
-        '<span>22</span>'+
-        '</p>'+
-        '</div>'+
-        '<div>'+
-        '<p>1111111111111</p>'+
-        '<p>1111111111111</p>'+
-        '</div>';      
+      return  '<div><img src='+item.coverUrl+'></div>'+
+              '<div data-flex="dir:top box:mean">'+
+              '<div data-flex="dir:left box:last" class="header"><h3 class="ellipsis">'+item.title+'</h3><p><span>'+item.amount+'</span>元</p></div>'+
+              '<div data-flex="dir:left box:mean" class="detail"><p>'+item.publishUserName+'</p><p>'+common.getTime(item.time)+'</p><p>'+this.originType[item.originType]+'</p></div>'+
+              '</div>';      
     }
 
     render(){

@@ -61,7 +61,7 @@ class Share extends React.Component{
 
     initConfig(config) {
         wx.config({
-            debug    : true,
+            //debug    : true,
             appId    : config.appId,
             timestamp: config.timeStamp,
             nonceStr : config.nonceStr,

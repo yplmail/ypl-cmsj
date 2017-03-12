@@ -57,34 +57,43 @@
     margin: 0 .36rem;
 }
 
-.wallet-scroll {
-    height: 10.4rem;
-}
-
-.wallet-list li > div {
+.wallet-scroll li > div {
     margin-top: .23rem;
-    height: 1.02rem;
 }
 
-.wallet-list li > div:nth-child(1) {
+.wallet-scroll li > div:nth-child(1) img {
     width: 1.4rem;
+    height: .98rem;
 }
 
-.wallet-list li > div:nth-child(2) {
+.wallet-scroll li > div:nth-child(2) {
+    padding-left: .34rem;
     text-align: left;
 }
 
-.wallet-list li > div:nth-child(3) {
-    width: 1rem;
-}
-
-.wallet-list li > div h3 {
+.wallet-scroll .header h3 {
+    font-size: 17px;
     color: #333;
-    font-size: 15px;
     font-weight: 700;
+    width:3.5rem;
 }
 
-.wallet-scroll{
-    height:8.42rem;
-    overflow: hidden;
+.wallet-scroll .header p {
+    font-size: 17px;
+    color: #333;
+}
+
+.wallet-scroll .header span{
+    font-size: 17px;
+    color: #ce1035; 
+}
+
+.wallet-scroll .detail p {
+    font-size: 11px;
+    color: #666;
+}
+
+.wallet-scroll .detail p:last-child {
+    text-align: right;
+    color:#cbae67;
 }

@@ -49,7 +49,14 @@ const common = {
         s = s.replace(/\"/g, "&quot;");
         s = s.replace(/\n/g, "<br>");
         return s;
-    }
+    },
+
+    getTime : (str) => {
+        let d2 = new Date(str).getTime();
+        let timestap = Date.now() - d2;
+        let m = timestap/1000 /60
+        return '今天';
+    } 
 
 }
 export default common;
