@@ -12,31 +12,40 @@ class Video extends React.Component{
     }
 
     componentDidMount(){
+        this.initScroll();
+        this.getVideos();
+    }
+
+    componentDidUpdate(){
+        this.scroll && this.scroll.refresh();
+    }
+
+    initScroll(){
+        this.scroll = new BScroll('.detail-wrapper', {
+            probeType: 3,
+            click:true
+        })
+    }
+
+    getVideos(){
         let server = new ServerRequest();
         server.post({
             url :'correlationVideo',
             data:{
                 publishId: this.props.videoId,
-                token    : common.getcookies('token'),
                 openId   : ''
             },
             success:function(response){
                 this.setState({videoList:response.datas})
-                setTimeout(function(){
-                    new BScroll('.detail-wrapper', {
-                      probeType: 3,
-                      click:true
-                    })
-                },500)                
             }.bind(this)
         })
     }
 
     linkHandle(id){
         if(/^#\/detail/.test(location.hash)){
-            location.hash ='video/'+id;          
+            location.hash ='video/'+id;
         }else{
-            location.hash ='detail/'+id;    
+            location.hash ='detail/'+id;
         }
     }
 

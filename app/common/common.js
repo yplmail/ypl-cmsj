@@ -56,7 +56,16 @@ const common = {
         let timestap = Date.now() - d2;
         let m = timestap/1000 /60
         return '今天';
-    } 
+    },
+
+    isAndroid : () => {
+        var isAndroid = false;
+        var ua = navigator.userAgent;
+        if(/MicroMessenger/i.test(ua) && /Android/i.test(ua)){
+            isAndroid = true;
+        }
+        return isAndroid;
+    }
 
 }
 export default common;

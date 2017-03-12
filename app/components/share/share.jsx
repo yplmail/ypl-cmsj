@@ -18,7 +18,7 @@ class Share extends React.Component{
             display : props.display || 'none',
             content : props.content || '请点击右上角将本链接发送给指定朋友或分享到朋友圈等'
         });
-        props.link && this.share(props);
+        this.share(props);
     }
 
     share(data) {
@@ -57,7 +57,7 @@ class Share extends React.Component{
                this.initConfig(result.wxConfig);
             }.bind(this)
         })
-    }    
+    }
 
     initConfig(config) {
         wx.config({

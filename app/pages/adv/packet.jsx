@@ -33,8 +33,7 @@ class Packet extends React.Component{
             url : 'receive',
             data:{
                 publishId : this.state.video.publishId,
-                videoPlayRecordId : this.state.playRecordId,
-                token : common.getcookies('token')
+                videoPlayRecordId : this.state.playRecordId
             },
             success:function(result){
                 let timer = setTimeout(function(){
