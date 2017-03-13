@@ -3,15 +3,13 @@ import common from '../../common/common';
 import ServerRequest from 'server/serverRequest';
 import Share   from 'share/share';
 import Packet  from './Packet';
-import Score   from './Score';
 import 'player/player.css';
 
 class Player extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            video  :{},
-            scoreAnimation : '',
+            video :{},
             share :{
                 display :'none',
                 title   : '',
@@ -26,6 +24,7 @@ class Player extends React.Component{
                 packetType : 0,
                 packetAnimation :'',
                 video  : {},
+                playRecordId:''
             }
         }
         this.first = true;
@@ -35,10 +34,10 @@ class Player extends React.Component{
     }
 
     componentDidMount(){
-        this.getVideos();
+        this.getVideo();
     }
 
-    getVideos(){
+    getVideo(){
         let server = new ServerRequest();
         server.post({
             url:'advDetail',
@@ -85,8 +84,7 @@ class Player extends React.Component{
             },
             packet:{
                  packetAnimation : ''
-            },
-            scoreAnimation  :''
+            }
         });
     }
 
@@ -112,7 +110,6 @@ class Player extends React.Component{
     */
     scoreHandle(){
         this.setState({
-            scoreAnimation  :'animation',
             share  :{
                  display:'none'
             },
@@ -120,6 +117,7 @@ class Player extends React.Component{
                  packetAnimation : ''
             }
         })
+        this.props.handle();
     }
 
     /**
@@ -199,10 +197,8 @@ class Player extends React.Component{
                     packet:{
                          packetAnimation : 'animation',
                          playRecordId    : this.videoPlayId
-                    },
-                    scoreAnimation  :''
+                    }
                 });
-
                 let timer = setTimeout(function(){
                     clearTimeout(timer);
                     this.videoPlayId = undefined;
@@ -228,7 +224,6 @@ class Player extends React.Component{
                 <div onClick={this.shareHandle}>{video.shareCount}</div>
                 </div>
                 <Packet {...this.state.packet} handle={this.scoreHandle}/>
-                <Score animation={this.state.scoreAnimation} videoId={this.props.videoId}/>
                 <Share  {...this.state.share} />
             </div>
         )

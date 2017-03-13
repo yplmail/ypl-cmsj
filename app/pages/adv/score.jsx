@@ -15,14 +15,6 @@ class Score extends React.Component{
         this.hideHandle = this.hideHandle.bind(this);
     }
 
-    componentDidMount(){
-        // this.wrapper = document.querySelector('.score-wrapper');
-        // this._preventDefault = function (e){ e.preventDefault(); }
-        // this.wrapper.addEventListener('touchStart', this._preventDefault);
-        // this.wrapper.addEventListener('touchMove', this._preventDefault);
-        // this.wrapper.addEventListener('touchEnd', this._preventDefault);
-    }
-
     componentWillReceiveProps(props){
         this.setState({animation:props.animation});
     }

@@ -248,7 +248,7 @@
 }
 
 .score-wrapper .score-content {
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
     height: 5.8rem;
