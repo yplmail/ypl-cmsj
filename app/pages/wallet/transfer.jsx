@@ -68,7 +68,7 @@ class Wallet extends React.Component{
 	    			content:'转出成功',
 	    			time : 2,
 	    			end : function(){
-                        location.hash = "/wallet";
+                        location.hash = "/wallet/2";
 	    			}.bind(this)
 	    		})
 			}.bind(this)

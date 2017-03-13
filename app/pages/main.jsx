@@ -54,7 +54,7 @@ ReactDOM.render(
 			<Route path="share/:videoId(/:shareId)" component={Detail} />
 			<Route path="register(/:videoId)(/:playId)" component={Register} />
 			<Route path="inviteRegister(/:shareId)" component={Register} />
-			<Route path="wallet" component={Wallet} />
+			<Route path="wallet(/:tab)" component={Wallet} />
 			<Route path="feedback" component={Feedback} />
 			<Route path="setting" component={Setting} />
 			<Route path="modifyPassword" component={ModifyPassword} />

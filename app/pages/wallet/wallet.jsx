@@ -70,11 +70,20 @@ class Header extends React.Component{
 class Wallet extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            child : PacketRecord,
-            
+        this.state = {       
+            child  : this.props.params.tab == 2 ? TransferRecord : PacketRecord,
         }
         this.changeTab = this.changeTab.bind(this);
+    }
+
+    componentDidMount(){
+        let packet = this.refs.packetRecord;
+        let transfer = this.refs.transferRecord;      
+        if(this.props.params.tab == 2){
+            transfer.className='active';
+        }else{
+            packet.className ='active';
+        }
     }
 
     changeTab(event){
@@ -91,9 +100,7 @@ class Wallet extends React.Component{
            transfer.className='active'
 
        }
-       this.setState({
-          child:obj
-       });
+       this.setState({child:obj});
     }
 
     render(){
@@ -102,7 +109,7 @@ class Wallet extends React.Component{
                 <Header />
                 <div className="wallet-list">
                     <div className="list-header" data-flex="dir:left box:mean cross:center">
-                        <div><a ref="packetRecord" onClick={this.changeTab} value="1" className="active">获赠记录</a></div>
+                        <div><a ref="packetRecord" onClick={this.changeTab} value="1">获赠记录</a></div>
                         <div><a ref="transferRecord" onClick={this.changeTab} value="2">提现记录</a></div>
                     </div>
                     <this.state.child />
