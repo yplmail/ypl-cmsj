@@ -68,8 +68,9 @@ class Player extends React.Component{
             },
             packet:{
                 packetType      : 0,
-                packetAnimation : this.props.shareId ? 'animation' : '',
+                packetAnimation : this.props.playId ? 'animation' : '',
                 video           : data,
+                playRecordId    : this.props.playId || ''
             }
         });
     }

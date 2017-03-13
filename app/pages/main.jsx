@@ -44,7 +44,7 @@ ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav} onChange={change} title="草莓视界">
 			<IndexRoute component={List} />
-			<Route path="register(/:videoId)(/:videoId)"  component={Register} />
+			<Route path="register(/:videoId)(/:playId)"  component={Register} />
 			<Route path="login(/:videoId)(/:playId)"  component={Login} />
 			<Route path="forgetPassword"  component={ForgetPassword} />
 			<Route path="hot"    component={Hot}/>
