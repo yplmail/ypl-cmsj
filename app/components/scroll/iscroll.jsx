@@ -8,19 +8,17 @@ class IScroll extends React.Component{
     constructor(props) {
         super(props);
 
-        this.pageIndex = 1;
+        this.pageIndex  = 1;
 
-        this.pageSize  = 10;
+        this.pageSize   = 10;
 
         this.totalCount = 0;
 
         this.pageCount  = 0;
 
-        this.status    = 3;
+        this.status     = 3;
 
-        this.onScrollStart = this.onScrollStart.bind(this);
-
-        this.onScrollEnd = this.onScrollEnd.bind(this);
+        this.touching   = false;
 
         this.pullDownTips = {
             0: '下拉刷新',
@@ -36,6 +34,14 @@ class IScroll extends React.Component{
             3: '加载成功',
             4: '没有更多',
         };
+
+        this.onScrollStart = this.onScrollStart.bind(this);
+
+        this.onScrollEnd = this.onScrollEnd.bind(this);
+
+        this.touchStart = this.touchStart.bind(this);
+
+        this.touchEnd = this.touchEnd.bind(this);
     }
 
     componentDidMount(){
@@ -111,7 +117,7 @@ class IScroll extends React.Component{
         // }
 
         //上拉加载老数据
-        if(this.scroll.y < this.scroll.maxScrollY - 10){
+        if(this.scroll.y < this.scroll.maxScrollY - 20){
 
             if(this.status == 3 || this.status == 4){
                 this.setUpLoadingTips(0)
@@ -156,11 +162,18 @@ class IScroll extends React.Component{
          this.refs.upLoadingTips.innerText = this.pullUpTips[this.status]
     }
 
+    touchStart(){
+        this.touching = true;
+    }
+
+    touchEnd(){
+        this.touching = false;
+    }
+
     render(){
         return (
             <div>
-                <ul ref="innserscroll">
-                  
+                <ul ref="innserscroll" onTouchStart={this.touchStart} onTouchEnd={this.touchEnd}>                 
                 </ul>
                 <div className="scroll-loading" ref="pullupTips" >
                 <div className="loading-box">

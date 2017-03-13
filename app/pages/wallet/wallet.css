@@ -74,7 +74,7 @@
 .wallet-scroll .header h3 {
     font-size: 17px;
     color: #333;
-    font-weight: 700;
+/*    font-weight: 700;*/
     width:3.5rem;
 }
 
@@ -97,3 +97,60 @@
     text-align: right;
     color:#cbae67;
 }
+
+.wallet-list .list-header{
+   line-height: .98rem;
+   background-color: #dddddd;
+   text-align: center;  
+}
+
+.wallet-list .list-header a{
+   display: inline-block;
+   font-size: 14px;
+   color:#333;
+   height:100%;
+   padding:0 .1rem;
+}
+
+.wallet-list .list-header a.active{
+    font-weight: 700;
+    border-bottom: 5px solid #ce1035;
+}
+
+.transfer-scroll li{
+    position: relative;
+    line-height: 1.16rem;
+}
+
+.transfer-scroll li > div:first-child{
+    width:70%;
+}
+
+.transfer-scroll li > div:last-child{
+    width:30%;
+    font-size: 17px;
+    text-align: right;
+}
+
+.transfer-scroll li > div:first-child h3{
+    font-size: 17px;
+    color:#333;
+    text-align: left;
+    border-bottom: none;
+    padding-left: 0;
+}
+
+.transfer-scroll li > div:first-child p{
+    font-size: 11px;
+    color:#666;
+    text-align: left;
+    line-height: .6rem;
+}
+
+.transfer-scroll li > div:last-child span{
+    font-size: 17px;
+    color:#ce1035;
+}
+
+
+

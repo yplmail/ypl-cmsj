@@ -44,7 +44,16 @@ class Wallet extends React.Component{
     		})
     		return false;
     	}
-    	this.withdraw(value);
+
+		layer.open({
+			content: '<p>确定转出金额？</p><p>￥'+value+'</p>',
+			style:'background-color:#fff; color:#323232;width:70%', //自定风格
+			btn: ['确定', '取消'],
+			yes: function(index){
+				layer.close(index);
+				this.withdraw(value);
+			}.bind(this)
+		});     	
     }
 
     withdraw(amt){
@@ -56,7 +65,7 @@ class Wallet extends React.Component{
 			},
 			success:function(response){
 	    		layer.open({
-	    			content:'转入成功',
+	    			content:'转出成功',
 	    			time : 2,
 	    			end : function(){
                         location.hash = "/wallet";
@@ -75,8 +84,8 @@ class Wallet extends React.Component{
 			           <span>￥{this.state.account.accountBalance}</span>
 		           </div>
 		           <div className="transfer-amount" onClick={this.transfer}>
-		           		<input id="one" type="radio" name="transferAmt" value="1"/>
-						<label htmlFor="one">1元</label>
+		           		<input id="zero" type="radio" name="transferAmt" value="1"/>
+						<label htmlFor="zero">1元</label>
 
 						<input id="one" type="radio" name="transferAmt" value="10"/>
 						<label htmlFor="one">10元</label>

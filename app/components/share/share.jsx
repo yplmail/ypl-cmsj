@@ -12,16 +12,17 @@ class Share extends React.Component{
             link    : '',
             imgUrl  : '',
             type    : '',
-            dataUrl : '',
-            success : function(){}           
+            dataUrl : ''       
         }
-        this.config = {};
         this.touchHandle = this.touchHandle.bind(this);
     }
 
     componentWillReceiveProps(props){
         this.setState({...props});
-        this.share();
+    }
+
+    componentDidUpdate(){
+        this.share()
     }
 
     share() {
@@ -32,7 +33,7 @@ class Share extends React.Component{
             imgUrl  : this.state.imgUrl,  // 分享图标
             type    : this.state.type,    // 分享类型,music、video或link，不填默认为link
             dataUrl : this.state.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
-            success : this.state.success||function(){},
+            success : this.state.success || this.touchHandle,
             cancel  : function(){
                  this.setState({display:'none'});
             }.bind(this)

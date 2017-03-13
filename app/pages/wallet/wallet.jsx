@@ -1,9 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router';
+import {IndexLink,Link} from 'react-router';
 import Scroll from 'scroll/iscroll';
-import BScroll from 'better-scroll';
 import ServerRequest from 'server/serverRequest';
 import common from 'common/common';
+import PacketRecord from './packetRecord';
+import TransferRecord from './transferRecord';
+
 import './wallet.css';
 
 class Header extends React.Component{
@@ -68,44 +70,42 @@ class Header extends React.Component{
 class Wallet extends React.Component{
     constructor(props){
         super(props);
-        this.data = {
-            el  : '.wallet-scroll',
-            url : 'rewardList',
-            callback : this.template.bind(this)
+        this.state = {
+            child : PacketRecord,
+            
         }
-        this.originType = {
-            1:'观看获赠',
-            2:'分享获赠',
-            3:'邀请注册获赠'
-        }
+        this.changeTab = this.changeTab.bind(this);
     }
 
-    template(item){
-        let element = document.createElement('li');
-        element.setAttribute('data-flex', 'main:left box:first')
-        element.innerHTML = this.innerHtml(item);
-        return element;
-    }
+    changeTab(event){
+       let val = event.target.getAttribute('value');
+       let packet = this.refs.packetRecord;
+       let transfer = this.refs.transferRecord;
+       let obj = PacketRecord
+       if(val == "1"){
+           packet.className='active'
+           transfer.className='';
+       }else{
+           obj = TransferRecord
+           packet.className='';
+           transfer.className='active'
 
-    innerHtml(item){
-      return  '<div><img src='+item.coverUrl+'></div>' +
-              '<div data-flex="dir:top box:mean">'+
-              '<div data-flex="dir:left box:last" class="header">'+
-              '<h3 class="ellipsis">'+item.title+'</h3><p><span>'+item.amount+'</span>元</p></div>'+
-              '<div data-flex="dir:left box:mean" class="detail">'+
-              '<p>'+item.publishUserName+'</p><p>'+common.getDateDiff(new Date(item.time).getTime())+'</p>'+
-              '<p>'+this.originType[item.originType]+'</p></div></div>';      
+       }
+       this.setState({
+          child:obj
+       });
     }
 
     render(){
        return(
            <div className="wallet-wrapper">
-                <Header/>
+                <Header />
                 <div className="wallet-list">
-                    <h2>获赠记录</h2>
-                    <div className="wallet-scroll">
-                        <Scroll {...this.data} />
+                    <div className="list-header" data-flex="dir:left box:mean cross:center">
+                        <div><a ref="packetRecord" onClick={this.changeTab} value="1" className="active">获赠记录</a></div>
+                        <div><a ref="transferRecord" onClick={this.changeTab} value="2">提现记录</a></div>
                     </div>
+                    <this.state.child />
                 </div>
            </div>
        )

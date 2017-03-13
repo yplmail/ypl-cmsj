@@ -23,7 +23,8 @@ const API = {
     'bindMobile':'user/bindMobile',
     'bindWechat':'user/bindWechat',
     'withdraw':'account/withdraw/wechat',
-    'feedback':'mine/feedback',
+    'withdrawList':'account/withdraw/list',
+    'feedback':'mine/feedback'
 }
 
 export default API

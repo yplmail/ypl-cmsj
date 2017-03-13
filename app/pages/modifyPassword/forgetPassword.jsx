@@ -114,12 +114,11 @@ class Login extends React.Component{
               newPwd:md5(this.state.pwd)
             },
             success:function(response){
-              common.setcookies('token',response.token,7);
               let params = this.props.params;
               if(params.videoId && params.playId){
                   location.hash="/detail/"+params.videoId+'/'+params.playId;
               }else{
-                  location.hash="/list";
+                  location.hash="/";
               }
             }.bind(this)
         });
