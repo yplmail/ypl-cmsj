@@ -88,11 +88,13 @@ class Wallet extends React.Component{
     }
 
     innerHtml(item){
-      return  '<div><img src='+item.coverUrl+'></div>'+
+      return  '<div><img src='+item.coverUrl+'></div>' +
               '<div data-flex="dir:top box:mean">'+
-              '<div data-flex="dir:left box:last" class="header"><h3 class="ellipsis">'+item.title+'</h3><p><span>'+item.amount+'</span>元</p></div>'+
-              '<div data-flex="dir:left box:mean" class="detail"><p>'+item.publishUserName+'</p><p>'+common.getTime(item.time)+'</p><p>'+this.originType[item.originType]+'</p></div>'+
-              '</div>';      
+              '<div data-flex="dir:left box:last" class="header">'+
+              '<h3 class="ellipsis">'+item.title+'</h3><p><span>'+item.amount+'</span>元</p></div>'+
+              '<div data-flex="dir:left box:mean" class="detail">'+
+              '<p>'+item.publishUserName+'</p><p>'+common.getDateDiff(new Date(item.time).getTime())+'</p>'+
+              '<p>'+this.originType[item.originType]+'</p></div></div>';      
     }
 
     render(){
