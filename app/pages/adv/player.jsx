@@ -93,8 +93,17 @@ class Player extends React.Component{
      * 分享成功
     */
     shareSuccess(){
+        this.setState({
+            share  :{
+                 display:'none'
+            },
+            packet:{
+                 packetAnimation : ''
+            }
+        });
+
         let server = new ServerRequest();
-        this.setState({share: { display : 'none'}});
+
         server.post({
             url:'shareSuccess',
             data:{
@@ -111,7 +120,7 @@ class Player extends React.Component{
     */
     scoreHandle(){
         this.setState({
-            share  :{
+            share  : {
                  display:'none'
             },
             packet:{

@@ -7,29 +7,32 @@ class Share extends React.Component{
         super(props);
         this.state = {
             display :'none',
-            content : '请点击右上角将本链接发送给指定朋友或分享到朋友圈等',
+            title   : '',
+            desc    : '',
+            link    : '',
+            imgUrl  : '',
+            type    : '',
+            dataUrl : '',
+            success : function(){}           
         }
         this.config = {};
         this.touchHandle = this.touchHandle.bind(this);
     }
 
     componentWillReceiveProps(props){
-        this.setState({
-            display : props.display || 'none',
-            content : props.content || '请点击右上角将本链接发送给指定朋友或分享到朋友圈等'
-        });
-        this.share(props);
+        this.setState({...props});
+        this.share();
     }
 
-    share(data) {
+    share() {
         let share = {
-            title   : data.title,  // 分享标题
-            desc    : data.desc,   // 分享描述
-            link    : data.link,   // 分享链接
-            imgUrl  : data.imgUrl,  // 分享图标
-            type    : data.type,    // 分享类型,music、video或link，不填默认为link
-            dataUrl : data.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
-            success : data.success||function(){},
+            title   : this.state.title,  // 分享标题
+            desc    : this.state.desc,   // 分享描述
+            link    : this.state.link,   // 分享链接
+            imgUrl  : this.state.imgUrl,  // 分享图标
+            type    : this.state.type,    // 分享类型,music、video或link，不填默认为link
+            dataUrl : this.state.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
+            success : this.state.success||function(){},
             cancel  : function(){
                  this.setState({display:'none'});
             }.bind(this)
@@ -61,7 +64,6 @@ class Share extends React.Component{
 
     initConfig(config) {
         wx.config({
-            //debug    : true,
             appId    : config.appId,
             timestamp: config.timeStamp,
             nonceStr : config.nonceStr,
@@ -85,7 +87,7 @@ class Share extends React.Component{
         return (
             <div className="share-wrapper" style={{display:this.state.display}} onClick={this.touchHandle}>
                 <div className="content">
-                    <p>{this.state.content}</p>
+                    <p>请点击右上角将本链接发送给指定朋友或分享到朋友圈等</p>
                 </div>
             </div>
         )
