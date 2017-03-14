@@ -87,6 +87,18 @@ const common = {
             result = parseInt(minC) + "分钟前";
         }
         return result;
+    },
+
+    changeTitle(title){
+        console.log(title);
+        const iframe = document.createElement('iframe');
+        iframe.src = '../favicon.ico';
+        document.title = title;
+        document.body.appendChild(iframe);
+        let timer = setTimeout(() => {
+            clearTimeout(timer);
+            document.body.removeChild(iframe);
+        }, 300);        
     }
 
 }

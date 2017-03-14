@@ -23,17 +23,13 @@ import About   from './about/about.jsx';
 function change(pre, next) {  
 	if(next.routes[1].title){
 		document.title = next.routes[1].title;		
-	}else{
-		document.title = '草莓视界';			
 	}
 	const iframe = document.createElement('iframe');
 	iframe.src = '../favicon.ico';
 	const listener = () => {
 	    setTimeout(() => {
 	        iframe.removeEventListener('load', listener);
-	        setTimeout(() => {
-	            document.body.removeChild(iframe);
-	        }, 0);
+	        document.body.removeChild(iframe);
 	    }, 0);
 	};
 	iframe.addEventListener('load', listener);
@@ -42,27 +38,27 @@ function change(pre, next) {
 
 ReactDOM.render(
 	<Router history={hashHistory}>
-		<Route path="/" component={Nav} onChange={change} title="草莓视界">
-			<IndexRoute component={List} />
-			<Route path="register(/:videoId)(/:playId)"  component={Register} />
-			<Route path="login(/:videoId)(/:playId)"  component={Login} />
-			<Route path="forgetPassword"  component={ForgetPassword} />
-			<Route path="hot"    component={Hot}/>
-			<Route path="mine"   component={Mine} title="我的"/>
+		<Route path="/" component={Nav} onChange={change} >
+			<IndexRoute component={List} title="首页"/>
+			<Route path="register(/:videoId)(/:playId)"  component={Register} title="注册"/>
+			<Route path="login(/:videoId)(/:playId)"  component={Login} title="登录"/>
+			<Route path="forgetPassword"  component={ForgetPassword} title="重置密码"/>
+			<Route path="hot" component={Hot} title="热门"/>
+			<Route path="mine" component={Mine} title="草莓"/>
 			<Route path="detail/:videoId(/:playId)" component={Detail} />
-			<Route path="video/:videoId(/:playId)" component={VideoDetail} />
 			<Route path="share/:videoId(/:shareId)" component={Detail} />
-			<Route path="register(/:videoId)(/:playId)" component={Register} />
-			<Route path="inviteRegister(/:shareId)" component={Register} />
-			<Route path="wallet(/:tab)" component={Wallet} />
-			<Route path="feedback" component={Feedback} />
-			<Route path="setting" component={Setting} />
-			<Route path="modifyPassword" component={ModifyPassword} />
+			<Route path="video/:videoId(/:playId)" component={VideoDetail} />
+			<Route path="register(/:videoId)(/:playId)" component={Register} title="注册"/>
+			<Route path="inviteRegister(/:shareId)" component={Register} title="邀请注册"/>
+			<Route path="wallet(/:tab)" component={Wallet} title="草莓钱包"/>
+			<Route path="feedback" component={Feedback} title="意见反馈"/>
+			<Route path="setting" component={Setting} title="设置"/>
+			<Route path="modifyPassword" component={ModifyPassword} title="修改密码"/>
 			<Route path="mobileAuth" component={MobileAuth} />
-			<Route path="wechatAuth" component={WechatAuth} />
-			<Route path="transfer" component={Transfer} />
-			<Route path="invite" component={Invite} />
-			<Route path="about" component={About} />
+			<Route path="wechatAuth" component={WechatAuth} title="微信认证"/>
+			<Route path="transfer" component={Transfer} title="转出金额"/>
+			<Route path="invite" component={Invite} title="邀请朋友"/>
+			<Route path="about" component={About} title="关于产品"/>
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')
