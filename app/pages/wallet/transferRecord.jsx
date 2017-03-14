@@ -16,6 +16,18 @@ class TransferRecord extends React.Component{
             2:'分享获赠',
             3:'邀请注册获赠'
         }
+
+        this.status = {
+            10:'资金冻结',
+            20:'提现中',
+            21:'提现成功',
+            22:'提现失败'
+        }
+
+        this.payType = {
+            1:'微信红包',
+            2:'微信零钱'
+        }
     }
 
     template(item){
@@ -26,8 +38,8 @@ class TransferRecord extends React.Component{
     }
 
     innerHtml(item){
-    	return  '<div data-flex="dir:top box:mean"><h3>微信提现</h3><p>2013/05/06</p></div>'+
-    	        '<div data-flex="main:right cross:center"><span>25.36</span>元</div>';    
+    	return  '<div data-flex="dir:top box:mean"><h3>'+this.payType[item.payType]+'</h3><p>'+item.transTime.replace(/-/g,'/')+'</p></div>'+
+        '<div data-flex="dir:top box:mean main:right"><p>'+item.amount+'元</p><p>'+this.status[item.status]+'</p></div>';    
     }
 
     render(){

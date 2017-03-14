@@ -83,10 +83,11 @@
     margin-bottom: 1.65rem;
 }
 
-.register-content li:nth-child(3) label{
+.register-content li:nth-child(3) span{
     position: absolute;
     right:0;
     top:0;
+    z-index: 3;
     display: inline-block;
     width:.7rem;
     height:.86rem;

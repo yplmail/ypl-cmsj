@@ -147,9 +147,19 @@
     line-height: .6rem;
 }
 
-.transfer-scroll li > div:last-child span{
+.transfer-scroll li > div:last-child p:first-child{
     font-size: 17px;
     color:#ce1035;
+}
+
+.transfer-scroll li > div:last-child span{
+    color:#333;
+}
+
+.transfer-scroll li > div:last-child p:last-child{
+    font-size: 11px;
+    color:#cbae67;
+    line-height: .6rem;
 }
 
 
