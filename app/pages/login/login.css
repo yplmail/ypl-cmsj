@@ -59,7 +59,6 @@
     display: inline-block;
     width: .7rem;
     height: .86rem;
-/*    background: url(../../images/close_password_icon.png);*/
     background-repeat: no-repeat;
     background-size: .44rem .27rem;
     background-position: left center;
@@ -72,7 +71,7 @@
     margin-bottom: 1.8rem;
 }
 
-.login-content li:nth-child(3) span {
+.login-content li:nth-child(3) a {
     font-size: 14px;
     color: #333;
 }
@@ -95,7 +94,7 @@
 
 .login-content li:nth-child(4) a {
     color: #fff;
-    background-color: #811b10;
+    background-color: #ce1035;
 }
 
 .login-content li:nth-child(5) a {

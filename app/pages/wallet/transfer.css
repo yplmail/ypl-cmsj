@@ -14,7 +14,7 @@
 }
 
 .transfer-wrapper .account-amount span{
-	display: inline-block;
+	  display: inline-block;
     font-size: 17px;
     color:#333;
     margin-top: .5rem;

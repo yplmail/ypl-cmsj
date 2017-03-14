@@ -145,7 +145,7 @@ class ForgetPassword extends React.Component{
 
                      <li>
                         <input id="code" type="tel" placeholder="请输入验证码" name="smsCode" onChange={this.codeChange} maxLength="4"/>
-                        <label ref="smsCode" htmlFor="code" onClick={this.handleCode}>{this.state.codeTips}</label>
+                        <label ref="smsCode" onClick={this.handleCode}>{this.state.codeTips}</label>
                      </li>
                      <li>
                         <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>

@@ -54,14 +54,14 @@
     display: inline-block;
     height:.86rem;
     line-height: .86rem;
-    width:40%;
-    background-color:#b09b7c;
+    width:38%;
+    margin-left: 2%;
+    background-color:#cbae67;
     vertical-align: middle;
     text-align: center;
-    border-bottom-right-radius: 8px;
-    border-top-right-radius: 8px;
     color:#fff;
     font-size: 14px;
+    border-radius: 8px;
 }
 
 .register-content li:nth-child(2) input{
@@ -73,10 +73,7 @@
     color:#999;
     font-size: 14px;
     border:1px solid #333237;
-    border-right: none;
     border-radius: 8px;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
 }
 
 .register-content li:nth-child(3){
@@ -91,7 +88,6 @@
     display: inline-block;
     width:.7rem;
     height:.86rem;
-/*    background: url(../../images/open_password_icon.png) no-repeat;*/
     background-repeat: no-repeat;
     background-size: .44rem .27rem;
     background-position: left center;
@@ -110,7 +106,6 @@
 
 .register-content li:nth-child(4){
     border:none;
-    border:1px solid #811b10;
     overflow: hidden;
 }
 
@@ -118,7 +113,7 @@
     height:.86rem;
     line-height: .86rem;
     width:100%;
-    background-color: #811b10;
+    background-color: #ce1035;
     text-align: center;
     font-size: 17px;
     color:#fff;

@@ -133,7 +133,7 @@ class ServerRequest {
     }
 
     _fail(msg) {
-        layer.open({content:msg||'服务恼情绪',time:2});
+        layer.open({content:msg||'网络有点小情绪',time:2});
     }
 }
 
