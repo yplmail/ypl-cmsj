@@ -63,7 +63,7 @@ class Record extends React.Component{
     render(){
         let list = this.state.packetList;
         return (
-          <div ref="vertical" className="packetRecord-wrapper" style={{display:(list.length > 0) ? 'block' : 'none'}}>
+          <div ref="vertical" className="packetRecord-wrapper">
             <ul>
                {
                   list.map((item,index)=>{

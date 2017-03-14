@@ -4,6 +4,8 @@ import {Link} from 'react-router';
 import md5 from 'md5/md5'
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
+import ClosePassword from '../../images/close_password_icon.png';
+import OpenPassword from '../../images/open_password_icon.png';
 
 class Login extends React.Component{
     constructor(props) {
@@ -12,8 +14,8 @@ class Login extends React.Component{
             mobile : '',
             pwd    : '',
             passwordType:'password',
-            display:'none'
-            
+            background  : 'url('+ClosePassword+')',
+            display:'none'       
         }
         this.mobileChange = this.mobileChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
@@ -44,10 +46,15 @@ class Login extends React.Component{
 
     changePasswordType(){
         let type = 'password';
+        let url  = 'url('+ClosePassword+')';
         if(this.state.passwordType == 'password'){
             type = 'text';
+            url  = 'url('+OpenPassword+')';
         }
-        this.setState({passwordType: type});
+        this.setState({
+            passwordType: type,
+            background  : url
+        });
     }
 
     validate(){
@@ -84,10 +91,10 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    if(/springrass.com$/.test(location.hostname) && common.isWechat()){
-                      location = './redirect.html';                  
+                    if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                        location = './redirect.html';                  
                     }else{
-                      location.hash = '/';
+                        location.hash = '/';
                     }
                 }
             }.bind(this)
@@ -113,7 +120,7 @@ class Login extends React.Component{
                       <label htmlFor="password"></label>
                       <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
                       <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
-                      <span onClick={this.changePasswordType}></span>
+                      <span onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></span>
                       </li>
 
                       <li>
@@ -128,13 +135,6 @@ class Login extends React.Component{
                       <Link to={linkPath}>没有账号、立即注册</Link>
                       </li>
                       </ul>
-
-                      <div className="third-login" style={{display:this.state.display}}>
-                        <h2>
-                          <span>第三方账号登陆</span>
-                        </h2>
-                        <a href="./redirect.html"></a>
-                      </div>
                   </div>
               </div>
         )

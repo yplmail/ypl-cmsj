@@ -37,7 +37,7 @@ class Login extends React.Component{
 	           <div className="content">	
 		           <div className="logo-outer">
                        <p className="springrass_logo"></p>
-			           <p className="springrass_name">春草传播</p>
+			           <p className="springrass_name">草莓视界</p>
 		           </div>
 
 		           <div className="wechat-detail">

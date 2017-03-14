@@ -4,6 +4,8 @@ import {Link} from 'react-router';
 import md5 from 'md5/md5'
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
+import ClosePassword from '../../images/close_password_icon.png';
+import OpenPassword from '../../images/open_password_icon.png';
 
 class Login extends React.Component{
     constructor(props) {
@@ -13,6 +15,7 @@ class Login extends React.Component{
             smsCode: '',
             pwd    : '',
             passwordType:'password',
+            background  : 'url('+ClosePassword+')',
             codeTips:'获取验证密码'
         }
         this.time = 0;
@@ -68,10 +71,15 @@ class Login extends React.Component{
 
     changePasswordType(){
         let type = 'password';
+        let url  = 'url('+ClosePassword+')';
         if(this.state.passwordType == 'password'){
             type = 'text';
+            url  = 'url('+OpenPassword+')';
         }
-        this.setState({passwordType: type});        
+        this.setState({
+            passwordType: type,
+            background  : url
+        });     
     }
 
     validate(){
@@ -123,7 +131,11 @@ class Login extends React.Component{
               if(params.videoId && params.playId){
                   location.hash="/detail/"+params.videoId+'/'+params.playId;
               }else{
-                  location.hash="/";
+                  if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                      location = './redirect.html';                  
+                  }else{
+                      location.hash = '/';
+                  }
               }
             }.bind(this)
         });
@@ -147,7 +159,7 @@ class Login extends React.Component{
                      <li>
                         <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
                         <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>
-                        <label htmlFor="password" onClick={this.changePasswordType}></label>
+                        <label htmlFor="password" onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></label>
                      </li>
 
                      <li>

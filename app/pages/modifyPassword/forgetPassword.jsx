@@ -4,8 +4,10 @@ import {Link} from 'react-router';
 import md5 from 'md5/md5.js'
 import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
+import ClosePassword from '../../images/close_password_icon.png';
+import OpenPassword from '../../images/open_password_icon.png';
 
-class Login extends React.Component{
+class ForgetPassword extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -13,6 +15,7 @@ class Login extends React.Component{
             smsCode: '',
             pwd    : '',
             passwordType:'password',
+            background  : 'url('+ClosePassword+')',
             codeTips:'获取验证密码'
         }
         this.time = 0;
@@ -68,10 +71,15 @@ class Login extends React.Component{
 
     changePasswordType(){
         let type = 'password';
+        let url  = 'url('+ClosePassword+')';
         if(this.state.passwordType == 'password'){
             type = 'text';
+            url  = 'url('+OpenPassword+')';
         }
-        this.setState({passwordType: type});        
+        this.setState({
+            passwordType: type,
+            background  : url
+        });     
     }
 
     validate(){
@@ -126,8 +134,8 @@ class Login extends React.Component{
 
     render(){
         return (
-           <div className="register-wrapper">
-               <div className="register-content">
+           <div className="forgetPassword-wrapper">
+               <div className="forgetPassword-content">
                  <ul>
                      <li>
                         <label htmlFor="mobile"></label>
@@ -142,11 +150,11 @@ class Login extends React.Component{
                      <li>
                         <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
                         <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>
-                        <label htmlFor="password" onClick={this.changePasswordType}></label>
+                        <label htmlFor="password" onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></label>
                      </li>
 
                      <li>
-                         <a ref="registerButton" onClick={this.validate}>重置密码</a>
+                         <a ref="forgetPasswordButton" onClick={this.validate}>确定</a>
                      </li>
                  </ul>
                </div>
@@ -155,5 +163,5 @@ class Login extends React.Component{
     }
 }
 
-export default Login;
+export default ForgetPassword;
 

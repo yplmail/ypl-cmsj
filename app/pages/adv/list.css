@@ -6,10 +6,10 @@
 .adv-list-wrapper ul > li {
     position: relative;
     height: 4.22rem;
-    background-image: url(../../images/adv_bg_01.jpg);
+/*    background-image: url(../../images/adv_bg_01.jpg);*/
     background-repeat: no-repeat;
     background-size: cover;
-    border-bottom: 4px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .adv-list-wrapper li > div:nth-child(1) {
@@ -19,11 +19,13 @@
 }
 
 .adv-list-wrapper li > div:nth-child(1) h2 {
+    position: relative;
     color: #fff;
     font-size: 17px;
     font-weight: 700;
     padding-left: .45rem;
     width:6.6rem;
+    z-index: 4;
 }
 
 .adv-list-wrapper li > div:nth-child(2) {
@@ -37,7 +39,7 @@
 .adv-list-wrapper li > div:nth-child(2) p {
     height: 100%;
     color: #fff;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .adv-list-wrapper p.adv-invest {

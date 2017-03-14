@@ -208,6 +208,7 @@ class Hot extends React.Component{
 										<p className="adv-score">{item.score}分</p>
 										<p className="adv-time"><span>{item.duration}</span></p>
 								    </div>
+	                                <h2 className="adv-title ellipsis">{item.title}</h2>
 							</li>)	
 						})
                     }

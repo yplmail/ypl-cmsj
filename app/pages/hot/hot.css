@@ -11,7 +11,7 @@
 
 .hot-wrapper li {
     position: absolute;
-    top: 1.7rem;
+    top: 2rem;
     left: .28rem;
     height: 7.72rem;
     width: 6.93rem;
@@ -21,6 +21,16 @@
     -ms-perspective: 500px;
     -o-perspective: 500px;
     perspective: 500px;
+}
+
+.hot-wrapper li .adv-title{
+    position: absolute;
+    top:.28rem;
+    left:.22rem;
+    font-size: 17px;
+    color:#fff;
+    font-weight: 700;
+    width:6.6rem;
 }
 
 .hot-wrapper li:nth-child(1) {
@@ -57,7 +67,7 @@
     line-height: 6.82rem;
     height: 6.82rem;
     text-align: center;
-    background-image: url(../../images/adv_bg_01.jpg);
+/*    background-image: url(../../images/adv_bg_01.jpg);*/
     background-repeat: repeat;
     background-size: 100% 100%;
 }
@@ -70,7 +80,7 @@
 }
 
 .hot-wrapper li > div:nth-child(2) p {
-    font-size: 10px;
+    font-size: 11px;
     height: 100%;
     color: #333;
 }
