@@ -49,15 +49,30 @@ class IScroll extends React.Component{
        this.initScroll();
     }
 
-    assign(){
-        let data = Object.assign({
+    assign(){  
+        //由于在IOS8中不支持该方法
+        // return Object.assign({
+        //     pageIndex:this.pageIndex,
+        //     pageSize :this.pageSize
+        // },this.props.data);
+        
+
+        let data = this.props.data;
+        
+        let obj = {            
             pageIndex:this.pageIndex,
             pageSize :this.pageSize
-        },this.props.data);
-        return data;
+        };
+
+        for (let r in data) {
+            obj[r] = data[r]
+        }
+
+        return obj;
     }
 
     fetchItems(){
+        var data = this.assign();
         let server = new ServerRequest();
         server.post({
             url    : this.props.url,

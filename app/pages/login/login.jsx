@@ -124,7 +124,7 @@ class Login extends React.Component{
                       </li>
 
                       <li>
-                          <Link to="forgetPassword">忘记密码？</Link>
+                          <Link to="forgetPassword">忘记密码?</Link>
                       </li>
 
                       <li>
