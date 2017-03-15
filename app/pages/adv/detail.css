@@ -16,7 +16,6 @@
     z-index: 90;
     width: 100%;
     height: 220px;
-/*    background-image: url(../../images/adv_bg_02.jpg);*/
     background-repeat: no-repeat;
     background-size: cover;
     display: none;
@@ -373,74 +372,72 @@
 
 .packet-wrapper .packet-content {
     position: absolute;
-    width: 5.74rem;
-    height: 8.66rem;
+    width: 5.73rem;
+    height: 8.69rem;
     top: 2rem;
     left: .9rem;
     background: url(../../images/packet_bg.png) no-repeat;
     background-size: contain;
-}
-
-.packet-wrapper p {
-    color: #fcbf81;
+    text-align: center
 }
 
 .packet-wrapper .packet-close {
     position: absolute;
     width: .58rem;
     height: .58rem;
-    top: .6rem;
-    left: .6rem;
+    top: .18rem;
+    left: .18rem;
     background: url(../../images/packet_close_icon.png) no-repeat;
     background-size: contain;
 }
 
 .packet-wrapper .packet-header {
-    position: relative;
+    position: absolute;
     width: 1.25rem;
     height: 1.25rem;
-    margin: 1.2rem auto 0;
+    top:1.5rem;
+    left:50%;
+    margin-left: -.625rem;
     background: url(../../images/user_header_icon.png);
     background-size: contain;
 }
 
-.packet-wrapper .packet-title {
-    position: relative;
-    margin-top: .2rem;
-    text-align: center;
+.packet-wrapper .packet-title{
+    position: absolute;
+    top: 3rem;
     font-size: 16px;
     color: #ffd8b0;
-    min-height: .48rem;
+    text-align: center;
+    width:100%;
 }
 
-.packet-wrapper .packet-desprition {
-    position: relative;
-    margin-top: .2rem;
+.packet-wrapper .packet-desprition{
+    position: absolute;
+    top: 3.6rem;
     text-align: center;
     font-size: 14px;
-    min-height: .4rem;
-    color: #ffd8b0;
+    color: #ffd7af;
+    width:100%;
 }
 
-.packet-wrapper .packet-wish {
-    position: relative;
+.packet-wrapper .packet-wish{
+    position: absolute;
+    bottom: 3.5rem;
     text-align: center;
-    margin-top: .5rem;
     font-size: 20px;
     min-height: .6rem;
     color: #ffd7af;
-}
-
-.packet-wrapper .packet-button {
-    position: relative;
-    top: .35rem;
-    text-align: center;
+    width:100%;
 }
 
 .packet-wrapper .packet-open{
-    display: inline-block;
+    position: absolute;
+    left:50%;
+    bottom:1.35rem;
+    display: block;
     width: 1.48rem;
     height: 1.48rem;
+    margin-left: -.74rem;
     background: url(../../images/packet_open_icon.png) no-repeat;
     background-size: contain;
     perspective: 500;
@@ -449,6 +446,114 @@
     -webkit-transform-style: preserve-3d;
     backface-visibility: visible;
 }
+
+.packet-wrapper .packet-result {
+    position: absolute;
+    width: 5.74rem;
+    height: 8.66rem;
+    top: 2rem;
+    left: .9rem;
+    background: url(../../images/packet_result_bg.png) no-repeat;
+    background-size: contain;
+}
+
+
+.packet-wrapper .result-header{
+    position: absolute;
+    top:1.54rem;
+    left:50%;
+    margin-left:-.625rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: url(../../images/user_header_icon.png);
+    background-size: contain;
+}
+
+.packet-wrapper .packet-result .packet-title{
+    position: absolute;
+    top: 3rem;
+    font-size: 16px;
+    color: #fcbf81;
+    text-align: center;
+    width:100%;
+}
+
+.packet-wrapper .packet-result .packet-desprition{
+    position: absolute;
+    top: 3.5rem;
+    text-align: center;
+    font-size: 14px;
+    color: #fcbf81;
+    width:100%;
+}
+
+.packet-wrapper .packet-money {
+    position: absolute;
+    top:4.6rem;
+    left:0;
+    text-align: center;
+    width:100%;
+    font-size: 43px;
+    color: #fcbf81;
+}
+
+.packet-wrapper .packet-account{
+    position: absolute;
+    top:5.7rem;
+    left:0;
+    text-align: center;
+    width:100%;
+    font-size: 12px;
+    color: #fff;
+}
+
+.packet-wrapper .packet-money:before {
+    position: relative;
+    content: '￥';
+    font-size: 24px;
+    color: #fcbf81;
+}
+
+.packet-wrapper .packet-ranking {
+    position: absolute;
+    bottom:1.5rem;
+    left:0;
+    width:100%;
+    text-align: center;
+    font-size: 14px;
+    color: #fcbf81;
+}
+
+.packet-wrapper .packet-ranking span {
+    font-size: 20px;
+}
+
+
+.packet-wrapper .packet-remindTips {
+    position: absolute;
+    top:5rem;
+    left:0;
+    text-align: center;
+    width:100%;
+    font-size: 38px;
+    color: #fcbf81;
+}
+
+.packet-wrapper .packet-more{
+    position: absolute;
+    bottom: .32rem;
+    text-align: center;
+    width: 100%;
+    background:url(../../images/more_icon.png) no-repeat;
+    background-size: .17rem .28rem;
+    background-position: 68% 44%;
+}
+
+.packet-wrapper .packet-more a{
+    font-size: 14px;
+    color:#ffe0cb;
+}
+
 
 @-webkit-keyframes rotate {
     from {
@@ -477,89 +582,6 @@
     -webkit-animation: rotate 1s infinite linear;
     animation-fill-mode: both;
     -webkit-animation-fill-mode: both;
-}
-
-
-
-.packet-wrapper .packet-result {
-    position: absolute;
-    width: 5.74rem;
-    height: 8.66rem;
-    top: 2rem;
-    left: .9rem;
-    background: url(../../images/packet_result_bg.png) no-repeat;
-    background-size: contain;
-}
-
-.packet-wrapper .result-header {
-    position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    margin: 1.6rem auto 0;
-    background: url(../../images/user_header_icon.png);
-    background-size: contain;
-}
-
-.packet-wrapper .packet-money {
-    position: relative;
-    text-align: center;
-    font-size: 0;
-    min-height: 43px;
-    color: #fcbf81;
-    margin-top:.2rem;
-}
-
-.packet-wrapper .packet-money span{
-    font-size: 43px;
-}
-
-.packet-wrapper .packet-money span:before {
-    content: '￥';
-    font-size: 24px;
-    color: #fcbf81;
-    vertical-align: middle;
-}
-
-.packet-wrapper .packet-remind {
-    position: relative;
-    text-align: center;
-    font-size: 14px;
-    min-height: 14px;
-    color: #fff;
-}
-
-.packet-wrapper .packet-ranking {
-    position: relative;
-    margin: .2rem 1rem;
-    text-align: center;
-    font-size: 14px;
-    min-height: 14px;
-    color: #fcbf81;
-}
-
-.packet-wrapper .packet-ranking span {
-    font-size: 20px;
-}
-
-.packet-wrapper .packet-remindTip {
-    position: relative;
-    font-size: 35px;
-    color: #fcbf81;
-    text-align: center;
-    margin-top: .6rem;
-}
-
-.packet-wrapper .packet-more a{
-    position: absolute;
-    display: inline-block;
-    font-size: 14px;
-    color: #fff;
-    bottom: 1.2rem;
-    text-align: center;
-    width: 100%;
-    background:url(../../images/more_icon.png) no-repeat;
-    background-size: .17rem .27rem;
-    background-position: 58% 42%;
 }
 
 @-webkit-keyframes scaleIn {

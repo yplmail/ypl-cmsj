@@ -9,8 +9,11 @@ class Packet extends React.Component{
         this.state = {
             packetType      : 0,
             packetAnimation :'',
-            video    :{},
-            playRecordId    :''
+            video           :{},
+            playRecordId    :'',
+            amount          :'',
+            beyondUserRate  :'',
+            remindTips      :''
         }
         this.wish = {
             '1':'一步之遥',           
@@ -38,6 +41,7 @@ class Packet extends React.Component{
      * @return {[type]}       [description]
      */
     openHandle(event){
+        debugger;
         if(common.getcookies('token')){
             event.target.className="packet-open rotateAnimation";
             this.openPacket();
@@ -109,27 +113,28 @@ class Packet extends React.Component{
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-wish">{detail.rewardsWish}</p>
-                <p className="packet-button"><span className="packet-open" onClick={this.openHandle}></span></p>
-            </div>;
+                <p className="packet-open" onClick={this.openHandle}></p>
+            </div>
       }else if(this.state.packetType == 1){
-         var content =<div className= {"packet-result"} >
+         var content =<div className="packet-result">
                 <p className="packet-close" onClick={this.closePacket}></p>
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-money"><span>{this.state.amount}</span></p>
-                <p className="packet-ranking">恭喜超过&nbsp;<span>{this.state.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>;
-                <p className="packet-more"><Link to="/">更多</Link></p>
-            </div>;
+                <p className="packet-money">27.82</p>
+                <p className="packet-account">已经存入账户零钱</p>
+                <p className="packet-ranking">恭喜超过&nbsp;<span>{this.state.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>
+                <p className="packet-more"><Link to="/">更多红包视频</Link></p>
+            </div>
       }else{
-         var content =<div className= {"packet-result"} >
+         var content =<div className="packet-result">
                 <p className="packet-close" onClick={this.closePacket}></p>
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-remindTip">{this.state.remindTips}</p>;
-                <p className="packet-more"><Link to="/">更多</Link></p>
-            </div>;
+                <p className="packet-remindTips">{this.state.remindTips}</p>
+                <p className="packet-more"><Link to="/">更多红包视频</Link></p>
+            </div>
       }
       return(
           <div className="packet-wrapper" style={{display:this.state.packetAnimation ? 'block':'none'}}>
