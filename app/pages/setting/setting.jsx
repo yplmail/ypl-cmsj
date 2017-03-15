@@ -7,7 +7,6 @@ class Setting extends React.Component{
 	constructor(props){
 		super(props);
     this.state = {
-        isBindMobile:'',
         isBindWechat:''
     }
     this.confirm = this.confirm.bind(this);
@@ -19,24 +18,11 @@ class Setting extends React.Component{
       server.post({
           url: 'home',
           success:function(response){
-             let mobile = '去绑定';
-             let wachat = '去绑定';
-             let bindMobile = false;
-             let bindWechat = false;
-             if(response.mobile){
-                bindMobile = true;
-                mobile = response.mobile.substr(0,3) + '*****' + response.mobile.substr(8,3);
-             }
              if(response.isWechatBinded == 'true'){
-                bindWechat = true;
-                wachat = '已绑定';
+                this.setState({wachat:'已绑定'})
+             }else{
+                this.setState({wachat:'去绑定'})
              }
-             this.setState({
-                mobile      : mobile,
-                wachat      : wachat,
-                isBindMobile:bindMobile,
-                isBindWechat:bindWechat               
-             })
           }.bind(this)
       })    
   }

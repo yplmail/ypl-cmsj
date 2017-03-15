@@ -95,8 +95,9 @@
     margin-top :-.555rem;
     margin-left:-.555rem;
     background: url(../../images/video_play_btn.png) repeat;
-    background-size: 100% 100%;
+    background-size: contain;
     z-index: 3;
+    border-radius: 50%;
 }
 
 .adv-list-wrapper ul > li:after{

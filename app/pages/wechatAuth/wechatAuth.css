@@ -11,7 +11,7 @@
 
 .wechatAuth-wrapper .logo-outer{
     height: 2.44rem;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #c1c1c1;
     text-align: center;
 }
 
@@ -46,6 +46,7 @@
 	font-size: 14px;
 	color:#666;
 	text-align: left;
+    line-height: 3em;
 }
 
 .wechatAuth-wrapper .wechat-detail p:before{
@@ -55,7 +56,7 @@
     height:6px;
     background: #666666;
     border-radius: 50%;
-    margin:0 .2rem;
+    margin-right:.2rem;
 }
 
 .wechatAuth-wrapper .auth-button{
@@ -64,7 +65,7 @@
     line-height: .88rem;
     width:100%;
     text-align: center;
-    background-color: #811b10;
+    background-color: #ce1035;
     border-radius: 8px;
     font-size: 17px;
     color: #fff;

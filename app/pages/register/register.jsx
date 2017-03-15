@@ -23,8 +23,15 @@ class Login extends React.Component{
         this.codeChange = this.codeChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
         this.handleCode = this.handleCode.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
         this.validate = this.validate.bind(this);
         this.changePasswordType = this.changePasswordType.bind(this);
+    }
+
+    componentWillMount(){
+        if(this.props.params.shareId){
+             common.changeTitle('邀请注册');
+        }
     }
 
     mobileChange(event){
@@ -45,8 +52,20 @@ class Login extends React.Component{
         });
     }
 
+    handleBlur(){
+
+    }
+
     handleCode(event){
-        if(this.time > 0) return;
+        if(this.state.mobile == ''){
+          layer.open({content:'请输入您的手机号码',time:2});
+          return false;
+        }
+        if(!/^1\d{10}$/.test(this.state.mobile)){
+          layer.open({content:'请输入正确的手机号码',time:2});
+          return false;
+        }
+        if(this.time > 0) return false;
         let server = new ServerRequest();
         server.post({
             url : 'sendSmsCode',
@@ -96,7 +115,7 @@ class Login extends React.Component{
           layer.open({content:'请输入短信验证码',time:2});
           return false;
         }
-        if(this.state.smsCode.length != 4){
+        if(!/\d{4}/.test(this.state.smsCode)){
           layer.open({content:'请输入正确的短信验证码',time:2});
           return false;
         } 
@@ -149,7 +168,7 @@ class Login extends React.Component{
                      <li>
                         <label htmlFor="mobile"></label>
                         <input id="mobile" type="tel" placeholder="请输入您的手机号" name="mobile" value={this.state.mobile}
-                        onChange={this.mobileChange} maxLength="11"/>
+                        onChange={this.mobileChange} onBlur={this.handleBlur} maxLength="11"/>
                      </li>
 
                      <li>

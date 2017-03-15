@@ -21,6 +21,13 @@ class ServerRequest {
         this._timeout = this._timeout.bind(this)
         this.xhr = new XMLHttpRequest();
         this.xhr.onreadystatechange = this._onreadystatechange.bind(this);
+        this.default = {
+            app_key: 'channel_wechat_1',
+            app_version: '1.0.0',
+            api_version: '1.0.0',
+            token : common.getcookies('token'),
+            timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")            
+        }
     }
 
     post(data) {
@@ -40,7 +47,9 @@ class ServerRequest {
     }
 
     _request() {
-        Object.assign(this.data, this._getDefaultData());
+        for(let r in this.default){
+            this.data[r] = this.default[r]
+        }
 
         for (let d in this.data) {
             this.arr.push(d + '=' + encodeURIComponent(this.data[d]));

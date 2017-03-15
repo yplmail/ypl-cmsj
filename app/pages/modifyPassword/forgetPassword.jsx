@@ -46,7 +46,15 @@ class ForgetPassword extends React.Component{
     }
 
     handleCode(event){
-        if(this.time > 0) return;
+        if(this.state.mobile == ''){
+          layer.open({content:'请输入您的手机号码',time:2});
+          return false;
+        }
+        if(!/^1\d{10}$/.test(this.state.mobile)){
+          layer.open({content:'请输入正确的手机号码',time:2});
+          return false;
+        }
+        if(this.time > 0) return false;
         let server = new ServerRequest();
         server.post({
             url : 'sendSmsCode',
@@ -122,12 +130,10 @@ class ForgetPassword extends React.Component{
               newPwd:md5(this.state.pwd)
             },
             success:function(response){
-              let params = this.props.params;
-              if(params.videoId && params.playId){
-                  location.hash="/detail/"+params.videoId+'/'+params.playId;
-              }else{
-                  location.hash="/";
-              }
+                layer.open({content:'密码重置成功！',time:2, end:function(index){
+                    common.setcookies('token','',-1); 
+                    location.hash = '/login';
+                }.bind(this)});  
             }.bind(this)
         });
     }
