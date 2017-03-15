@@ -128,7 +128,7 @@ class Login extends React.Component{
                       </li>
 
                       <li>
-                      <a onClick={this.validate}>登陆</a>
+                      <a onClick={this.validate}>登录</a>
                       </li>
 
                       <li>

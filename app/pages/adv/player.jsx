@@ -60,7 +60,7 @@ class Player extends React.Component{
             video : data,
             share : {
                 title   : data.title,
-                desc    : data.desc,
+                desc    : data.publishVideoDesc,
                 link    : 'http://'+location.hostname+'/#/share/'+data.publishId+'/'+shareId,
                 imgUrl  : data.coverUrl,
                 type    : 'video',
