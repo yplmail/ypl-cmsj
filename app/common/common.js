@@ -90,7 +90,6 @@ const common = {
     },
 
     changeTitle(title){
-        console.log(title);
         const iframe = document.createElement('iframe');
         iframe.src = '../favicon.ico';
         document.title = title;

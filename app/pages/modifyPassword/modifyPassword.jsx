@@ -59,11 +59,12 @@ class ModifyPassword extends React.Component{
             url : 'modifyLoginPwd',
             data: {
               oldPwd: md5(this.state.oldPwd),
-              newPwd: md5(this.state.nwPwd)             
+              newPwd: md5(this.state.newPwd)             
             },
             success:function(response){
                 layer.open({content:'登录密码修改成功！',time:2, end:function(index){
-                    location.hash = '/setting';
+                    common.setcookies('token','',-1); 
+                    location.hash = '/login';
                 }.bind(this)});                 
             }.bind(this)
         });
