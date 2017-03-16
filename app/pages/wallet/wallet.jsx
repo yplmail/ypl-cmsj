@@ -1,6 +1,5 @@
 import React from 'react';
 import {IndexLink,Link} from 'react-router';
-import Scroll from 'scroll/iscroll';
 import ServerRequest from 'server/serverRequest';
 import common from 'common/common';
 import PacketRecord from './packetRecord';

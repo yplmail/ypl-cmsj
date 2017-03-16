@@ -91,7 +91,9 @@ var Layer = function(win) {
         }
 
         if (config.type === 2) {
-            config.content = '<i></i><i class="layui-m-layerload"></i><i></i><p>' + (config.content || '') + '</p>';
+            //config.content = '<i></i><i class="layui-m-layerload"></i><i></i><p>' + (config.content || '') + '</p>';
+
+            config.content = '<i class="layui-m-layerload"></i><i class="layui-m-layerlogo"></i>';
         }
 
         if (config.skin) config.anim = 'up';

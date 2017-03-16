@@ -24,6 +24,7 @@ class Header extends React.Component{
       let server = new ServerRequest();
       server.post({
           url: 'home',
+          maskLayer:true,
           success:function(response){
              this.setState({
                 nickname: response.nickname    ||  '不仅仅是看客',

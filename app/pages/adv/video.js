@@ -1,6 +1,6 @@
 import React   from 'react';
 import common from '../../common/common';
-import BScroll from 'better-scroll';
+import Scroll from 'scroll/iscroll';
 import ServerRequest from 'server/serverRequest';
 
 class Video extends React.Component{
@@ -21,7 +21,7 @@ class Video extends React.Component{
     }
 
     initScroll(){
-        this.scroll = new BScroll('.detail-wrapper', {
+        this.scroll = new Scroll('.detail-wrapper', {
             probeType: 3,
             click:true
         })

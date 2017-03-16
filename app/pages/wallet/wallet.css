@@ -56,6 +56,12 @@
     margin: 0 .36rem;
 }
 
+
+.wallet-scroll,.transfer-scroll{
+    overflow: hidden;
+    height:10.36rem;
+}
+
 .wallet-scroll li > div {
     margin-top: .23rem;
 }

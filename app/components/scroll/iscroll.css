@@ -23,47 +23,48 @@
     display: none;
 }
 
-.scroll-loading .loading-box {
+.scroll-loading .loading-box{
     position: absolute;
     top: 5px;
     left: 50%;
-    margin-left: -25px;
+    margin-left: -15px;
     height: 30px;
     width: 30px;
 }
 
 .scroll-loading .loading-rond {
+    position: absolute;
     height: 30px;
     width: 30px;
     border: 1px solid #0CF;
     border-radius: 50%;
-    position: absolute;
     animation: rond 1s infinite;
     -webkit-animation: rond 1s infinite;
 }
 
 .scroll-loading .loading-rond .rond {
     position: absolute;
-    border-radius: 50%;
+    top:2.5px;
+    left: 0;
     height: 5px;
     width: 5px;
+    border-radius: 50%;
     background-color: #0CF;
-    top: .05rem;
-    left: 0;
 }
 
-.scroll-loading .loading-center {
+.scroll-loading .loading-circle {
     position: absolute;
-    height: .4rem;
-    width: .4rem;
+    top:5px;
+    left:5px;
+    height: 20px;
+    width: 20px;
     color: #fff;
+    border-radius: 50%;
     text-align: center;
-    margin: 5px;
-    border-radius: 40px;
     background: #0CF;
 }
 
-.scroll-loading .loading-center p {
+.scroll-loading .loading-circle p {
     position: absolute;
     color: #999;
     left: 30px;

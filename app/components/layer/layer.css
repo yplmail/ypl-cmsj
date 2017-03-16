@@ -181,14 +181,14 @@
     line-height: 0;
 }
 
-.layui-m-layer2 .layui-m-layercont i {
+/*.layui-m-layer2 .layui-m-layercont i {
     width: 25px;
     height: 25px;
     margin-left: 8px;
     display: inline-block;
     background-color: #fff;
     border-radius: 100%;
-}
+}*/
 
 .layui-m-layer2 .layui-m-layercont p {
     margin-top: 20px;
@@ -223,22 +223,74 @@
     }
 }
 
-.layui-m-layer2 .layui-m-layercont i {
+/*.layui-m-layer2 .layui-m-layercont i {
     -webkit-animation: layui-m-anim-loading 1.4s infinite ease-in-out;
     animation: layui-m-anim-loading 1.4s infinite ease-in-out;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
-}
+}*/
 
-.layui-m-layer2 .layui-m-layercont i:first-child {
+/*.layui-m-layer2 .layui-m-layercont i:first-child {
     margin-left: 0;
     -webkit-animation-delay: -.32s;
     animation-delay: -.32s;
-}
+}*/
 
-.layui-m-layer2 .layui-m-layercont i.layui-m-layerload {
+/*.layui-m-layer2 .layui-m-layercont i.layui-m-layerload {
     -webkit-animation-delay: -.16s;
     animation-delay: -.16s;
+}*/
+
+.layui-m-layer2 .layui-m-layercont i.layui-m-layerload {
+    position: fixed;
+    display: block;
+    left:50%;
+    top:50%;
+    width:50px;
+    height:50px;
+    margin-top:-25px;
+    margin-left:-25px;
+    z-index: 106;
+    border-radius: 50%;
+    border-width: 5px;
+    border-style: solid;
+    border-bottom-color: #5da313;
+    border-right-color: #5da313;
+    border-top-color: #dfb74a;
+    border-left-color:#dfb74a;
+    animation: rond-move 1s infinite linear;
+    -webkit-animation: rond-move 1s infinite linear;
+}
+
+.layui-m-layer2 .layui-m-layercont i.layui-m-layerlogo{
+    position: fixed;
+    display: block;
+    left:50%;
+    top:50%;
+    width:45px;
+    height:45px;
+    margin-top:-18px;
+    margin-left:-15px;
+    background:url(../../images/strawberry_logo.png) no-repeat; 
+    background-size: contain;    
+}
+
+@keyframes rond-move {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rond-move {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 .layui-m-layer2 .layui-m-layercont>div {

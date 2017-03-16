@@ -1,250 +1,237 @@
 import React from 'react';
-import BScroll from 'better-scroll';
+import Iscroll from './iscroll';
+import './iscroll.css';
 import ServerRequest from 'server/serverRequest';
-import common from '../../common/common';
-import './scroll.css';
 
 class Scroll extends React.Component{
-    constructor(props) {
+
+    constructor(props){
+
         super(props);
-        this.state = {
-            datas      : [],
-            totalCount : 0,
-            pageIndex  : 1,
-            pageCount  : 0,
-            pageSize   : 10
-        };
 
-        this.el  = props.el;
-
-        this.url = props.url;
-        
         this.pageIndex = 1;
 
         this.pageSize  = 10;
 
-        this.pullDownStatus = 3;
+        this.element   = props.el;
 
-        this.pullUpStatus   = 0;
+        this.url       = props.url;
 
-        this.isRefresh = false;
+        this.datas     = props.datas || {};
 
-        this.loadHeight = 40;
+        this.callback  = props.callback || function(){};
 
-        this.onScroll = this.onScroll.bind(this);
+        this.datas['pageIndex']  = this.pageIndex;
 
-        this.onScrollEnd = this.onScrollEnd.bind(this);
+        this.datas['pageSize']   = this.pageSize;
 
-        this.initScroll = this.initScroll.bind(this);
-
-        this.pullDownTips = {
-            0: '下拉发起刷新',
-            1: '继续下拉刷新',
-            2: '松手即可刷新',
-            3: '正在刷新',
-            4: '刷新成功'
-        };
-
-        this.pullUpTips = {
-            0: '上拉发起加载',
-            1: '松手即可加载',
-            2: '正在加载',
-            3: '加载成功',
-            4: '没有更多...'
-        };
-    }
-
-    componentWillMount(){
-       this.data = Object.assign({
-           pageSize  : 10,
-           pageIndex : this.pageIndex
-       },this.props.data);
+        this.up = true;    
     }
 
     componentDidMount(){
+        this.instance();
         this.fetchDatas();
-        this.initScroll();
     }
 
-    componentDidUpdate(el,props) {
-        if(this.refs.pullUp && props.totalCount > 10){
-            this.refs.pullUp.style.display='block';
-        }
+    instance(){
+        this.iscroll = new Iscroll(this.element,{
+            probeType:3,
+            click : true,
+        });
 
-        if(this.refs.pullDown){
-            this.refs.pullDown.style.display='block';
-            this.scroll.scrollTo(0, -this.loadHeight, 500);
-        }
+        this.iscroll.on('scrollStart', function() {
+            this.scrollStart();
+        }.bind(this))
 
-        setTimeout(function(){
-            this.scroll.refresh();
-            if(this.pageIndex > 1){
-                this.scroll.scrollTo(0,this.scroll.maxScrollY-40,1);               
-            }
-        }.bind(this), 500)
+        this.iscroll.on('scrollEnd', function() {
+            this.scrollEnd();
+        }.bind(this))
     }
 
-    assign(){
-        return Object.assign({
-            pageIndex:this.pageIndex,
-            pageSize :this.pageSize
-        },this.props.data);        
-    }
+    scrollStart(){
 
-    fetchDatas(){
-        let server = new ServerRequest();
-        server.post({
-            url    : this.url,
-            data   : this.assign(),
-            success: function(response){
-                this.isRefresh = true;
-                this.next(response);
-            }.bind(this)
-        })
-    }
-
-    next(response){
-        if(this.pageIndex == 1){
-            this.setPullDownTips(4);
-            this.setState({...response});
-            this.scroll.scrollTo(0, -40, 500);
+        /**
+         * 只有开启了下轮滑动
+         * 立即结束上轮没有结束的请求
+         */
+        this.server.xhr.abort();
+  
+        if(this.iscroll.directionY == -1){
+            this.up = false;
+            this.refs.downLoadingTips.innerText = '下拉刷新';         
         }else{
-            this.setPullUpTips(3);
-            this.state.datas.concat(response.datas);
-            response.datas = this.state.datas;
-            this.setState({...response});
-
+            this.up = true;
+            this.refs.upLoadingTips.innerText   = '上拉加载';     
         }
     }
 
-    initScroll(){
-        this.scroll = new BScroll(this.props.el, {
-            probeType: 3,
-            click:true
-        })
-        this.scroll.on('scrollEnd', this.onScrollEnd);
-        this.scroll.on('scroll', this.onScroll);
-    }
+    scrollEnd(){
 
-    onScroll(){
-        if(this.scroll.y > -40){
-            if(this.pullDownStatus != 3){
-                if(this.scroll.y < 0){
-                    this.setPullDownTips(1);
-                }else{    
-                    this.up   = false;
-                    this.down = true;
-                    this.setPullDownTips(2);
-                }
-            }           
-           return false;
-        }
-
-        if(this.scroll.y < this.scroll.maxScrollY){
-            if(this.pullUpStatus != 2){
-                if (this.scroll.y <= this.scroll.maxScrollY) {
-                    this.up   = true;
-                    this.down = false;
-                    this.setPullUpTips(1);
-                } else {
-                    this.setPullUpTips(0);
-                }
-            }            
-        }
-    }
-
-    onScrollEnd(){
-        // 下拉滑动结束后，停在刷新区域
-        if (this.down && this.scroll.y > -40) {
-            if(this.pullDownStatus == 2){
-                this.setPullDownTips(3);
-                this.pageIndex = 1;
-                this.fetchDatas();                
-            }
+        /**
+         * 防止非人为滑动下的操作
+         * @param  {[type]} this.iscroll.directionY ! [description]
+         * @return {[type]} [description]
+         */
+        if(this.iscroll.directionY != 1 && this.iscroll.directionY != -1){
             return false;
         }
 
-        // 上拉滑动结束后，停在加载区域
-        if (this.up && this.scroll.y <= this.scroll.maxScrollY) {     
-            if (this.pullUpStatus == 1) { 
-                this.setPullUpTips(2);
-                if(this.state.pageIndex < this.state.pageCount){
-                    ++this.pageIndex;
-                    this.fetchDatas();
-                }else{
-                    this.nomore();
-                }
-            }
+        /**
+         * 防止下拉的同时执行
+         * this.iscroll.scrollTo(0,this.iscroll.maxScrollY + 40,500);
+         */
+        if(this.iscroll.directionY == -1){
+            this.up = true;     
         }
-    }
 
-    nomore(){
-        this.setPullUpTips(4);
-        let timer = setTimeout(function(){
-           clearInterval(timer);
-           this.scroll.scrollTo(0, this.scroll.y + this.loadHeight, 500);
-           this.setPullUpTips(0);
-        }.bind(this),500)        
-    }
-
-    setPullDownTips(status){
-        this.pullDownStatus = status;
-        if(this.refs.pullDownTips){
-            this.refs.pullDownTips.innerText = this.pullDownTips[status];
+        /**
+         * 下拉滑动结束
+         * @param  {[type]} this.iscroll.y [description]
+         * @return {[type]}                [description]
+         */
+        if(this.iscroll.y == 0){
+            this.refs.downLoadingTips.innerText = '正在刷新';
+            this.pageIndex = 1;
+            this.datas['pageIndex'] = this.pageIndex;
+            this.fetchDatas();
+            return false;
         }
-    }
 
-    setPullUpTips(status){
-        this.pullUpStatus = status;
-        if(this.refs.pullUpTips){
-            this.refs.pullUpTips.innerText = this.pullUpTips[status];
-        }
-    }
-
-    elements(){
-        let content = '';
-        if(this.isRefresh){
-            if(this.state.datas.length > 0){
-                content = this.state.datas.map((item, index) => {
-                    return <this.props.row item={item} key={index}/>
-                })
+        /**
+         * 上拉滑动结束
+         * @param  {[type]} this.iscroll.y [description]
+         * @return {[type]}                [description]
+         */
+        if(this.iscroll.y == this.iscroll.maxScrollY && this.pageCount > 1){
+            this.refs.downLoadingTips.innerText = '正在加载';
+            if(this.pageIndex < this.pageCount){
+                this.datas['pageIndex'] = ++this.pageIndex;
+                this.fetchDatas();
             }else{
-                content = <div className="no-video">暂无相关视频</div>;
+                this.refs.upLoadingTips.innerText = '没有更多';
+                let timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    if(this.up){
+                        this.iscroll.scrollTo(0,this.iscroll.maxScrollY + 40,500); 
+                        this.iscroll.refresh();                        
+                    }
+                }.bind(this),320);
             }
         }
-        return content;
+    }
+
+    fetchDatas(){
+        this.server = new ServerRequest();
+        this.server.post({
+            url  : this.url,
+            data : this.datas,
+            success:function(result){
+               this.pageCount = result.pageCount;
+               this.dealwith(result);
+            }.bind(this)
+        });
+    }
+
+    dealwith(result){
+        
+        if(this.pageIndex == 1) {
+            this.refs.downLoadingTips.innerText = '刷新成功';              
+        }else{
+            this.refs.upLoadingTips.innerText   = '加载成功'; 
+        }
+
+        if(result.totalCount == 0){
+            this.noDatas();
+        }
+
+        if(result.totalCount > 0 && result.totalCount <= 10){
+            this.minDatas(result.datas);
+        }
+
+        if(result.totalCount > 10){
+            this.maxDatas(result.datas);
+        }
+    }
+
+    noDatas(){
+       this.refs.srcollcontainer.innerHTML='<div class="no-data">暂无相关数据</div>';
+    }
+
+    minDatas(datas){
+        this.wrapper = document.querySelector(this.element);
+        this.refs.downscrolltips.style.display='block';
+        this.refs.srcollcontainer.style.height = this.wrapper.style.height || this.styles(this.wrapper).height;
+        this.nodes(datas);
+    }
+
+    maxDatas(datas){
+        this.refs.downscrolltips.style.display='block';
+        this.refs.upscrolltips.style.display='block';
+        this.nodes(datas);
+    }
+
+    nodes(datas){
+
+        if(this.pageIndex == 1){
+            this.refs.srcollcontainer.innerHTML = "";
+        }
+
+        let container = this.refs.srcollcontainer;
+
+        datas.forEach(function(data,index){
+            container.appendChild(this.callback(data));            
+        }.bind(this));
+          
+        let timer = setTimeout(function(){
+            clearTimeout(timer);
+            this.ended();
+        }.bind(this),300);
+    }
+
+    ended(){
+        if(this.pageIndex == 1){
+            this.iscroll.scrollTo(0,-40,500);                
+        }else{
+            this.iscroll.scrollTo(0 , this.iscroll.maxScrollY + 40 , 500); 
+        }
+        this.iscroll.refresh();          
+    }
+
+    styles(el){
+        return el.currentStyle ? el.currentStyle : document.defaultView.getComputedStyle(el, null);                 
     }
 
     render(){
-        var content = this.elements();
-        console.log(content)
-        return (
-            <ul>
-                <div className="scroll-loading" ref="pullDown" >
-                <div className="loading-box">
-                <div className="loading-rond">
-                <div className="rond"></div>
+        return(
+            <div className="scroll-wrapper">
+                <div className="scroll-loading scrolltips" ref="downscrolltips">
+                    <div className="loading-box">
+                        <div className="loading-rond">
+                            <div className="rond"></div>
+                        </div>
+                        <div className="loading-circle">
+                            <p ref="downLoadingTips">下拉刷新</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="loading-center">
-                <p ref="pullDownTips">{this.pullDownTips[this.pullDownStatus]}</p>
-                </div>
-                </div>
-                </div>
-                {this.elements()}
-                <div className="scroll-loading" ref="pullUp">
-                <div className="loading-box">
-                <div className="loading-rond">
-                <div className="rond"></div>
-                </div>
-                <div className="loading-center">
-                <p ref="pullUpTips">{this.pullUpTips[this.pullUpStatus]}</p>
-                </div>
-                </div>
-                </div>
-            </ul>
-        )
+
+                <ul ref="srcollcontainer" className="srcoll-container">
+
+                </ul>
+
+                <div className="scroll-loading scrolltips" ref="upscrolltips">
+                    <div className="loading-box">
+                        <div className="loading-rond">
+                            <div className="rond"></div>
+                        </div>
+                        <div className="loading-circle">
+                            <p ref="upLoadingTips">上拉加载</p>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        );
     }
 }
 
 export default Scroll;
-

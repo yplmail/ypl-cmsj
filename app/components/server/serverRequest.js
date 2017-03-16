@@ -7,8 +7,6 @@ import API from 'config/api';
 
 class ServerRequest {
     constructor() {
-        this.arr = [];
-        this.str = '';
         this.data = {};
         this.domain = ENVIRONMENT[process.env.NODE_ENV];
         this.url = '';
@@ -26,7 +24,7 @@ class ServerRequest {
             app_version: '1.0.0',
             api_version: '1.0.0',
             token : common.getcookies('token'),
-            timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")            
+            timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")    
         }
     }
 
@@ -51,32 +49,36 @@ class ServerRequest {
             this.data[r] = this.default[r]
         }
 
+        let arr = [];
+        
         for (let d in this.data) {
-            this.arr.push(d + '=' + encodeURIComponent(this.data[d]));
+            arr.push(d + '=' + encodeURIComponent(this.data[d]));
         }
 
-        this.str = this.arr.join("&");
+        let str = arr.join("&");
 
         if (this.mock) {
             this.url = '/mock/' + this.url + '.json?' + Date.now();
         } else {
             this.url = this.domain + API[this.url] + '?' + Date.now();
         }
-
+       
         if(this.maskLayer){
             layer.open({type: 2});
         }
 
         if (this.method == 'GET') {
-            if (this.str) this.url = this.url + '&' + this.str;
+            if (str) this.url = this.url + '&' + str;
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.send(null);
         } else {
             this._timeout()
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            this.xhr.send(this.str);
+            this.xhr.send(str);
         }
+
+        this.tip = str;
     }
 
     _onreadystatechange() {
@@ -86,7 +88,6 @@ class ServerRequest {
     }
 
     _complete() {
-        layer.closeAll();
         var head = this.xhr.getAllResponseHeaders();
         var response = this.xhr.responseText;
         if (/application\/json/.test(head) || this.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
@@ -105,6 +106,7 @@ class ServerRequest {
         } else {
             this.error(this.xhr.statusText, this.xhr);
         }
+        layer.closeAll();
     }
 
     _timeout() {
@@ -122,16 +124,6 @@ class ServerRequest {
         }
     }
 
-    _getDefaultData() {
-        return {
-            app_key: 'channel_wechat_1',
-            app_version: '1.0.0',
-            api_version: '1.0.0',
-            token : common.getcookies('token'),
-            timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")
-        }
-    }
-
     _success(result) {
         /**
          *
@@ -143,6 +135,9 @@ class ServerRequest {
 
     _fail(msg) {
         layer.open({content:msg||'网络有点小情绪',time:2});
+        // alert('问题接口名称：'+this.url);
+        // alert('问题页面URL： '+location.href);
+        // alert('问题接口参数：'+this.tip);
     }
 }
 
