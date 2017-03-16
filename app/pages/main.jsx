@@ -19,6 +19,7 @@ import MobileAuth   from './mobileAuth/mobileAuth.jsx';
 import WechatAuth   from './wechatAuth/wechatAuth.jsx';
 import Invite   from './invite/invite.jsx';
 import About   from './about/about.jsx';
+import Record   from './wallet/Record.jsx';
 
 function change(pre, next) {  
 	if(next.routes[1].title){
@@ -59,6 +60,7 @@ ReactDOM.render(
 			<Route path="transfer" component={Transfer} title="转出金额"/>
 			<Route path="invite" component={Invite} title="邀请朋友"/>
 			<Route path="about" component={About} title="关于产品"/>
+			<Route path="record" component={Record} title="红包记录"/>
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')
