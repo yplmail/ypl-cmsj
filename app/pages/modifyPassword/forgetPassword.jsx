@@ -58,6 +58,7 @@ class ForgetPassword extends React.Component{
         let server = new ServerRequest();
         server.post({
             url : 'sendSmsCode',
+            maskLayer:true,
             data:{
                type  : 2,
                mobile: this.state.mobile
@@ -124,6 +125,7 @@ class ForgetPassword extends React.Component{
         let server = new ServerRequest();
         server.post({
             url : 'resetLoginPwd',
+            maskLayer:true,
             data: {
               mobile:this.state.mobile,
               smsCode:this.state.smsCode,

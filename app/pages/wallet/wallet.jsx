@@ -20,9 +20,10 @@ class Header extends React.Component{
 		let server = new ServerRequest();
 		server.post({
 			url: 'home',
+      maskLayer:true,
 			success:function(response){
 				this.setState({
-                    account : response
+            account : response
 				});
 			}.bind(this)
 		})

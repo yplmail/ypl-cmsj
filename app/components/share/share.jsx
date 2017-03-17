@@ -41,6 +41,7 @@ class Share extends React.Component{
 
     cancelHandle(){
         this.setState({display:'none'});
+        this.props.handle && this.props.handle();
     }
 
     initConfig(config) {

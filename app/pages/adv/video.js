@@ -31,6 +31,7 @@ class Video extends React.Component{
         let server = new ServerRequest();
         server.post({
             url :'correlationVideo',
+            maskLayer:true,
             data:{
                 publishId: this.props.videoId,
                 openId   : ''

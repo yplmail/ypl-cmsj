@@ -125,19 +125,6 @@
     text-align: center;
 }
 
-/*.mine-mask-wrapper a {
-    position: relative;
-    display: inline-block;
-    top: 1.3rem;
-    width: 1.2rem;
-    height: 1.2rem;
-    line-height: 1.2rem;
-    background: #ddd;
-    border: 2px solid #0CF;
-    border-bottom-color: #0CF;
-    border-radius: 50%;
-    color: #811b10;
-}*/
 
 .mine-mask-wrapper .mask-content a:first-child {
     margin-right: .5rem;

@@ -69,6 +69,7 @@ class Login extends React.Component{
         let server = new ServerRequest();
         server.post({
             url : 'sendSmsCode',
+            maskLayer:true,
             data:{
                type  : 1,
                mobile: this.state.mobile
@@ -143,6 +144,7 @@ class Login extends React.Component{
         }
         server.post({
             url : 'register',
+            maskLayer:true,
             data: data,
             success:function(response){
               common.setcookies('token',response.token,7);

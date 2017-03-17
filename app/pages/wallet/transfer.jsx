@@ -16,6 +16,7 @@ class Wallet extends React.Component{
 		let server = new ServerRequest();
 		server.post({
 			url: 'home',
+			maskLayer:true,
 			success:function(response){
 				this.setState({
                     account : response
@@ -25,9 +26,8 @@ class Wallet extends React.Component{
     }
 
     transfer(event){
-        if(event.target.nodeName == "LABEL"){
-           return false;
-        }
+    	let nodeName = event.target.nodeName.toUpperCase();
+        if(nodeName != 'INPUT'){return false;}
     	let value  = event.target.getAttribute('value') * 1;
     	let amount = this.state.account.accountBalance * 1;
     	if(amount == 0){

@@ -55,6 +55,7 @@ class Feedback extends React.Component{
        let server = new ServerRequest();
        server.post({
        	  url : 'feedback',
+       	  maskLayer:true,
        	  data:{
        	  	 content : common.encode(this.state.content)
        	  },

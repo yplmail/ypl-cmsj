@@ -28,6 +28,7 @@ class Player extends React.Component{
             }
         }
         this.first = true;
+        this.playHandle = this.playHandle.bind(this);
         this.pauseHandle = this.pauseHandle.bind(this);
         this.shareHandle = this.shareHandle.bind(this);
         this.scoreHandle = this.scoreHandle.bind(this);
@@ -80,6 +81,7 @@ class Player extends React.Component{
      * 打开分享
     */
     shareHandle(){
+        this.pauseHandle();
         this.setState({
             share  :{
                  display:'block'
@@ -132,13 +134,29 @@ class Player extends React.Component{
     }
 
     /**
-     * 重播
+     * 播放
     */
-    pauseHandle(){
+    playHandle(){
         document.querySelector('.prism-player').style.display = 'block';
         document.querySelector('.video-cover').style.display  = 'none';
-        this.player.replay();
+        
+        if(this.player.getCurrentTime() == this.player.getDuration()){
+            this.player.replay();
+        }
+
+        if(this.player.getCurrentTime() != 0){
+            this.player.play();  
+        }
     }
+
+    /**
+     * 暂停
+    */
+    pauseHandle(){
+        this.player.pause();
+        document.querySelector('.prism-player').style.display = 'none';
+        document.querySelector('.video-cover').style.display  = 'block';
+    }    
 
     /**
      *  初始化播放器
@@ -225,7 +243,7 @@ class Player extends React.Component{
             <div className="video-wrapper">
                 <div className="video-player">
                 <div className="video-cover" style={{backgroundImage:coverUrl}}>
-                <span className="video-pause" onClick={this.pauseHandle}></span>
+                <span className="video-pause" onClick={this.playHandle}></span>
                 </div>
                 <div id="springGrassPlayer" className="prism-player" ></div>
                 </div>
@@ -235,7 +253,7 @@ class Player extends React.Component{
                 <div onClick={this.shareHandle}>{video.shareCount}</div>
                 </div>
                 <Packet {...this.state.packet} handle={this.scoreHandle}/>
-                <Share  {...this.state.share} />
+                <Share  {...this.state.share} handle={this.playHandle}/>
             </div>
         )
     }

@@ -17,6 +17,7 @@ class Setting extends React.Component{
       let server = new ServerRequest();
       server.post({
           url: 'home',
+          maskLayer:true,
           success:function(response){
              if(response.isWechatBinded == 'true'){
                 this.setState({wachat:'已绑定'})
@@ -43,6 +44,7 @@ class Setting extends React.Component{
       let server = new ServerRequest();
       server.post({
           url: 'logout',
+          maskLayer:true,
           success:function(response){
             common.setcookies('token','',-1); 
             location.hash = '/login';

@@ -57,6 +57,7 @@ class ModifyPassword extends React.Component{
         let server = new ServerRequest();
         server.post({
             url : 'modifyLoginPwd',
+            maskLayer:true,
             data: {
               oldPwd: md5(this.state.oldPwd),
               newPwd: md5(this.state.newPwd)             

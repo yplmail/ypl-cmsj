@@ -41,7 +41,6 @@ class Packet extends React.Component{
      * @return {[type]}       [description]
      */
     openHandle(event){
-        debugger;
         if(common.getcookies('token')){
             event.target.className="packet-open rotateAnimation";
             this.openPacket();
@@ -121,7 +120,7 @@ class Packet extends React.Component{
                 <p className="result-header"></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-money">{detial.amount}</p>
+                <p className="packet-money">{this.state.amount}</p>
                 <p className="packet-account">已经存入账户零钱</p>
                 <p className="packet-ranking">恭喜超过&nbsp;<span>{this.state.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>
                 <p className="packet-more"><Link to="/">更多红包视频</Link></p>

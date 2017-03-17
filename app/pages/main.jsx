@@ -15,7 +15,6 @@ import Feedback   from './feedback/feedback.jsx';
 import Setting   from './setting/setting.jsx';
 import ModifyPassword   from './modifyPassword/modifyPassword.jsx';
 import ForgetPassword   from './modifyPassword/forgetPassword.jsx';
-import MobileAuth   from './mobileAuth/mobileAuth.jsx';
 import WechatAuth   from './wechatAuth/wechatAuth.jsx';
 import Invite   from './invite/invite.jsx';
 import About   from './about/about.jsx';
@@ -54,7 +53,6 @@ ReactDOM.render(
 			<Route path="feedback" component={Feedback} title="意见反馈"/>
 			<Route path="setting" component={Setting} title="设置"/>
 			<Route path="modifyPassword" component={ModifyPassword} title="修改密码"/>
-			<Route path="mobileAuth" component={MobileAuth} />
 			<Route path="wechatAuth" component={WechatAuth} title="微信认证"/>
 			<Route path="transfer" component={Transfer} title="转出金额"/>
 			<Route path="invite" component={Invite} title="邀请朋友"/>

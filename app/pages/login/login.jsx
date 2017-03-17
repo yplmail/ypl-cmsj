@@ -81,6 +81,7 @@ class Login extends React.Component{
         let server = new ServerRequest();
         server.post({
             url : 'login',
+            maskLayer:true,
             data: {
               mobile : this.state.mobile,
               pwd    : md5(this.state.pwd),              

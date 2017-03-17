@@ -10,7 +10,7 @@
 
 .transfer-wrapper .account-amount{
 	height:1.13rem;
-	border-bottom:1px solid #999;
+	border-bottom:1px solid #c1c1c1;
 }
 
 .transfer-wrapper .account-amount span{
@@ -35,16 +35,16 @@
    width:2.05rem;
    height:.89rem;
    line-height: .89rem;
-   border:1px solid #811b10;
-   border-radius: 10px;
+   border:1px solid #ce1035;
+   border-radius: 8px;
    text-align: center;
    margin-left:.18rem;
    margin-bottom: .18rem;
    font-size:17px;
-   color:#811b10;
+   color:#ce1035;
 }
 
 .transfer-wrapper .transfer-amount input:checked + label{
-	background: #811b10;
+	background: #ce1035;
 	color:#fff;
 }
