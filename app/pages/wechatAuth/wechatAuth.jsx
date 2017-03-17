@@ -22,6 +22,9 @@ class Login extends React.Component{
                     layer.open({content:'认证成功！',time:2, end:function(index){
                         location.hash = '/';
                     }.bind(this)});              
+                },
+                error:function(msg){
+                    layer.open({content:msg,time:2});
                 }
             });       
         }

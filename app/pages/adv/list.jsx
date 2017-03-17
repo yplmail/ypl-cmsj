@@ -19,13 +19,10 @@ class List extends React.Component{
         if(query.code && query.state){
             let server = new ServerRequest();
             server.post({
-                url : 'wechatLogin',
+                url : 'bindWechat',
                 data:{
                     code:query.code,
                     state:query.state
-                },
-                success:function(response){
-                    common.setcookies('token',response.token,7);                    
                 }
             });       
         }

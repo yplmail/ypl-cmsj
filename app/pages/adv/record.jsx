@@ -7,12 +7,23 @@ class Record extends React.Component{
         super(props);
         this.state={
             packetList : []
-        }
+        };
+        this.iscroll = null;
     }
 
     componentDidMount(){
         this.getList();
     }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.scroll){
+            this.iscroll = nextProps.scroll; 
+        }
+    }
+
+    componentDidUpdate(){
+        this.iscroll && this.iscroll.refresh();
+    } 
 
     getList(){
         let server = new ServerRequest();

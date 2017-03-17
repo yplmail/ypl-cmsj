@@ -100,6 +100,9 @@ class ServerRequest {
             } else {
                 if(response.code == 900003){
                     location.hash = '/login';
+                } else if(response.code == 900007){
+                    //微信绑定接口
+                    this.error && this.error(response.msg);
                 }else{
                     this.error(response.msg, this.xhr);
                 }
@@ -134,7 +137,7 @@ class ServerRequest {
     }
 
     _fail(msg) {
-        layer.open({content:msg || this.url+'网络有点小情绪',time:2});
+        layer.open({content:msg || '网络有点小情绪',time:2});
     }
 }
 

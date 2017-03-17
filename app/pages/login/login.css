@@ -103,37 +103,5 @@
 
 }
 
-.third-login{
-    margin-top:1.18rem;
-    text-align: center;
-}
-
-.third-login h2:before,
-.third-login h2:after{
-    content:'';
-    display: inline-block;
-    width:1.4rem;   
-    height:1px;
-    background: url(../../images/line_icon.png) no-repeat;
-    background-size: contain;
-    background-position: center center;
-    vertical-align: middle;
-}
-
-.third-login h2 span{
-     font-size: 14px;
-     color:#333; 
-     margin:0 .22rem; 
-}
-
-.third-login a{
-    display: inline-block;
-    margin-top:.55rem;
-    width:.69rem;
-    height:.9rem;
-    background: url(../../images/wechat_logo.png) no-repeat;
-    background-size: .69rem .9rem;
-    background-position:center center;
-}
 
 

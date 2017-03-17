@@ -4,6 +4,11 @@
     height: 100%;
 }
 
+.detail-wrapper .scroll-wrapper{
+    overflow: hidden;
+    height:6.8rem;
+}
+
 .video-wrapper{
    position: relative;
    width:100%;

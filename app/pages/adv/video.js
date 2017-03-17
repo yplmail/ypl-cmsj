@@ -1,6 +1,5 @@
 import React   from 'react';
 import common from '../../common/common';
-import Scroll from 'scroll/iscroll';
 import ServerRequest from 'server/serverRequest';
 
 class Video extends React.Component{
@@ -8,24 +7,24 @@ class Video extends React.Component{
         super(props);
         this.state = {
            videoList : []
-        }
+        };
+        this.first  = false;
+        this.iscroll = true;
     }
 
     componentDidMount(){
-        this.initScroll();
         this.getVideos();
     }
 
-    componentDidUpdate(){
-        this.scroll && this.scroll.refresh();
+    componentWillReceiveProps(nextProps){
+        if(nextProps.scroll){
+            this.iscroll= nextProps.scroll; 
+        }
     }
 
-    initScroll(){
-        this.scroll = new Scroll('.detail-wrapper', {
-            probeType: 3,
-            click:true
-        })
-    }
+    componentDidUpdate(){
+        this.iscroll && this.iscroll.refresh();
+    }   
 
     getVideos(){
         let server = new ServerRequest();
@@ -37,6 +36,7 @@ class Video extends React.Component{
                 openId   : ''
             },
             success:function(response){
+                this.first = true;
                 this.setState({videoList:response.datas})
             }.bind(this)
         })
@@ -71,19 +71,24 @@ class Video extends React.Component{
     }
 
     render(){
-       var list = this.state.videoList;
-       if( list.length > 0 ){
+        if(this.state.videoList.length > 0 ){
             var content = this.loopVideoList();
-       }else{
-            var content = <div className="no-video">暂无相关视频</div>;
-       }
-       return (<div className="correlation-wrapper">
-          <h2>相关视频</h2>
-          <ul>
-            {content}
-          </ul>
-       </div>
-       )
+        }else{
+            if(this.first){
+              var content = <div className="no-video">暂无相关视频</div>;
+            }else{
+              var content = null;
+            }
+        }
+
+        return (
+            <div className="correlation-wrapper">
+                <h2>相关视频</h2>
+                <ul>
+                    {content}
+                </ul>
+            </div>
+        )
     }
 }
 
