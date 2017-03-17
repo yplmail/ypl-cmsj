@@ -87,7 +87,8 @@ class ServerRequest {
         }
     }
 
-    _complete() {
+    _complete() {  
+        layer.closeAll();
         var head = this.xhr.getAllResponseHeaders();
         var response = this.xhr.responseText;
         if (/application\/json/.test(head) || this.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
@@ -106,7 +107,6 @@ class ServerRequest {
         } else {
             this.error(this.xhr.statusText, this.xhr);
         }
-        layer.closeAll();
     }
 
     _timeout() {
@@ -134,10 +134,7 @@ class ServerRequest {
     }
 
     _fail(msg) {
-        layer.open({content:msg||'网络有点小情绪',time:2});
-        // alert('问题接口名称：'+this.url);
-        // alert('问题页面URL： '+location.href);
-        // alert('问题接口参数：'+this.tip);
+        layer.open({content:msg || this.url+'网络有点小情绪',time:2});
     }
 }
 

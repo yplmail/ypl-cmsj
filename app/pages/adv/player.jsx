@@ -136,16 +136,18 @@ class Player extends React.Component{
     /**
      * 播放
     */
-    playHandle(){
-        document.querySelector('.prism-player').style.display = 'block';
-        document.querySelector('.video-cover').style.display  = 'none';
-        
-        if(this.player.getCurrentTime() == this.player.getDuration()){
-            this.player.replay();
-        }
-
-        if(this.player.getCurrentTime() != 0){
+    playHandle(replay){
+        let time      = this.player.getCurrentTime();
+        let duration  = this.player.getDuration();
+        if(time != 0 && time < duration){
+            document.querySelector('.prism-player').style.display = 'block';
+            document.querySelector('.video-cover').style.display  = 'none';
             this.player.play();  
+        }
+        if(replay && time == duration){
+            document.querySelector('.prism-player').style.display = 'block';
+            document.querySelector('.video-cover').style.display  = 'none';
+            this.player.replay();
         }
     }
 
@@ -170,7 +172,8 @@ class Player extends React.Component{
             cover : this.state.video.coverUrl,
             preload : true,
             playsinline:true,
-            autoplay:false
+            autoplay:false,
+            showBuffer:true
         });
 
         this.player.on('play',function(){
@@ -243,7 +246,7 @@ class Player extends React.Component{
             <div className="video-wrapper">
                 <div className="video-player">
                 <div className="video-cover" style={{backgroundImage:coverUrl}}>
-                <span className="video-pause" onClick={this.playHandle}></span>
+                <span className="video-pause" onClick={this.playHandle.bind(this,true)}></span>
                 </div>
                 <div id="springGrassPlayer" className="prism-player" ></div>
                 </div>
