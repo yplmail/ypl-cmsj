@@ -1,4 +1,4 @@
-This repo is a boilerplate for React-Babel-Webpack project. You could use it as a base to build your own web app.
+This repo is a springrass for React-Babel-Webpack project. You could use it as a base to build your own web app.
 
 ## Features
 
@@ -14,25 +14,21 @@ This repo is a boilerplate for React-Babel-Webpack project. You could use it as 
 
 ## How to use
 
-First, you should clone the repo and install the dependencies.
+First, you should clone the repo and install the dependencies. 
+
+npm install -g cnpm --registry=https://registry.npm.taobao.org
 
 ```bash
-$ git clone git@github.com:ruanyf/react-babel-webpack-boilerplate.git <yourAppName>
+$ git clone git@github.com:yplmail/ypl-react.git <yourAppName>
 $ cd <yourAppName>
-$ npm install
+$ cnpm install
 ```
 
-Then, launch the boilerplate app.
+Then, launch the springrass app.
 
 ```bash
-$ npm start
+$ npm run start
 ```
-
-You should see a new browser tap opening and a title of "Hello World" in http://127.0.0.1:8080.
-
-From there, you start to develop your own code in the `app` directory. When you finish coding, use `npm run build` or `npm run deploy` to build the static files.
-
-When committing your code, you should use [AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). Otherwise, the repo will throw an error. If you use `npm run commit` instead of `git commit`, the command will help you to produce a formatted commit message.
 
 ## License
 
