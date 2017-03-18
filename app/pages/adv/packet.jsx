@@ -104,11 +104,12 @@ class Packet extends React.Component{
 
     render(){
       var detail = this.state.video;
+      let url = detail.publishAvatar ? 'url('+detail.publishAvatar+')' : ''
       var content = null;
       if(this.state.packetType == 0){
          var content =<div className= {"packet-content " + this.state.packetAnimation} >
                 <p className="packet-close" onClick={this.closePacket}></p>
-                <p className="packet-header"></p>
+                <p className="packet-header" style={{backgroundImage:url}}></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-wish">{detail.rewardsWish}</p>
@@ -117,7 +118,7 @@ class Packet extends React.Component{
       }else if(this.state.packetType == 1){
          var content =<div className="packet-result">
                 <p className="packet-close" onClick={this.closePacket}></p>
-                <p className="result-header"></p>
+                <p className="result-header" style={{backgroundImage:url}}></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-money">{this.state.amount}</p>
@@ -128,7 +129,7 @@ class Packet extends React.Component{
       }else{
          var content =<div className="packet-result">
                 <p className="packet-close" onClick={this.closePacket}></p>
-                <p className="result-header"></p>
+                <p className="result-header" style={{backgroundImage:url}}></p>
                 <p className="packet-title">{detail.publishNickName}</p>
                 <p className="packet-desprition">{detail.rewardsSlogan}</p>
                 <p className="packet-remindTips">{this.state.remindTips}</p>
