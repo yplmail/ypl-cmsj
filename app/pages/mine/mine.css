@@ -28,8 +28,10 @@
     margin-top: .5rem;
     width: 1.2rem;
     height: 1.2rem;
-    background: url(../../images/user_header_icon.png) no-repeat;
+    background-image: url(../../images/user_header_icon.png);
+    background-repeat: no-repeat;
     background-size: contain;
+    border-radius: 50%;
 }
 
 .mine-header-wrapper .headerTip {

@@ -29,21 +29,17 @@ class Header extends React.Component{
              this.setState({
                 nickname: response.nickname    ||  '不仅仅是看客',
                 amount  : response.totalIncome || '0.00',
-                url     : response.faceUrl            
+                url     : response.faceUrl ? 'url('+response.faceUrl+')' : ''           
              });
           }.bind(this)
       })
    }
 
    render(){
-      let url = '';
-      if(this.state.url){
-          url = "backgroundImage:url("+this.state.url+")";
-      }
       return (
           <div className="mine-header-wrapper">
               <div className="personal-header">
-                  <p className="headerImg" style={{url}}></p>
+                  <p className="headerImg" style={{backgroundImage:this.state.url}}></p>
                   <p className="headerTip">{this.state.nickname}</p>
               </div>
               <div className="personal-money">
