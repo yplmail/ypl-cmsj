@@ -1,4 +1,5 @@
 import React   from 'react';
+import {Link} from 'react-router';
 import Player  from './player';
 import Record  from './Record';
 import Video   from './Video';
@@ -47,6 +48,7 @@ class Detail extends React.Component{
 	}
 
 	render(){
+
 		return(
 			<div className="detail-wrapper">
 	           <Player {...this.props.params} handle={this.scoreHandle} />
@@ -57,6 +59,7 @@ class Detail extends React.Component{
 	               </div>
 			   </div>
 			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
+			   <Link className="back-button" to='/' style={{display:this.props.shareId?'block':'none'}}></Link>
 			</div>
 		);
 	}
