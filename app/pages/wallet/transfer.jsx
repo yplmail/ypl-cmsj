@@ -65,7 +65,7 @@ class Wallet extends React.Component{
 			},
 			success:function(response){
 	    		layer.open({
-	    			content:'转出成功',
+	    			content:'提交成功',
 	    			time : 2,
 	    			end : function(){
                         location.hash = "/wallet/2";

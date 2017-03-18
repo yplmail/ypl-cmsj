@@ -147,8 +147,8 @@ class Hot extends React.Component{
 	        t.nextSibling.style.transition= 'transform 0.2s linear';
 	        t.nextSibling.style.webkitTransition= '-webkit-transform 0.2s linear';
 
-	        t.nextSibling.style.transform = 'translateY(20px) scale3d(0.95,0.95,0.95)';
-	        t.nextSibling.style.webkitTransition = '-webkit-translateY(20px) scale3d(0.95,0.95,0.95)';   						
+	        t.nextSibling.style.transform = 'translateY(25px) scale3d(0.95,0.95,0.95)';
+	        t.nextSibling.style.webkitTransition = '-webkit-translateY(25px) scale3d(0.95,0.95,0.95)';   						
 		}
 	}
 
@@ -192,19 +192,19 @@ class Hot extends React.Component{
 
 	render(){
        return(
-           <div className="hot-wrapper" style={{height:(window.innerHeight-56) + 'px'}}>
+           <div className="hot-wrapper">
                  <ul>
                     {
                         this.state.items.map((item, index) => {
                         	let coverUrl = item.coverUrl ? 'url('+item.coverUrl+')' : '';
 							return (<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} 
-								key={item.publishId} onClick={this.linkHandle.bind(this,item.publishId)}>
-								    <div data-flex="main:center cross:center" style={{backgroundImage:coverUrl}}>
+								key={item.publishId} >
+								    <div data-flex="main:center cross:center" style={{backgroundImage:coverUrl}} onClick={this.linkHandle.bind(this,item.publishId)}>
 										<span className="video-play"></span>
 									</div>
 									<div data-flex="dir:left">
 										<p className="adv-invest">{item.totalAmount}</p>
-										<p className="adv-packetcount">红包已领23622个</p>
+										<p className="adv-packetcount">已领{item.usedCount}个</p>
 										<p className="adv-score">{item.score}分</p>
 										<p className="adv-time"><span>{item.duration}</span></p>
 								    </div>

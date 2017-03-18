@@ -17,6 +17,12 @@ class ModifyPassword extends React.Component{
         this.vildateHandle = this.vildateHandle.bind(this);
 	}
 
+  componentWillMount(){
+       if(!common.getcookies('token')){
+           location.hash = "/login";
+       }
+  }
+
 	changeOldPassword(event){
         this.setState({
             oldPwd: common.trim(event.target.value)
@@ -46,7 +52,7 @@ class ModifyPassword extends React.Component{
        } 
 
        if(this.state.newPwd.length < 6 || this.state.newPwd.length > 20){
-          layer.open({content:'请输入6到20位长度的登录密码',time:2});
+          layer.open({content:'请输入6-20位字符的新密码',time:2});
           return false;
        } 
 

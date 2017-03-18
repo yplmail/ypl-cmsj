@@ -60,10 +60,13 @@ const common = {
         return isAndroid;
     },
 
-    getDateDiff: (timeStamp) => {
+    getDateDiff: (str) => {
+        str = str ? str.replace(/-/g,'/') : '';
+        if(!str) return '';
         let now = Date.now();
+        let timeStamp = new Date(str).getTime();
         let diffValue = now - timeStamp;
-        if (diffValue < 0) {return '';}
+        if (diffValue < 0) return ''
         let minute = 1000 * 60;
         let hour = minute * 60;
         let day = hour * 24;
@@ -74,19 +77,19 @@ const common = {
         let dayC   = diffValue / day;
         let hourC  = diffValue / hour;
         let minC   = diffValue / minute;
-        let result = "刚刚"
         if (monthC >= 1) {
-            result = parseInt(monthC) + "月前";
+            return parseInt(monthC) + "月前";
         } else if (weekC >= 1) {
-            result = parseInt(weekC) + "周前";
+            return parseInt(weekC) + "周前";
         } else if (dayC >= 1) {
-            result = parseInt(dayC) + "天前";
+            return parseInt(dayC) + "天前";
         } else if (hourC >= 1) {
-            result = parseInt(hourC) + "小时前";
+            return parseInt(hourC) + "小时前";
         } else if (minC >= 1) {
-            result = parseInt(minC) + "分钟前";
+            return parseInt(minC) + "分钟前";
+        }else{
+            return '刚刚'
         }
-        return result;
     },
 
     changeTitle(title){

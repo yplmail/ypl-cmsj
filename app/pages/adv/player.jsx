@@ -252,7 +252,7 @@ class Player extends React.Component{
                 </div>
                 <div className="video-detail" data-flex="dir:left cross:center">
                 <div>{video.totalAmount}</div>
-                <div>红包已领{video.usedCount}个</div>
+                <div>已领{video.usedCount}个</div>
                 <div onClick={this.shareHandle}>{video.shareCount}</div>
                 </div>
                 <Packet {...this.state.packet} handle={this.scoreHandle}/>

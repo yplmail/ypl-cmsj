@@ -16,7 +16,7 @@ class ForgetPassword extends React.Component{
             pwd    : '',
             passwordType:'password',
             background  : 'url('+ClosePassword+')',
-            codeTips:'获取验证密码'
+            codeTips:'获取验证码'
         }
         this.time = 0;
         this.mobileChange = this.mobileChange.bind(this);
@@ -111,11 +111,11 @@ class ForgetPassword extends React.Component{
         } 
 
         if(this.state.pwd == ''){
-          layer.open({content:'请设置您的登录密码',time:2});
+          layer.open({content:'请设置新的登录密码',time:2});
           return false;
         }
         if(this.state.pwd.length < 6 || this.state.pwd.length > 20){
-          layer.open({content:'请输入6到20位长度的登录密码',time:2});
+          layer.open({content:'请输入6-20位字符的新密码',time:2});
           return false;
         }   
         this.registerHandler();
@@ -157,7 +157,7 @@ class ForgetPassword extends React.Component{
                      </li>
                      <li>
                         <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
-                        <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>
+                        <input id="password" type={this.state.passwordType} placeholder="请设置新的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>
                         <span onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></span>
                      </li>
 

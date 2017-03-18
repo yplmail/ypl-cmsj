@@ -17,6 +17,13 @@ class PacketRecord extends React.Component{
             2:'分享获赠',
             3:'邀请注册获赠'
         }
+
+        this.color = {
+            1:'#cbae67',
+            2:'#62a807',
+            3:'#ce1035'               
+        }
+
     }
 
     template(item){
@@ -32,8 +39,8 @@ class PacketRecord extends React.Component{
               '<div data-flex="dir:left box:last" class="header">'+
               '<h3 class="ellipsis">'+item.title+'</h3><p><span>'+item.amount+'</span>元</p></div>'+
               '<div data-flex="dir:left box:mean" class="detail">'+
-              '<p>'+item.publishUserName+'</p><p>'+common.getDateDiff(new Date(item.time).getTime())+'</p>'+
-              '<p>'+this.originType[item.originType]+'</p></div></div>';      
+              '<p>'+item.publishUserName+'</p><p>'+common.getDateDiff(item.time)+'</p>'+
+              '<p style=color:'+this.color[item.originType]+'>'+this.originType[item.originType]+'</p></div></div>';      
     }
 
     render(){

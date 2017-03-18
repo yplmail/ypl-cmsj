@@ -71,7 +71,7 @@ class Login extends React.Component{
           return false;
         }
         if(this.state.pwd.length < 6 || this.state.pwd.length > 20){
-          layer.open({content:'请输入6到20位长度的登录密码',time:2});
+          layer.open({content:'请输入6-20位字符的密码',time:2});
           return false;
         }
         this.loginHandle();
@@ -92,11 +92,12 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                        location = './redirect.html';                  
-                    }else{
-                        location.hash = '/';
-                    }
+                    // if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                    //     location = './redirect.html';                  
+                    // }else{
+                    //     location.hash = '/';                      
+                    // }
+                    location.hash = '/';
                 }
             }.bind(this)
         });
@@ -120,7 +121,7 @@ class Login extends React.Component{
                       <li>
                       <label htmlFor="password"></label>
                       <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
-                      <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
+                      <input id="password" type={this.state.passwordType} placeholder="请输入您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
                       <span onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></span>
                       </li>
 
