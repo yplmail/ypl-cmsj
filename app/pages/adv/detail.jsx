@@ -59,7 +59,7 @@ class Detail extends React.Component{
 	               </div>
 			   </div>
 			   <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
-			   <Link className="back-button" to='/' style={{display:this.props.shareId?'block':'none'}}></Link>
+			   <Link className="back-button" to='/' style={{display:this.props.params.shareId ? 'block':'none'}}></Link>
 			</div>
 		);
 	}
