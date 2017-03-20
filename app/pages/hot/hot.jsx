@@ -12,6 +12,7 @@ class Hot extends React.Component{
 		};
 		this.pageIndex = 1;
 		this.pageCount = 0;
+		this.isRefresh = false;
 		this.touchStart = this.touchStart.bind(this);
 		this.touchMove = this.touchMove.bind(this);
 		this.touchEnd = this.touchEnd.bind(this);
@@ -34,6 +35,7 @@ class Hot extends React.Component{
 				pageIndex : this.pageIndex
 			},
 			success:function(response){
+				this.isRefresh = true;
 				this.pageCount = response.pageCount;
 				this.setState({items:this.state.items.concat(response.datas)});
 			}.bind(this)
@@ -190,29 +192,39 @@ class Hot extends React.Component{
 		location.hash = '/detail/'+ videoId;
 	}
 
-	render(){
-       return(
-           <div className="hot-wrapper">
-                 <ul>
-                    {
-                        this.state.items.map((item, index) => {
-                        	let coverUrl = item.coverUrl ? 'url('+item.coverUrl+')' : '';
-							return (<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} 
-								key={item.publishId} >
-								    <div data-flex="main:center cross:center" style={{backgroundImage:coverUrl}} onClick={this.linkHandle.bind(this,item.publishId)}>
+	loop(){
+		if(this.state.items.length > 0){
+			let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
+			//let width  = 6.94 * fontsize;
+			let height = 6.82 * fontsize;
+			return this.state.items.map((item, index) => {
+				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+height+')' : '';
+				return (
+						<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} 
+						key={item.publishId} >
+								<div data-flex="main:center cross:center" style={{backgroundImage:coverUrl}} 
+								onClick={this.linkHandle.bind(this,item.publishId)}>
 										<span className="video-play"></span>
-									</div>
-									<div data-flex="dir:left">
+								</div>
+								<div data-flex="dir:left">
 										<p className="adv-invest">{item.totalAmount}</p>
 										<p className="adv-packetcount">已领{item.usedCount}个</p>
 										<p className="adv-score">{item.score}分</p>
 										<p className="adv-time"><span>{item.duration}</span></p>
-								    </div>
-	                                <h2 className="adv-title ellipsis">{item.title}</h2>
-							</li>)	
-						})
-                    }
-                 </ul>
+								</div>
+								<h2 className="adv-title ellipsis">{item.title}</h2>
+						</li>
+				)	
+			})        			
+		}else if(this.isRefresh){
+			return (<div className="no-data">暂无相关数据</div>)
+		}
+	}
+
+	render(){
+       return(
+           <div className="hot-wrapper">
+                <ul>{this.loop()}</ul>
            </div>
        )
 	}	

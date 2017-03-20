@@ -13,20 +13,6 @@ class List extends React.Component{
             callback : this.template.bind(this)
         }
     }
-    
-    // componentDidMount(){
-    //     var query = this.props.location.query;
-    //     if(query.code && query.state){
-    //         let server = new ServerRequest();
-    //         server.post({
-    //             url : 'bindWechat',
-    //             data:{
-    //                 code:query.code,
-    //                 state:query.state
-    //             }
-    //         });       
-    //     }
-    // }
 
     template(item){
         let element = document.createElement('li');
@@ -42,7 +28,7 @@ class List extends React.Component{
     innerHtml(item){
         return  '<div><h2 class="ellipsis">'+item.title+'</h2></div>'+
                 '<div data-flex="dir:left">'+
-                '<p class="adv-invest">'+item.totalAmount+'元</p>'+
+                '<p class="adv-invest">'+item.totalAmount+'</p>'+
                 '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
                 '<p class="adv-score">'+item.score+'分</p>'+
                 '<p class="adv-time"><span>'+item.duration+'</span></p>'+

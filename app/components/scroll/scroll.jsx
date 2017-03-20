@@ -158,9 +158,9 @@ class Scroll extends React.Component{
     }
 
     minDatas(datas){
-        this.wrapper = document.querySelector(this.element);
         this.refs.downscrolltips.style.display='block';
-        this.refs.srcollcontainer.style.height = this.wrapper.style.height || this.styles(this.wrapper).height;
+        // this.wrapper = document.querySelector(this.element);
+        // this.refs.srcollcontainer.style.height = this.wrapper.style.height || this.styles(this.wrapper).height;
         this.nodes(datas);
     }
 
@@ -177,10 +177,18 @@ class Scroll extends React.Component{
         }
 
         let container = this.refs.srcollcontainer;
-
+        
         datas.forEach(function(data,index){
             container.appendChild(this.callback(data));            
         }.bind(this));
+
+        this.wrapper = document.querySelector(this.element);
+
+        let wrapperHeight = this.wrapper.style.height || this.styles(this.wrapper).height;
+
+        if(container.offsetHeight < wrapperHeight){
+            container.style.height = wrapperHeight;
+        }
           
         let timer = setTimeout(function(){
             clearTimeout(timer);

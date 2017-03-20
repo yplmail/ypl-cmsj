@@ -30,8 +30,7 @@ class Score extends React.Component{
             url : 'score',
             data:{
                 publishId : this.props.videoId,
-                score : this.score || 0,
-                token : common.getcookies('token')
+                score : this.score || 0
             }
         });
     }
