@@ -174,16 +174,14 @@ class Scroll extends React.Component{
 
         if(this.pageIndex == 1){
             this.refs.srcollcontainer.innerHTML = "";
-        }
+        }      
 
         let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
-
-        let width = 7.5 * fontsize;        
 
         let container = this.refs.srcollcontainer;
         
         datas.forEach(function(data,index){
-            container.appendChild(this.callback(data,width));            
+            container.appendChild(this.callback(data,fontsize));            
         }.bind(this));
 
         this.wrapper = document.querySelector(this.element);

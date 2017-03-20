@@ -14,10 +14,10 @@ class List extends React.Component{
         }
     }
 
-    template(item,width){
+    template(item,font){
         let element = document.createElement('li');
-        element.setAttribute('id', item.publishId);
-        element.style.backgroundImage = item.coverUrl ?'url('+item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+width+')' : '';
+        element.setAttribute('id', item.publishId);          
+        element.style.backgroundImage = item.coverUrl ?'url('+item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+7.5*font+')' : '';
         element.innerHTML = this.innerHtml(item);
         element.onclick = function(){
            location.hash = '/detail/'+item.publishId;
