@@ -195,7 +195,6 @@ class Hot extends React.Component{
 	loop(){
 		if(this.state.items.length > 0){
 			let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
-			//let width  = 6.94 * fontsize;
 			let height = 6.82 * fontsize;
 			return this.state.items.map((item, index) => {
 				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+height+')' : '';

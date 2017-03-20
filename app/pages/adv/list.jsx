@@ -14,10 +14,10 @@ class List extends React.Component{
         }
     }
 
-    template(item){
+    template(item,width){
         let element = document.createElement('li');
         element.setAttribute('id', item.publishId);
-        element.style.backgroundImage = item.coverUrl ?'url('+item.coverUrl+')' : '';
+        element.style.backgroundImage = item.coverUrl ?'url('+item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+width+')' : '';
         element.innerHTML = this.innerHtml(item);
         element.onclick = function(){
            location.hash = '/detail/'+item.publishId;
