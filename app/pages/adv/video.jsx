@@ -52,6 +52,8 @@ class Video extends React.Component{
 
     loopVideoList(){
       let videos = this.state.videoList;
+      let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
+      let width = 2.56 * fontsize; 
       return videos.map((item,index)=>{
            return(
               <li data-flex="box:last" key={index} onClick={this.linkHandle.bind(this,item.publishId)}>
@@ -63,7 +65,7 @@ class Video extends React.Component{
                       </div>
                   </div>
                   <div>
-                      <img src={item.coverUrl+"?x-oss-process=image/resize,m_lfit,h_72"}/>
+                      <img src={item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+width}/>
                   </div>
               </li>
            )
