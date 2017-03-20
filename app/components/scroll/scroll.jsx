@@ -190,7 +190,9 @@ class Scroll extends React.Component{
 
         let wrapperHeight = this.wrapper.style.height || this.styles(this.wrapper).height;
 
-        if(container.offsetHeight < wrapperHeight){
+        let numH = wrapperHeight.replace('px','')
+
+        if(container.offsetHeight < numH){
             container.style.height = wrapperHeight;
         }
           
