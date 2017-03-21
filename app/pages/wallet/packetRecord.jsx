@@ -25,7 +25,6 @@ class PacketRecord extends React.Component{
         }
 
         this.width = Math.round(common.remRatio() * 1.4);
-
     }
 
     template(item){

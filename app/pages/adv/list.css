@@ -43,31 +43,46 @@
 }
 
 .adv-list-wrapper p.adv-invest {
-    width: 32%;
+    width: 43%;
+    margin-left: .45rem;
+}
+
+.adv-list-wrapper p.adv-invest:before{
+    content: '';
+    display: inline-block;
+    width: .34rem;
+    height: .34rem;
     background: url(../../images/adv_amt_icon.png) no-repeat;
-    background-position: .45rem center;
-    background-size: .34rem .34rem;
-    padding-left:.85rem;
+    background-size: contain;
+    vertical-align: -4px;
+    margin-right: 4px; 
 }
 
 .adv-list-wrapper p.adv-packetcount {
-    width: 32%;
-    background: url(../../images/adv_packet_icon.png) no-repeat;
-    background-position: left center;
-    background-size: .34rem .34rem;
-    padding-left:.4rem;
+    width: 37%;
 }
 
-.adv-list-wrapper p.adv-score {
+.adv-list-wrapper p.adv-packetcount:before{
+    content: '';
+    display: inline-block;
+    width: .34rem;
+    height: .34rem;
+    background: url(../../images/adv_packet_icon.png) no-repeat;
+    background-size: contain;
+    vertical-align: -4px;
+    margin-right: 4px;     
+}
+
+/*.adv-list-wrapper p.adv-score {
     width: 18%;
     background: url(../../images/adv_score_icon.png) no-repeat;
     background-position: left center;
     background-size: .34rem .34rem; 
     padding-left:.4rem;   
-}
+}*/
 
 .adv-list-wrapper p.adv-time {
-    width: 18%;
+    width: 20%;
     text-align: right;
     padding-right:.45rem;
 }

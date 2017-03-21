@@ -196,7 +196,6 @@ class Hot extends React.Component{
 
 	loop(){
 		if(this.state.items.length > 0){
-			//alert(this.height);
 			return this.state.items.map((item, index) => {
 				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+this.height+',limit_0)' : '';
 				return (
@@ -209,7 +208,6 @@ class Hot extends React.Component{
 								<div data-flex="dir:left">
 										<p className="adv-invest">{item.totalAmount}</p>
 										<p className="adv-packetcount">已领{item.usedCount}个</p>
-										<p className="adv-score">{item.score}分</p>
 										<p className="adv-time"><span>{item.duration}</span></p>
 								</div>
 								<h2 className="adv-title ellipsis">{item.title}</h2>

@@ -31,9 +31,16 @@ class List extends React.Component{
                 '<div data-flex="dir:left">'+
                 '<p class="adv-invest">'+item.totalAmount+'</p>'+
                 '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
-                '<p class="adv-score">'+item.score+'分</p>'+
                 '<p class="adv-time"><span>'+item.duration+'</span></p>'+
-                '</div>';       
+                '</div>';            
+
+        // return  '<div><h2 class="ellipsis">'+item.title+'</h2></div>'+
+        //         '<div data-flex="dir:left">'+
+        //         '<p class="adv-invest">'+item.totalAmount+'</p>'+
+        //         '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
+        //         '<p class="adv-score">'+item.score+'分</p>'+
+        //         '<p class="adv-time"><span>'+item.duration+'</span></p>'+
+        //         '</div>';       
     }
     
     render(){
