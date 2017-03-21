@@ -13,9 +13,10 @@
 .hot-wrapper li {
     position: absolute;
     top: 1rem;
-    left: .28rem;
+    left: 50%;
     height: 7.91rem;
     width: 6.94rem;
+    margin-left: -3.47rem;
     transform: translateY(0) scale3d(0.9, 0.9, 0.9);
     -webkit-perspective: 500px;
     -moz-perspective: 500px;
@@ -77,6 +78,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% 100%;
+    background-color: #323232;
 }
 
 .hot-wrapper li > div:nth-child(1):after {

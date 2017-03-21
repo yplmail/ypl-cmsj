@@ -24,7 +24,9 @@ const API = {
     'bindWechat':'user/bindWechat',
     'withdraw':'account/withdraw/wechat',
     'withdrawList':'account/withdraw/list',
-    'feedback':'mine/feedback'
+    'feedback':'mine/feedback',
+    'checkMobile':'user/checkMobile',
+    'isValidplayId' : 'publish/videoPlayRecordValid'
 }
 
 export default API

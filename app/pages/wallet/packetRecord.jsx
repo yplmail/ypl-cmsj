@@ -24,6 +24,8 @@ class PacketRecord extends React.Component{
             3:'#ce1035'               
         }
 
+        this.width = Math.round(common.remRatio() * 1.4);
+
     }
 
     template(item){
@@ -34,7 +36,7 @@ class PacketRecord extends React.Component{
     }
 
     innerHtml(item){
-      return  '<div><img src='+item.coverUrl+'></div>'+
+      return  '<div><img src='+item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+this.width+'></div>'+
               '<div data-flex="dir:top box:mean">'+
               '<div data-flex="dir:left box:last" class="header">'+
               '<h3 class="ellipsis">'+item.title+'</h3><p><span>'+item.amount+'</span>元</p></div>'+

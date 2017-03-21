@@ -52,8 +52,25 @@ class Login extends React.Component{
         });
     }
 
-    handleBlur(){
-
+    handleBlur(event){
+        if(!/^1\d{10}$/.test(this.state.mobile)){
+          return false;
+        }      
+        let val = event.target.value;
+        let server = new ServerRequest();
+        server.post({
+            url : 'checkMobile',
+            data: {
+              mobile : val,           
+            },
+            success:function(response){
+                if(response.isRegister === "true"){
+                    layer.open({content:'您已是香甜诱人的草莓',time:2,end:function(){
+                        location.hash = '/login'
+                    }});
+                }    
+            }.bind(this)
+        });        
     }
 
     handleCode(event){
@@ -178,6 +195,7 @@ class Login extends React.Component{
                         <input id="code" type="tel" placeholder="请输入验证码" name="smsCode" onChange={this.codeChange} maxLength="4"/>
                         <label ref="smsCode" onClick={this.handleCode}>{this.state.codeTips}</label>
                      </li>
+                     
                      <li>
                         <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
                         <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>

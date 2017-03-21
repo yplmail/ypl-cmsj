@@ -10,6 +10,7 @@ class Video extends React.Component{
         };
         this.first  = false;
         this.iscroll = true;
+        this.width = Math.round(common.remRatio() * 2.56);
     }
 
     componentDidMount(){
@@ -65,7 +66,7 @@ class Video extends React.Component{
                       </div>
                   </div>
                   <div>
-                      <img src={item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+width}/>
+                      <img src={item.coverUrl+'?x-oss-process=image/resize,m_lfit,w_'+this.width}/>
                   </div>
               </li>
            )

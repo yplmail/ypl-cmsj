@@ -1,13 +1,13 @@
 ;
 (function(window, document) {
-    var setFontSize = function() {
-        var clientWith = window.innerWidth;
-        if (clientWith > 736) clientWith = 736;
+    var setFontSize = function(callback) {
+        var clientWith = Math.min(window.innerWidth,414);
         var width = clientWith * (window.devicePixelRatio || 1);
         var html = document.querySelector("html");
         html.style.fontSize = (width / 7.5) * (1 / window.devicePixelRatio) + 'px';
         var wrapper = document.querySelector(".container-wrapper");
         wrapper.style.height = window.innerHeight + 'px';
+        callback && callback();
     };
 
     window.addEventListener('load', function() {
@@ -15,7 +15,9 @@
     })
 
     window.addEventListener('resize', function() {
-        setFontSize();
+        // setFontSize(function(){
+        //        //location.reload();
+        // });
     });
 
     Date.prototype.Format = function(fmt) { //author: meizz 

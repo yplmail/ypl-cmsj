@@ -92,7 +92,7 @@ const common = {
         }
     },
 
-    changeTitle(title){
+    changeTitle : (title) => {
         const iframe = document.createElement('iframe');
         iframe.src = '../favicon.ico';
         document.title = title;
@@ -101,6 +101,12 @@ const common = {
             clearTimeout(timer);
             document.body.removeChild(iframe);
         }, 300);        
+    },
+
+    remRatio : () => {
+        let width = Math.min(window.innerWidth,414);
+        
+        return width / 7.5;
     }
 
 }

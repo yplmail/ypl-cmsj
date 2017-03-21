@@ -17,6 +17,8 @@ class Hot extends React.Component{
 		this.touchMove = this.touchMove.bind(this);
 		this.touchEnd = this.touchEnd.bind(this);
 		this.removeNode = this.removeNode.bind(this);
+	    this.height = Math.round(common.remRatio() * 6.82);
+	    // this.width = Math.round(common.remRatio() * 6.94);
 	}
  
 	componentDidMount(){	
@@ -194,10 +196,9 @@ class Hot extends React.Component{
 
 	loop(){
 		if(this.state.items.length > 0){
-			let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
-			let height = 6.82 * fontsize;
+			//alert(this.height);
 			return this.state.items.map((item, index) => {
-				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+height+')' : '';
+				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+this.height+',limit_0)' : '';
 				return (
 						<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} 
 						key={item.publishId} >

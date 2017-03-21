@@ -70,11 +70,37 @@ class Player extends React.Component{
             },
             packet:{
                 packetType      : 0,
-                packetAnimation : this.props.playId ? 'animation' : '',
+                packetAnimation : '',
                 video           : data,
                 playRecordId    : this.props.playId || ''
             }
         });
+
+        if(this.props.playId){
+            this.isOpenPakcet();
+        }
+    }
+
+    isOpenPakcet(){
+        let server = new ServerRequest();
+        server.post({
+            url:'isValidplayId',
+            data:{
+                videoPlayRecordId : this.props.playId
+            },
+            success:function(response){
+                if(response.valid === "true"){
+                    this.setState({
+                        share  :{
+                             display:'none'
+                        },
+                        packet:{
+                             packetAnimation : 'animation'
+                        }
+                    });                    
+                }
+            }.bind(this)
+        })           
     }
 
     /**
