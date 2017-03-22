@@ -1,5 +1,4 @@
-;
-(function(window, document) {
+;(function(window, document) {
     var setFontSize = function(callback) {
         var clientWith = Math.min(window.innerWidth,414);
         var width = clientWith * (window.devicePixelRatio || 1);
@@ -14,7 +13,7 @@
         setFontSize();
     })
 
-    window.addEventListener('resize', function() {
+    window.addEventListener('orientationchange', function() {
         location.reload();
     });
 
