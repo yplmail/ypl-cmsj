@@ -29,28 +29,23 @@ class Detail extends React.Component{
             click:true
         })
         this.setState({scroll : this.scroll});
-    }
-
-  refreshToken(){
-        let server = new ServerRequest();
-        server.post({
-          url:'refreshToken',
-          success:function(response){
-                common.setcookies('token',response.token,7);
-          }
-        });
   }
 
   scoreHandle(){
     // this.setState({
-    //   scoreAnimation:'animation'
+    //  scoreAnimation:'animation'
     // });
+  }
+
+  componentDidUpdate(){
+       var el = document.querySelector('.scroll-wrapper');
+       el.style.height = (window.innerHeight-el.offsetTop) + 'px';
   }
 
   render(){
     return(
       <div className="detail-wrapper">
-         <Player {...this.props.params} handle={this.scoreHandle} />
+             <Player {...this.props.params} handle={this.scoreHandle} />
          <div className="scroll-wrapper">
              <div>
                    <Record {...this.props.params} scroll={this.state.scroll}/>
@@ -58,7 +53,7 @@ class Detail extends React.Component{
                  </div>
          </div>
          <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
-         <Link className="back-button" to='/' style={{display:this.props.params.shareId ? 'block' : 'none'}}></Link>
+         <Link className="back-button" to='/' style={{display:this.props.params.shareId ? 'block':'none'}}></Link>
       </div>
     );
   }

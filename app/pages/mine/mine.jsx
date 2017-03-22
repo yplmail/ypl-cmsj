@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 import common from 'common/common';
+import Scroll from 'scroll/iscroll';
 import ServerRequest from 'server/serverRequest';
 import './mine.css';
 
@@ -23,7 +24,7 @@ class Header extends React.Component{
    getData(){
       let server = new ServerRequest();
       server.post({
-          url: 'home',
+          url:'home',
           maskLayer:true,
           success:function(response){
              this.setState({
@@ -101,27 +102,41 @@ class Mine extends React.Component{
       super(props);
    }
 
-   componentDidMount(){
-        var query = this.props.location.query;
-        if(query.code && query.state){
-            let server = new ServerRequest();
-            server.post({
-                url : 'bindWechat',
-                data:{
-                    code:query.code,
-                    state:query.state
-                }
-            });       
-        }       
-   }
+  componentDidMount(){
+      var query = this.props.location.query;
+      if(query.code && query.state){
+          let server = new ServerRequest();
+          server.post({
+              url : 'bindWechat',
+              data:{
+                  code:query.code,
+                  state:query.state
+              }
+          });       
+      }
+      this.initScroll();       
+  }
 
-   render(){
+  initScroll(){
+    this.scroll = new Scroll('.mine-wrapper', {
+        probeType: 3,
+        click:true
+    })
+
+    setTimeout(function(){
+      this.scroll.refresh();
+    }.bind(this),320)
+  }
+
+  render(){
       return (
-         <div className="mine-wrapper">
-             <Header />
-             <List />
-             <Mask/>
-         </div>
+        <div className="mine-wrapper" style={{height:(window.innerHeight-49) + 'px'}}>
+          <div>
+              <Header />
+              <List />
+              <Mask/>
+          </div>
+        </div>
       )
    }
 }
