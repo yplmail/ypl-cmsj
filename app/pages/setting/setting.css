@@ -14,15 +14,15 @@
 }
 
 .setting-wrapper li:after{
-   content: '';
-   position: absolute;
-   right:.15rem;
-   top:.35rem;
-   display: block;
-   width:.19rem;
-   height:.34rem;
-   background:url(../../images/arrow_right_icon.png) no-repeat;
-   background-size: 100%;
+    content: '';
+    position: absolute;
+    right: .2rem;
+    top: .4rem;
+    display: block;
+    width: .14rem;
+    height: .29rem;
+    background: url(../../images/arrow_right_icon.png) no-repeat;
+    background-size: 100%;;
 }
 
 .setting-wrapper li a{

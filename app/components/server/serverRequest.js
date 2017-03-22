@@ -104,7 +104,7 @@ class ServerRequest {
                     location.hash = '/login';
                 } else if(response.code == 900007){
                     //微信绑定接口
-                    this.error && this.error(response.msg);
+                    //this.error && this.error(response.msg);
                 }else{
                     this.error(response.msg, this.xhr);
                 }

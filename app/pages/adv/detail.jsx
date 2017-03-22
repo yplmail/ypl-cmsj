@@ -37,6 +37,11 @@ class Detail extends React.Component{
 		// });
 	}
 
+	componentDidUpdate(){
+       var el = document.querySelector('.scroll-wrapper');
+       el.style.height = (window.innerHeight-el.offsetTop) + 'px';
+	}
+
 	render(){
 		return(
 			<div className="detail-wrapper">

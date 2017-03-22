@@ -6,7 +6,7 @@
 
 .detail-wrapper .scroll-wrapper {
     overflow: hidden;
-    height: 6rem;
+/*    height: 6rem;*/
 }
 
 .video-wrapper {
@@ -365,7 +365,8 @@
     width: 5.73rem;
     height: 8.69rem;
     top: 2rem;
-    left: .9rem;
+    left:50%;
+    margin-left:-2.865rem;
     background: url(../../images/packet_bg.png) no-repeat;
     background-size: contain;
     text-align: center
@@ -444,7 +445,8 @@
     width: 5.74rem;
     height: 8.66rem;
     top: 2rem;
-    left: .9rem;
+    left: 50%;
+    margin-left:-2.865rem;
     background: url(../../images/packet_result_bg.png) no-repeat;
     background-size: contain;
 }

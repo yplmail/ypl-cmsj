@@ -101,6 +101,20 @@ class Mine extends React.Component{
       super(props);
    }
 
+   componentDidMount(){
+        var query = this.props.location.query;
+        if(query.code && query.state){
+            let server = new ServerRequest();
+            server.post({
+                url : 'bindWechat',
+                data:{
+                    code:query.code,
+                    state:query.state
+                }
+            });       
+        }       
+   }
+
    render(){
       return (
          <div className="mine-wrapper">

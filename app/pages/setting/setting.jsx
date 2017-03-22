@@ -7,7 +7,7 @@ class Setting extends React.Component{
 	constructor(props){
 		super(props);
     this.state = {
-        isBindWechat:''
+        isBindWechat : false
     }
     this.confirm = this.confirm.bind(this);
     this.logout = this.logout.bind(this);
@@ -20,9 +20,15 @@ class Setting extends React.Component{
           maskLayer:true,
           success:function(response){
              if(response.isWechatBinded == 'true'){
-                this.setState({wachat:'已绑定'})
+                this.setState({
+                  isBindWechat : true,
+                  wachat       : '已绑定'
+                })
              }else{
-                this.setState({wachat:'去绑定'})
+                this.setState({
+                  isBindWechat: false,
+                  wachat      : '去绑定'
+                })
              }
           }.bind(this)
       })    
@@ -53,15 +59,21 @@ class Setting extends React.Component{
       })   
   }
 
+  linkHandle(){
+      if(!this.state.isBindWechat){
+          location.href = './redirect.html?scope=snsapi_userinfo';      
+      }
+  }
+
 	render(){
        return(
            <div className="setting-wrapper">
               <ul>
                   <li>
-	                  <Link to="/wechatAuth">
+	                  <a onClick={this.linkHandle} style={{color:this.state.isBindWechat ? '#333' : '#999'}}>
                         <span>微信绑定</span>
     	                  <span>{this.state.wachat}</span>
-                    </Link>
+                    </a>
                   </li>
 
                   <li>

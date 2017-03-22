@@ -217,6 +217,18 @@ class Player extends React.Component{
         document.querySelector('.duration').innerText = this.state.video.duration;
     }
 
+    componentWillUnmount(){
+        this.player.pause();
+        this.player = null;
+        let server = new ServerRequest();
+        server.post({
+            url:'advEndPlay',
+            data:{
+                videoPlayRecordId : this.videoPlayId
+            }
+        })        
+    }
+
     /**
      *  记录开始播放时间
     */

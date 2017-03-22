@@ -19,7 +19,7 @@
     }
     if (data.code) {
         if (data.scope) {
-            location.href = 'https://' + location.hostname + '/#/wechatAuth?code=' + data.code + '&state=' + data.state;
+            location.href = 'https://' + location.hostname + '/#/mine?code=' + data.code + '&state=' + data.state;
         } else {
             location.href = 'https://' + location.hostname + '/#/?code=' + data.code + '&state=' + data.state;
         }

@@ -15,9 +15,7 @@
     })
 
     window.addEventListener('resize', function() {
-        // setFontSize(function(){
-        //        //location.reload();
-        // });
+        location.reload();
     });
 
     Date.prototype.Format = function(fmt) { //author: meizz 
