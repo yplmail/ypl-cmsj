@@ -46,6 +46,7 @@ class Setting extends React.Component{
           url: 'logout',
           maskLayer:true,
           success:function(response){
+            common.setcookies('refreshTokenTime','',-1);
             common.setcookies('token','',-1); 
             location.hash = '/login';
           }.bind(this)

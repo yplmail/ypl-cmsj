@@ -15,6 +15,23 @@ class List extends React.Component{
         this.width = Math.round(common.remRatio() * 7.5);
     }
 
+    componentDidMount(){
+        if(!common.getcookies('refreshTokenTime') && common.getcookies('token')){
+            this.refreshToken();
+        }
+    }
+
+    refreshToken(){
+        let server = new ServerRequest();
+        server.post({
+            url:'refreshToken',
+            success:function(response){
+                common.setcookies('refreshTokenTime',Date.now(),6);
+                common.setcookies('token',response.token,7);
+            }
+        });
+    }
+
     template(item,font){
         let element = document.createElement('li');
         element.setAttribute('id', item.publishId);          
@@ -48,31 +65,6 @@ class List extends React.Component{
             <div className="adv-list-wrapper" style={{height:(window.innerHeight-49) + 'px'}}>
                 <Scroll {...this.data} />
             </div>
-        )
-    }
-}
-
-class ListItem extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    handler(event){
-       location.hash = '/detail/' + event.currentTarget.getAttribute('id')
-    }
-
-    render(){
-        let coverUrl = this.props.item.coverUrl ?'url('+this.props.item.coverUrl+')' : '';
-        return(
-            <li id={this.props.item.publishId} style={{backgroundImage : coverUrl}} onClick={this.handler} >
-                <div><h2 className="ellipsis">{this.props.item.title}</h2></div>
-                <div data-flex="dir:left">
-                    <p className="adv-invest">{this.props.item.totalAmount}元</p>
-                    <p className="adv-packetcount">已领{this.props.item.usedCount}个</p>
-                    <p className="adv-score">{this.props.item.score}分</p>
-                    <p className="adv-time"><span>{this.props.item.duration}</span></p>
-                </div>
-            </li>
         )
     }
 }

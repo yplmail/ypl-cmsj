@@ -31,16 +31,6 @@ class Detail extends React.Component{
         this.setState({scroll : this.scroll});
     }
 
-	refreshToken(){
-        let server = new ServerRequest();
-        server.post({
-        	url:'refreshToken',
-        	success:function(response){
-                common.setcookies('token',response.token,7);
-        	}
-        });
-	}
-
 	scoreHandle(){
 		// this.setState({
 		// 	scoreAnimation:'animation'

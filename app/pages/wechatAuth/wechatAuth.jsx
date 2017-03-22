@@ -24,7 +24,9 @@ class Login extends React.Component{
                     }.bind(this)});              
                 },
                 error:function(msg){
-                    layer.open({content:msg,time:2});
+                    layer.open({content:msg,time:2,end:function(index){
+                        location.hash = '/mine';
+                    }.bind(this)});
                 }
             });       
         }

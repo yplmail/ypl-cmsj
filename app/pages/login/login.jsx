@@ -87,6 +87,7 @@ class Login extends React.Component{
               pwd    : md5(this.state.pwd),              
             },
             success:function(response){
+                common.setcookies('refreshTokenTime',Date.now(),1/144);
                 common.setcookies('token',response.token,7);
                 let params = this.props.params;
                 if(params.videoId && params.playId){
