@@ -134,8 +134,8 @@ class Mine extends React.Component{
           <div>
               <Header />
               <List />
-              <Mask/>
           </div>
+          <Mask/>
         </div>
       )
    }

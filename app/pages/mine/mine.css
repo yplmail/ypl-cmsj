@@ -118,7 +118,7 @@
 }
 
 .mine-mask-wrapper {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -127,11 +127,9 @@
     text-align: center;
 }
 
-
 .mine-mask-wrapper .mask-content a:first-child {
     margin-right: .5rem;
 }
-
 
 .mine-mask-wrapper .cercle {
     position: absolute;
