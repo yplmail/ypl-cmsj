@@ -22,7 +22,11 @@ class Record extends React.Component{
     }
 
     componentDidUpdate(){
-        this.iscroll && this.iscroll.refresh();
+        if(this.iscroll){
+            setTimeout(function(){
+                this.iscroll.refresh();           
+            }.bind(this),320)            
+        }
     } 
 
     getList(){

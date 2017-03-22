@@ -9,7 +9,6 @@ class Video extends React.Component{
            videoList : []
         };
         this.first  = false;
-        this.iscroll = true;
         this.width = Math.round(common.remRatio() * 2.56);
     }
 
@@ -24,7 +23,11 @@ class Video extends React.Component{
     }
 
     componentDidUpdate(){
-        this.iscroll && this.iscroll.refresh();
+        if(this.iscroll){          
+            setTimeout(function(){
+                this.iscroll.refresh();           
+            }.bind(this),320)            
+        }
     }   
 
     getVideos(){
