@@ -14,6 +14,7 @@
     })
 
     window.addEventListener('orientationchange', function() {
+        location.reload();
         var timer = setTimeout(function(){
             clearTimeout(timer);
             location.reload();
