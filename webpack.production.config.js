@@ -89,13 +89,13 @@ var webpackConfig = module.exports = {
             chunksSortMode: 'dependency',
             inject: true,
             hash: true
-        }), 
+        }),
 
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, './dist/redirect.html'),
             template: './app/redirect.html',
             inject: false
-        })         
+        })
     ],
     postcss: [
         require('autoprefixer')({

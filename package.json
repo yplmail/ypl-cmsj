@@ -6,10 +6,11 @@
   "scripts": {
     "lint": "eslint 'app/**/*.@(js|jsx)'",
     "lint:msg": "validate-commit-msg",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "webpack-dev-server --devtool eval --progress --hot --colors --host 0.0.0.0 --content-base app",
-    "production": "webpack -p --config webpack.production.config.js",
+    "development": "webpack -p --config webpack.production.config.js",
+    "preventive" : "webpack -p --config webpack.production.config.js",
+    "production" : "webpack -p --config webpack.production.config.js",
     "validate": "npm ls",
     "commit": "git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1"

@@ -1,7 +1,7 @@
 
 const ENVIRONMENT = {
     development: 'https://preapi.springrass.com/rest/',
-    test       : 'https://preapi.springrass.com/rest/',
+    preventive : 'https://preapi.springrass.com/rest/',
     production : 'https://api.springrass.com/rest/'
 }
 
