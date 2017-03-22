@@ -24,7 +24,8 @@ class Video extends React.Component{
 
     componentDidUpdate(){
         if(this.iscroll){          
-            setTimeout(function(){
+            let timer = setTimeout(function(){
+                clearTimeout(timer);
                 this.iscroll.refresh();           
             }.bind(this),320)            
         }

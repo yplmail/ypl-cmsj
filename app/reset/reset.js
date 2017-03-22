@@ -14,7 +14,10 @@
     })
 
     window.addEventListener('orientationchange', function() {
-        location.reload();
+        var timer = setTimeout(function(){
+            clearTimeout(timer);
+            location.reload();
+        },320)
     });
 
     Date.prototype.Format = function(fmt) { //author: meizz 
