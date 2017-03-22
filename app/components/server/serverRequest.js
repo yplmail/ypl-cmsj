@@ -24,7 +24,7 @@ class ServerRequest {
             app_version: '1.0.0',
             api_version: '1.0.0',
             token : common.getcookies('token'),
-            timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")    
+            timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")
         }
     }
 
@@ -50,9 +50,11 @@ class ServerRequest {
         }
 
         let arr = [];
-        
+
         for (let d in this.data) {
-            arr.push(d + '=' + encodeURIComponent(this.data[d]));
+            if(this.data[d]){
+                arr.push(d + '=' + encodeURIComponent(this.data[d]));
+            }
         }
 
         let str = arr.join("&");
@@ -62,7 +64,7 @@ class ServerRequest {
         } else {
             this.url = this.domain + API[this.url] + '?' + Date.now();
         }
-       
+
         if(this.maskLayer){
             layer.open({type: 2});
         }
@@ -87,7 +89,7 @@ class ServerRequest {
         }
     }
 
-    _complete() {  
+    _complete() {
         layer.closeAll();
         var head = this.xhr.getAllResponseHeaders();
         var response = this.xhr.responseText;
