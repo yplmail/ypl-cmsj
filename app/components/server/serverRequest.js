@@ -99,6 +99,7 @@ class ServerRequest {
                 this._success(response.data);
             } else {
                 if(response.code == 900003){
+                    common.setcookies('token','',-1);
                     location.hash = '/login';
                 } else if(response.code == 900007){
                     //微信绑定接口

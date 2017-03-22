@@ -48,7 +48,6 @@ class Detail extends React.Component{
 	}
 
 	render(){
-
 		return(
 			<div className="detail-wrapper">
 	           <Player {...this.props.params} handle={this.scoreHandle} />
