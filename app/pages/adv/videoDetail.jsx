@@ -42,15 +42,15 @@ class Detail extends React.Component{
   }
 
   scoreHandle(){
-    this.setState({
-      scoreAnimation:'animation'
-    });
+    // this.setState({
+    //   scoreAnimation:'animation'
+    // });
   }
 
   render(){
     return(
       <div className="detail-wrapper">
-             <Player {...this.props.params} handle={this.scoreHandle} />
+         <Player {...this.props.params} handle={this.scoreHandle} />
          <div className="scroll-wrapper">
              <div>
                    <Record {...this.props.params} scroll={this.state.scroll}/>

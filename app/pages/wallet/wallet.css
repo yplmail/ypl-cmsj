@@ -50,7 +50,7 @@
 
 .wallet-wrapper .wallet-list li {
     height: 1.48rem;
-    border-bottom: 1px solid #d2d2d2;
+    border-bottom: 1px solid #eee;
     text-align: center;
     font-size: 14px;
     margin: 0 .36rem;
@@ -59,7 +59,7 @@
 
 .wallet-scroll,.transfer-scroll{
     overflow: hidden;
-    height:10.36rem;
+    height:9rem;
 }
 
 .wallet-scroll li > div {
@@ -79,7 +79,6 @@
 .wallet-scroll .header h3 {
     font-size: 15px;
     color: #333;
-/*    font-weight: 700;*/
     width:3.5rem;
 }
 

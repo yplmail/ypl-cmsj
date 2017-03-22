@@ -42,9 +42,9 @@ class Detail extends React.Component{
 	}
 
 	scoreHandle(){
-		this.setState({
-			scoreAnimation:'animation'
-		});
+		// this.setState({
+		// 	scoreAnimation:'animation'
+		// });
 	}
 
 	render(){

@@ -485,7 +485,17 @@
     left: 0;
     text-align: center;
     width: 100%;
+}
+
+.packet-wrapper .packet-money a{
     font-size: 43px;
+    color: #fcbf81;
+}
+
+.packet-wrapper .packet-money a:before {
+    position: relative;
+    content: '￥';
+    font-size: 24px;
     color: #fcbf81;
 }
 
@@ -495,15 +505,11 @@
     left: 0;
     text-align: center;
     width: 100%;
-    font-size: 12px;
-    color: #fff;
 }
 
-.packet-wrapper .packet-money:before {
-    position: relative;
-    content: '￥';
-    font-size: 24px;
-    color: #fcbf81;
+.packet-wrapper .packet-account a{
+    font-size: 12px;
+    color: #fff;
 }
 
 .packet-wrapper .packet-ranking {
