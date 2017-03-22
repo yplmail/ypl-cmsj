@@ -21,16 +21,25 @@ class Scroll extends React.Component{
 
         this.callback  = props.callback || function(){};
 
+        this.end       = props.end      || function(){};
+
+        this.refreshScroll = this.refreshScroll.bind(this);
+
         this.datas['pageIndex']  = this.pageIndex;
 
         this.datas['pageSize']   = this.pageSize;
 
-        this.up = true;    
+        this.up = true;
     }
 
     componentDidMount(){
         this.instance();
         this.fetchDatas();
+        document.addEventListener('orientationchange',this.refreshScroll, false);
+    }
+
+    refreshScroll(){
+        location.reload();
     }
 
     instance(){
@@ -55,13 +64,13 @@ class Scroll extends React.Component{
          * 立即结束上轮没有结束的请求
          */
         this.server.xhr.abort();
-  
+
         if(this.iscroll.directionY == -1){
             this.up = false;
-            this.refs.downLoadingTips.innerText = '下拉刷新';         
+            this.refs.downLoadingTips.innerText = '下拉刷新';
         }else{
             this.up = true;
-            this.refs.upLoadingTips.innerText   = '上拉加载';     
+            this.refs.upLoadingTips.innerText   = '上拉加载';
         }
     }
 
@@ -81,7 +90,7 @@ class Scroll extends React.Component{
          * this.iscroll.scrollTo(0,this.iscroll.maxScrollY + 40,500);
          */
         if(this.iscroll.directionY == -1){
-            this.up = true;     
+            this.up = true;
         }
 
         /**
@@ -112,8 +121,8 @@ class Scroll extends React.Component{
                 let timer = setTimeout(function(){
                     clearTimeout(timer);
                     if(this.up){
-                        this.iscroll.scrollTo(0,this.iscroll.maxScrollY + 40,500); 
-                        this.iscroll.refresh();                        
+                        this.iscroll.scrollTo(0,this.iscroll.maxScrollY + 40,500);
+                        this.iscroll.refresh();
                     }
                 }.bind(this),320);
             }
@@ -133,11 +142,11 @@ class Scroll extends React.Component{
     }
 
     dealwith(result){
-        
+
         if(this.pageIndex == 1) {
-            this.refs.downLoadingTips.innerText = '刷新成功';              
+            this.refs.downLoadingTips.innerText = '刷新成功';
         }else{
-            this.refs.upLoadingTips.innerText   = '加载成功'; 
+            this.refs.upLoadingTips.innerText   = '加载成功';
         }
 
         if(result.totalCount == 0){
@@ -154,6 +163,7 @@ class Scroll extends React.Component{
     }
 
     noDatas(){
+       this.end()
        this.refs.srcollcontainer.innerHTML='<div class="no-data">暂无相关数据</div>';
     }
 
@@ -174,15 +184,17 @@ class Scroll extends React.Component{
 
         if(this.pageIndex == 1){
             this.refs.srcollcontainer.innerHTML = "";
-        }      
+        }
 
         let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
 
         let container = this.refs.srcollcontainer;
-        
+
         datas.forEach(function(data,index){
-            container.appendChild(this.callback(data,fontsize));            
+            container.appendChild(this.callback(data,fontsize));
         }.bind(this));
+
+        this.end();
 
         this.wrapper = document.querySelector(this.element);
 
@@ -193,7 +205,7 @@ class Scroll extends React.Component{
         if(container.offsetHeight < numH){
             container.style.height = wrapperHeight;
         }
-          
+
         let timer = setTimeout(function(){
             clearTimeout(timer);
             this.ended();
@@ -202,15 +214,15 @@ class Scroll extends React.Component{
 
     ended(){
         if(this.pageIndex == 1){
-            this.iscroll.scrollTo(0,-40,500);                
+            this.iscroll.scrollTo(0,-40,500);
         }else{
-            this.iscroll.scrollTo(0 , this.iscroll.maxScrollY + 40 , 500); 
+            this.iscroll.scrollTo(0 , this.iscroll.maxScrollY + 40 , 500);
         }
-        this.iscroll.refresh();          
+        this.iscroll.refresh();
     }
 
     styles(el){
-        return el.currentStyle ? el.currentStyle : document.defaultView.getComputedStyle(el, null);                 
+        return el.currentStyle ? el.currentStyle : document.defaultView.getComputedStyle(el, null);
     }
 
     render(){
@@ -240,9 +252,13 @@ class Scroll extends React.Component{
                             <p ref="upLoadingTips">上拉加载</p>
                         </div>
                     </div>
-                </div>                    
+                </div>
             </div>
         );
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener('orientationchange',this.refreshScroll,false)
     }
 }
 

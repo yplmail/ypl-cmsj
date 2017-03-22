@@ -22,7 +22,7 @@ class Wallet extends React.Component{
                     account : response
 				});
 			}.bind(this)
-		}) 
+		})
     }
 
     transfer(event){
@@ -34,8 +34,8 @@ class Wallet extends React.Component{
     		layer.open({
     			content:'账户余额不足',
     			time : 2
-    		}) 
-    		return false;   		
+    		})
+    		return false;
     	}
     	if(value > amount){
     		layer.open({
@@ -53,7 +53,7 @@ class Wallet extends React.Component{
 				layer.close(index);
 				this.withdraw(value);
 			}.bind(this)
-		});     	
+		});
     }
 
     withdraw(amt){
@@ -72,12 +72,12 @@ class Wallet extends React.Component{
 	    			}.bind(this)
 	    		})
 			}.bind(this)
-		}) 
+		})
     }
 
 	render(){
        return(
-           <div className="transfer-wrapper">
+           <div className="transfer-wrapper" style={{height:window.innerHeight+"px"}}>
 	           <div className="conent">
 		           <div className="account-amount">
 			           <span>账户零钱：</span>
@@ -108,7 +108,7 @@ class Wallet extends React.Component{
 	           </div>
            </div>
        )
-	}	
+	}
 }
 
 export default Wallet;

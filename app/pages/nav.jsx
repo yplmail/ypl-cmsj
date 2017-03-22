@@ -18,9 +18,9 @@ class Nav extends React.Component{
     }
 
 	componentDidMount(){
-		this.wrapper = document.querySelector('.container')
-		this._preventDefault = function (e){ e.preventDefault(); }
-		this.wrapper.addEventListener('touchmove', this._preventDefault);
+		// this.wrapper = document.querySelector('.container')
+		// this._preventDefault = function (e){ e.preventDefault(); }
+		// this.wrapper.addEventListener('touchmove', this._preventDefault);
 	}
 
 	componentWillReceiveProps(props){
@@ -33,9 +33,9 @@ class Nav extends React.Component{
         	this.setState({'display':'block'});
         }else{
         	this.setState({'display':'none'});
-        }		
+        }
 	}
-  
+
 	render(){
        return(
        	   <div className="container">

@@ -11,7 +11,7 @@ class About extends React.Component{
 
 	render(){
 		return(
-           <div className="about-wrapper">
+           <div className="about-wrapper" style={{height:window.innerHeight+"px"}}>
               <div className="product-logo"></div>
               <h1>草莓视界</h1>
               <p>V 0.1</p>

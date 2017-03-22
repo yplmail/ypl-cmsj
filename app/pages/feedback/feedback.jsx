@@ -18,7 +18,7 @@ class Feedback extends React.Component{
 	changeHandle(event){
 		this.setState({
 			content : event.target.value
-		});        
+		});
 	}
 
 	focusHandle(event){
@@ -34,7 +34,7 @@ class Feedback extends React.Component{
 			this.setState({
 				content : '我的成长离不开您宝贵的意见'
 			});
-		}		
+		}
 	}
 
 	submitHandle(){
@@ -47,7 +47,7 @@ class Feedback extends React.Component{
 			layer.open({content:'请至少输入20位长度的反馈意见',time:2});
 			return false;
 		}
-      
+
         this.submit();
 	}
 
@@ -69,27 +69,27 @@ class Feedback extends React.Component{
 
 	render(){
        return(
-           <div className="feedback-wrapper">
+           <div className="feedback-wrapper" style={{height:window.innerHeight+"px"}}>
                 <div className="feedback-content">
 	                <div className="nav-tab">请填写您反馈的意见：</div>
 
 	                <div className="feedback-area">
-		                <textarea 
-		                onChange={this.changeHandle} 
-		                onFocus={this.focusHandle} 
+		                <textarea
+		                onChange={this.changeHandle}
+		                onFocus={this.focusHandle}
 		                onBlur ={this.blurHandle}
 		                value={this.state.content}
 		                maxLength="256">
 		                </textarea>
-	                </div>	
+	                </div>
 
 	                <div className="feedback-btn" onClick={this.submitHandle}>
                         提交
-	                </div>                
-                </div>	
+	                </div>
+                </div>
            </div>
        )
-	}	
+	}
 }
 
 export default Feedback;

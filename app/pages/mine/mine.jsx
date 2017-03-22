@@ -30,7 +30,7 @@ class Header extends React.Component{
              this.setState({
                 nickname: response.nickname    ||  '不仅仅是看客',
                 amount  : response.totalIncome || '0.00',
-                url     : response.faceUrl ? 'url('+response.faceUrl+')' : ''           
+                url     : response.faceUrl ? 'url('+response.faceUrl+')' : ''
              });
           }.bind(this)
       })
@@ -74,7 +74,7 @@ class List extends React.Component{
 class Mask extends React.Component{
    constructor(props){
       super(props);
-      this.state = {       
+      this.state = {
          display : 'none'
       }
    }
@@ -112,9 +112,9 @@ class Mine extends React.Component{
                   code:query.code,
                   state:query.state
               }
-          });       
+          });
       }
-      this.initScroll();       
+      //this.initScroll();
   }
 
   initScroll(){

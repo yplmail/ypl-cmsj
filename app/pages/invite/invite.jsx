@@ -15,7 +15,7 @@ class Invite extends React.Component{
 
 	shareHandle(event){
 		let tk = common.getcookies('token');
-		let shareId = tk ? tk.split("_")[1] : '';	
+		let shareId = tk ? tk.split("_")[1] : '';
         this.setState({
         	share:{
 				display : 'block',
@@ -29,7 +29,7 @@ class Invite extends React.Component{
 
 	render(){
 		return(
-           <div className="invite-wrapper">
+           <div className="invite-wrapper" style={{height:window.innerHeight+"px"}}>
 				<div className="invite-content" >
 					<h1>一起去发现创意的美</h1>
 					<h2><span>分享到微信</span></h2>

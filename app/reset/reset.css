@@ -27,7 +27,7 @@ time, mark, audio, video, input {
 html {
     background-color: #eeeff3;
     -webkit-text-size-adjust: 100%;
-/*    overflow: hidden;*/
+    overflow: hidden;
 }
 
 html * {

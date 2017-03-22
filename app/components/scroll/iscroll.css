@@ -95,13 +95,13 @@
 
     75% {
         transform: scale3d(0,10px,0);
-    } 
+    }
 
     100% {
         transform: scale3d(0,0,0);
         display: none;
-    }   
- } 
+    }
+ }
 
  @-webkit-keyframes hide{
      0% {
@@ -118,13 +118,13 @@
 
     75% {
         transform: scale3d(0,10px,0);
-    } 
+    }
 
     100% {
         transform: scale3d(0,0,0);
         display: none;
-    }  
- } 
+    }
+ }
 
 .hidden{
     animation: hide 0.5s 0.5s 1;

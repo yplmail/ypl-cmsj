@@ -31,7 +31,7 @@ class Setting extends React.Component{
                 })
              }
           }.bind(this)
-      })    
+      })
   }
 
   confirm(){
@@ -43,7 +43,7 @@ class Setting extends React.Component{
               layer.close(index);
               this.logout();
           }.bind(this)
-      });    
+      });
   }
 
   logout(){
@@ -53,21 +53,21 @@ class Setting extends React.Component{
           maskLayer:true,
           success:function(response){
             common.setcookies('refreshTokenTime','',-1);
-            common.setcookies('token','',-1); 
+            common.setcookies('token','',-1);
             location.hash = '/login';
           }.bind(this)
-      })   
+      })
   }
 
   linkHandle(){
       if(!this.state.isBindWechat){
-          location.href = './redirect.html?scope=snsapi_userinfo';      
+          location.href = './redirect.html?scope=snsapi_userinfo';
       }
   }
 
 	render(){
        return(
-           <div className="setting-wrapper">
+           <div className="setting-wrapper" style={{height:window.innerHeight+"px"}}>
               <ul>
                   <li>
 	                  <a onClick={this.linkHandle} style={{color:this.state.isBindWechat ? '#333' : '#999'}}>
@@ -79,11 +79,11 @@ class Setting extends React.Component{
                   <li>
 	                  <Link to="/modifyPassword">修改密码</Link>
                   </li>
-              </ul>  
-              <div className="setting-btn" onClick={this.confirm}>退出当前账号</div>               
+              </ul>
+              <div className="setting-btn" onClick={this.confirm}>退出当前账号</div>
            </div>
        )
-	}	
+	}
 }
 
 export default Setting;

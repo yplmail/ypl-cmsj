@@ -55,22 +55,22 @@ class Login extends React.Component{
     handleBlur(event){
         if(!/^1\d{10}$/.test(this.state.mobile)){
           return false;
-        }      
+        }
         let val = event.target.value;
         let server = new ServerRequest();
         server.post({
             url : 'checkMobile',
             data: {
-              mobile : val,           
+              mobile : val,
             },
             success:function(response){
                 if(response.isRegister === "true"){
                     layer.open({content:'您已是香甜诱人的草莓',time:2,end:function(){
                         location.hash = '/login'
                     }});
-                }    
+                }
             }.bind(this)
-        });        
+        });
     }
 
     handleCode(event){
@@ -101,9 +101,9 @@ class Login extends React.Component{
                         this.setState({'codeTips':"重新获取"});
                         clearInterval(this.timer);
                     }
-                }.bind(this),1000);  
+                }.bind(this),1000);
             }.bind(this)
-        });      
+        });
     }
 
     changePasswordType(){
@@ -116,7 +116,7 @@ class Login extends React.Component{
         this.setState({
             passwordType: type,
             background  : url
-        });     
+        });
     }
 
     validate(){
@@ -136,7 +136,7 @@ class Login extends React.Component{
         if(!/\d{4}/.test(this.state.smsCode)){
           layer.open({content:'请输入正确的短信验证码',time:2});
           return false;
-        } 
+        }
 
         if(this.state.pwd == ''){
           layer.open({content:'请设置您的登录密码',time:2});
@@ -145,7 +145,7 @@ class Login extends React.Component{
         if(this.state.pwd.length < 6 || this.state.pwd.length > 20){
           layer.open({content:'请输入6-20字符的密码',time:2});
           return false;
-        }   
+        }
         this.registerHandler();
     }
 
@@ -154,7 +154,7 @@ class Login extends React.Component{
         let data = {
           mobile : this.state.mobile,
           smsCode: this.state.smsCode,
-          pwd    : md5(this.state.pwd),      
+          pwd    : md5(this.state.pwd),
         }
         if(this.props.params.shareId) {
           data['recommendCode'] = this.props.params.shareId;
@@ -171,7 +171,7 @@ class Login extends React.Component{
                   location.hash="/detail/"+params.videoId+'/'+params.playId;
               }else{
                   // if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                  //     location = './redirect.html';                  
+                  //     location = './redirect.html';
                   // }else{
                   //     location.hash = '/';
                   // }
@@ -183,7 +183,7 @@ class Login extends React.Component{
 
     render(){
         return (
-           <div className="register-wrapper">
+           <div className="register-wrapper" style={{height:window.innerHeight+"px"}}>
                <div className="register-content">
                  <ul>
                      <li>
@@ -196,7 +196,7 @@ class Login extends React.Component{
                         <input id="code" type="tel" placeholder="请输入验证码" name="smsCode" onChange={this.codeChange} maxLength="4"/>
                         <label ref="smsCode" onClick={this.handleCode}>{this.state.codeTips}</label>
                      </li>
-                     
+
                      <li>
                         <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
                         <input id="password" type={this.state.passwordType} placeholder="请设置您的密码" name="pwd" onChange={this.passwordChange} maxLength="20"/>

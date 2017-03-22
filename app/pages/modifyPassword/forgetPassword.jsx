@@ -73,9 +73,9 @@ class ForgetPassword extends React.Component{
                         this.setState({'codeTips':"重新获取"});
                         clearInterval(this.timer);
                     }
-                }.bind(this),1000);  
+                }.bind(this),1000);
             }.bind(this)
-        });      
+        });
     }
 
     changePasswordType(){
@@ -88,7 +88,7 @@ class ForgetPassword extends React.Component{
         this.setState({
             passwordType: type,
             background  : url
-        });     
+        });
     }
 
     validate(){
@@ -108,7 +108,7 @@ class ForgetPassword extends React.Component{
         if(this.state.smsCode.length != 4){
           layer.open({content:'请输入正确的短信验证码',time:2});
           return false;
-        } 
+        }
 
         if(this.state.pwd == ''){
           layer.open({content:'请设置新的登录密码',time:2});
@@ -117,7 +117,7 @@ class ForgetPassword extends React.Component{
         if(this.state.pwd.length < 6 || this.state.pwd.length > 20){
           layer.open({content:'请输入6-20位字符的新密码',time:2});
           return false;
-        }   
+        }
         this.registerHandler();
     }
 
@@ -133,16 +133,16 @@ class ForgetPassword extends React.Component{
             },
             success:function(response){
                 layer.open({content:'密码重置成功！',time:2, end:function(index){
-                    common.setcookies('token','',-1); 
+                    common.setcookies('token','',-1);
                     location.hash = '/login';
-                }.bind(this)});  
+                }.bind(this)});
             }.bind(this)
         });
     }
 
     render(){
         return (
-           <div className="forgetPassword-wrapper">
+           <div className="forgetPassword-wrapper" style={{height:window.innerHeight+"px"}}>
                <div className="forgetPassword-content">
                  <ul>
                      <li>

@@ -59,7 +59,7 @@
 
 .wallet-scroll,.transfer-scroll{
     overflow: hidden;
-    height:9rem;
+    background-color: #fff;
 }
 
 .wallet-scroll li > div {
@@ -89,7 +89,7 @@
 
 .wallet-scroll .header span{
     font-size: 15px;
-    color: #ce1035; 
+    color: #ce1035;
 }
 
 .wallet-scroll .detail p {
@@ -106,7 +106,7 @@
    height: .98rem;
    line-height: .98rem;
    background-color: #dddddd;
-   text-align: center;  
+   text-align: center;
 }
 
 .wallet-list .list-header a{

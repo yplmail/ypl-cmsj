@@ -70,7 +70,7 @@ class Header extends React.Component{
 class Wallet extends React.Component{
     constructor(props){
         super(props);
-        this.state = {       
+        this.state = {
             child  : this.props.params.tab == 2 ? TransferRecord : PacketRecord,
         }
         this.changeTab = this.changeTab.bind(this);
@@ -78,7 +78,7 @@ class Wallet extends React.Component{
 
     componentDidMount(){
         let packet = this.refs.packetRecord;
-        let transfer = this.refs.transferRecord;      
+        let transfer = this.refs.transferRecord;
         if(this.props.params.tab == 2){
             transfer.className='active';
         }else{

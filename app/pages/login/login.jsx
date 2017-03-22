@@ -15,7 +15,7 @@ class Login extends React.Component{
             pwd    : '',
             passwordType:'password',
             background  : 'url('+ClosePassword+')',
-            display:'none'       
+            display:'none'
         }
         this.mobileChange = this.mobileChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
@@ -28,7 +28,7 @@ class Login extends React.Component{
         if(common.isWechat()){
             this.setState({
                 display: 'block'
-            });                 
+            });
         }
     }
 
@@ -84,7 +84,7 @@ class Login extends React.Component{
             maskLayer:true,
             data: {
               mobile : this.state.mobile,
-              pwd    : md5(this.state.pwd),              
+              pwd    : md5(this.state.pwd),
             },
             success:function(response){
                 common.setcookies('refreshTokenTime',Date.now(),6);
@@ -94,9 +94,9 @@ class Login extends React.Component{
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
                     // if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                    //     location = './redirect.html';                  
+                    //     location = './redirect.html';
                     // }else{
-                    //     location.hash = '/';                      
+                    //     location.hash = '/';
                     // }
                     location.hash = '/';
                 }
@@ -111,7 +111,7 @@ class Login extends React.Component{
               linkPath = linkPath + '/' + params.videoId + '/' + params.playId;
           }
           return (
-              <div className="login-wrapper">
+              <div className="login-wrapper" style={{height:window.innerHeight+"px"}}>
                   <div className="login-content">
                       <ul>
                       <li>

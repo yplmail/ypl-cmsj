@@ -18,12 +18,11 @@ class Hot extends React.Component{
 		this.touchEnd = this.touchEnd.bind(this);
 		this.removeNode = this.removeNode.bind(this);
 	    this.height = Math.round(common.remRatio() * 6.82);
-	    // this.width = Math.round(common.remRatio() * 6.94);
 	}
- 
-	componentDidMount(){	
+
+	componentDidMount(){
 		this.initData();
-		this.wrapper = document.querySelector('.container')
+		this.wrapper = document.querySelector('.hot-inner')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault);
 	}
@@ -41,7 +40,7 @@ class Hot extends React.Component{
 				this.pageCount = response.pageCount;
 				this.setState({items:this.state.items.concat(response.datas)});
 			}.bind(this)
-		})   
+		})
 	}
 
 	touchStart(event){
@@ -51,7 +50,7 @@ class Hot extends React.Component{
         this.startPageY = event.touches[0].pageY;
 	}
 
-	touchMove(event){		
+	touchMove(event){
 		let t = event.currentTarget;
 		var zIndex = document.defaultView.getComputedStyle(t,null)['zIndex'] * 1;
 		if(zIndex < 3) return false;
@@ -85,14 +84,14 @@ class Hot extends React.Component{
         }
 
         this.moveAnimation(t,x,y);
- 
-		if(event.touches[0].clientY < 0){	
+
+		if(event.touches[0].clientY < 0){
 			if(x >= 50 || x <= -50){
-				this.silderAnimation(t);				
+				this.silderAnimation(t);
 			}else{
 				this.backAnimation(t);
 			}
-		} 
+		}
 	}
 
 	touchEnd(event){
@@ -103,7 +102,7 @@ class Hot extends React.Component{
         let directionX = event.changedTouches[0].pageX - this.startPageX;
 
         let directionY = event.changedTouches[0].pageY - this.startPageY;
-        
+
 		if(!directionX && !directionY){
             if(event.target.className == "video-play"){
             	//location.hash = '/detail'
@@ -128,7 +127,7 @@ class Hot extends React.Component{
 
 	moveAnimation(t,x,y){
 		t.style.transition= '';
-        t.style.webkitTransition= '';	
+        t.style.webkitTransition= '';
         t.style.transform = 'translate3d('+x+'px, '+y+'px, 0)';
         t.style.webkitTransform = '-webkit-translate3d('+x+'px, '+y+'px, 0)';
 
@@ -137,13 +136,13 @@ class Hot extends React.Component{
 	        t.nextSibling.style.webkitTransition= '-webkit-transform 0.4s linear';
 
 	        t.nextSibling.style.transform = 'translateY(0) scale3d(1,1,1)';
-	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';      	
-        }		
+	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';
+        }
 	}
 
 	backAnimation(t){
         t.style.transition= 'transform 0.2s linear';
-        t.style.webkitTransition= '-webkit-transform 0.2s linear';		
+        t.style.webkitTransition= '-webkit-transform 0.2s linear';
 		t.style.transform = 'translateY(0) scale3d(1,1,1)';
 		t.style.webkitTransform = 'translateY(0) scale3d(1,1,1)';
 
@@ -152,7 +151,7 @@ class Hot extends React.Component{
 	        t.nextSibling.style.webkitTransition= '-webkit-transform 0.2s linear';
 
 	        t.nextSibling.style.transform = 'translateY(25px) scale3d(0.95,0.95,0.95)';
-	        t.nextSibling.style.webkitTransition = '-webkit-translateY(25px) scale3d(0.95,0.95,0.95)';   						
+	        t.nextSibling.style.webkitTransition = '-webkit-translateY(25px) scale3d(0.95,0.95,0.95)';
 		}
 	}
 
@@ -167,27 +166,27 @@ class Hot extends React.Component{
             t.nextSibling.style.transition= 'transform 0.2s linear';
 	        t.nextSibling.style.webkitTransition= '-webkit-transform 0.2s linear';
 	        t.nextSibling.style.transform = 'translateY(0) scale3d(1,1,1)';
-	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';     	  
-	        this.removeNode(t);      	
+	        t.nextSibling.style.webkitTransition = '-webkit-translateY(0) scale3d(1,1,1)';
+	        this.removeNode(t);
         }else{
 	        t.style.transition= 'transform 0.2s linear';
-	        t.style.webkitTransition= '-webkit-transform 0.2s linear';		
+	        t.style.webkitTransition= '-webkit-transform 0.2s linear';
 			t.style.transform = 'translateY(0) scale3d(1,1,1)';
 			t.style.webkitTransform = 'translateY(0) scale3d(1,1,1)';
-        }      
+        }
 	}
 
 	removeNode(t){
-		setTimeout(function(){	        	
-			var parentNode = t.parentNode;   
+		setTimeout(function(){
+			var parentNode = t.parentNode;
 			parentNode.removeChild(t);
 			if(parentNode.childNodes.length <= 3){
 				++this.pageIndex;
 				if(this.pageIndex <= this.pageCount){
-					this.initData();		           	
+					this.initData();
 				}
 			}
-		}.bind(this),320) 
+		}.bind(this),320)
 	}
 
 	linkHandle(videoId){
@@ -199,9 +198,9 @@ class Hot extends React.Component{
 			return this.state.items.map((item, index) => {
 				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+this.height+',limit_0)' : '';
 				return (
-						<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd} 
+						<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd}
 						key={item.publishId} >
-								<div data-flex="main:center cross:center" style={{backgroundImage:coverUrl}} 
+								<div data-flex="main:center cross:center" style={{backgroundImage:coverUrl}}
 								onClick={this.linkHandle.bind(this,item.publishId)}>
 										<span className="video-play"></span>
 								</div>
@@ -212,8 +211,8 @@ class Hot extends React.Component{
 								</div>
 								<h2 className="adv-title ellipsis">{item.title}</h2>
 						</li>
-				)	
-			})        			
+				)
+			})
 		}else if(this.isRefresh){
 			return (<div className="no-data">暂无相关数据</div>)
 		}
@@ -221,11 +220,11 @@ class Hot extends React.Component{
 
 	render(){
        return(
-           <div className="hot-wrapper">
-                <ul>{this.loop()}</ul>
+           <div className="hot-wrapper" style={{height:(window.innerHeight-49)+'px'}}>
+                <ul className="hot-inner">{this.loop()}</ul>
            </div>
        )
-	}	
+	}
 }
 
 export default Hot;

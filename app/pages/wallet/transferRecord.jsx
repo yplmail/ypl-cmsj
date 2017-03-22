@@ -9,8 +9,10 @@ class TransferRecord extends React.Component{
         this.data = {
             el  : '.transfer-scroll',
             url : 'withdrawList',
-            callback : this.template.bind(this)
+            callback : this.template.bind(this),
+            end      : this.setHeight.bind(this)
         }
+
         this.originType = {
             1:'观看获赠',
             2:'分享获赠',
@@ -28,6 +30,13 @@ class TransferRecord extends React.Component{
             1:'微信红包',
             2:'微信零钱'
         }
+    }
+
+    setHeight(){
+         let top = document.querySelector('.wallet-list').offsetTop;
+         let height = Math.round(common.remRatio() * 0.98);
+         let scrollH = window.innerHeight - top - height;
+         document.querySelector('.transfer-scroll').style.height = scrollH + 'px';
     }
 
     template(item){
@@ -49,12 +58,12 @@ class TransferRecord extends React.Component{
                '<div data-flex="dir:top box:mean main:right">'+
                '<p>'+item.amount+'元</p>'+
                '<p style="color:'+c+'">'+this.status[item.status]+'</p>'+
-               '</div>';    
+               '</div>';
     }
 
     render(){
-       return(       		
-			<div className="transfer-scroll">
+       return(
+			<div className="transfer-scroll" >
 				<Scroll {...this.data} />
 			</div>
        )
