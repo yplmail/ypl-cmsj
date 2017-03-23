@@ -5,6 +5,7 @@
     background-color: #eee;
     background: url(../../images/login_bg.png) no-repeat;
     background-size: cover;
+    overflow: hidden;
 }
 
 .login-content {

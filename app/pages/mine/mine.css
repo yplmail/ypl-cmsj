@@ -19,7 +19,7 @@
 .mine-header-wrapper .personal-header {
     background: url(../../images/mine_header_bg.png) no-repeat;
     background-size: 100% 100%;
-    width:100%;
+    width: 100%;
     text-align: center;
 }
 
@@ -118,12 +118,12 @@
 }
 
 .mine-mask-wrapper {
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0,.2);
+    background-color: rgba(0, 0, 0, .2);
     text-align: center;
 }
 
@@ -155,7 +155,7 @@
     margin-left: -0.6rem;
     border-radius: 50%;
     z-index: 100;
-    transform: scale(.96,.96);
+    transform: scale(.96, .96);
     background: #ddd;
 }
 

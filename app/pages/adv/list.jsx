@@ -10,7 +10,8 @@ class List extends React.Component{
         this.data = {
             el  : '.adv-list-wrapper',
             url : 'advList',
-            callback : this.template.bind(this)
+            createNode : this.template.bind(this),
+            refreshScroll: this.refreshScroll.bind(this)
         };
         this.width = Math.round(common.remRatio() * 7.5);
     }
@@ -30,6 +31,14 @@ class List extends React.Component{
                 common.setcookies('token',response.token,7);
             }
         });
+    }
+
+    refreshScroll(scroll){ 
+        let timer = setTimeout(function(){
+            clearTimeout(timer);
+            document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight-49) + 'px';
+            scroll.refresh();         
+        }.bind(this),320)
     }
 
     template(item,font){

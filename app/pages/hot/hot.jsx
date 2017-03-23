@@ -25,6 +25,11 @@ class Hot extends React.Component{
 		this.wrapper = document.querySelector('.hot-inner')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault);
+		// document.addEventListener('orientationchange',function(event){
+  //          if(window.orientation == 0){
+  //             location.reload();
+  //          }
+		// }, false);
 	}
 
 	initData(){
@@ -55,7 +60,7 @@ class Hot extends React.Component{
 		var zIndex = document.defaultView.getComputedStyle(t,null)['zIndex'] * 1;
 		if(zIndex < 3) return false;
         //向上滑动最大距离
-        let moveMaxTop = t.offsetHeight+ t.offsetTop - 20;
+        let moveMaxTop = t.offsetHeight + t.offsetTop - 20;
         //向下滑动最大距离
         var footerHeight = document.querySelector('.nav-wrapper').offsetHeight
         let moveMaxBottom = window.innerHeight - t.offsetTop - footerHeight - 20;

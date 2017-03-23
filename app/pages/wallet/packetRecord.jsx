@@ -9,8 +9,8 @@ class PacketRecord extends React.Component{
         this.data = {
             el  : '.wallet-scroll',
             url : 'rewardList',
-            callback : this.template.bind(this),
-            end      : this.setHeight.bind(this)
+            createNode : this.template.bind(this),
+            refreshScroll : this.refreshHeight.bind(this)
         }
 
         this.originType = {
@@ -28,11 +28,15 @@ class PacketRecord extends React.Component{
         this.width = Math.round(common.remRatio() * 1.4);
     }
 
-    setHeight(){
-         let top = document.querySelector('.wallet-list').offsetTop;
-         let height = Math.round(common.remRatio() * 0.98);
-         let scrollH = window.innerHeight - top - height;
-         document.querySelector('.wallet-scroll').style.height = scrollH + 'px';
+    refreshHeight(scroll,t){
+        let timer = setTimeout(function(){
+            clearTimeout(timer);
+            let top = document.querySelector('.wallet-list').offsetTop;
+            let height = Math.round(common.remRatio() * 0.98);
+            let scrollH = window.innerHeight - top - height;
+            document.querySelector('.wallet-scroll').style.height = scrollH + 'px';
+            scroll.refresh();         
+        }.bind(this),t)
     }
 
     template(item){

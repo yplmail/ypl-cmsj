@@ -19,11 +19,11 @@ class Scroll extends React.Component{
 
         this.datas     = props.datas || {};
 
-        this.callback  = props.callback || function(){};
+        this.refresh   = this.refresh.bind(this);
 
-        this.end       = props.end      || function(){};
+        this.createNode    = props.createNode || function(){};
 
-        this.refreshScroll = this.refreshScroll.bind(this);
+        this.refreshScroll = props.refreshScroll || function(){};
 
         this.datas['pageIndex']  = this.pageIndex;
 
@@ -35,11 +35,11 @@ class Scroll extends React.Component{
     componentDidMount(){
         this.instance();
         this.fetchDatas();
-        document.addEventListener('orientationchange',this.refreshScroll, false);
+        document.addEventListener('orientationchange',this.refresh, false);
     }
 
-    refreshScroll(){
-        location.reload();
+    refresh(){
+        this.refreshScroll(this.iscroll,320);
     }
 
     instance(){
@@ -163,7 +163,7 @@ class Scroll extends React.Component{
     }
 
     noDatas(){
-       this.end()
+       this.refreshScroll(this.iscroll,0);
        this.refs.srcollcontainer.innerHTML='<div class="no-data">暂无相关数据</div>';
     }
 
@@ -191,10 +191,10 @@ class Scroll extends React.Component{
         let container = this.refs.srcollcontainer;
 
         datas.forEach(function(data,index){
-            container.appendChild(this.callback(data,fontsize));
+            container.appendChild(this.createNode(data,fontsize));
         }.bind(this));
 
-        this.end();
+        this.refreshScroll(this.iscroll,0);
 
         this.wrapper = document.querySelector(this.element);
 
@@ -258,7 +258,7 @@ class Scroll extends React.Component{
     }
 
     componentWillUnmount(){
-        document.removeEventListener('orientationchange',this.refreshScroll,false)
+        document.removeEventListener('orientationchange',this.refresh,false)
     }
 }
 

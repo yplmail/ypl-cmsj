@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 import common from 'common/common';
-import Scroll from 'scroll/iscroll';
 import ServerRequest from 'server/serverRequest';
 import './mine.css';
 
@@ -114,18 +113,6 @@ class Mine extends React.Component{
               }
           });
       }
-      //this.initScroll();
-  }
-
-  initScroll(){
-    this.scroll = new Scroll('.mine-wrapper', {
-        probeType: 3,
-        click:true
-    })
-
-    setTimeout(function(){
-      this.scroll.refresh();
-    }.bind(this),320)
   }
 
   render(){
