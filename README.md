@@ -26,9 +26,21 @@ $ cnpm install
 
 Then, launch the springrass app.
 
-```bash
+```development
 $ npm run start
 ```
+
+
+```preventive
+$ npm run preventive
+```
+
+
+```production
+$ npm run production
+```
+
+
 
 ## License
 
