@@ -209,6 +209,9 @@ class Player extends React.Component{
         this.player.on('ended',function(){
                 document.querySelector('.prism-player').style.display = 'none';
                 document.querySelector('.video-cover').style.display  = 'block';
+                if(this.player.getIsFullScreen()){
+                    this.player.cancelFullScreen();                   
+                }
                 if(this.videoPlayId){
                     this.end();
                 }

@@ -11,6 +11,7 @@ class Setting extends React.Component{
     }
     this.confirm = this.confirm.bind(this);
     this.logout = this.logout.bind(this);
+    this.linkHandle = this.linkHandle.bind(this);
 	}
 
   componentDidMount(){
@@ -70,7 +71,7 @@ class Setting extends React.Component{
            <div className="setting-wrapper" style={{height:window.innerHeight+"px"}}>
               <ul>
                   <li>
-	                  <a onClick={this.linkHandle} style={{color:this.state.isBindWechat ? '#333' : '#999'}}>
+	                  <a onClick={this.linkHandle} style={{color:this.state.isBindWechat ? '#999' : '#333'}}>
                         <span>微信绑定</span>
     	                  <span>{this.state.wachat}</span>
                     </a>

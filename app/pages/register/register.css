@@ -19,6 +19,10 @@
     border-radius: 8px;
 }
 
+.register-content li input{
+    appearance: none;   
+}
+
 .register-content li:nth-child(1){
     overflow: hidden;
     margin-bottom: .3rem;

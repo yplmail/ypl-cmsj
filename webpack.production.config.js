@@ -6,7 +6,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var isGzip = true;
-
+console.log("****************" + process.argv)
 var webpackConfig = module.exports = {
     entry: {
         app: path.resolve(__dirname, 'app/pages/main.jsx'),
@@ -66,6 +66,7 @@ var webpackConfig = module.exports = {
         new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
         new ExtractTextPlugin('css/app.css'),
         // new webpack.optimize.DedupePlugin(),
+
         new webpack.DefinePlugin({
             "process.env": {
                 NODE_ENV: JSON.stringify("production")
