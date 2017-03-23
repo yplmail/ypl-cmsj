@@ -29,7 +29,7 @@ class Detail extends React.Component{
             click:true
         })
         this.setState({scroll : this.scroll});
-  }
+    }
 
   scoreHandle(){
     // this.setState({
