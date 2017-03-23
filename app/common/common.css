@@ -31,7 +31,7 @@
     text-align: center;
 }
 
-.nav-wrapper li{
+.nav-wrapper li {
     height: 49px;
 }
 
@@ -116,15 +116,7 @@
     text-overflow: ellipsis;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+input,
+textarea {
+    appearance: none;
+}

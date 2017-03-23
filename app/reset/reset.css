@@ -41,7 +41,6 @@ body {
     max-width: 10rem;
     width: 100%;
     margin: 0 auto;
-/*    overflow-x: hidden;*/
     font: 14px/1.5 'Heiti SC', 'Helvetica', 'HelveticaNeue', 'Droidsansfallback', "Droid Sans", 'Dengxian', 'Segoe', 'microsoft yahei';
     color: #323232;
     background-color: #fff;
@@ -81,7 +80,7 @@ a {
     display: inline-block;
     text-decoration: none;
     -webkit-backface-visibility: hidden;
-    color: #969696;
+    color: #323232;
 }
 
 li {
@@ -133,3 +132,4 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
     color: #999;
 }
+

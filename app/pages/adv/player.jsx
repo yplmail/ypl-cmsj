@@ -209,15 +209,17 @@ class Player extends React.Component{
         this.player.on('ended',function(){
                 document.querySelector('.prism-player').style.display = 'none';
                 document.querySelector('.video-cover').style.display  = 'block';
-                if(this.player.getIsFullScreen()){
-                    this.player.cancelFullScreen();                   
-                }
                 if(this.videoPlayId){
                     this.end();
                 }
         }.bind(this))
 
-        document.querySelector('.duration').innerText = this.state.video.duration;
+        let timer = setTimeout(function(){
+            clearTimeout(timer);
+            if(document.querySelector('.duration')){
+                document.querySelector('.duration').innerText = this.state.video.duration;
+            }           
+        }.bind(this),320);
     }
 
     componentWillUnmount(){

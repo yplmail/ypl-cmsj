@@ -46,7 +46,7 @@ class Share extends React.Component{
 
     initConfig(config) {
         wx.config({
-            // debug    : true,
+            //debug    : true,
             appId    : config.appId,
             timestamp: config.timeStamp,
             nonceStr : config.nonceStr,
@@ -55,10 +55,10 @@ class Share extends React.Component{
         });
 
         wx.error(function(res){
-            // layer.open({
-            //     content: '微信初始化信息验证失败',
-            //     time   : 2
-            // });
+            layer.open({
+                content: '微信初始化信息验证失败',
+                time   : 2
+            });
         }.bind(this));
     }
 
