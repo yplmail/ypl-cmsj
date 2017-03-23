@@ -30,6 +30,12 @@ class Login extends React.Component{
                 display: 'block'
             });
         }
+
+        document.querySelector(".container").style.height = window.innerHeight + 'px';
+
+        document.addEventListener('orientationchange',function(){
+
+        }, false);
     }
 
     mobileChange(event){
@@ -93,11 +99,6 @@ class Login extends React.Component{
                 if(params.videoId && params.playId){
                     location.hash="/detail/"+params.videoId+'/'+params.playId;
                 }else{
-                    // if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                    //     location = './redirect.html';
-                    // }else{
-                    //     location.hash = '/';
-                    // }
                     location.hash = '/';
                 }
             }.bind(this)
@@ -111,32 +112,36 @@ class Login extends React.Component{
               linkPath = linkPath + '/' + params.videoId + '/' + params.playId;
           }
           return (
-              <div className="login-wrapper" style={{height:window.innerHeight+"px"}}>
+              <div className="login-wrapper">
                   <div className="login-content">
+                      <div className="login-logo">
+                          <span className="logo"></span>
+                          <h1 className="title">草莓视界</h1>
+                      </div>
                       <ul>
-                      <li>
-                      <label htmlFor="mobile"></label>
-                      <input id="mobile" type="tel" placeholder="请输入您的手机号" value={this.state.mobile}  onChange={this.mobileChange} maxLength="11" />
-                      </li>
+                          <li>
+                            <label htmlFor="mobile"></label>
+                            <input id="mobile" type="tel" placeholder="请输入您的手机号" value={this.state.mobile}  onChange={this.mobileChange} maxLength="11" />
+                          </li>
 
-                      <li>
-                      <label htmlFor="password"></label>
-                      <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
-                      <input id="password" type={this.state.passwordType} placeholder="请输入您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
-                      <span onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></span>
-                      </li>
+                          <li>
+                          <label htmlFor="password"></label>
+                          <input type='password' style={{height:'0',position:'absolute',top:'-10000px',visibility:'hidden'}}/>
+                          <input id="password" type={this.state.passwordType} placeholder="请输入您的密码" value={this.state.pwd}  onChange={this.passwordChange} maxLength="20" />
+                          <span onClick={this.changePasswordType} style={{backgroundImage:this.state.background}}></span>
+                          </li>
 
-                      <li>
+                          <li>
                           <Link to="forgetPassword">忘记密码?</Link>
-                      </li>
+                          </li>
 
-                      <li>
-                      <a onClick={this.validate}>登录</a>
-                      </li>
+                          <li>
+                          <a onClick={this.validate}>登录</a>
+                          </li>
 
-                      <li>
-                      <Link to={linkPath}>没有账号、立即注册</Link>
-                      </li>
+                          <li>
+                          <Link to={linkPath}>没有账号、立即注册</Link>
+                          </li>
                       </ul>
                   </div>
               </div>

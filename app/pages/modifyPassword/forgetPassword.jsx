@@ -142,7 +142,7 @@ class ForgetPassword extends React.Component{
 
     render(){
         return (
-           <div className="forgetPassword-wrapper" style={{height:window.innerHeight+"px"}}>
+           <div className="forgetPassword-wrapper">
                <div className="forgetPassword-content">
                  <ul>
                      <li>

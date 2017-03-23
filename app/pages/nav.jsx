@@ -18,9 +18,7 @@ class Nav extends React.Component{
     }
 
 	componentDidMount(){
-		// this.wrapper = document.querySelector('.container')
-		// this._preventDefault = function (e){ e.preventDefault(); }
-		// this.wrapper.addEventListener('touchmove', this._preventDefault);
+
 	}
 
 	componentWillReceiveProps(props){
@@ -38,7 +36,7 @@ class Nav extends React.Component{
 
 	render(){
        return(
-       	   <div className="container">
+       	   <div className="container" style={{height:window.innerHeight + 'px'}}>
 				{this.props.children}
 				<div className="nav-wrapper" style={{display:this.state.display}}>
 					<div className="nav">

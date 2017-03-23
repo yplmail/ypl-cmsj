@@ -10,7 +10,26 @@
 
 .login-content {
     position: relative;
-    padding: 1.8rem .75rem 0 .75rem;
+    padding: .5rem .75rem;
+}
+
+.login-content .login-logo {
+    text-align: center;
+    margin-bottom: .5rem;
+}
+
+.login-content .login-logo span.logo {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    background: url(../../images/strawberry_logo.png) no-repeat;
+    background-size: cover;
+}
+
+.login-content .login-logo h1.title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5em;
 }
 
 .login-content li {
@@ -38,7 +57,7 @@
     background-color: #eee;
     color: #333;
     font-size: 14px;
-    appearance: none;   
+    appearance: none;
 }
 
 .login-content li:nth-child(1) label {
@@ -70,7 +89,6 @@
     border: none;
     height: .5rem;
     text-align: right;
-    margin-bottom: 1.8rem;
 }
 
 .login-content li:nth-child(3) a {
@@ -102,8 +120,4 @@
 .login-content li:nth-child(5) a {
     color: #333;
     background-color: #dddddd;
-
 }
-
-
-
