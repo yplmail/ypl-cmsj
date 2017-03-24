@@ -33,14 +33,10 @@ class TransferRecord extends React.Component{
     }
 
     refreshHeight(scroll,t){
-         let timer = setTimeout(function(){
-             clearTimeout(timer);
-             let top = document.querySelector('.wallet-list').offsetTop;
-             let height = Math.round(common.remRatio() * 0.98);
-             let scrollH = window.innerHeight - top - height;
-             document.querySelector('.transfer-scroll').style.height = scrollH + 'px';   
-             scroll.refresh();         
-         }.bind(this),t)
+        let top = document.querySelector('.wallet-list').offsetTop;
+        let height = Math.round(common.remRatio() * 0.98);
+        let scrollH = window.innerHeight - top - height;
+        document.querySelector('.transfer-scroll').style.height = scrollH + 'px';   
     }
 
     template(item){
