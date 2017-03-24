@@ -63,7 +63,11 @@ var webpackConfig = module.exports = {
         }
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'js/vendors.js'),
+        new webpack.optimize.CommonsChunkPlugin({
+            name:'vendors', 
+            filename:'js/vendors.js',
+            async:true
+        }),
         new ExtractTextPlugin('css/app.css'),
         new webpack.DefinePlugin({
             "process.env": {

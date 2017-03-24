@@ -36,27 +36,27 @@ class ModifyPassword extends React.Component{
     }
 
     vildateHandle(){
-       if(this.state.oldPwd == ''){
-          layer.open({content:'请输入您的原始登录密码',time:2});
-          return false;
-       }
+        if(this.state.oldPwd == ''){
+            layer.open({content:'请输入您的原始登录密码',time:2});
+            return false;
+        }
 
-       if(this.state.oldPwd.length < 6 || this.state.oldPwd.length > 20){
-          layer.open({content:'请输入正确的原始登录密码',time:2});
-          return false;
-       }
+        if(this.state.oldPwd.length < 6 || this.state.oldPwd.length > 20){
+            layer.open({content:'请输入正确的原始登录密码',time:2});
+            return false;
+        }
 
-       if(this.state.newPwd == ''){
-          layer.open({content:'请输入新的登录密码',time:2});
-          return false;
-       }
+        if(this.state.newPwd == ''){
+            layer.open({content:'请输入新的登录密码',time:2});
+            return false;
+        }
 
-       if(this.state.newPwd.length < 6 || this.state.newPwd.length > 20){
-          layer.open({content:'请输入6-20位字符的新密码',time:2});
-          return false;
-       }
+        if(!/^[0-9a-zA-Z]{6,20}$/.test(this.state.newPwd)){
+            layer.open({content:'请输入6-20位数字或英文的新密码',time:2});
+            return false;
+        }
 
-       this.modifyPassword();
+        this.modifyPassword();
     }
 
     modifyPassword(){
@@ -89,7 +89,7 @@ class ModifyPassword extends React.Component{
 
 					<li>
 						<label htmlFor="newPwd"></label>
-						<input id="newPwd" type='password' name="newPwd" placeholder="请设置新的登录密码" value={this.state.newPwd}
+						<input id="newPwd" type='password' name="newPwd" placeholder="请设置新的密码(6-20位数字或英文)" value={this.state.newPwd}
 						onChange={this.changeNewPassword} maxLength="20" />
 					</li>
 					<li>

@@ -29,7 +29,7 @@ function change(pre, next) {
 	    setTimeout(() => {
 	        iframe.removeEventListener('load', listener);
 	        document.body.removeChild(iframe);
-	    }, 0);
+	    }, 320);
 	};
 	iframe.addEventListener('load', listener);
 	document.body.appendChild(iframe);

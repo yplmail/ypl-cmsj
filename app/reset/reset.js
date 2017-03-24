@@ -10,7 +10,13 @@
 
     window.addEventListener('load', function() {
         setFontSize();
-    })
+    },false)
+
+    window.addEventListener('scroll', function() {
+        if(document.body.scrollTop > (window.innerHeight-49)){
+            document.body.scrollTop = window.innerHeight-49;
+        }
+    },false)
 
     Date.prototype.Format = function(fmt) {
         var o = {
