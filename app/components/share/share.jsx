@@ -7,13 +7,13 @@ class Share extends React.Component{
         super(props);
         this.state = {
             display :'none',
-            title   : '',
-            desc    : '',
-            link    : '',
-            imgUrl  : '',
-            type    : '',
-            dataUrl : '',  
-            success : ''     
+            title   : props.title || '',
+            desc    : props.desc || '',
+            link    : props.link || '',
+            imgUrl  : props.imgUrl || '',
+            type    : props.type || '',
+            dataUrl : props.dataUrl || '',
+            success : props.success || '',  
         }
         this.cancelHandle = this.cancelHandle.bind(this);
     }
@@ -23,7 +23,7 @@ class Share extends React.Component{
     }
 
     componentDidUpdate(){
-        this.share()
+        this.share();
     }
 
     componentDidMount(){
@@ -46,7 +46,6 @@ class Share extends React.Component{
 
     initConfig(config) {
         wx.config({
-            //debug    : true,
             appId    : config.appId,
             timestamp: config.timeStamp,
             nonceStr : config.nonceStr,
@@ -60,6 +59,8 @@ class Share extends React.Component{
                 time   : 2
             });
         }.bind(this));
+
+        this.share();
     }
 
     share() {
@@ -73,9 +74,6 @@ class Share extends React.Component{
             success : this.state.success || this.cancelHandle,
             cancel  : this.cancelHandle
         };
-
-        // console.log('分享参数：');
-        // console.log(share);
 
         wx.ready(function() {
             // 分享到朋友圈
