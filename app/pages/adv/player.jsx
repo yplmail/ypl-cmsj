@@ -61,7 +61,7 @@ class Player extends React.Component{
             video : data,
             share : {
                 title   : data.title,
-                desc    : data.publishVideoDesc,
+                desc    : data.publishVideoDesc || '一起去发现创意的美',
                 link    : 'http://'+location.hostname+'/#/share/'+data.publishId+'/'+shareId,
                 imgUrl  : data.coverUrl,
                 type    : 'video',
