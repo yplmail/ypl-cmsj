@@ -4,18 +4,18 @@
         var width = clientWith * (window.devicePixelRatio || 1);
         var html = document.querySelector("html");
         html.style.fontSize = (width / 7.5) * (1 / window.devicePixelRatio) + 'px';
-        // var wrapper = document.querySelector(".container-wrapper");
-        // wrapper.style.height = window.innerHeight + 'px';
     };
 
     window.addEventListener('load', function() {
         setFontSize();
     },false)
 
-    window.addEventListener('scroll', function() {
-        if(document.body.scrollTop > (window.innerHeight-49)){
-            document.body.scrollTop = window.innerHeight-49;
-        }
+    window.addEventListener('orientationchange', function(event) {
+        // if(window.orientation == 0){
+        //     document.html.style.overflow='hidden';
+        // }else{
+        //     document.html.style.overflow='auto';
+        // }
     },false)
 
     Date.prototype.Format = function(fmt) {

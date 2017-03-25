@@ -30,12 +30,6 @@ class Login extends React.Component{
                 display: 'block'
             });
         }
-
-        document.querySelector(".container").style.height = window.innerHeight + 'px';
-
-        document.addEventListener('orientationchange',function(){
-
-        }, false);
     }
 
     mobileChange(event){

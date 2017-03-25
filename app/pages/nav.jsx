@@ -17,10 +17,6 @@ class Nav extends React.Component{
         this.nav(this.props);
     }
 
-	componentDidMount(){
-
-	}
-
 	componentWillReceiveProps(props){
         this.nav(props);
 	}
