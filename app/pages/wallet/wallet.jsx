@@ -30,21 +30,13 @@ class Header extends React.Component{
 	}
 
 	transferHandle(){
-       if(!this.state.account.mobile){
+       if(!this.state.account.isWechatBinded == "true"){
             layer.open({
-            	content:'请绑定手机号',
+            	content:'请先绑定微信号',
             	time : 2
             })
        }
-
-       if(!this.state.account.isWechatBinded === "true"){
-            layer.open({
-            	content:'请绑定微信号',
-            	time : 2
-            })
-       }
-
-       location.hash = '/transfer'
+       location.hash = '/transfer';
 	}
 
 	render(){
