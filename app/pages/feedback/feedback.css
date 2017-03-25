@@ -8,8 +8,9 @@
 .feedback-wrapper .feedback-content{
 	position: relative;
 	width:6.5rem;
-	left:.5rem;
 	top:1.05rem;
+    left:50%;
+    margin-left: -3.25rem;
 }
 
 .feedback-wrapper .nav-tab{

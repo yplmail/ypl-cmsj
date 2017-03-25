@@ -259,6 +259,7 @@ class Scroll extends React.Component{
 
     componentWillUnmount(){
         document.removeEventListener('orientationchange',this.refresh,false)
+        this.iscroll.destroy(); 
     }
 }
 

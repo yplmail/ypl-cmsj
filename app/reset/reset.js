@@ -1,6 +1,7 @@
-;(function(window, document) {
+;
+(function(window, document) {
     var setFontSize = function() {
-        var clientWith = Math.min(window.innerWidth,414);
+        var clientWith = Math.min(window.innerWidth, 414);
         var width = clientWith * (window.devicePixelRatio || 1);
         var html = document.querySelector("html");
         html.style.fontSize = (width / 7.5) * (1 / window.devicePixelRatio) + 'px';
@@ -8,15 +9,21 @@
 
     window.addEventListener('load', function() {
         setFontSize();
-    },false)
+    }, false)
+
+    document.addEventListener('touchmove', preventDefault, false)    
 
     window.addEventListener('orientationchange', function(event) {
-        // if(window.orientation == 0){
-        //     document.html.style.overflow='hidden';
-        // }else{
-        //     document.html.style.overflow='auto';
-        // }
-    },false)
+        if (window.orientation == 0) {
+            document.addEventListener('touchmove', preventDefault, false)
+        } else {
+            document.removeEventListener('touchmove', preventDefault, false)
+        }
+    }, false);
+
+    function preventDefault(ev) {
+        ev.preventDefault()
+    }
 
     Date.prototype.Format = function(fmt) {
         var o = {
