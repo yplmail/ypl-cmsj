@@ -117,7 +117,7 @@ class Mine extends React.Component{
 
   render(){
       return (
-        <div className="mine-wrapper" style={{height:(window.innerHeight-49) + 'px'}}>
+        <div className="mine-wrapper">
           <div>
               <Header />
               <List />

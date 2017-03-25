@@ -79,7 +79,7 @@ class ModifyPassword extends React.Component{
 
 	render(){
        return(
-			<div className="modifyPassword-wrapper" style={{height:window.innerHeight+"px"}}>
+			<div className="modifyPassword-wrapper">
 				<ul className="modifyPassword-content">
 					<li>
 						<label htmlFor="oldPwd"></label>

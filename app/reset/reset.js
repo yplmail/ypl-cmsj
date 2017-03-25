@@ -14,7 +14,7 @@
     document.addEventListener('touchmove', preventDefault, false)    
 
     window.addEventListener('orientationchange', function(event) {
-        if (window.orientation == 0) {
+        if (window.orientation == 0) {       
             document.addEventListener('touchmove', preventDefault, false)
         } else {
             document.removeEventListener('touchmove', preventDefault, false)

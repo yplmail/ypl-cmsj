@@ -69,7 +69,7 @@ class Feedback extends React.Component{
 
 	render(){
        return(
-           <div className="feedback-wrapper" style={{height:window.innerHeight+"px"}}>
+           <div className="feedback-wrapper">
                 <div className="feedback-content">
 	                <div className="nav-tab">请填写您反馈的意见：</div>
 

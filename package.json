@@ -8,7 +8,7 @@
     "lint:msg": "validate-commit-msg",
     "build": "webpack",
     "start": "webpack-dev-server --devtool eval --progress --hot --colors --host 0.0.0.0 --content-base app",
-    "development": "webpack -p --config webpack.development.config.js",
+    "development": "webpack -p --config webpack.config.js",
     "preventive" : "webpack -p --config webpack.preventive.config.js",
     "production" : "webpack -p --config webpack.production.config.js",
     "validate": "npm ls",

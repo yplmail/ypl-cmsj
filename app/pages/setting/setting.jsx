@@ -68,7 +68,7 @@ class Setting extends React.Component{
 
 	render(){
        return(
-           <div className="setting-wrapper" style={{height:window.innerHeight+"px"}}>
+           <div className="setting-wrapper">
               <ul>
                   <li>
 	                  <a onClick={this.linkHandle} style={{color:this.state.isBindWechat ? '#999' : '#333'}}>

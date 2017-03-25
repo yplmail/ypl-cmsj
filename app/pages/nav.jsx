@@ -32,7 +32,7 @@ class Nav extends React.Component{
 
 	render(){
        return(
-       	   <div className="container" style={{height:window.innerHeight + 'px'}}>
+       	   <div className="container" style={{height:Math.max(window.innerHeight,window.innerWidth) + 'px'}}>
 				{this.props.children}
 				<div className="nav-wrapper" style={{display:this.state.display}}>
 					<div className="nav">
