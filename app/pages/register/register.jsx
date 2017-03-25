@@ -172,12 +172,11 @@ class Login extends React.Component{
               if(params.videoId && params.playId){
                   location.hash="/detail/"+params.videoId+'/'+params.playId;
               }else{
-                  // if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                  //     location = './redirect.html';
-                  // }else{
-                  //     location.hash = '/';
-                  // }
-                  location.hash = '/';
+                  if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                      location = './redirect.html';
+                  }else{
+                      location.hash = '/';
+                  }
               }
             }.bind(this)
         });

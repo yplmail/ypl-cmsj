@@ -20,6 +20,19 @@ class List extends React.Component{
         if(!common.getcookies('refreshTokenTime') && common.getcookies('token')){
             this.refreshToken();
         }
+
+        var query = this.props.location.query;
+
+        if(query.code && query.state){
+            let server = new ServerRequest();
+            server.post({
+                url : 'bindWechat',
+                data:{
+                    code :query.code,
+                    state:query.state
+                }
+            });
+        }
     }
 
     refreshToken(){
