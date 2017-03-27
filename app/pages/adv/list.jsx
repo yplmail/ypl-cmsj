@@ -83,10 +83,6 @@ class List extends React.Component{
             </div>
         )
     }
-
-    componentWillUnmount(){
-        //this.wrapper.removeEventListener('touchmove', this._preventDefault,false);
-    }
 }
 
 export default List;
