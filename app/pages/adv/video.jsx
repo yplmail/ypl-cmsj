@@ -9,7 +9,7 @@ class Video extends React.Component{
            videoList : []
         };
         this.first  = false;
-        this.width = Math.round(common.remRatio() * 2.56);
+        this.width = Math.round(common.remRatio() * 2.56) * 2;
     }
 
     componentDidMount(){
@@ -57,8 +57,6 @@ class Video extends React.Component{
 
     loopVideoList(){
       let videos = this.state.videoList;
-      let fontsize = document.querySelector('html').style.fontSize.replace('px','') * 1;
-      let width = 2.56 * fontsize; 
       return videos.map((item,index)=>{
            return(
               <li data-flex="box:last" key={index} onClick={this.linkHandle.bind(this,item.publishId)}>

@@ -35,13 +35,11 @@ class Nav extends React.Component{
        	   <div className="container" style={{height:Math.max(window.innerHeight,window.innerWidth) + 'px'}}>
 				{this.props.children}
 				<div className="nav-wrapper" style={{display:this.state.display}}>
-					<div className="nav">
-						<ul data-flex="dir:left box:mean">
-							<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
-							<li><Link to="/hot"   activeClassName="active">热门</Link></li>
-							<li><Link to="/mine"  activeClassName="active">草莓</Link></li>
-						</ul>
-					</div>
+					<ul data-flex="dir:left box:mean">
+						<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
+						<li><Link to="/hot"   activeClassName="active">热门</Link></li>
+						<li><Link to="/mine"  activeClassName="active">草莓</Link></li>
+					</ul>
 				</div>
            </div>
        )

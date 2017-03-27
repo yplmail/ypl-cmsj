@@ -13,11 +13,11 @@
 
     document.addEventListener('touchmove', preventDefault, false)    
 
-    window.addEventListener('orientationchange', function(event) {
+    document.addEventListener('orientationchange', function(event) {
         if (window.orientation == 0) {       
-            document.addEventListener('touchmove', preventDefault, false)
+            document.addEventListener('touchmove', preventDefault, false);
         } else {
-            document.removeEventListener('touchmove', preventDefault, false)
+            document.removeEventListener('touchmove', preventDefault, false);
         }
     }, false);
 
