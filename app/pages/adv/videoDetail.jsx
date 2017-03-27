@@ -38,22 +38,24 @@ class Detail extends React.Component{
   }
 
   componentDidUpdate(){
-       var el = document.querySelector('.scroll-wrapper');
-       el.style.height = (window.innerHeight-el.offsetTop) + 'px';
+       setTimeout(function(){
+           var el = document.querySelector('.scroll-wrapper');
+           el.style.height = (Math.max(window.innerHeight,window.innerWidth)-el.offsetTop) + 'px';        
+       },320)
   }
 
   render(){
     return(
       <div className="detail-wrapper">
-             <Player {...this.props.params} handle={this.scoreHandle} />
-         <div className="scroll-wrapper">
-             <div>
-                   <Record {...this.props.params} scroll={this.state.scroll}/>
-                   <Video  {...this.props.params} scroll={this.state.scroll}/>
-                 </div>
-         </div>
-         <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
-         <Link className="back-button" to='/' style={{display:this.props.params.shareId ? 'block':'none'}}></Link>
+          <Player {...this.props.params} handle={this.scoreHandle} />
+          <div className="scroll-wrapper">
+              <div>
+                  <Record {...this.props.params} scroll={this.state.scroll}/>
+                  <Video  {...this.props.params} scroll={this.state.scroll}/>
+              </div>
+          </div>
+          <Score animation={this.state.scoreAnimation} videoId={this.props.params.videoId}/>
+          <Link className="back-button" to='/' style={{display:this.props.params.shareId ? 'block':'none'}}></Link>
       </div>
     );
   }

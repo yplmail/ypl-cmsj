@@ -25,7 +25,7 @@ class PacketRecord extends React.Component{
             3:'#ce1035'
         }
 
-        this.width = Math.round(common.remRatio() * 1.4);
+        this.width = Math.round(common.remRatio() * 1.4) * 2;
     }
 
     refreshHeight(scroll,t){

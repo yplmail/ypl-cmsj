@@ -47,11 +47,13 @@ class List extends React.Component{
     }
 
     refreshScroll(scroll){ 
+        document.querySelector('.container').style.height= (window.innerHeight) + "px";
+        document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight) + 'px';
         let timer = setTimeout(function(){
-            clearTimeout(timer);
             document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight-49) + 'px';
+            clearTimeout(timer);
             scroll.refresh();         
-        }.bind(this),320)
+        },320)
     }
 
     template(item,font){
@@ -72,14 +74,6 @@ class List extends React.Component{
                 '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
                 '<p class="adv-time"><span>'+item.duration+'</span></p>'+
                 '</div>';
-
-        // return  '<div><h2 class="ellipsis">'+item.title+'</h2></div>'+
-        //         '<div data-flex="dir:left">'+
-        //         '<p class="adv-invest">'+item.totalAmount+'</p>'+
-        //         '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
-        //         '<p class="adv-score">'+item.score+'分</p>'+
-        //         '<p class="adv-time"><span>'+item.duration+'</span></p>'+
-        //         '</div>';
     }
 
     render(){
@@ -88,6 +82,10 @@ class List extends React.Component{
                 <Scroll {...this.data} />
             </div>
         )
+    }
+
+    componentWillUnmount(){
+        //this.wrapper.removeEventListener('touchmove', this._preventDefault,false);
     }
 }
 
