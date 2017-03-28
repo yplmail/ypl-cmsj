@@ -7,6 +7,7 @@ import Login    from './login/login.jsx';
 import Hot      from './hot/hot.jsx';
 import Mine     from './mine/mine.jsx';
 import Detail   from  './adv/detail.jsx';
+import VideoList   from  './adv/videoList.jsx';
 import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
@@ -57,6 +58,7 @@ ReactDOM.render(
 			<Route path="transfer" component={Transfer} title="转出金额"/>
 			<Route path="invite" component={Invite} title="邀请朋友"/>
 			<Route path="about" component={About} title="关于产品"/>
+			<Route path="videoList" component={VideoList} title="首页"/>
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')

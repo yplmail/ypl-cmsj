@@ -130,3 +130,9 @@
     animation: hide 0.5s 0.5s 1;
     -webkit-animation: hide 0.5s 0.5s 1;
 }
+
+.load-tip{
+    text-align: center;
+    height:50px;
+    line-height: 50px;
+}

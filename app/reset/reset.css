@@ -27,7 +27,7 @@ time, mark, audio, video, input {
 html {
     background-color: #eeeff3;
     -webkit-text-size-adjust: 100%;
-    overflow: hidden;
+/*    overflow: hidden;*/
 }
 
 html * {
@@ -44,7 +44,7 @@ body {
     font: 14px/1.5 'Heiti SC', 'Helvetica', 'HelveticaNeue', 'Droidsansfallback', "Droid Sans", 'Dengxian', 'Segoe', 'microsoft yahei';
     color: #323232;
     background-color: #fff;
-    overflow: hidden;
+/*    overflow: hidden;*/
 }
 
 article,
