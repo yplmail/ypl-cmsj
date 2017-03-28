@@ -50,6 +50,7 @@ class List extends React.Component{
         document.querySelector('.container').style.height= (window.innerHeight) + "px";
         document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight) + 'px';
         let timer = setTimeout(function(){
+            //由于竖屏后下拉loading不会往下移动，所以临时解决下
             document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight-49) + 'px';
             clearTimeout(timer);
             scroll.refresh();         
@@ -74,6 +75,10 @@ class List extends React.Component{
                 '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
                 '<p class="adv-time"><span>'+item.duration+'</span></p>'+
                 '</div>';
+    }
+
+    componentWillUnmount(){
+        document.querySelector('.container').style.height= Math.max(window.innerHeight,window.innerWidth) + 'px';      
     }
 
     render(){
