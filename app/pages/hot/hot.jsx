@@ -18,13 +18,22 @@ class Hot extends React.Component{
 		this.touchEnd = this.touchEnd.bind(this);
 		this.removeNode = this.removeNode.bind(this);
 	    this.height = Math.round(common.remRatio() * 6.82);
+	    this.orientationchange = this.orientationchange.bind(this);
 	}
 
 	componentDidMount(){
 		this.initData();
 		this.wrapper = document.querySelector('.hot-inner')
 		this._preventDefault = function (e){ e.preventDefault(); }
-		this.wrapper.addEventListener('touchmove', this._preventDefault);
+		this.wrapper.addEventListener('touchmove', this._preventDefault,false);	
+	}
+
+	orientationchange(){
+		if(window.orientation == 0){
+			this.wrapper.addEventListener('touchmove', this._preventDefault,false);			
+		}else{
+			this.wrapper.removeEventListener('touchmove', this._preventDefault,false);	
+		}
 	}
 
 	initData(){

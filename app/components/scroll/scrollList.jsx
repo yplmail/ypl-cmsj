@@ -1,5 +1,6 @@
 import React from 'react';
 import ServerRequest from 'server/serverRequest';
+import './iscroll.css';
 
 class ScrollList extends React.Component{
 
@@ -17,15 +18,9 @@ class ScrollList extends React.Component{
 
         this.datas     = props.datas || {};
 
-        this.datas['pageIndex']  = this.pageIndex;
-
-        this.datas['pageSize']   = this.pageSize;
-
         this.createNode    = props.createNode || function(){};
 
         this.scrollEvent = this.scrollEvent.bind(this);
-
-        this.wrapper = document;
 
     }
 
@@ -35,38 +30,20 @@ class ScrollList extends React.Component{
 
         this.container = this.refs.scrollcontainer;
 
-        this.wrapper   = this.container.parentNode;
+        this.scrolltip = this.refs.scrolltips;
 
-        this.scrolltip = this.refs.loadingtips;
+        this.loadingtip = this.refs.loadingtips;
       
-        this.fetchDatas();
-
         window.addEventListener('scroll',this.scrollEvent,false);
-    }
 
-    scrollEvent(event){
-        var scrollpos = this.body.offsetHeight + this.body.scrollTop;
-        var maxHeight = this.body.scrollHeight;
-        var loadingtip = this.refs.loadingtips;
-        if(scrollpos == maxHeight){
-            if(this.pageIndex < this.pageCount){
-                loadingtip.innerText='正在加载';
-                ++this.pageIndex;
-                let timer = setTimeout(function(){
-                    clearTimeout(timer);
-                    this.fetchDatas();
-                }.bind(this),320);
-            }else{
-                if(loadingtip) loadingtip.innerText='没有更多'; 
-            }
-        }      
+        this.fetchDatas();
     }
 
     fetchDatas(){
         this.server = new ServerRequest();
         this.server.post({
             url  : this.url,
-            data : this.datas,
+            data : this.data(),
             success:function(result){
                this.pageCount  = result.pageCount;
                this.totalCount = result.totalCount;
@@ -75,9 +52,37 @@ class ScrollList extends React.Component{
         });
     }
 
+    data(){
+        this.datas['pageIndex']  = this.pageIndex;
+        this.datas['pageSize']   = this.pageSize;
+        return this.datas;
+    }
+
+    scrollEvent(event){
+        event.preventDefault();
+        var scrollpos = this.body.offsetHeight + this.body.scrollTop;
+        var maxHeight = this.body.scrollHeight;
+        if(scrollpos == maxHeight){
+            if(this.pageIndex < this.pageCount){
+                this.loadingtip.innerText='正在加载';
+                ++this.pageIndex;
+                let timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    this.fetchDatas();
+                }.bind(this),320);
+            }else{
+                this.loadingtip.innerText='没有更多'; 
+                let timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    this.scrolltip.style.display = 'none';
+                }.bind(this),320)
+            }
+        }      
+    }
+
     dealwith(result){
         if(this.totalCount == 0){
-            this.container.innerText = '<p class="no-data">暂无相关数据</p>';
+            this.container.innerHTML = '<p class="no-data">暂无相关数据</p>';
         }else{
             this.createNodes(result.datas);      
         }       
@@ -89,7 +94,7 @@ class ScrollList extends React.Component{
         }.bind(this)); 
 
         if(this.totalCount > this.pageSize){
-            this.scrolltip.style.display = 'block';
+            this.refs.scrolltips.style.display = 'block';
         }
     }
 

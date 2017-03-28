@@ -1,5 +1,5 @@
 import React from 'react';
-import Scroll from 'scroll/scroll';
+import Scroll from 'scroll/scrollList';
 import common from '../../common/common';
 import ServerRequest from 'server/serverRequest';
 import './list.css';
@@ -11,7 +11,6 @@ class List extends React.Component{
             el  : '.adv-list-wrapper',
             url : 'advList',
             createNode : this.template.bind(this),
-            refreshScroll: this.refreshScroll.bind(this)
         };
         this.width = Math.round(common.remRatio() * 7.5);
     }
@@ -46,17 +45,6 @@ class List extends React.Component{
         });
     }
 
-    refreshScroll(scroll){ 
-        document.querySelector('.container').style.height= (window.innerHeight) + "px";
-        document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight) + 'px';
-        let timer = setTimeout(function(){
-            //由于竖屏后下拉loading不会往下移动，所以临时解决下
-            document.querySelector('.adv-list-wrapper').style.height = (window.innerHeight-49) + 'px';
-            clearTimeout(timer);
-            scroll.refresh();         
-        },320)
-    }
-
     template(item,font){
         let element = document.createElement('li');
         element.setAttribute('id', item.publishId);
@@ -77,14 +65,11 @@ class List extends React.Component{
                 '</div>';
     }
 
-    componentWillUnmount(){
-        document.querySelector('.container').style.height= Math.max(window.innerHeight,window.innerWidth) + 'px';      
-    }
-
     render(){
         return (
             <div className="adv-list-wrapper" style={{height:(window.innerHeight-49) + 'px'}}>
                 <Scroll {...this.data} />
+                <div style={{height:'49px'}}></div>
             </div>
         )
     }

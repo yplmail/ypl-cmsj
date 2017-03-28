@@ -11,20 +11,6 @@
         setFontSize();
     }, false)
 
-    document.addEventListener('touchmove', preventDefault, false)    
-
-    document.addEventListener('orientationchange', function(event) {
-        if (window.orientation == 0) {       
-            document.addEventListener('touchmove', preventDefault, false);
-        } else {
-            document.removeEventListener('touchmove', preventDefault, false);
-        }
-    }, false);
-
-    function preventDefault(ev) {
-        ev.preventDefault()
-    }
-
     Date.prototype.Format = function(fmt) {
         var o = {
             "M+": this.getMonth() + 1, //月份

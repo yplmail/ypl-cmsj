@@ -7,7 +7,6 @@ import Login    from './login/login.jsx';
 import Hot      from './hot/hot.jsx';
 import Mine     from './mine/mine.jsx';
 import Detail   from  './adv/detail.jsx';
-import VideoList   from  './adv/videoList.jsx';
 import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
@@ -25,6 +24,7 @@ function change(pre, next) {
 		document.title = next.routes[1].title;		
 	}
 	const iframe = document.createElement('iframe');
+	iframe.style.display='none';
 	iframe.src = '../favicon.ico';
 	const listener = () => {
 	    setTimeout(() => {
@@ -39,7 +39,7 @@ function change(pre, next) {
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav} onChange={change} >
-			<IndexRoute component={List} title="首页"/>
+			<IndexRoute component={List} title="草莓视界"/>
 			<Route path="register(/:videoId)(/:playId)"  component={Register} title="注册"/>
 			<Route path="login(/:videoId)(/:playId)"  component={Login} title="登录"/>
 			<Route path="forgetPassword"  component={ForgetPassword} title="重置密码"/>
@@ -58,7 +58,6 @@ ReactDOM.render(
 			<Route path="transfer" component={Transfer} title="转出金额"/>
 			<Route path="invite" component={Invite} title="邀请朋友"/>
 			<Route path="about" component={About} title="关于产品"/>
-			<Route path="videoList" component={VideoList} title="首页"/>
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')

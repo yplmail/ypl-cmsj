@@ -30,19 +30,33 @@ class Nav extends React.Component{
         }
 	}
 
+	getElement(){
+	    let path = this.props.location.pathname;		
+        if(path == "/hot" || path == "/mine"){
+        	return <div style={{height:'60px'}}></div>;
+        }else{
+            return null;
+        }
+	}
+
 	render(){
-       return(
-       	   <div className="container" style={{height:Math.max(window.innerHeight,window.innerWidth) + 'px'}}>
-				{this.props.children}
-				<div className="nav-wrapper" style={{display:this.state.display}}>
-					<ul data-flex="dir:left box:mean">
-						<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
-						<li><Link to="/hot"   activeClassName="active">热门</Link></li>
-						<li><Link to="/mine"  activeClassName="active">草莓</Link></li>
-					</ul>
-				</div>
-           </div>
-       )
+		let h = Math.max(window.innerHeight,window.innerWidth);
+		let path = this.props.location.pathname;		
+		if(path == "/hot" || path == "/mine"){
+            h = h - 60
+		}
+		return(
+		   <div className="container" style={{height:h + 'px'}}>
+			{this.props.children}
+			<div className="nav-wrapper" style={{display:this.state.display}}>
+				<ul data-flex="dir:left box:mean">
+					<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
+					<li><Link to="/hot"   activeClassName="active">热门</Link></li>
+					<li><Link to="/mine"  activeClassName="active">草莓</Link></li>
+				</ul>
+			</div>
+		</div>
+		)
 	}
 }
 

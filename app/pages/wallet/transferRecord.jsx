@@ -1,5 +1,5 @@
 import React from 'react';
-import Scroll from 'scroll/scroll';
+import Scroll from 'scroll/scrollList';
 import ServerRequest from 'server/serverRequest';
 import common from 'common/common';
 
@@ -10,7 +10,6 @@ class TransferRecord extends React.Component{
             el  : '.transfer-scroll',
             url : 'withdrawList',
             createNode : this.template.bind(this),
-            refreshScroll : this.refreshHeight.bind(this)
         }
 
         this.originType = {
@@ -30,13 +29,6 @@ class TransferRecord extends React.Component{
             1:'微信红包',
             2:'微信零钱'
         }
-    }
-
-    refreshHeight(scroll,t){
-        let top = document.querySelector('.wallet-list').offsetTop;
-        let height = Math.round(common.remRatio() * 0.98);
-        let scrollH = window.innerHeight - top - height;
-        document.querySelector('.transfer-scroll').style.height = scrollH + 'px';   
     }
 
     template(item){

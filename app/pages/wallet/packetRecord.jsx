@@ -1,5 +1,5 @@
 import React from 'react';
-import Scroll from 'scroll/scroll';
+import Scroll from 'scroll/scrollList';
 import ServerRequest from 'server/serverRequest';
 import common from 'common/common';
 
@@ -10,7 +10,6 @@ class PacketRecord extends React.Component{
             el  : '.wallet-scroll',
             url : 'rewardList',
             createNode : this.template.bind(this),
-            refreshScroll : this.refreshHeight.bind(this)
         }
 
         this.originType = {
@@ -26,13 +25,6 @@ class PacketRecord extends React.Component{
         }
 
         this.width = Math.round(common.remRatio() * 1.4) * 2;
-    }
-
-    refreshHeight(scroll,t){
-        let top = document.querySelector('.wallet-list').offsetTop;
-        let height = Math.round(common.remRatio() * 0.98);
-        let scrollH = window.innerHeight - top - height;
-        document.querySelector('.wallet-scroll').style.height = scrollH + 'px';
     }
 
     template(item){
