@@ -12,10 +12,15 @@ class Nav extends React.Component{
 		this.state = {
 			display : 'block'
 		}
+		this.orientationchange = this.orientationchange.bind(this);
 	}
 
     componentWillMount(){
         this.nav(this.props);
+    }
+
+    componentDidMount(){
+		window.addEventListener('orientationchange',this.orientationchange,false);
     }
 
 	componentWillReceiveProps(props){
@@ -31,13 +36,18 @@ class Nav extends React.Component{
         }
 	}
 
-	getElement(){
-	    let path = this.props.location.pathname;	
-        if((path == "/hot" || path == "/mine") && !common.isAndroid()){
-        	return <div style={{height:'65px',backgroundColor:'#eee'}}></div>;
-        }else{
-            return null;
-        }
+	/**
+	 * 解决横屏再竖屏之后，fixed导航栏下移问题
+	 * @param  {[type]} window.orientation [description]
+	 * @return {[type]}                    [description]
+	 */
+	orientationchange(){
+		if(window.orientation == 0){	
+			let timer = setTimeout(function(){
+				clearTimeout(timer);
+	            window.scrollTo(0,1)				
+			},50)
+		}
 	}
 
 	render(){

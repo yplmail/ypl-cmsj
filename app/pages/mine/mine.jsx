@@ -115,6 +115,11 @@ class Mine extends React.Component{
       }
   }
 
+  /**
+   * Math.max(window.innerHeight+65,window.innerWidth+65)
+   * 解决横屏再竖屏之后，fixed导航栏被hot-wrapper移动时抹去问题（所谓的'橡皮擦问题'）
+   * @return {[type]} [description]
+   */
   render(){
       return (
         <div className="mine-wrapper" style={{height:Math.max(window.innerHeight+65,window.innerWidth+65)+ 'px'}}>

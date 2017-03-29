@@ -18,7 +18,6 @@ class Hot extends React.Component{
 		this.touchEnd = this.touchEnd.bind(this);
 		this.removeNode = this.removeNode.bind(this);
 	    this.height = Math.round(common.remRatio() * 6.82);
-	    this.orientationchange = this.orientationchange.bind(this);
 	}
 
 	componentDidMount(){
@@ -26,16 +25,6 @@ class Hot extends React.Component{
 		this.wrapper = document.querySelector('.hot-inner')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault,false);	
-		// window.addEventListener('orientationchange',this.orientationchange,false);
-	}
-
-	orientationchange(){
-		if(window.orientation == 0){
-			alert(window.scrollY)
-			this.wrapper.addEventListener('touchmove', this._preventDefault,false);			
-		}else{
-			this.wrapper.removeEventListener('touchmove', this._preventDefault,false);	
-		}
 	}
 
 	initData(){
@@ -229,6 +218,11 @@ class Hot extends React.Component{
 		}
 	}
 
+	/**
+	 * Math.max(window.innerHeight+65,window.innerWidth+65)
+	 * 解决横屏再竖屏之后，fixed导航栏被hot-wrapper移动时抹去问题（所谓的'橡皮擦问题'）
+	 * @return {[type]} [description]
+	 */
 	render(){
        return(
            <div className="hot-wrapper" style={{height:Math.max(window.innerHeight+65,window.innerWidth+65)+ 'px'}}>
@@ -238,6 +232,7 @@ class Hot extends React.Component{
 	}
 
 	componentWillUnmount(){
+		this.wrapper.removeEventListener('touchmove', this._preventDefault,false);	
         window.scrollTo(0,0)
 	}
 }
