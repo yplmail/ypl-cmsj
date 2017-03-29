@@ -62,7 +62,7 @@ class ScrollList extends React.Component{
         event.preventDefault();
         var scrollpos = this.body.offsetHeight + this.body.scrollTop;
         var maxHeight = this.body.scrollHeight;
-        if(scrollpos == maxHeight){
+        if(scrollpos >= maxHeight){
             if(this.pageIndex < this.pageCount){
                 this.loadingtip.innerText='正在加载';
                 ++this.pageIndex;

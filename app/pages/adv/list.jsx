@@ -73,6 +73,10 @@ class List extends React.Component{
             </div>
         )
     }
+
+    componentWillUnmount(){
+        window.scrollTo(0,0)
+    }
 }
 
 export default List;

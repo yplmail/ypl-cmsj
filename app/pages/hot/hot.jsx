@@ -26,10 +26,12 @@ class Hot extends React.Component{
 		this.wrapper = document.querySelector('.hot-inner')
 		this._preventDefault = function (e){ e.preventDefault(); }
 		this.wrapper.addEventListener('touchmove', this._preventDefault,false);	
+		// window.addEventListener('orientationchange',this.orientationchange,false);
 	}
 
 	orientationchange(){
 		if(window.orientation == 0){
+			alert(window.scrollY)
 			this.wrapper.addEventListener('touchmove', this._preventDefault,false);			
 		}else{
 			this.wrapper.removeEventListener('touchmove', this._preventDefault,false);	
@@ -233,6 +235,10 @@ class Hot extends React.Component{
                 <ul className="hot-inner">{this.loop()}</ul>
            </div>
        )
+	}
+
+	componentWillUnmount(){
+        window.scrollTo(0,0)
 	}
 }
 

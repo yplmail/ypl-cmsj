@@ -40,14 +40,10 @@ class Nav extends React.Component{
 	}
 
 	render(){
-		let h = Math.max(window.innerHeight,window.innerWidth);
-		let path = this.props.location.pathname;		
-		if(path == "/hot" || path == "/mine"){
-            h = h - 60
-		}
 		return(
-		   <div className="container" style={{height:h + 'px'}}>
+		   <div className="container" style={{height:Math.max(window.innerHeight,window.innerWidth) + 'px'}}>
 			{this.props.children}
+			{this.getElement()}
 			<div className="nav-wrapper" style={{display:this.state.display}}>
 				<ul data-flex="dir:left box:mean">
 					<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>
