@@ -4,6 +4,7 @@ import {IndexLink,Link} from 'react-router';
 import Load from './load';
 import BScroll from 'better-scroll';
 import '../common/common.css';
+import common from 'common/common';
 
 class Nav extends React.Component{
 	constructor(props){
@@ -31,8 +32,8 @@ class Nav extends React.Component{
 	}
 
 	getElement(){
-	    let path = this.props.location.pathname;		
-        if(path == "/hot" || path == "/mine"){
+	    let path = this.props.location.pathname;	
+        if((path == "/hot" || path == "/mine") && !common.isAndroid()){
         	return <div style={{height:'60px'}}></div>;
         }else{
             return null;
