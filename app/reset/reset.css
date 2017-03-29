@@ -25,7 +25,7 @@ time, mark, audio, video, input {
 }
 
 html {
-    background-color: #eeeff3;
+    background-color: #eee;
     -webkit-text-size-adjust: 100%;
 }
 
@@ -43,6 +43,7 @@ body {
     font: 14px/1.5 'Heiti SC', 'Helvetica', 'HelveticaNeue', 'Droidsansfallback', "Droid Sans", 'Dengxian', 'Segoe', 'microsoft yahei';
     color: #323232;
     background-color: #fff;
+    overflow: hidden;
 }
 
 article,

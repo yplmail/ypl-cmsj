@@ -34,7 +34,7 @@ class Nav extends React.Component{
 	getElement(){
 	    let path = this.props.location.pathname;	
         if((path == "/hot" || path == "/mine") && !common.isAndroid()){
-        	return <div style={{height:'60px'}}></div>;
+        	return <div style={{height:'65px',backgroundColor:'#eee'}}></div>;
         }else{
             return null;
         }
@@ -44,7 +44,6 @@ class Nav extends React.Component{
 		return(
 		   <div className="container" style={{height:Math.max(window.innerHeight,window.innerWidth) + 'px'}}>
 			{this.props.children}
-			{this.getElement()}
 			<div className="nav-wrapper" style={{display:this.state.display}}>
 				<ul data-flex="dir:left box:mean">
 					<li><IndexLink to="/" activeClassName="active">首页</IndexLink></li>

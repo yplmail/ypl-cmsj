@@ -47,7 +47,7 @@ class Player extends React.Component{
                 openId   : ''
             },
             success:function(response){
-                common.changeTitle(response.title);
+                //common.changeTitle(response.title);
                 this.setData(response);
                 this.initPlayer();
             }.bind(this)

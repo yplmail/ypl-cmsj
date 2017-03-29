@@ -24,21 +24,22 @@ function change(pre, next) {
 		document.title = next.routes[1].title;		
 	}
 	const iframe = document.createElement('iframe');
-	iframe.style.display='none';
 	iframe.src = '../favicon.ico';
+	iframe.style.display='none';
 	const listener = () => {
-	    setTimeout(() => {
+	    let timer = setTimeout(() => {
+	    	clearTimeout(timer);
 	        iframe.removeEventListener('load', listener);
 	        document.body.removeChild(iframe);
 	    }, 320);
 	};
-	iframe.addEventListener('load', listener);
+	iframe.addEventListener('load', listener,false);
 	document.body.appendChild(iframe);
 }
 
 ReactDOM.render(
 	<Router history={hashHistory}>
-		<Route path="/" component={Nav} onChange={change} >
+		<Route path="/" component={Nav}>
 			<IndexRoute component={List} title="草莓视界"/>
 			<Route path="register(/:videoId)(/:playId)"  component={Register} title="注册"/>
 			<Route path="login(/:videoId)(/:playId)"  component={Login} title="登录"/>

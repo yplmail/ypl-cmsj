@@ -231,7 +231,7 @@ class Hot extends React.Component{
 
 	render(){
        return(
-           <div className="hot-wrapper">
+           <div className="hot-wrapper" style={{height:Math.max(window.innerHeight+65,window.innerWidth+65)+ 'px'}}>
                 <ul className="hot-inner">{this.loop()}</ul>
            </div>
        )
