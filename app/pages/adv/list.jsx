@@ -1,5 +1,5 @@
 import React from 'react';
-import Scroll from 'scroll/scrollList';
+import Scroll from 'scroll/scroll';
 import common from '../../common/common';
 import ServerRequest from 'server/serverRequest';
 import './list.css';
