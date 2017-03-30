@@ -6,10 +6,12 @@ import './result.css';
 class Result extends React.Component{
     constructor(props){
         super(props);
+        this.state = {}
     }
 
     componentDidMount(){
-
+        this.openPacket();
+        this.getPacketRecord();
     }
 
     /**
@@ -18,20 +20,22 @@ class Result extends React.Component{
      * @return {[type]}       [description]
      */
     openPacket(event){
+        let query = this.props.location.query;
         let server = new ServerRequest();
         server.post({
             url : 'receive',
             data:{
-                publishId : this.state.video.publishId,
-                videoPlayRecordId : this.state.playRecordId
+                publishId : query.videoId,
+                videoPlayRecordId : query.playId
             },
             success:function(result){
-                let timer = setTimeout(function(){
-                    clearTimeout(timer);
-                    this.packetResult(result);
-                }.bind(this),320)
+                this.state({...result})
             }.bind(this)
         });
+    }
+
+    getPacketRecord(){
+
     }
 
     render(){

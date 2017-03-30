@@ -28,15 +28,15 @@ class Packet extends React.Component{
      * @return {[type]}       [description]
      */
     openHandle(event){
+        let videoId  = this.state.video.publishId;
+        let recordId = this.state.playRecordId;
         if(common.getcookies('token')){
             this.closePacket();
             let timer = setTimeout(function(){
                 clearTimeout(timer);
-                location.hash = '/result/'+this.state.video.publishId + '/123';   // +this.state.playRecordId || 123;
+                location.hash = '/result/'+videoId + '/'+recordId;
             }.bind(this),0)
         }else{
-            let videoId  = this.state.video.publishId;
-            let recordId = this.state.playRecordId;
             location.hash = '/login/'+videoId+'/'+recordId;
         }
     }
