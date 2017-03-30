@@ -26,7 +26,8 @@ const API = {
     'withdrawList':'account/withdraw/list',
     'feedback':'mine/feedback',
     'checkMobile':'user/checkMobile',
-    'isValidplayId' : 'publish/videoPlayRecordValid'
+    'isValidplayId' : 'publish/videoPlayRecordValid',
+    'luckyRank' : 'reward/luckyRank'
 }
 
 export default API

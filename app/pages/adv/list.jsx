@@ -57,10 +57,12 @@ class List extends React.Component{
     }
 
     innerHtml(item){
+        let amount = parseFloat(item.totalAmount || 0);
+        let styles = amount ? '' : 'style=visibility:hidden';
         return  '<div><h2 class="ellipsis">'+item.title+'</h2></div>'+
                 '<div data-flex="dir:left">'+
-                '<p class="adv-invest">'+item.totalAmount+'</p>'+
-                '<p class="adv-packetcount">已领'+item.usedCount+'个</p>'+
+                '<p class="adv-invest" '+styles+'>'+item.totalAmount+'</p>'+
+                '<p class="adv-packetcount" '+styles+'>已领'+item.usedCount+'个</p>'+
                 '<p class="adv-time"><span>'+item.duration+'</span></p>'+
                 '</div>';
     }

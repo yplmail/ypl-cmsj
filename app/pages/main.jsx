@@ -19,7 +19,7 @@ import WechatAuth   from './wechatAuth/wechatAuth.jsx';
 import Invite   from './invite/invite.jsx';
 import About   from './about/about.jsx';
 
-function change(pre, next) {  
+function change(pre, next) {
 	if(next.routes[1].title){
 		document.title = next.routes[1].title;		
 	}
@@ -37,6 +37,10 @@ function change(pre, next) {
 	document.body.appendChild(iframe);
 }
 
+function enter(router, replace){
+   location.search = "v=2";
+}
+
 ReactDOM.render(
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav}>
@@ -44,7 +48,7 @@ ReactDOM.render(
 			<Route path="register(/:videoId)(/:playId)"  component={Register} title="注册"/>
 			<Route path="login(/:videoId)(/:playId)"  component={Login} title="登录"/>
 			<Route path="forgetPassword"  component={ForgetPassword} title="重置密码"/>
-			<Route path="hot" component={Hot} title="热门"/>
+			<Route path="hot" component={Hot} title="热门" />
 			<Route path="mine" component={Mine} title="草莓"/>
 			<Route path="detail/:videoId(/:playId)" component={Detail} />
 			<Route path="share/:videoId(/:shareId)" component={Detail} />

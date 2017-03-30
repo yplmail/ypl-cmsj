@@ -13,7 +13,7 @@ class Invite extends React.Component{
         	share:{
 				display : 'none',
 				title   : '草莓视界',
-				desc    : '草莓视界带你一起去发现创意的美',
+				desc    : '草莓视界带你一起发现创意美',
 				link    : 'http://'+location.hostname+'/#/inviteRegister/'+shareId,
 				imgUrl  : 'http://'+location.hostname+'/images/strawberry_logo.png'
         	}
@@ -33,7 +33,7 @@ class Invite extends React.Component{
 		return(
            <div className="invite-wrapper">
 				<div className="invite-content" >
-					<h1>一起去发现创意的美</h1>
+					<h1>一起发现创意美</h1>
 					<h2><span>分享到微信</span></h2>
 					<i onClick={this.shareHandle}></i>
 				</div>

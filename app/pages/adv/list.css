@@ -6,7 +6,6 @@
 .adv-list-wrapper ul > li {
     position: relative;
     height: 4.22rem;
-/*    background-image: url(../../images/adv_bg_01.jpg);*/
     background-repeat: no-repeat;
     background-size: cover;
     border-bottom: 1px solid #eee;
@@ -50,8 +49,8 @@
 .adv-list-wrapper p.adv-invest:before{
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
+    width: .36rem;
+    height: .36rem;
     background: url(../../images/adv_amt_icon.png) no-repeat;
     background-size: contain;
     vertical-align: -4px;
@@ -65,8 +64,8 @@
 .adv-list-wrapper p.adv-packetcount:before{
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
+    width: .36rem;
+    height: .36rem;
     background: url(../../images/adv_packet_icon.png) no-repeat;
     background-size: contain;
     vertical-align: -4px;
@@ -77,7 +76,7 @@
     width: 18%;
     background: url(../../images/adv_score_icon.png) no-repeat;
     background-position: left center;
-    background-size: .34rem .34rem; 
+    background-size: .36rem .36rem; 
     padding-left:.4rem;   
 }*/
 
@@ -88,7 +87,8 @@
 }
 
 .adv-list-wrapper p.adv-time span {
-    background-color: #adaca8;
+    background-color: #e8c787;
+    opacity: .56;
     color: #fff;
     padding: 0 5px;
     border-radius: 8px;

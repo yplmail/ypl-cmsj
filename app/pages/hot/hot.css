@@ -115,9 +115,9 @@
 .hot-wrapper p.adv-invest:before{
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
-    background: url(../../images/adv_amt_icon2.png) no-repeat;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/hot_adv_icon.png) no-repeat;
     background-size: contain;
     vertical-align: -4px;
     margin-right: 4px;
@@ -131,9 +131,9 @@
 .hot-wrapper p.adv-packetcount:before{
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
-    background: url(../../images/adv_packet_icon2.png) no-repeat;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/hot_packet_icon.png) no-repeat;
     background-size: contain;
     vertical-align: -4px;
     margin-right: 4px;
@@ -154,7 +154,7 @@
 }
 
 .hot-wrapper p.adv-time span {
-    background-color: #adaca8;
+    background-color: #e30c35;
     color: #fff;
     padding: 0 5px;
     border-radius: 8px;

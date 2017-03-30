@@ -197,6 +197,8 @@ class Hot extends React.Component{
 		if(this.state.items.length > 0){
 			return this.state.items.map((item, index) => {
 				let coverUrl = item.coverUrl ? 'url('+item.coverUrl+'?x-oss-process=image/resize,m_fill,h_'+this.height+',limit_0)' : '';
+				let amount = parseFloat(item.totalAmount || 0);
+				let styles = amount ? 'visible' : 'hidden';
 				return (
 						<li onTouchStart={this.touchStart} onTouchMove={this.touchMove} onTouchEnd={this.touchEnd}
 						key={item.publishId} >
@@ -205,8 +207,8 @@ class Hot extends React.Component{
 										<span className="video-play"></span>
 								</div>
 								<div data-flex="dir:left">
-										<p className="adv-invest">{item.totalAmount}</p>
-										<p className="adv-packetcount">已领{item.usedCount}个</p>
+										<p className="adv-invest" style={{visibility:styles}}>{item.totalAmount}</p>
+										<p className="adv-packetcount" style={{visibility:styles}}>已领{item.usedCount}个</p>
 										<p className="adv-time"><span>{item.duration}</span></p>
 								</div>
 								<h2 className="adv-title ellipsis">{item.title}</h2>

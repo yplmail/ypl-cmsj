@@ -75,9 +75,9 @@
 .video-wrapper .video-detail > div:nth-child(1):before {
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
-    background: url(../../images/adv_amt_icon2.png) repeat;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/hot_adv_icon.png) repeat;
     background-size: contain;
     vertical-align: -5px;
     margin-right: 4px;
@@ -90,9 +90,9 @@
 .video-wrapper .video-detail > div:nth-child(2):before {
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
-    background: url(../../images/adv_packet_icon2.png) repeat;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/hot_packet_icon.png) repeat;
     background-size: contain;
     vertical-align: -5px;
     margin-right: 4px;
@@ -107,83 +107,108 @@
 .video-wrapper .video-detail > div:nth-child(3):before {
     content: '';
     display: inline-block;
-    width: .34rem;
-    height: .34rem;
+    width: .36rem;
+    height: .36rem;
     background: url(../../images/adv_share_icon.png) repeat;
     background-size: contain;
     vertical-align: -5px;
     margin-right: 4px;
 }
 
-.packetRecord-wrapper {
+.packetRecord-wrapper{
     position: relative;
     width: 100%;
-    min-height: 1px;
-    max-height: 90px;
-    background-color: #eee;
+    background-color: #fff;
     overflow: hidden;
+    border-top:1px solid #eee;
+    height:0;
 }
 
-.packetRecord-wrapper li {
-    height: 30px;
-    color: #9f786f;
-    font-size: 14px;
-    text-align: left;
+.packetRecord-wrapper > div{
+    width:50%;
+    height:100%;
 }
 
-.packetRecord-wrapper li:nth-of-type(1n) {
-    color: #9f786f;
+.packetRecord-wrapper .luck-star{
+    background: url(../../images/luck_star_icon.png) no-repeat;
+    background-size: 134px 35px;
+    background-position: center center;
 }
 
-.packetRecord-wrapper li:nth-of-type(2n) {
-    color: #cb9b23;
+.packetRecord-wrapper .luck-level > div{
+    height:100%;
 }
 
-.packetRecord-wrapper li:nth-of-type(3n) {
-    color: #2db890;
+.packetRecord-wrapper .luck-level > div:nth-child(1){
+    position: relative;
+    background: url(../../images/luck_gold.png) no-repeat;
+    background-size: 33px 43px;
+    background-position: center 5px;
 }
 
-.packetRecord-wrapper li > div:nth-child(2) {
-    width: 25%;
-    margin-left: .28rem;
+.packetRecord-wrapper .luck-level > div:nth-child(2){
+    position: relative;
+    background: url(../../images/luck_silver.png) no-repeat;
+    background-size: 33px 43px;
+    background-position: center  5px;   
 }
 
-.packetRecord-wrapper li > div:nth-child(3) {
-    width: 25%;
-    margin-left: .35rem;
+.packetRecord-wrapper .luck-level > div:nth-child(3){
+    position: relative;
+    background: url(../../images/luck_copper.png) no-repeat;
+    background-size: 33px 43px;
+    background-position: center  5px;  
 }
 
-.packetRecord-wrapper li > div:nth-child(4) {
-    margin-left: .35rem;
-    color: #333;
-}
-
-.packetRecord-wrapper li > div:nth-child(4) span {
-    color: #f02800;
-}
-
-.packetRecord-wrapper li .personal-header {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
+.packetRecord-wrapper .luck-level .luck-header{
+    position: absolute;
+    display: block;
+    width :25px;
+    height:25px;
+    left:50%;
+    top:16.5px;
+    margin-left: -13.5px;
     border-radius: 50%;
-    margin-left: .28rem;
-    background-image: url(../../images/user_header_icon.png);
+    background-image: url(../../images/mine_header_icon.png);
     background-repeat: no-repeat;
     background-size: contain;
 }
 
-.packetRecord-wrapper ul {
-    position: relative;
-    top: 0px;
+.packetRecord-wrapper .luck-level .gold{
+    position: absolute;
+    display: block;
+    width:100%;    
+    left:0;
+    bottom:2px;
+    text-align: center;
+    font-size: 10px;
+    color:#333;
 }
 
-.packetRecord-wrapper ul.move {
-    transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
+.packetRecord-wrapper .luck-level .silver{
+    position: absolute;
+    display: block;
+    width:100%;
+    left:0;
+    bottom:2px;
+    text-align: center;
+    font-size: 10px;
+    color:#333;
+}
+
+.packetRecord-wrapper .luck-level .copper{
+    position: absolute;
+    display: block;
+    width:100%;
+    left:0;
+    bottom:2px;
+    text-align: center;
+    font-size: 10px;
+    color:#333;
 }
 
 .correlation-wrapper {
+    border-top:5px solid #eee;
     background-color: #fff;
 }
 
