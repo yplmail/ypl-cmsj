@@ -178,8 +178,6 @@ class Login extends React.Component{
               }else{
                   location.hash = '/';
               }
-
-
             }.bind(this)
         });
     }
