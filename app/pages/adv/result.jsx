@@ -9,7 +9,29 @@ class Result extends React.Component{
     }
 
     componentDidMount(){
-        
+
+    }
+
+    /**
+     * 打开红包
+     * @param  {[type]} event [description]
+     * @return {[type]}       [description]
+     */
+    openPacket(event){
+        let server = new ServerRequest();
+        server.post({
+            url : 'receive',
+            data:{
+                publishId : this.state.video.publishId,
+                videoPlayRecordId : this.state.playRecordId
+            },
+            success:function(result){
+                let timer = setTimeout(function(){
+                    clearTimeout(timer);
+                    this.packetResult(result);
+                }.bind(this),320)
+            }.bind(this)
+        });
     }
 
     render(){
@@ -41,12 +63,12 @@ class Result extends React.Component{
 				          <div>27.32元</div>
 			          </li>
 		          </ul>
-	          </div>  
+	          </div>
           </div>
     	);
     }
 
-}    
+}
 
 export default Result;
 

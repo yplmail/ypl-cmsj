@@ -97,10 +97,10 @@ class Player extends React.Component{
                         packet:{
                              packetAnimation : 'animation'
                         }
-                    });                    
+                    });
                 }
             }.bind(this)
-        })           
+        })
     }
 
     /**
@@ -156,7 +156,6 @@ class Player extends React.Component{
                  packetAnimation : ''
             }
         })
-        this.props.handle();
     }
 
     /**
@@ -168,11 +167,12 @@ class Player extends React.Component{
         if(time != 0 && time < duration){
             document.querySelector('.prism-player').style.display = 'block';
             document.querySelector('.video-cover').style.display  = 'none';
-            this.player.play();  
+            this.player.play();
         }
         if(replay && time == duration){
             document.querySelector('.prism-player').style.display = 'block';
             document.querySelector('.video-cover').style.display  = 'none';
+            this.notice()
             this.player.replay();
         }
     }
@@ -184,7 +184,7 @@ class Player extends React.Component{
         this.player.pause();
         document.querySelector('.prism-player').style.display = 'none';
         document.querySelector('.video-cover').style.display  = 'block';
-    }    
+    }
 
     /**
      *  初始化播放器
@@ -218,7 +218,7 @@ class Player extends React.Component{
             clearTimeout(timer);
             if(document.querySelector('.duration')){
                 document.querySelector('.duration').innerText = this.state.video.duration;
-            }           
+            }
         }.bind(this),320);
     }
 
@@ -231,7 +231,7 @@ class Player extends React.Component{
             data:{
                 videoPlayRecordId : this.videoPlayId
             }
-        })        
+        })
     }
 
     /**
@@ -298,7 +298,7 @@ class Player extends React.Component{
                 <div>已领{video.usedCount}个</div>
                 <div onClick={this.shareHandle}>{video.shareCount}</div>
                 </div>
-                <Packet {...this.state.packet} handle={this.scoreHandle}/>
+                <Packet {...this.state.packet}/>
                 <Share  {...this.state.share} handle={this.playHandle}/>
             </div>
         )
