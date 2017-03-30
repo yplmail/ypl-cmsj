@@ -20,10 +20,12 @@ class Scroll extends React.Component{
 
         this.scrollEvent = this.scrollEvent.bind(this);
 
+        this.loading     = false;
+
     }
 
     componentDidMount(){
-        
+
         this.body      = document.querySelector('body');
 
         this.container = this.refs.scrollcontainer;
@@ -31,7 +33,7 @@ class Scroll extends React.Component{
         this.scrolltip = this.refs.scrolltips;
 
         this.loadingtip = this.refs.loadingtips;
-      
+
         window.addEventListener('scroll',this.scrollEvent,false);
 
         this.fetchDatas();
@@ -43,6 +45,7 @@ class Scroll extends React.Component{
             url  : this.url,
             data : this.data(),
             success:function(result){
+               this.loading    = false;
                this.pageCount  = result.pageCount;
                this.totalCount = result.totalCount;
                this.dealwith(result);
@@ -61,6 +64,8 @@ class Scroll extends React.Component{
         var scrollpos = this.body.offsetHeight + this.body.scrollTop;
         var maxHeight = this.body.scrollHeight;
         if(scrollpos >= maxHeight - 10){
+            if(this.loading) return false;
+            this.loading = true;
             if(this.pageIndex < this.pageCount){
                 this.loadingtip.innerText='正在加载';
                 ++this.pageIndex;
@@ -69,27 +74,27 @@ class Scroll extends React.Component{
                     this.fetchDatas();
                 }.bind(this),200);
             }else{
-                this.loadingtip.innerText='没有更多'; 
+                this.loadingtip.innerText='没有更多';
                 let timer = setTimeout(function(){
                     clearTimeout(timer);
                     this.scrolltip.style.display = 'none';
                 }.bind(this),200)
             }
-        }      
+        }
     }
 
     dealwith(result){
         if(this.totalCount == 0){
             this.container.innerHTML = '<p class="no-data">暂无相关数据</p>';
         }else{
-            this.createNodes(result.datas);      
-        }       
+            this.createNodes(result.datas);
+        }
     }
 
     createNodes(datas){
         datas.forEach(function(data,index){
             this.container.appendChild(this.createNode(data));
-        }.bind(this)); 
+        }.bind(this));
 
         if(this.totalCount > this.pageSize){
             this.refs.scrolltips.style.display = 'block';
@@ -109,7 +114,7 @@ class Scroll extends React.Component{
                             <p ref="loadingtips">下拉加载</p>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
         );
     }

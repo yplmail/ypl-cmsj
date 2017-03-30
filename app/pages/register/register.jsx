@@ -169,15 +169,17 @@ class Login extends React.Component{
               common.setcookies('refreshTokenTime',Date.now(),6);
               common.setcookies('token',response.token,7);
               let params = this.props.params;
-              if(params.videoId && params.playId){
-                  location.hash="/detail/"+params.videoId+'/'+params.playId;
-              }else{
-                  if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                      location = './redirect.html';
+              if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                  if(params.videoId && params.playId){
+                      location = './redirect.html?videoId='+params.videoId+'&playId='+params.playId;
                   }else{
-                      location.hash = '/';
+                      location = './redirect.html';
                   }
+              }else{
+                  location.hash = '/';
               }
+
+
             }.bind(this)
         });
     }

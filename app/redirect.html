@@ -17,19 +17,39 @@
         }
         data[arr[i].substring(0, pos)] = decodeURIComponent(arr[i].substring(pos + 1));
     }
+
+
     if (data.code) {
-        if (data.scope) {
-            location.href = 'https://' + location.hostname + '/#/mine?code=' + data.code + '&state=' + data.state;
-        } else {
+        if(data.videoId && data.playId){
+            location.href = 'https://' + location.hostname + '/#/detail/'+data.videoId+'/'+data.playId+'?code=' + data.code + '&state=' + data.state;
+        }
+
+        if(data.scope == 'snsapi_base'){
             location.href = 'https://' + location.hostname + '/#/?code=' + data.code + '&state=' + data.state;
+        }else{
+            location.href = 'https://' + location.hostname + '/#/mine?code=' + data.code + '&state=' + data.state;
         }
     } else {
-        var scope = data.scope || 'snsapi_base';
-        var url = encodeURIComponent('https://' + location.hostname + '/redirect.html');
-        if (scope === 'snsapi_userinfo') {
-            url = encodeURIComponent('https://' + location.hostname + '/redirect.html?scope=' + scope);
+
+        var arr = [];
+
+        if(data.scope){
+            arr.push('scope='+data.scope);
+        }else{
+            arr.push('scope=snsapi_base');
         }
-        location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope=" + scope + "&state=chuncao#wechat_redirect";        
+
+        if(data.videoId){
+            arr.push('videoId='+data.videoId);
+        }
+
+        if(data.playId){
+            arr.push('playId='+data.playId);
+        }
+
+        var url = encodeURIComponent('https://'+location.hostname+'/redirect.html?'+arr.join('&'));
+
+        location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope=" + scope + "&state=chuncao#wechat_redirect";
     }
     </script>
 </body>
