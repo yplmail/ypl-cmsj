@@ -15,22 +15,7 @@ class Video extends React.Component{
     componentDidMount(){
         this.getVideos();
     }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.scroll){
-            this.iscroll= nextProps.scroll; 
-        }
-    }
-
-    componentDidUpdate(){
-        if(this.iscroll){          
-            let timer = setTimeout(function(){
-                clearTimeout(timer);
-                this.iscroll.refresh();           
-            }.bind(this),320)            
-        }
-    }   
-
+  
     getVideos(){
         let server = new ServerRequest();
         server.post({

@@ -8,27 +8,11 @@ class Record extends React.Component{
         this.state={
             packetList : []
         };
-        this.iscroll = null;
     }
 
     componentDidMount(){
         this.getList();
     }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.scroll){
-            this.iscroll = nextProps.scroll; 
-        }
-    }
-
-    componentDidUpdate(){
-        if(this.iscroll){
-            let timer = setTimeout(function(){
-                clearTimeout(timer);
-                this.iscroll.refresh();           
-            }.bind(this),320)            
-        }
-    } 
 
     getList(){
         let server = new ServerRequest();

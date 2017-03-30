@@ -1,0 +1,117 @@
+.result-wrapper{
+	position: relative;
+	width:100%;
+	height:100%;
+}
+
+.result-wrapper .result-content{
+	position: relative;
+/*	height:7rem;*/
+	width:100%;
+	background-color: #eee;
+}
+
+.result-wrapper .result-content .header{
+	position:relative;
+	background: url(../../images/packet_result_icon.png) no-repeat;
+	background-size: 100% 100%;
+	width: 100%;
+	height:2.98rem;
+	text-align: center;	
+}
+
+.result-wrapper .result-content .header-img{
+	position: absolute;
+	display: inline-block;
+	top:2.3rem;
+	left:50%;
+	margin-left: -.615rem;
+	width:1.22rem;
+	height:1.22rem;
+	border-radius: 50%;
+	background-image: url(../../images/mine_header_icon.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+
+}
+
+.result-wrapper .content > div{
+    text-align: center;
+}
+
+.result-wrapper .content > div:nth-child(1){
+	margin-top: 35px;
+	font-size: 17px;
+	color:#333;
+}
+
+.result-wrapper .content > div:nth-child(2){
+	line-height: 2em;
+	font-size: 14px;
+	color:#333;
+}
+
+.result-wrapper .content > div:nth-child(3){
+	margin-top: 10px;
+	font-size: 43px;
+	color:#333;
+}
+
+.result-wrapper .content > div:nth-child(3):before{
+	content:'￥';
+    font-size: 24px;
+}
+
+.result-wrapper .content > div:nth-child(4){
+	margin-top: -10px;
+	font-size: 14px;
+	color:#285db4;
+}
+
+.result-wrapper .content > div:nth-child(5){
+	margin-top: 20px;
+	font-size: 15px;
+	color:#333;
+}
+
+.result-wrapper .content > div:nth-child(6) span{
+	display: inline-block;
+    background-color:#ce1035;
+    width:3rem;
+    height:43px;
+    line-height: 43px;
+    border-radius: 8px;
+    margin:20px;
+    text-align: center;
+    font-size: 17px;
+    color:#fff;
+}
+
+.result-wrapper .result-record{
+	margin:0 .3rem;
+}
+
+.result-wrapper .result-record h1{
+	height:1rem;
+	line-height:1rem;
+	font-size: 14px;
+	color:#333;
+}
+
+.result-wrapper .result-record li{
+	height:1.22rem;
+	border-top:1px solid #eee;
+}
+
+.result-wrapper .result-record li > div:nth-child(1){
+    width:1.05rem;
+    background-image: url(../../images/mine_header_icon.png);
+    background-position: center center;
+    background-size: 1rem 1rem;    
+}
+
+.result-wrapper .result-record li > div:nth-child(3){
+    width:1.05rem;  
+}
+
+

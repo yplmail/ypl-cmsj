@@ -15,18 +15,18 @@ class Packet extends React.Component{
             beyondUserRate  :'',
             remindTips      :''
         }
-        this.wish = {
-            '1':'一步之遥',           
-            '2':'再接再厉',
-            '3':'近在咫尺',
-            '4':'触手可得',
-            '5':'勇往直前',
-            '6':'锲而不舍',
-            '7':'矢志不渝',
-            '8':'孜孜不倦', 
-            '9':'事在人为',
-            '10':'滴水穿石'
-        }
+        // this.wish = {
+        //     '1':'一步之遥',           
+        //     '2':'再接再厉',
+        //     '3':'近在咫尺',
+        //     '4':'触手可得',
+        //     '5':'勇往直前',
+        //     '6':'锲而不舍',
+        //     '7':'矢志不渝',
+        //     '8':'孜孜不倦', 
+        //     '9':'事在人为',
+        //     '10':'滴水穿石'
+        // }
         this.openHandle = this.openHandle.bind(this);
         this.closePacket = this.closePacket.bind(this);
     }
@@ -43,7 +43,11 @@ class Packet extends React.Component{
     openHandle(event){
         if(common.getcookies('token')){
             event.target.className="packet-open rotateAnimation";
-            this.openPacket();
+            let timer = setTimeout(function(){
+                clearTimeout(timer);
+                location.hash = '/result/'+this.state.video.publishId + '/123';   // +this.state.playRecordId || 123;
+            }.bind(this),320)
+            //this.openPacket();
         }else{
             let videoId  = this.state.video.publishId;
             let recordId = this.state.playRecordId;
@@ -79,19 +83,21 @@ class Packet extends React.Component{
      * @return {[type]}       [description]
      */
     packetResult(result){
-        document.querySelector('.packet-open').className='packet-open';
-        if(result.amount == '0'){
-            this.setState({
-                packetType : 2,
-                remindTips : this.wish[Math.floor(Math.random()*10)] || '滴水穿石'
-            });
-        }else{
-            this.setState({
-                packetType : 1,
-                amount : result.amount,
-                beyondUserRate : result.beyondUserRate
-            });
-        }        
+
+
+        // document.querySelector('.packet-open').className='packet-open';
+        // if(result.amount == '0'){
+        //     this.setState({
+        //         packetType : 2,
+        //         remindTips : this.wish[Math.floor(Math.random()*10)] || '滴水穿石'
+        //     });
+        // }else{
+        //     this.setState({
+        //         packetType : 1,
+        //         amount : result.amount,
+        //         beyondUserRate : result.beyondUserRate
+        //     });
+        // }        
     }
 
     /**
@@ -105,40 +111,16 @@ class Packet extends React.Component{
     render(){
       var detail = this.state.video;
       let url = detail.publishAvatar ? 'url('+detail.publishAvatar+')' : ''
-      var content = null;
-      if(this.state.packetType == 0){
-         var content =<div className= {"packet-content " + this.state.packetAnimation} >
-                <p className="packet-close" onClick={this.closePacket}></p>
-                <p className="packet-header" style={{backgroundImage:url}}></p>
-                <p className="packet-title">{detail.publishNickName}</p>
-                <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-wish">{detail.rewardsWish}</p>
-                <p className="packet-open" onClick={this.openHandle}></p>
-            </div>
-      }else if(this.state.packetType == 1){
-         var content =<div className="packet-result">
-                <p className="packet-close" onClick={this.closePacket}></p>
-                <p className="result-header" style={{backgroundImage:url}}></p>
-                <p className="packet-title">{detail.publishNickName}</p>
-                <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-money"><Link to="/wallet">{this.state.amount}</Link></p>
-                <p className="packet-account"><Link to="/wallet">已经存入账户零钱</Link></p>
-                <p className="packet-ranking">恭喜超过&nbsp;<span>{this.state.beyondUserRate+'%'}</span>&nbsp;的草莓哦！</p>
-                <p className="packet-more"><Link to="/">更多红包视频</Link></p>
-            </div>
-      }else{
-         var content =<div className="packet-result">
-                <p className="packet-close" onClick={this.closePacket}></p>
-                <p className="result-header" style={{backgroundImage:url}}></p>
-                <p className="packet-title">{detail.publishNickName}</p>
-                <p className="packet-desprition">{detail.rewardsSlogan}</p>
-                <p className="packet-remindTips">{this.state.remindTips}</p>
-                <p className="packet-more"><Link to="/">更多红包视频</Link></p>
-            </div>
-      }
       return(
-          <div className="packet-wrapper" style={{display:this.state.packetAnimation ? 'block':'none'}}>
-            {content}
+          <div className="packet-wrapper" style={{display:this.state.packetAnimation ? 'block':'block'}}>
+              <div className= {"packet-content " + this.state.packetAnimation} >
+                  <p className="packet-close" onClick={this.closePacket}></p>
+                  <p className="packet-header" style={{backgroundImage:url}}></p>
+                  <p className="packet-title">{detail.publishNickName}</p>
+                  <p className="packet-desprition">{detail.rewardsSlogan}</p>
+                  <p className="packet-wish">{detail.rewardsWish}</p>
+                  <p className="packet-open" onClick={this.openHandle}></p>
+              </div>
           </div>
       )
     }
