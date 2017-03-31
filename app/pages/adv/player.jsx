@@ -199,7 +199,36 @@ class Player extends React.Component{
             preload : true,
             playsinline:true,
             autoplay:false,
-            showBuffer:true
+            showBuffer:true,
+            skinLayout:[{
+                "name":"bigPlayButton",
+                "align":"cc",
+                "x":30,
+                "y":80
+            },{
+                "name":"controlBar",
+                "align":"blabs",
+                "x":0,
+                "y":0,
+                "children":[
+                    {
+                        "name":"playButton",
+                        "align":"blabs",
+                        "x":20,
+                        "y":6
+                    },{
+                        "name":"timeDisplay",
+                        "align":"tlabs",
+                        "x":50,
+                        "y":0
+                    },{
+                        "name":"fullScreenButton",
+                        "align":"brabs",
+                        "x":20,
+                        "y":6
+                    }
+                ]
+            }]
         });
 
         this.player.on('play',function(){
