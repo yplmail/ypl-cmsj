@@ -14,7 +14,7 @@ class Scroll extends React.Component{
 
         this.url       = props.url;
 
-        this.datas     = props.datas || {};
+        this.datas     = props.data || {};
 
         this.createNode  = props.createNode || function(){};
 

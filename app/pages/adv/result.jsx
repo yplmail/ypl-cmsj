@@ -33,7 +33,7 @@ class Result extends React.Component{
         this.data = {
             el  : '.result-record',
             url : 'packetRecord',
-            data: {publishId:this.query.videoId}
+            data: {publishId:this.query.videoId},
             createNode : this.template.bind(this),
             callback   : this.count.bind(this)
         };
@@ -160,7 +160,7 @@ class Result extends React.Component{
         return '<div class="record-header" data-flex="main:center cross:center"><i style={{backgroundImage:coverUrl}}></i></div>'+
                 '<div class="record-content" >'+
                 '<p>'+item.nickname+'</p>'+
-                '<p>'+item.date+'</p>'+
+                '<p>'+item.date.substr(5)+'</p>'+
                 '</div>'+
                 '<div class="record-amount">'+
                 '<span>'+item.amount+'元</span>'+
