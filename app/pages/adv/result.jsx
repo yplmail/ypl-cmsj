@@ -26,16 +26,17 @@ class Result extends React.Component{
             }
         }
 
-        this.data = {
-            el  : '.result-record',
-            url : 'packetRecord',
-            createNode : this.template.bind(this),
-            callback   : this.count.bind(this)
-        };
-
         this.shareHandle = this.shareHandle.bind(this);
 
         this.query = this.props.params;
+
+        this.data = {
+            el  : '.result-record',
+            url : 'packetRecord',
+            data: {publishId:this.query.videoId}
+            createNode : this.template.bind(this),
+            callback   : this.count.bind(this)
+        };
 
         this.tips = {
             '1'  : '糟糕，发给你的洲际红包被萨德拦截了！',
