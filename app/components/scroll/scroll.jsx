@@ -18,6 +18,8 @@ class Scroll extends React.Component{
 
         this.createNode  = props.createNode || function(){};
 
+        this.callback    = props.callback || function(){};
+
         this.scrollEvent = this.scrollEvent.bind(this);
 
         this.loading     = false;
@@ -48,6 +50,7 @@ class Scroll extends React.Component{
                this.loading    = false;
                this.pageCount  = result.pageCount;
                this.totalCount = result.totalCount;
+               this.callback(result);
                this.dealwith(result);
             }.bind(this)
         });

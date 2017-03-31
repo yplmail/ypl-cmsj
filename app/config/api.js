@@ -27,7 +27,8 @@ const API = {
     'feedback':'mine/feedback',
     'checkMobile':'user/checkMobile',
     'isValidplayId' : 'publish/videoPlayRecordValid',
-    'luckyRank' : 'reward/luckyRank'
+    'luckyRank' : 'reward/luckyRank',
+    'packetRecord':'/reward/record'
 }
 
 export default API
