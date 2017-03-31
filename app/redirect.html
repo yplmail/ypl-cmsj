@@ -22,6 +22,7 @@
     if (data.code) {
         if(data.videoId && data.playId){
             location.href = 'https://' + location.hostname + '/#/detail/'+data.videoId+'/'+data.playId+'?code=' + data.code + '&state=' + data.state;
+            return false;
         }
 
         if(data.scope == 'snsapi_base'){
