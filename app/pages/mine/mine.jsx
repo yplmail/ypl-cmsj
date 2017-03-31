@@ -27,7 +27,7 @@ class Header extends React.Component{
           maskLayer:true,
           success:function(response){
              this.setState({
-                nickname: response.nickname    ||  '不仅仅是看客',
+                nickname: response.nickname    ||  '草莓看客',
                 amount  : response.totalIncome || '0.00',
                 url     : response.faceUrl ? 'url('+response.faceUrl+')' : ''
              });
@@ -59,7 +59,7 @@ class List extends React.Component{
       return (
           <div className="mine-list-wrapper">
               <ul>
-                  <li><Link to="/wallet">草莓钱包</Link></li>
+                  <li><Link to="/wallet">我的钱包</Link></li>
                   <li><Link to="/invite">邀请朋友</Link></li>
                   <li><Link to="/feedback">意见反馈</Link></li>
                   <li><Link to="/about">关于产品</Link></li>

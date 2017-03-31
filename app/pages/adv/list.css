@@ -87,12 +87,13 @@
 }
 
 .adv-list-wrapper p.adv-time span {
-    background-color: #e8c787;
+    background-color: rgba(203,174,103,0.56);
     opacity: .56;
-    color: #fff;
+    color: rgba(255,255,255);
     padding: 0 5px;
     border-radius: 8px;
     vertical-align: top;
+    font-size: 10px;
 }
 
 .adv-list-wrapper ul > li:last-child{

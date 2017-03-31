@@ -414,7 +414,7 @@
     left: 50%;
     margin-left: -.625rem;
     border-radius: 50%;
-    background: url(../../images/user_header_icon.png);
+    background: url(../../images/mine_header_icon.png);
     background-repeat: no-repeat;
     background-size: contain;
 }
