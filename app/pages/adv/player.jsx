@@ -314,6 +314,8 @@ class Player extends React.Component{
     render(){
         let video = this.state.video;
         let coverUrl = video.coverUrl ?'url('+video.coverUrl+')' : '';
+        let amount = parseFloat(video.totalAmount || 0);
+        let styles = amount ? '' : 'hidden';
         return (
             <div className="video-wrapper">
                 <div className="video-player">
@@ -323,8 +325,8 @@ class Player extends React.Component{
                 <div id="springGrassPlayer" className="prism-player" ></div>
                 </div>
                 <div className="video-detail" data-flex="dir:left cross:center">
-                <div>{video.totalAmount}</div>
-                <div>已领{video.usedCount}个</div>
+                <div style={{visibility:styles}}>{video.totalAmount}</div>
+                <div style={{visibility:styles}}>已领{video.usedCount}个</div>
                 <div onClick={this.shareHandle}>{video.shareCount}</div>
                 </div>
                 <Packet {...this.state.packet}/>
