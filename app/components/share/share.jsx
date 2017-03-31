@@ -90,9 +90,7 @@ class Share extends React.Component{
     render(){
         return (
             <div className="share-wrapper" style={{display:this.state.display}} onClick={this.cancelHandle}>
-                <div className="content">
-                    <p>请点击右上角将本链接发送给指定朋友或分享到朋友圈等</p>
-                </div>
+                <div className="content"></div>
             </div>
         )
     }
