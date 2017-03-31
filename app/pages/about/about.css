@@ -34,7 +34,7 @@
 
 .about-wrapper ul li{
 	height:.98rem;
-	border-bottom: 1px solid #c1c1c1;
+	border-bottom: 1px solid #eee;
 }
 
 .about-wrapper ul li > div:nth-child(1){
