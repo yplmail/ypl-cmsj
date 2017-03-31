@@ -10,7 +10,8 @@ class Result extends React.Component{
         super(props);
         this.state = {
             result : {
-                beyondUserRate:0
+                beyondUserRate:0,
+                publisher : {}
             },
             count  : 0,
             share :{
@@ -60,9 +61,9 @@ class Result extends React.Component{
         }
 
         this.percent = {
-            '1' : '城市套路深，何必太认真，你却认真打败了全国'+this.state.result.beyondUserRate+'%的用户',
-            '2' : '姿势太帅，恭喜你打败了全国'+this.state.result.beyondUserRate+'%的红包用户',
-            '3' : '闹哪样？一不小心你就打败了全国'+this.state.result.beyondUserRate+'%的用户'            
+            '1' : '城市套路深，何必太认真，你却认真打败了全国##%的用户',
+            '2' : '姿势太帅，恭喜你打败了全国##%的红包用户',
+            '3' : '闹哪样？一不小心你就打败了全国##%的用户'            
         }
     }
 
@@ -170,24 +171,27 @@ class Result extends React.Component{
         if(data.amount == '0'){ 
             return <div className="no-winning">{this.tips[Math.ceil(Math.random()*20)]}</div>
         }else{
+            let str = this.percent[Math.ceil(Math.random()*3)];
             return <div>
                        <div className="packet-amount">{data.amount}</div>
                        <div className="packet-tip">已存入我的钱包</div>
-                       <div className="packet-percent">{this.percent[Math.ceil(Math.random()*3)]}</div>
+                       <div className="packet-percent">{str.replace("##",data.beyondUserRate)}</div>
                    </div>
         }
     }
 
     render(){
+        let avatar = this.state.result.publisher.avatar;
+        let coverUrl = avatar ? 'url('+avatar+')' : '';
     	return(
           <div className="result-wrapper">
 	          <div className="result-content">
 		          <div className="header">
-			          <i className="header-img"></i>
+			          <i className="header-img" style={{backgroundImage:coverUrl}}></i>
 		          </div>
 		          <div className="content">
-			          <div className="packet-title">兰博基尼</div>
-			          <div className="packet-wish">感谢观看，小小心意，请笑纳</div>
+			          <div className="packet-title">{this.state.result.publisher.name}</div>
+			          <div className="packet-wish">{this.state.result.thanksWords}</div>
                       {this.result()}
 			          <div className="packet-share"><span onClick={this.shareHandle}>分享</span></div>
 		          </div>
