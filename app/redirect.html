@@ -49,6 +49,8 @@
 
         var url = encodeURIComponent('https://'+location.hostname+'/redirect.html?'+arr.join('&'));
 
+        var scope = data.scope || 'snsapi_base';
+
         location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx69d84247bc78b780&redirect_uri=" + url + "&response_type=code&scope=" + scope + "&state=chuncao#wechat_redirect";
     }
     </script>

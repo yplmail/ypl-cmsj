@@ -102,14 +102,13 @@ class Result extends React.Component{
                 publishId: this.query.videoId
             },
             success:function(data){
-                data = {};
                 let tk = common.getcookies('token');
                 let shareId = tk ? tk.split("_")[1] : '';
                 this.setState({
                     share : {
                         title   : data.title,
                         desc    : data.publishVideoDesc || '一起发现创意美',
-                        link    : 'http://'+location.hostname+'/#/share/'+data.publishId+'/'+shareId,
+                        link    : 'http://'+location.hostname+'/#/share/'+data.publishId+'/'+ shareId,
                         imgUrl  : data.coverUrl,
                         type    : 'video',
                         dataUrl : data.playUrl,
