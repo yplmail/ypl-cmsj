@@ -125,14 +125,18 @@
 }
 
 .packetRecord-wrapper > div{
-    width:50%;
     height:100%;
 }
 
 .packetRecord-wrapper .luck-star{
+    width:46%;
     background: url(../../images/luck_star_icon.png) no-repeat;
     background-size: 134px 35px;
     background-position: center center;
+}
+
+.packetRecord-wrapper .luck-level{
+      width:54%;  
 }
 
 .packetRecord-wrapper .luck-level > div{
