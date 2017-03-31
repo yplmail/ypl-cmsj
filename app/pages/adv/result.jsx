@@ -148,7 +148,7 @@ class Result extends React.Component{
         this.setState({count : result.totalCount})
     }
 
-    template(item,font){
+    template(item){
         let element = document.createElement('li');
         element.setAttribute('data-flex', 'dir:left box:justify');
         element.innerHTML = this.innerHtml(item);
@@ -156,10 +156,12 @@ class Result extends React.Component{
     }
 
     innerHtml(item){
-        let coverUrl = item.avatar ? 'url('+item.avatar+')' : '';
-        return '<div class="record-header" data-flex="main:center cross:center"><i style={{backgroundImage:coverUrl}}></i></div>'+
+        let coverUrl = item.avatar ? 'background-image:url('+item.avatar+')' : '';
+        item.nickname = item.nickname || '草莓看客';
+        return '<div class="record-header" data-flex="main:center cross:center">'+
+                '<i style='+coverUrl+'></i></div>'+
                 '<div class="record-content" >'+
-                '<p>'+item.nickname || '草莓看客' +'</p>'+
+                '<p>'+item.nickname+'</p>'+
                 '<p>'+item.date.substr(5)+'</p>'+
                 '</div>'+
                 '<div class="record-amount">'+

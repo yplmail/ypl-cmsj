@@ -21,12 +21,12 @@ class Record extends React.Component{
             data:{
               publishId: this.props.videoId
             },
-            success:function(response){      
+            success:function(response){
                 this.setState({
                     packetList: response.datas
                 });
             }.bind(this)
-        })      
+        })
     }
 
     render(){
@@ -35,8 +35,8 @@ class Record extends React.Component{
         return (
           <div ref="vertical" className="packetRecord-wrapper" data-flex="dir:left" style={{height:h}}>
               <div className="luck-star"></div>
-              <div className="luck-level" data-flex="dir:left box:mean">
-              {                
+              <div className="luck-level">
+              {
                     list.map(function(item,index){
                         let coverUrl = item.avatar ? 'url('+item.avatar+')' : '';
                         return(
