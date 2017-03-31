@@ -58,13 +58,13 @@ class Result extends React.Component{
             '17' :  '真不是我的错，我也不知道红包去哪个星球了',
             '18' :  '别急，我们许总已经在抢银行了',
             '19' :  '我知道你想憋个大的，继续',
-            '20' :  '喔噻，哥，赶快去买张彩票吧，双色球6 6 6 6 6 6 8'                       
+            '20' :  '喔噻，哥，赶快去买张彩票吧，双色球6 6 6 6 6 6 8'
         }
 
         this.percent = {
             '1' : '城市套路深，何必太认真，你却认真打败了全国##%的用户',
             '2' : '姿势太帅，恭喜你打败了全国##%的红包用户',
-            '3' : '闹哪样？一不小心你就打败了全国##%的用户'            
+            '3' : '闹哪样？一不小心你就打败了全国##%的用户'
         }
     }
 
@@ -123,7 +123,7 @@ class Result extends React.Component{
     shareHandle(){
         this.setState({
             share:{display:'block'}
-        });        
+        });
     }
 
     shareSuccess(){
@@ -141,7 +141,7 @@ class Result extends React.Component{
             success:function(response){
                //微信自带分享成功提示
             }
-        });        
+        });
     }
 
     count(result){
@@ -159,7 +159,7 @@ class Result extends React.Component{
         let coverUrl = item.avatar ? 'url('+item.avatar+')' : '';
         return '<div class="record-header" data-flex="main:center cross:center"><i style={{backgroundImage:coverUrl}}></i></div>'+
                 '<div class="record-content" >'+
-                '<p>'+item.nickname+'</p>'+
+                '<p>'+item.nickname || '草莓看客' +'</p>'+
                 '<p>'+item.date.substr(5)+'</p>'+
                 '</div>'+
                 '<div class="record-amount">'+
@@ -169,7 +169,7 @@ class Result extends React.Component{
 
     result(){
         let data = this.state.result;
-        if(data.amount == '0'){ 
+        if(data.amount == '0'){
             return <div className="no-winning">{this.tips[Math.ceil(Math.random()*20)]}</div>
         }else{
             let str = this.percent[Math.ceil(Math.random()*3)];
@@ -200,7 +200,7 @@ class Result extends React.Component{
               <div className="result-line"></div>
 		      <h1>已抢{this.state.count}个红包</h1>
               <div className="result-record">
-                  <Scroll {...this.data} />         
+                  <Scroll {...this.data} />
 	          </div>
               <Share {...this.state.share}/>
           </div>
