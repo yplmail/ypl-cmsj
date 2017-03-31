@@ -22,14 +22,14 @@
     if (data.code) {
         if(data.videoId && data.playId){
             location.href = 'https://' + location.hostname + '/#/detail/'+data.videoId+'/'+data.playId+'?code=' + data.code + '&state=' + data.state;
-            return false;
+        }else{
+            if(data.scope == 'snsapi_base'){
+                location.href = 'https://' + location.hostname + '/#/?code=' + data.code + '&state=' + data.state;
+            }else{
+                location.href = 'https://' + location.hostname + '/#/mine?code=' + data.code + '&state=' + data.state;
+            }
         }
 
-        if(data.scope == 'snsapi_base'){
-            location.href = 'https://' + location.hostname + '/#/?code=' + data.code + '&state=' + data.state;
-        }else{
-            location.href = 'https://' + location.hostname + '/#/mine?code=' + data.code + '&state=' + data.state;
-        }
     } else {
 
         var arr = [];
