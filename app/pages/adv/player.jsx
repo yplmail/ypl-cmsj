@@ -254,13 +254,16 @@ class Player extends React.Component{
     componentWillUnmount(){
         this.player.pause();
         this.player = null;
-        let server = new ServerRequest();
-        server.post({
-            url:'advEndPlay',
-            data:{
-                videoPlayRecordId : this.videoPlayId
-            }
-        })
+        //正播放、中途退出，上传播放记录
+        if(this.videoPlayId){
+            let server = new ServerRequest();
+            server.post({
+                url:'advEndPlay',
+                data:{
+                    videoPlayRecordId : this.videoPlayId
+                }
+            })           
+        }
     }
 
     /**

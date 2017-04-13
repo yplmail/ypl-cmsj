@@ -15,12 +15,12 @@ class Detail extends React.Component{
   render(){
     return(
       <div className="detail-wrapper">
-             <Player {...this.props.params}/>
+         <Player {...this.props.params} />
          <div className="scroll-wrapper">
-             <div>
+              <div>
                    <Record {...this.props.params} />
                    <Video  {...this.props.params} />
-                 </div>
+              </div>
          </div>
          <Link className="back-button" to='/' style={{display:this.props.params.shareId ? 'block':'none'}}></Link>
       </div>
