@@ -25,9 +25,8 @@ time, mark, audio, video, input {
 }
 
 html {
-    background-color: #eeeff3;
+    background-color: #eee;
     -webkit-text-size-adjust: 100%;
-    overflow: hidden;
 }
 
 html * {
@@ -38,13 +37,9 @@ html * {
 }
 
 body {
-    max-width: 10rem;
-    width: 100%;
-    margin: 0 auto;
     font: 14px/1.5 'Heiti SC', 'Helvetica', 'HelveticaNeue', 'Droidsansfallback', "Droid Sans", 'Dengxian', 'Segoe', 'microsoft yahei';
     color: #323232;
     background-color: #fff;
-    overflow: hidden;
 }
 
 article,
@@ -133,4 +128,7 @@ input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
     color: #999;
 }
-
+.container-wrapper{
+  max-width:750px;
+  margin:auto;
+}

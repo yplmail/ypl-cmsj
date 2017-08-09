@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>草莓视频</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link href="../reset/reset.css" rel="stylesheet">
+    <link href="../reset/data-flex.css" rel="stylesheet">
+    <link href="./common/common.css" rel="stylesheet">
+    <link href="./channel.css" rel="stylesheet">
+    <script type="text/javascript" src="../reset/reset.js"></script>
+</head>
+
+<body>
+    <div class="channel-wrapper">
+        <div class="channel-toolbar" data-flex="dir:left cross:center box:justify">
+            <div>
+                <img src="./images/strawberry_logo.png" alt="">         
+            </div>
+            <div >
+                <h1>草莓视频</h1>
+                <p>有趣的视频应用</p>
+            </div>
+            <div>
+                <a href="./download.html">打开APP</a>
+            </div>
+        </div>
+        <div class="channel-header">
+            <div class="header-outer" data-flex="dir:left box:first">
+                <div class="img-outer"><img id="channelAvatar" src="./images/person_header.png"></div>
+                <div class="des-outer" data-flex="dir:top box:mean main:center">
+                    <h1 data-flex="cross:center" id="nickName"></h1>
+                    <p id="introduction"></p>
+                </div>
+            </div>
+            <div class="channel-detail" data-flex="dir:left box:mean main:center">
+                <div data-flex="dir:top box:mean">
+                    <p data-flex="cross:bottom" id="fans">0</p>
+                    <p data-flex="cross:top">粉丝</p>
+                </div>
+                <div data-flex="dir:top box:mean">
+                    <p data-flex="cross:bottom" id="praise">0</p>
+                    <p data-flex="cross:top">获赞</p>
+                </div>
+                <div data-flex="dir:top box:mean">
+                    <p data-flex="cross:bottom" id="attention">0</p>
+                    <p data-flex="cross:top">关注</p>
+                </div>
+                <div data-flex="cross:center main:center">
+                    <p class="edit-channel">关注</p>
+                </div>
+            </div>
+        </div>
+        <div class="channel-list">
+            <div class="channel-rows">
+            	<ul class="scroll-outer">
+            		
+                </ul>
+    		        <div class="scroll-loading">
+    		            <div class="loading-box">
+    		                <div class="loading-rond">
+    		                    <div class="rond"></div>
+    		                </div>
+    		                <div class="loading-circle">
+    		                    <p ref="loadingtips">下拉加载</p>
+    		                </div>
+    		            </div>
+    		        </div>            	
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="./common/zepto.js"></script>
+    <script type="text/javascript" src="./common/layer.js"></script>
+    <script type="text/javascript" src="./common/utils.js"></script>
+    <script type="text/javascript" src="./channel.js"></script>    
+</body>
+
+</html>

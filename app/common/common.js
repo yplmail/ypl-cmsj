@@ -9,7 +9,7 @@ const common = {
         let d = new Date()
         d.setDate(d.getDate() + expiredays)
         document.cookie = name + "=" + escape(value) +
-            ((expiredays == null) ? "" : ";expires=" + d.toGMTString())
+            ((expiredays == null) ? "" : ";expires=" + d.toGMTString())+";path=/";
     },
 
     getcookies: (name) => {
@@ -23,6 +23,19 @@ const common = {
             }
         }
         return ""
+    },
+
+    getsearch(){
+        var arr  = location.search.substring(1).split('&');
+        var data = {};
+        for (var i = 0; i < arr.length; i++) {
+            var pos = arr[i].indexOf('=');
+            if (pos === -1) {
+                continue;
+            }
+            data[arr[i].substring(0, pos)] = decodeURIComponent(arr[i].substring(pos + 1));
+        } 
+        return data;      
     },
 
     isWechat: () => {
@@ -104,9 +117,22 @@ const common = {
     },
 
     remRatio : () => {
-        let width = Math.min(window.innerWidth,414);
-        
+        let width = Math.min(window.innerWidth,414);  
         return width / 7.5;
+    },
+
+    joinImageUrl:(url) =>{
+        if(!url){
+            return require('../images/mine_header_icon.png');
+        }else if(/^http:\/\//.test(url) || /^https:\/\//.test(url)){
+            return url;
+        }else{
+            if(process.env.NODE_ENV == 'production'){
+                return 'https://file.springrass.com'+url;
+            }else{
+                return 'https://prefile.springrass.com'+url;
+            }                
+        }
     }
 
 }

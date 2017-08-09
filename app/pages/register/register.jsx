@@ -6,6 +6,7 @@ import ServerRequest from 'server/serverRequest';
 import common from '../../common/common';
 import ClosePassword from '../../images/close_password_icon.png';
 import OpenPassword from '../../images/open_password_icon.png';
+import ENVIRONMENT from 'config/config';
 
 class Login extends React.Component{
     constructor(props) {
@@ -16,9 +17,13 @@ class Login extends React.Component{
             pwd    : '',
             passwordType:'password',
             background  : 'url('+ClosePassword+')',
+            codeToken   : '',
+            imageCode   : '',
+            imageUrl    : '',
             codeTips:'获取验证码'
         }
         this.time = 0;
+        this.ischecked = false;
         this.mobileChange = this.mobileChange.bind(this);
         this.codeChange = this.codeChange.bind(this);
         this.passwordChange = this.passwordChange.bind(this);
@@ -32,6 +37,30 @@ class Login extends React.Component{
         if(this.props.params.shareId){
              common.changeTitle('邀请注册');
         }
+    }
+
+    componentDidMount(){
+        this.getImageToken();
+    }
+
+    getImageToken(){
+        let server = new ServerRequest();
+        server.get({
+           url:'getImageToken',
+           success:function(result){
+              this.setState({
+                  imageCode : '',
+                  codeToken : result.codeToken,
+                  imageUrl  : ENVIRONMENT[process.env.NODE_ENV] + 'config/getCode?codeToken='+result.codeToken
+              });
+           }.bind(this)
+        })
+    }
+
+    imageCodeChange(event){
+        this.setState({
+            imageCode: event.target.value
+        });
     }
 
     mobileChange(event){
@@ -74,6 +103,7 @@ class Login extends React.Component{
     }
 
     handleCode(event){
+
         if(this.state.mobile == ''){
           layer.open({content:'请输入您的手机号码',time:2});
           return false;
@@ -82,6 +112,23 @@ class Login extends React.Component{
           layer.open({content:'请输入正确的手机号码',time:2});
           return false;
         }
+
+        if(!this.state.imageCode){
+          layer.open({content:'请输入图片验证码',time:2});
+          return false;
+        }
+
+        if(this.state.imageCode.length < 4){
+          layer.open({content:'请输入正确的图片验证码',time:2});
+          return false;
+        }
+
+        if(this.ischecked){
+          return false;
+        }else{
+          this.ischecked = true;
+        }
+
         if(this.time > 0) return false;
         let server = new ServerRequest();
         server.post({
@@ -89,19 +136,42 @@ class Login extends React.Component{
             maskLayer:true,
             data:{
                type  : 1,
-               mobile: this.state.mobile
+               mobile: this.state.mobile,
+               codeToken   : this.state.codeToken,
+               imgCode     : this.state.imageCode
             },
             success:function(response){
+                this.ischecked = false;
                 this.refs.smsCode.style.opacity = 0.3;
                 this.time = 60;
                 this.timer = setInterval(function(){
                     this.setState({'codeTips':(--this.time) + "S后重新获取"});
                     if(this.time == 0){
                         this.refs.smsCode.style.opacity = 1;
-                        this.setState({'codeTips':"重新获取"});
+                        this.setState({
+                          'codeTips':"重新获取",
+                          'imageCode' : ''
+                        });
+                        this.getImageToken();
                         clearInterval(this.timer);
                     }
                 }.bind(this),1000);
+            }.bind(this),
+            error:function(msg, response, xhr){
+                this.ischecked = false;
+                if (response.code == 900003) {
+                    common.setcookies('refreshTokenTime', '', -1);
+                    common.setcookies('token', '', -1);
+                    location.hash = '/login';
+                } else if (response.code == 900007) {
+                    //微信绑定接口
+                } else if(response.code == 800004){
+                    layer.open({content:msg,time:2,end:function(){
+                        this.getImageToken();                      
+                    }.bind(this)});         
+                }else {
+                    layer.open({content:msg || '网络有点小情绪',time:2});
+                }                
             }.bind(this)
         });
     }
@@ -166,18 +236,24 @@ class Login extends React.Component{
             maskLayer:true,
             data: data,
             success:function(response){
-              common.setcookies('refreshTokenTime',Date.now(),6);
-              common.setcookies('token',response.token,7);
-              let params = this.props.params;
-              if(params.videoId && params.playId){
-                  location.hash="/detail/"+params.videoId+'/'+params.playId;
-              }else{
-                  if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                      location = './redirect.html';
-                  }else{
-                      location.hash = '/';
-                  }
-              }
+                common.setcookies('refreshTokenTime',Date.now(),2);
+                common.setcookies('token',response.token,7);
+                if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                    let params = this.props.params;
+                    if(params.videoId && params.playId){
+                        var search = common.getsearch();
+                        if(search.source == 'video'){
+                            location = location.protocol + '//' + location.host + '/multipage/video.html?videoId='+params.videoId+'&playId='+params.playId;
+                        }
+                        if(search.source == 'detail'){
+                            location = location.protocol + '//' + location.host + '/multipage/detail.html?videoId='+params.videoId+'&playId='+params.playId;
+                        }
+                    }else{
+                        location = location.protocol + '//' + location.host+'/#/';                
+                    }
+                }else{
+                    location = location.protocol + '//' + location.host+'/#/';   
+                }
             }.bind(this)
         });
     }
@@ -191,6 +267,12 @@ class Login extends React.Component{
                         <label htmlFor="mobile"></label>
                         <input id="mobile" type="tel" placeholder="请输入您的手机号" name="mobile" value={this.state.mobile}
                         onChange={this.mobileChange} onBlur={this.handleBlur} maxLength="11"/>
+                     </li>
+
+                    <li>
+                        <img src={this.state.imageUrl} />
+                        <input type="text" placeholder="请输入图片验证码" maxLength="4" value={this.state.imageCode} onChange={this.imageCodeChange.bind(this)}/>
+                        <span onClick={this.getImageToken.bind(this)}>换一张</span>
                      </li>
 
                      <li>

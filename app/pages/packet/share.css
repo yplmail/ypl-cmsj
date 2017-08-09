@@ -1,0 +1,170 @@
+.packetshare-wrapper {
+    position: relative;
+    width: 100%;
+    background: url(../../images/packetshare_bg.png) no-repeat;
+    background-size: 100% 100%;
+    height:15.49rem;
+    user-select:none;
+    text-align: center;
+}
+
+.packetshare-header {
+	position: relative;
+	top:2rem;
+    text-align: center;
+}
+
+.packetshare-header img {
+    width: 1.67rem;
+    height: 1.67rem;
+    border-radius: 50%;
+}
+
+.packetshare-header h3{
+	color:#fff;
+	font-size: 14px;
+	height:2.5em;
+	line-height: 2.5em;
+} 
+
+.packetshare-header p{
+	text-align: center;
+	color:#f9e5bb;
+	font-size: 19px;
+	height:2em;
+	line-height: 2em;
+} 
+
+.packetshare-header .packet-amount{
+    color:#fff;
+}
+
+.packetshare-header .packet-amount span{
+    color:#fff;
+    font-size: 30px;
+    vertical-align: baseline;
+}
+.packetshare-content{
+    position: relative;
+    top:2.5rem;
+    left:50%;
+    margin-left:-3.47rem;
+    width:6.94rem;
+    height:4rem;
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.packetshare-content:before{
+	position: absolute;
+	top:0;
+	left:0;
+	content:'';
+	display: block;
+	z-index: 15;
+	width:100%;
+	height:100%;
+	background: url(../../images/video_play_btn.png) no-repeat;
+	background-size: 1.12rem 1.12rem;
+	background-position: center center
+}
+
+.packetshare-content .sharevideo-title{
+    position: relative;
+    width: 100%;
+    line-height: 0.8rem;
+    height:0.8rem;
+}
+
+.packetshare-content .sharevideo-title h2{	
+    font-size: 17px;
+    font-weight: 700;
+    text-align: left;
+    color: #fff;
+    padding-left: .45rem;
+    width:6.2rem;
+}
+
+.packetshare-content .sharevideo-bar{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    line-height: 0.8rem;
+    height:0.8rem;
+    color:#fff;
+}
+
+.packetshare-content .sharevideo-bar p.adv-invest {
+    width: 30%;
+}
+
+.packetshare-content .sharevideo-bar p.adv-invest:before{
+    content: '';
+    display: inline-block;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/list_packet_icon.png) no-repeat;
+    background-size: contain;
+    vertical-align: -4px;
+    margin-right: 4px;
+}
+
+.sharevideo-bar p.adv-packetAmt {
+    width: 25%;
+}
+
+.sharevideo-bar p.adv-packetAmt:before{
+    content: '';
+    display: inline-block;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/adv_packetamt_icon.png) no-repeat;
+    background-size: contain;
+    vertical-align: -4px;
+    margin-right: 4px;
+}
+
+.sharevideo-bar p.adv-playCount {
+    width: 25%;
+}
+
+.sharevideo-bar p.adv-playCount:before{
+    content: '';
+    display: inline-block;
+    width: .36rem;
+    height: .36rem;
+    background: url(../../images/adv_play_count.png) no-repeat;
+    background-size: contain;
+    vertical-align: -4px;
+    margin-right: 4px;
+}
+
+.sharevideo-bar p.adv-time {
+    width: 20%;
+    text-align: right;
+    padding-right:.45rem;
+}
+
+.sharevideo-bar p.adv-time span {
+    background-color: rgba(232,199,135,.8);
+    /*background-color: rgba(203,174,103,0.56);*/
+    /*opacity: .56;*/
+    color: rgba(255,255,255);
+    padding: 2px 5px;
+    border-radius: 8px;
+    /*vertical-align: top;*/
+    font-size: 10px;
+}
+
+.packetshare-qrcode{
+    display: block;
+    position: absolute;
+    bottom: 2.2rem;
+    left: .9rem;
+    width: 1.65rem;
+    height: 1.65rem;
+    z-index: 10;   
+}

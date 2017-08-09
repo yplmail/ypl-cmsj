@@ -34,7 +34,7 @@
 
 .about-wrapper ul li{
 	height:.98rem;
-	border-bottom: 1px solid #c1c1c1;
+	border-bottom: 1px solid #eee;
 }
 
 .about-wrapper ul li > div:nth-child(1){
@@ -50,3 +50,23 @@
    font-size: 15px;
    color:#666;
 }
+
+.about-wrapper ul li > a{
+  display: block;
+  height:.98rem;
+  line-height: .98rem;
+}
+
+.about-wrapper ul li > a{
+    background: url(../../images/arrow_right_icon.png) no-repeat;  
+    background-size: .14rem .29rem;
+    background-position: 95% center;  
+}
+
+.about-wrapper ul li > a >div:nth-child(1){
+   padding-left:.36rem;
+   font-size: 15px;
+   color:#333;
+   font-weight: 700;
+}
+

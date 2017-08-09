@@ -6,27 +6,29 @@ class Share extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            display :'none',
-            title   : props.title || '',
-            desc    : props.desc || '',
-            link    : props.link || '',
-            imgUrl  : props.imgUrl || '',
-            type    : props.type || '',
-            dataUrl : props.dataUrl || '',
-            success : props.success || '',  
+            display:this.props.display
         }
-        this.cancelHandle = this.cancelHandle.bind(this);
     }
 
-    componentWillReceiveProps(props){
-        this.setState({...props});
+    componentWillReceiveProps(nextProps){
+        this.setState({display:nextProps.display});
+    }    
+
+    cancelHandle(){
+        this.props.handle && this.props.handle();
     }
 
-    componentDidUpdate(){
-        this.share();
+    render(){
+        return (
+            <div className="share-wrapper" style={{display:this.state.display}} onClick={this.cancelHandle.bind(this)}>
+                <div id="shareLogo" className="content"></div>
+            </div>
+        )
     }
+}
 
-    componentDidMount(){
+const Wechat = {
+    fetchWechatInfo:function(shareData){
         var server = new ServerRequest();
         server.post({
             url :'wechatShare',
@@ -34,18 +36,14 @@ class Share extends React.Component{
                 url : location.href.replace(/#.+$/, '')
             },
             success:function(result){
-               this.initConfig(result.wxConfig);
+               this.initWechat(result.wxConfig,shareData);
             }.bind(this)
-        })
-    }
+        })  
+    },
 
-    cancelHandle(){
-        this.setState({display:'none'});
-        this.props.handle && this.props.handle();
-    }
-
-    initConfig(config) {
+    initWechat:function(config,shareData){
         wx.config({
+            //debug    : true,
             appId    : config.appId,
             timestamp: config.timeStamp,
             nonceStr : config.nonceStr,
@@ -58,44 +56,29 @@ class Share extends React.Component{
                 content: '微信初始化信息验证失败',
                 time   : 2
             });
-        }.bind(this));
+        }.bind(this));  
 
-        this.share();
-    }
-
-    share() {
-        let share = {
-            title   : this.state.title,  // 分享标题
-            desc    : this.state.desc,   // 分享描述
-            link    : this.state.link,   // 分享链接
-            imgUrl  : this.state.imgUrl,  // 分享图标
-            type    : this.state.type,    // 分享类型,music、video或link，不填默认为link
-            dataUrl : this.state.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
-            success : this.state.success || this.cancelHandle,
-            cancel  : this.cancelHandle
+        let content = {
+            title   : shareData.title,  // 分享标题
+            desc    : shareData.desc,   // 分享描述
+            link    : shareData.link,   // 分享链接
+            imgUrl  : shareData.imgUrl,  // 分享图标
+            type    : shareData.type,    // 分享类型,music、video或link，不填默认为link
+            dataUrl : shareData.dataUrl, // 如果type是music或video，则要提供数据链接，默认为空,
+            success : shareData.success
         };
 
         wx.ready(function() {
             // 分享到朋友圈
-            wx.onMenuShareTimeline(share);
+            wx.onMenuShareTimeline(content);
             // 分享给朋友
-            wx.onMenuShareAppMessage(share);
+            wx.onMenuShareAppMessage(content);
             // 分享到QQ
-            wx.onMenuShareQQ(share);
+            wx.onMenuShareQQ(content);
             //分享到QQ空间
-            wx.onMenuShareWeibo(share);
+            wx.onMenuShareWeibo(content);
         });
-    };
-
-    render(){
-        return (
-            <div className="share-wrapper" style={{display:this.state.display}} onClick={this.cancelHandle}>
-                <div className="content">
-                    <p>请点击右上角将本链接发送给指定朋友或分享到朋友圈等</p>
-                </div>
-            </div>
-        )
     }
 }
 
-export default Share;
+export {Share,Wechat};

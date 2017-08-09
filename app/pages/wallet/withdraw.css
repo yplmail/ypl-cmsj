@@ -1,0 +1,58 @@
+.withdraw-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.withdraw-wrapper .conent {
+    margin: 0 .3rem;
+}
+
+.withdraw-wrapper .account-amount {
+    height: 1.13rem;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.withdraw-wrapper .account-amount span {
+    display: inline-block;
+    font-size: 17px;
+    color: #333;
+    margin-top: .5rem;
+}
+
+.withdraw-wrapper .withdraw-amount {
+    margin: .33rem 0;
+    text-align: center;
+}
+
+.withdraw-wrapper .withdraw-amount input {
+    display: none;
+}
+
+.withdraw-wrapper .withdraw-amount label {
+    display: inline-block;
+    width: 2.05rem;
+    height: .89rem;
+    line-height: .89rem;
+    border: 1px solid #ce1035;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: .18rem;
+    margin-bottom: .18rem;
+    font-size: 17px;
+    color: #ce1035;
+}
+
+.withdraw-wrapper .withdraw-amount input:checked + label {
+    background: #ce1035;
+    color: #fff;
+}
+
+.withdraw-tips {
+    position: absolute;
+    bottom: .5rem;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}

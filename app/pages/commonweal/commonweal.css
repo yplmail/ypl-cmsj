@@ -1,0 +1,55 @@
+.commonweal-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: #eee;    
+}
+
+.commonweal-outer {
+    position: relative;
+    width: 100%;    
+}
+
+.commonweal-outer li {
+    position: relative;
+    height: 4rem;
+    width: 100%;
+    margin-bottom: 1px;
+    background-color: #333;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.commonweal-outer li a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.commonweal-tools {
+    height: 1rem;
+    line-height: 1rem;
+    font-size: 15px;
+    color: #fff;
+}
+
+.commonweal-title {
+    margin-left: .35rem;
+    width: 5rem;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.commonweal-tools img {
+    width: .36rem;
+    height: .4rem;
+}
+
+.commonweal-tools span {
+    font-size: 11px!important;
+    margin-left: 2px;
+}
+
+.commonweal-tools>div:last-child {
+    text-align: center;
+}

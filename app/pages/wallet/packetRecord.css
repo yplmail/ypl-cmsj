@@ -1,0 +1,73 @@
+.packetrecord-outer {
+    position: relative;
+}
+
+.packetrecord-scroll {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.packetrecord-scroll li {
+    height: 1.82rem;
+    margin: 0 .3rem;
+    border-bottom: 1px solid #eee;
+}
+
+.packetrecord-scroll .video-img {
+    height: 1.44rem;
+    width: 1.44rem;
+}
+
+.packetrecord-scroll .header-img {
+    height: .48rem;
+    width: .48rem;
+    border-radius: 50%;
+}
+
+.packetrecord-scroll .record-content {
+    margin-left: .3rem;
+    height: 1.44rem;
+}
+
+.packetrecord-scroll .record-header h3 {
+    font-size: 11px;
+    color: #666;
+    padding-left: 5px;
+}
+
+.packetrecord-scroll .record-title h3 {
+    width: 3.5rem;
+    font-size: 15px;
+    color: #333;
+}
+
+.packetrecord-scroll .record-title p {
+    text-align: right;
+    font-size: 17px;
+}
+
+.packetrecord-scroll .record-title span {
+    font-size: 17px;
+}
+
+.packetrecord-scroll .record-title span:nth-child(1) {
+    color: #ce1035;
+}
+
+.packetrecord-scroll .record-detail p:nth-child(1) {
+    font-size: 11px;
+    color: #666;
+}
+
+.packetrecord-scroll .record-detail p:nth-child(2) {
+    font-size: 11px;
+    color: #666;
+    text-align: center;
+}
+
+.packetrecord-scroll .record-detail p:nth-child(3) {
+    font-size: 11px;
+    text-align: right;
+}

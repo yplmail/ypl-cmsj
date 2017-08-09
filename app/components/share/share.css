@@ -11,13 +11,14 @@
 
 .share-wrapper .content {
     position: fixed;
-    right: 25px;
+    right: 0;
     top: 0;
     z-index: 10;
     padding-top: 1.5rem;
-    width: 3.8rem;
-    background: url(../../images/share_line_icon.png) no-repeat right top;
-    background-size: auto 1.5rem;
+    width: 4.87rem;
+    height:4.32rem;
+    background: url(../../images/share_guide_icon.png) no-repeat right top;
+    background-size: 100% 100%;
 }
 
 .share-wrapper .content p {

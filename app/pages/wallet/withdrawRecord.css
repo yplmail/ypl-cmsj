@@ -1,0 +1,44 @@
+.withdrawrecord-outer {
+    position: relative;
+}
+
+.withdrawrecord-scroll {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.withdrawrecord-scroll li {
+    height: 1.82rem;
+    margin: 0 .3rem;
+    border-bottom: 1px solid #eee;
+}
+
+.withdrawrecord-scroll .record-title {
+    margin-top: 10px;
+}
+
+.withdrawrecord-scroll .record-title h3 {
+    font-size: 17px;
+    color: #333;
+}
+
+.withdrawrecord-scroll .record-title span {
+    font-size: 17px;
+    color: #333;
+}
+
+.withdrawrecord-scroll .record-title span:nth-child(1) {
+    color: #ce1035;
+}
+
+.withdrawrecord-scroll .record-status {
+    font-size: 11px;
+    color: #666;
+}
+
+.withdrawrecord-scroll .record-result {
+    font-size: 11px;
+    color: #666;
+}

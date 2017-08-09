@@ -17,25 +17,25 @@
 }
 
 .mine-header-wrapper .personal-header {
+    position: relative;
     background: url(../../images/mine_header_bg.png) no-repeat;
     background-size: 100% 100%;
-    width: 100%;
     text-align: center;
+    width: 100%;
+    height: 2.06rem;
 }
 
 .mine-header-wrapper .headerImg {
-    display: inline-block;
-    margin-top: .5rem;
+    position: absolute;
+    top: .5rem;
+    left: 50%;
+    margin-left: -.6rem;
     width: 1.2rem;
     height: 1.2rem;
-    background-image: url(../../images/user_header_icon.png);
+    background-image: url(../../images/mine_header_icon.png);
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 50%;
-}
-
-.mine-header-wrapper .headerTip {
-    line-height: 2.5em;
 }
 
 .mine-header-wrapper .personal-money {
@@ -51,6 +51,12 @@
 .mine-header-wrapper .personal-money span:nth-child(2) {
     color: #333;
     font-size: 20px;
+}
+
+.mine-header-wrapper .personal-money .headerTip {
+    text-align: center;
+    font-size: 14px;
+    color: #333;
 }
 
 .mine-list-wrapper {
@@ -82,22 +88,57 @@
 }
 
 .mine-list-wrapper li:nth-child(3) {
-    background: url(../../images/feedback_icon.png) no-repeat;
+    background: url(../../images/follow.png) no-repeat;
     background-size: .54rem .54rem;
     background-position: .38rem center;
 }
 
 .mine-list-wrapper li:nth-child(4) {
-    margin-bottom: .58rem;
-    background: url(../../images/about_product_icon.png) no-repeat;
+    background: url(../../images/feedback_icon.png) no-repeat;
     background-size: .54rem .54rem;
     background-position: .38rem center;
 }
 
 .mine-list-wrapper li:nth-child(5) {
+    background: url(../../images/about_product_icon.png) no-repeat;
+    background-size: .54rem .54rem;
+    background-position: .38rem center;
+}
+
+.mine-list-wrapper li:nth-child(6) {
+    margin-bottom: .2rem;
+    background: url(../../images/downloadapp_icon.png) no-repeat;
+    background-size: .54rem;
+    background-position: .38rem center;
+}
+
+.mine-list-wrapper li:nth-child(7) {
+    background: url(../../images/works_icon.png) no-repeat;
+    background-size: .54rem;
+    background-position: .38rem center;
+}
+
+.mine-list-wrapper li:nth-child(8) {
     background: url(../../images/setting_icon.png) no-repeat;
     background-size: .54rem .54rem;
     background-position: .38rem center;
+}
+
+.mine-list-wrapper li:nth-child(1) i {
+    position: absolute;
+    top: .15rem;
+    left: .75rem;
+    width: .2rem;
+    height: .2rem;
+    background-color: #e30c35;
+    border-radius: 50%;
+}
+
+.mine-list-wrapper li:nth-child(3) span {
+    position: absolute;
+    right: .8rem;
+    top: .04rem;
+    color: #999;
 }
 
 .mine-list-wrapper li:after {
@@ -175,4 +216,28 @@
     100% {
         transform: rotate(720deg);
     }
+}
+
+.follow_bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5)
+}
+
+.follow_content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 100;
+    width: 5rem;
+    transform: translate(-50%, -50%);
+}
+
+.follow_img {
+    width: 100%;
+    height: 100%;
 }

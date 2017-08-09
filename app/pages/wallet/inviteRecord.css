@@ -1,0 +1,54 @@
+.inviterecord-outer {
+    position: relative;
+}
+
+.inviterecord-scroll {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.inviterecord-scroll li {
+    height: 1.21rem;
+    margin: 0 .3rem;
+    border-bottom: 1px solid #eee;
+}
+
+.inviterecord-scroll .headerImg {
+    width: .85rem;
+    height: .85rem;
+    border-radius: 50%;
+}
+
+.inviterecord-scroll .record-content {
+    height: .85rem;
+    padding-left: .3rem;
+}
+
+.inviterecord-scroll .nickName {
+    font-size: 15px;
+    color: #333;
+}
+
+.inviterecord-scroll .rewardAmount {
+    width: 2rem;
+    text-align: right;
+}
+
+.inviterecord-scroll .rewardAmount span {
+    font-size: 17px;
+}
+
+.inviterecord-scroll .rewardAmount span:nth-child(1){
+    color:#ce1035;
+}
+
+.inviterecord-scroll .invite-result {
+/*    width: 2.5rem;*/
+    text-align: right;
+}
+
+.record-content > div:last-child p{
+   font-size: 11px;
+}

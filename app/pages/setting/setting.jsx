@@ -7,33 +7,47 @@ class Setting extends React.Component{
 	constructor(props){
 		super(props);
     this.state = {
-        isBindWechat : false
+        isBindWechat : false,
+        wachat       : '',
+        isBindMobile : false,
+        mobile       : ''
     }
     this.confirm = this.confirm.bind(this);
     this.logout = this.logout.bind(this);
-    this.linkHandle = this.linkHandle.bind(this);
 	}
 
-  componentDidMount(){
+  componentDidMount(){   
+      this.getHomeData();          
+  }
+
+  getHomeData(){
       let server = new ServerRequest();
       server.post({
           url: 'home',
           maskLayer:true,
-          success:function(response){
-             if(response.isWechatBinded == 'true'){
-                this.setState({
-                  isBindWechat : true,
-                  wachat       : '已绑定'
-                })
-             }else{
-                this.setState({
-                  isBindWechat: false,
-                  wachat      : '去绑定'
-                })
-             }
+          success:function(response){           
+              this.setState({
+                  isBindWechat : response.isWechatBinded == 'true' ? true : false,
+                  wachat       : response.isWechatBinded == 'true' ? '已绑定' : '去绑定',
+                  isBindMobile : response.mobile ? true : false,
+                  mobile       : response.mobile ? response.mobile : '去绑定'
+              })
           }.bind(this)
       })
   }
+
+
+  wachatLink(){
+      if(!this.state.isBindWechat){
+          location.href = './redirect.html?scope=snsapi_userinfo&isBind=1#/mine';        
+      }
+  }
+
+  mobileLink(){
+      if(!this.state.isBindMobile){
+          location.hash = '/mobileAuth';
+      }    
+  }  
 
   confirm(){
       layer.open({
@@ -53,17 +67,18 @@ class Setting extends React.Component{
           url: 'logout',
           maskLayer:true,
           success:function(response){
-            common.setcookies('refreshTokenTime','',-1);
-            common.setcookies('token','',-1);
-            location.hash = '/login';
-          }.bind(this)
+              common.setcookies('refreshTokenTime','',-1);
+              common.setcookies('token','',-1);
+              common.setcookies('authorize_code','',-1);
+              location = '#/login';
+          }.bind(this),
+          error:function(msg,response,xhr){
+              common.setcookies('refreshTokenTime','',-1);
+              common.setcookies('token','',-1);
+              common.setcookies('authorize_code','',-1);
+              location = '#/login';            
+          }
       })
-  }
-
-  linkHandle(){
-      if(!this.state.isBindWechat){
-          location.href = './redirect.html?scope=snsapi_userinfo';
-      }
   }
 
 	render(){
@@ -71,9 +86,16 @@ class Setting extends React.Component{
            <div className="setting-wrapper">
               <ul>
                   <li>
-	                  <a onClick={this.linkHandle} style={{color:this.state.isBindWechat ? '#999' : '#333'}}>
+	                  <a onClick={this.wachatLink.bind(this)} style={{color:this.state.isBindWechat ? '#999' : '#333'}}>
                         <span>微信绑定</span>
     	                  <span>{this.state.wachat}</span>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a onClick={this.mobileLink.bind(this)} style={{color:this.state.isBindMobile ? '#999' : '#333'}}>
+                        <span>手机绑定</span>
+                        <span>{this.state.mobile}</span>
                     </a>
                   </li>
 

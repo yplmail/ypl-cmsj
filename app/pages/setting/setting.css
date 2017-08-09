@@ -43,9 +43,13 @@
 }
 
 .setting-wrapper .setting-btn{
-	height: .88rem;
-	line-height: .88rem;
-	margin:2.52rem .48rem 0 .48rem;
+  position: absolute;
+  bottom:1.2rem;
+  left:50%;
+	height: .86rem;
+	line-height: .86rem;
+  width:6rem;
+  margin-left: -3rem;
 	text-align: center;
 	background-color: #ce1035;
 	border-radius: 8px;

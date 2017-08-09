@@ -1,0 +1,126 @@
+.enjoy-wrapper {
+    position: relative;
+    width: 100%;
+    background: url(../../images/enjoy_bg.jpg) no-repeat;
+    background-size: cover;
+}
+
+.enjoy-nav {
+    position: relative;
+    height: .8rem;
+    width: 100%;
+    background-color: #1c1c20;
+}
+
+.nav-outer {
+    width: 80%;
+    margin: 0 auto;
+    height: .8rem;
+    line-height: .8rem;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.nav-outer > div {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-outer span {
+    display: inline-block;
+    font-size: 17px;
+    color: #fff;
+    padding: 0 5px;
+    height: .74rem;
+}
+
+.nav-outer span.active {
+    font-weight: 700;
+    border-bottom: .06rem solid #ce1035;
+}
+
+.enjoy-swipe {
+    position: relative;
+    width: 100%;
+}
+
+.enjoy-swipe .swipe-outer {
+    position: relative;
+    overflow: hidden;
+}
+
+.enjoy-swipe .swipe-items {
+    display: flex;
+    display: -webkit-flex;
+    height: 100%;
+    width: 100%;
+}
+
+.enjoy-swipe .item {
+    flex: 1;
+}
+
+.enjoy-swipe li {
+    position: relative;
+    width:7rem;
+    margin: 0 auto;
+    padding:.125rem 0;
+}
+
+.enjoy-swipe li a {
+    position: relative;
+    height: 4rem;
+    background-color: #333;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    width: 100%;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.enjoy-swipe .playtime {
+    position: absolute;
+    right:.3rem;
+    bottom:.3rem;
+    background-color: rgba(232, 199, 135, .8);
+    padding: 1px 7px;
+    border-radius: 8px;
+    font-size: 11px;
+    color:#fff;
+}
+
+.enjoy-swipe .enjoyvideo-detail{
+    background-color: #fff;
+    height:1.34rem;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;    
+}
+
+.enjoy-title {
+    display: block;
+    margin-left: .35rem;
+    width: 6rem!important;
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+}
+
+.enjoy-tools {
+    margin-left: .35rem;
+    font-size: 15px;
+    color: #fff;
+}
+
+.enjoy-tools img {
+    width: .36rem;
+    height: .4rem;
+}
+
+.enjoy-tools span {
+    font-size: 11px!important;
+    margin-left: 2px;
+    color:#333;
+}
+
+

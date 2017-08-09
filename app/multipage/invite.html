@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>邀请好友</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link href="../reset/reset.css" rel="stylesheet">
+    <link href="./common/swiper.css" rel="stylesheet">
+    <link href="./invite.css" rel="stylesheet">
+    <script type="text/javascript" src="../reset/reset.js"></script>
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="./images/invite_01.png" alt="">
+                <a class="inviteRegister" href="../index.html#inviteRegister"></a>
+                <div class="pre-outer slideInUpAnroid"><img src="./images/page_pre.png" alt=""></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="./images/invite_02.png" alt="">
+                <div class="pre-outer slideInUpAnroid"><img src="./images/page_pre.png" alt=""></div>
+            </div>
+            <div class="swiper-slide">
+                <img src="./images/invite_01.png" alt="">
+                <a class="inviteRegister" href="../index.html#inviteRegister"></a>
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="operator-outer">
+        <a class="qrcode-btn">关注</a>
+        <a id="download" href="./download.html">下载</a>
+    </div>
+
+    <div class="qrcode-outer" style="display: none">
+        <img class="qrcode" src="./images/public_concern_icon.png" alt="">
+        <img class="close" src="./images/close_icon.png" alt="">
+    </div>
+
+    <script type="text/javascript" src="./common/swiper.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+            direction: 'vertical'
+        });
+        var arr  = location.search.substring(1).split('&');
+        var data = {};
+        for (var i = 0; i < arr.length; i++) {
+            var pos = arr[i].indexOf('=');
+            if (pos === -1) {
+                continue;
+            }
+            data[arr[i].substring(0, pos)] = decodeURIComponent(arr[i].substring(pos + 1));
+        } 
+
+        if (data.shareId) {
+            document.getElementsByClassName("inviteRegister").setAttribute('href', '../index.html#inviteRegister/' + data.shareId);
+            document.getElementById("download").setAttribute('href', './download.html?shareId=' + data.shareId);
+        }
+
+        var qrcodeBtn = document.getElementsByClassName('qrcode-btn')[0];
+
+        var qrcodeOuter = document.getElementsByClassName('qrcode-outer')[0];
+
+        var qrcode = document.getElementsByClassName('qrcode')[0];
+
+        var close = document.getElementsByClassName('close')[0];
+
+        qrcodeBtn.addEventListener('click', function() {
+            qrcodeOuter.style.display = 'block';
+        }, false);
+
+        qrcodeOuter.addEventListener('click', function() {
+            qrcodeOuter.style.display = 'none';
+        }, false);
+
+        close.addEventListener('click', function() {
+            qrcodeOuter.style.display = 'none';
+        }, false);
+
+        qrcode.addEventListener('click', function(e) {
+            e.stopPropagation();
+        }, false);
+
+        var preOuter = document.getElementsByClassName('pre-outer');
+
+        if (/iPad|iPod|iPhone/i.test(navigator.userAgent)) {
+            preOuter[0].setAttribute('class', 'pre-outer slideInUp');
+            preOuter[1].setAttribute('class', 'pre-outer slideInUp');
+        }
+    </script>
+</body>
+
+</html>

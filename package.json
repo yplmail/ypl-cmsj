@@ -9,21 +9,22 @@
     "build": "webpack",
     "start": "webpack-dev-server --devtool eval --progress --hot --colors --host 0.0.0.0 --content-base app",
     "development": "webpack -p --config webpack.config.js",
-    "preventive" : "webpack -p --config webpack.preventive.config.js",
-    "production" : "webpack -p --config webpack.production.config.js",
+    "test": "webpack -p --config webpack.test.config.js",
+    "preventive": "webpack -p --config webpack.preventive.config.js",
+    "production": "webpack -p --config webpack.production.config.js",
     "validate": "npm ls",
     "commit": "git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1"
   },
   "dependencies": {
-    "animate.css": "^3.5.2",
-    "babel-runtime": "6.x",
-    "better-scroll": "^0.1.12",
-    "get-next-page": "^1.0.0",
     "react": "15.x",
     "react-dom": "15.x",
-    "react-html5video": "^2.0.0",
-    "react-router": "^2.5.1"
+    "react-router": "^2.5.1",
+    "iscroll": "^5.2.0",
+    "react-iscroll": "^2.0.2",
+    "react-swipes": "^1.0.6",
+    "animate.css": "^3.5.2",
+    "babel-runtime": "6.x"
   },
   "devDependencies": {
     "autoprefixer": "^6.6.1",

@@ -1,0 +1,49 @@
+.invitePacket-wrapper{
+    position: relative;
+	width:100%;
+    height:12.5rem;	
+    background: url(../../images/invite_packet_bg.png) no-repeat;
+    background-size: 100%;
+    text-align: center;
+    z-index: 0;	
+    background-color: #f7f7f7;
+}
+
+.invitePacket-content{
+    position: absolute;
+    bottom:.8rem;  
+    left:0; 
+    width:100%;
+    text-align: center;
+}
+
+.invitePacket-content a:nth-child(1){
+    display: block;
+    line-height: .84rem;
+    height:.84rem;
+    width:80%;
+    margin-left:10%;
+    border:1px solid #46a90e;
+    border-radius: 20px;
+    font-size: 15px;
+    background: url(../../images/invite_f_icon.png) no-repeat;
+    background-size: .75rem .75rem;
+    background-position: 35% center;
+    padding-left:14%;
+}
+
+.invitePacket-content a:nth-child(2){
+    line-height: .84rem;
+    height:.84rem;
+    display: block;
+    margin-left:10%;    
+    width:80%;
+    border:1px solid #46a90e;
+    border-radius: 20px;
+    margin-top:.26rem;
+    font-size: 15px;
+    background: url(../../images/invite_fs_icon.png) no-repeat;
+    background-size: .75rem .75rem;
+    background-position: 35% center;
+    padding-left:14%;
+}

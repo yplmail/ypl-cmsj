@@ -1,0 +1,402 @@
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    height: 12.2rem;
+}
+
+.video-player {
+    position: relative;
+    width: 100%;
+    height: 4.2rem;
+}
+
+.player-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: 1;
+    display: none;
+}
+
+.player-cover:after {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 55.5px;
+    height: 55.5px;
+    margin-left: -25.25px;
+    margin-bottom: -25.25px;
+    bottom: 50%;
+    left: 50%;
+    z-index: 2;
+    background-image: url(./images/video_play_btn.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.video-content {
+    position: relative;
+    width: 100%;
+    height: 8rem;
+    background-image: url(./images/video_content_bg.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;       
+}
+
+.video-content-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-filter: blur(20px);
+    /* Chrome, Opera */
+    -moz-filter: blur(20px);
+    -ms-filter: blur(20px);
+    filter: blur(20px);
+    filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius=20, MakeShadow=false);
+    /* IE6~IE9 */
+    z-index: 0;
+}
+
+.video-info {
+    position: relative;
+    padding-top:20px;
+    z-index: 1;
+}
+
+.video-info > div {
+    height: .8rem;
+}
+
+.info-packet {
+    position: relative;
+    height: .68rem;
+    background: url(./images/video_packet_bg.png) no-repeat;
+    background-size: contain;
+    background-position: 15% center;
+}
+
+.info-share {
+    position: relative;
+    height: .68rem;
+    background: url(./images/video_share_bg.png) no-repeat;
+    background-size: contain;
+    background-position: 85% center;
+}
+
+.info-maxpacket {
+    position: relative;
+    height: .68rem;
+    background: url(./images/video_maxpacket_bg.png) no-repeat;
+    background-size: contain;
+    background-position: 15% center;
+}
+
+.info-playcount {
+    position: relative;
+    height: .68rem;
+    background: url(./images/video_playcount_bg.png) no-repeat;
+    background-size: contain;
+    background-position: 85% center;
+}
+
+.video-info img {
+    width: .4rem;
+    height: .4rem;
+}
+
+.info-packet img,
+.info-maxpacket img {
+    margin-left: .4rem;
+}
+
+.info-packet span,
+.info-maxpacket span {
+    margin-left: .3rem;
+}
+
+.info-share img,
+.info-playcount img {
+    margin-right: .4rem;
+}
+
+.info-share span,
+.info-playcount span {
+    margin-right: .3rem;
+}
+
+.video-info span {
+    font-size: 11px;
+    color: #ffd8b0;
+}
+
+.center-packet {
+    position: absolute;
+    width: 2.9rem;
+    height: 3.69rem;
+    top: 32%;
+    left: 50%;
+    margin-left: -1.45rem;
+    background: url(./images/center_packet.png) no-repeat;
+    background-size: contain;
+    z-index: 2;
+    -webkit-transform: scale3d(.5, .5, .5);
+    transform: scale5d(.5, .5, .5);
+    -webkit-transition: all 0.75s linear;
+    transition: all 0.75s linear;
+    -webkit-perspective: 500px;
+    -moz-perspective: 500px;
+    -ms-perspective: 500px;
+    -o-perspective: 500px;
+    perspective: 500px;        
+}
+
+.video-content .packet-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: hidden; 
+}
+
+.video-content .packet-container li {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 1.53rem;
+    height: 1.92rem;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background: url(./images/move_packet.png) no-repeat;
+    background-size: contain;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transition: transform 3s linear;
+    -webkit-transition: transform 3s linear;
+    -webkit-perspective: 800px;
+    -moz-perspective: 800px;
+    -ms-perspective: 800px;
+    -o-perspective: 800px;
+    perspective: 800px;    
+}
+
+.translate{
+     transform: translate3d(0, 500px, 0)!important;
+    -webkit-transform: translate3d(0, 500px, 0)!important;   
+}
+
+.video-content .packet-container li img {
+    position: absolute;
+    left: 50%;
+    margin-left: -.25rem;
+    margin-top: .5rem;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+}
+
+.video-content .packet-container li span {
+    position: absolute;
+    top: 1.1rem;
+    font-size: 10px;
+    color: #ffd8b0;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.tab-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1.23rem;
+    background: url(./images/tab_nav.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.tab-nav a {
+    flex: 1;
+    height: 1rem;
+    font-size: 15px;
+    color: #fff;
+}
+
+.tab-nav a img {
+    width: .44rem;
+    height: .46rem;
+}
+
+.tab-nav a span {
+    padding-left: 6px;
+}
+
+
+.packet-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.packet-wrapper .packet-content {
+    position: absolute;
+    width: 5.73rem;
+    height: 8.69rem;
+    top: 1.5rem;
+    left: 50%;
+    margin-left: -2.865rem;
+    background: url(./images/packet_bottom_bg.png) no-repeat;
+    background-position: left bottom;
+    background-size: 5.73rem 3.99rem;
+    text-align: center;
+    background-color:#e20c35;
+    border-radius: 20px;
+}
+
+.packet-wrapper .packet-close {
+    position: absolute;
+    width: .58rem;
+    height: .58rem;
+    top: .18rem;
+    left: .18rem;
+    background: url(./images/packet_close_icon.png) no-repeat;
+    background-size: contain;
+}
+
+.packet-wrapper .packet-header {
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    top: 1.5rem;
+    left: 50%;
+    margin-left: -.625rem;
+    border-radius: 50%;
+    background-image: url(./images/person_header.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.packet-wrapper .packet-title {
+    position: absolute;
+    top: 3rem;
+    font-size: 16px;
+    color: #ffd8b0;
+    text-align: center;
+    width: 100%;
+}
+
+.packet-wrapper .packet-desprition {
+    position: absolute;
+    top: 3.6rem;
+    text-align: center;
+    font-size: 14px;
+    color: #ffd7af;
+    width: 100%;
+}
+
+.packet-wrapper .packet-wish {
+    position: absolute;
+    bottom: 3.5rem;
+    text-align: center;
+    font-size: 20px;
+    min-height: .6rem;
+    color: #ffd7af;
+    width: 100%;
+}
+
+.packet-wrapper .packet-open {
+    position: absolute;
+    left: 50%;
+    bottom: 1.35rem;
+    display: block;
+    width: 1.48rem;
+    height: 1.48rem;
+    margin-left: -.74rem;
+    background: url(./images/packet_open_icon.png) no-repeat;
+    background-size: contain;
+    perspective: 500;
+    -webkit-perspective: 500;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    backface-visibility: visible;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        transform: rotate3d(0, 0, 0, 0);
+        -webkit-transform: rotate3d(0, 0, 0, 0);
+    }
+    to {
+        transform: rotate3d(0, 1, 0, 360deg);
+        -webkit-transform: rotate3d(0, 1, 0, 360deg);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate3d(0, 0, 0, 0);
+        -webkit-transform: rotate3d(0, 0, 0, 0);
+    }
+    to {
+        transform: rotate3d(0, 1, 0, 360deg);
+        -webkit-transform: rotate3d(0, 1, 0, 360deg);
+    }
+}
+
+.packet-wrapper .rotateAnimation {
+    animation: rotate 1s infinite linear;
+    -webkit-animation: rotate 1s infinite linear;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+}
+
+@-webkit-keyframes scaleIn {
+    from {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.packet-wrapper .animation {
+    -webkit-animation-name: scaleIn;
+    animation-name: scaleIn;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+

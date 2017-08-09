@@ -121,3 +121,44 @@
     color: #333;
     background-color: #dddddd;
 }
+
+.wechat-login{
+    position: relative;
+}
+
+.login-wrapper .wechat-login h2{
+    text-align: center;
+}
+
+.login-wrapper .wechat-login h2 span{
+    color: #333;
+    font-size: 10px;
+    margin:0 .22rem;
+}
+
+.login-wrapper .wechat-login h2:before,
+.login-wrapper .wechat-login h2:after{
+    content:'';
+    display: inline-block;
+    width:1.4rem;   
+    height:1px;
+    background: url(../../images/line_icon.png) no-repeat;
+    background-size: contain;
+    background-position: center center;
+    vertical-align: middle;
+}
+
+.login-wrapper .wechat-login p{
+    text-align: center;
+    margin-top: .2rem;
+}
+
+.login-wrapper .wechat-login a{
+    display: inline-block;
+    color: #333;
+    font-size: 10px;
+    width:.98rem;
+    height:.98rem;
+    background: url(../../images/invite_wx_logo.png) no-repeat;
+    background-size: contain;
+}

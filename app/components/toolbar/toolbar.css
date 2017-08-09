@@ -1,0 +1,89 @@
+.toolbar-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 92;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
+}
+
+.toolbar-content .content {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 4.86rem;
+    height: 8.99rem;
+    margin-left: -2.43rem;
+    margin-top: -5rem;
+}
+
+.toolbar-content .content img:nth-child(1) {
+    width: 100%;
+    height: 100%;
+}
+
+.toolbar-content img:nth-child(2) {
+    position: absolute;
+    right: 0;
+    top: .6rem;
+    width: .41rem;
+    height: .41rem;
+}
+
+.toolbar-bottom {
+    display: none;
+}
+
+.toolbar-inner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 1.05rem;
+    background-color: rgba(0, 0, 0, .5);
+    width: 100%;
+    z-index: 92;
+}
+
+.toolbar-inner .toolbar-close{
+    position: absolute;
+    top:.2rem;
+    right:.2rem;
+    width:.4rem;
+    height:.4rem;
+}
+
+.toolbar-inner > div:nth-child(1) img {
+    width: 1rem;
+}
+
+.toolbar-inner > div:nth-child(1) p {
+    color: #fff;
+    font-size: 12px;
+    margin-left:5px;
+}
+
+.toolbar-inner > div:nth-child(2) span {
+    font-size: 14px;
+    color: #fff;
+    padding: 5px 20px;
+    background-color: #e20c35;
+    border-radius: 20px;
+}
+
+.toolbar-inner .tips {
+    color: #fff;
+    font-size: 17px;
+}
+
+.toolbar-inner .qrcodetips {
+    color: #fff;
+    font-size: 17px;
+    background-color: #fff;
+    border-radius: 20px;
+    color: #e20c35;
+    text-align: center;
+    width: 82%;
+    padding: 2px 0;
+}

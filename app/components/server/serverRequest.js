@@ -23,7 +23,7 @@ class ServerRequest {
             app_key: 'channel_wechat_1',
             app_version: '1.0.0',
             api_version: '1.0.0',
-            token : common.getcookies('token'),
+            token: common.getcookies('token'),
             timestamp: new Date().Format("yyyy-MM-dd hh:mm:ss")
         }
     }
@@ -45,14 +45,14 @@ class ServerRequest {
     }
 
     _request() {
-        for(let r in this.default){
+        for (let r in this.default) {
             this.data[r] = this.default[r]
         }
 
         let arr = [];
 
         for (let d in this.data) {
-            if(this.data[d]){
+            if (this.data[d] && this.data[d] != 'undefined' && this.data[d] != 'null') {
                 arr.push(d + '=' + encodeURIComponent(this.data[d]));
             }
         }
@@ -65,8 +65,8 @@ class ServerRequest {
             this.url = this.domain + API[this.url] + '?' + Date.now();
         }
 
-        if(this.maskLayer){
-            layer.open({type: 2});
+        if (this.maskLayer) {
+            this.index = layer.open({ type: 2 });
         }
 
         if (this.method == 'GET') {
@@ -74,7 +74,7 @@ class ServerRequest {
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.send(null);
         } else {
-            this._timeout()
+            if (this.async) { this._timeout() }
             this.xhr.open(this.method, this.url, this.async);
             this.xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             this.xhr.send(str);
@@ -90,7 +90,7 @@ class ServerRequest {
     }
 
     _complete() {
-        layer.closeAll();
+        if (this.maskLayer) { layer.close(this.index); }
         var head = this.xhr.getAllResponseHeaders();
         var response = this.xhr.responseText;
         if (/application\/json/.test(head) || this.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
@@ -100,19 +100,10 @@ class ServerRequest {
             if (response.code == 0) {
                 this._success(response.data);
             } else {
-                if(response.code == 900003){
-                    common.setcookies('refreshTokenTime','',-1);
-                    common.setcookies('token','',-1);
-                    location.hash = '/login';
-                } else if(response.code == 900007){
-                    //微信绑定接口
-                    //this.error && this.error(response.msg);
-                }else{
-                    this.error(response.msg, this.xhr);
-                }
+                this.error(response.msg, response, this.xhr);
             }
         } else {
-            this.error(this.xhr.statusText, this.xhr);
+            this.error(this.xhr.statusText, response, this.xhr);
         }
     }
 
@@ -120,28 +111,32 @@ class ServerRequest {
         if ('timeout' in this.xhr) {
             this.xhr.timeout = this.timeout;
             this.xhr.ontimeout = function() {
-                this.error('请求超时...', this.xhr);
+                this.error('请求超时...', {}, this.xhr);
             }.bind(this);
         } else {
             let timer = setTimeout(function() {
                 this.xhr.abort();
-                this.error('请求超时...', this.xhr);
+                this.error('请求超时...', {}, this.xhr);
                 clearTimeout(timer);
             }.bind(this), this.timeout);
         }
     }
 
     _success(result) {
-        /**
-         *
-         * 这里做一些中间处理，暂时无
-         *
-         **/
         this.success(result, this.xhr)
     }
 
-    _fail(msg) {
-        layer.open({content:msg || '网络有点小情绪',time:2});
+
+    _fail(msg, response) {
+        if (response.code == 900003) {
+            common.setcookies('refreshTokenTime', '', -1);
+            common.setcookies('token', '', -1);
+            location.hash = '/login';
+        } else if (response.code == 900007) {
+            //微信绑定接口
+        } else {
+            layer.open({ content: msg || '网络有点小情绪', time: 2 });
+        }
     }
 }
 

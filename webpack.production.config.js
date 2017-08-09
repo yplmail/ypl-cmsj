@@ -5,7 +5,7 @@ var uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var isGzip   = true;
+var isGzip = true;
 
 var webpackConfig = module.exports = {
     entry: {
@@ -21,11 +21,13 @@ var webpackConfig = module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: /^node_modules$/,
-            loader: 'babel?presets=es2015&compact=false',
+            //loader: 'babel?presets=es2015&compact=false',
+            loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'
         }, {
             test: /\.jsx$/,
             exclude: /^node_modules$/,
-            loaders: ['jsx', 'babel?presets[]=es2015,presets[]=react']
+            //loaders: ['jsx', 'babel?presets[]=es2015,presets[]=react']
+            loaders: ['jsx', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0']
         }, {
             test: /\.css$/,
             exclude: /^node_modules$/,
@@ -57,16 +59,18 @@ var webpackConfig = module.exports = {
             'scroll': path.resolve(__dirname, './app/components/scroll'),
             'server': path.resolve(__dirname, './app/components/server'),
             'share': path.resolve(__dirname, './app/components/share'),
-            'md5'  : path.resolve(__dirname, './app/components/md5'),
-            'common'  : path.resolve(__dirname, './app/common'),
-            'config'  : path.resolve(__dirname, './app/config')
+            'swipes': path.resolve(__dirname, './app/components/swipes'),
+            'toolbar': path.resolve(__dirname, './app/components/toolbar'),
+            'md5': path.resolve(__dirname, './app/components/md5'),
+            'common': path.resolve(__dirname, './app/common'),
+            'config': path.resolve(__dirname, './app/config')
         }
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
-            name:'vendors', 
-            filename:'js/vendors.js',
-            async:true
+            name: 'vendors',
+            filename: 'js/vendors.js',
+            async: true
         }),
         new ExtractTextPlugin('css/app.css'),
         new webpack.DefinePlugin({
@@ -81,9 +85,9 @@ var webpackConfig = module.exports = {
             }
         }),
         new CopyWebpackPlugin([
-            { from: './app/reset/data-flex.css', to: 'reset/data-flex.css'},
-            { from: './app/reset/reset.css', to: 'reset/reset.css' },
-            { from: './app/reset/reset.js', to: 'reset/reset.js' },
+            { from: './app/reset', to: 'reset', toType: 'dir' },
+            { from: './app/multipage', to: 'multipage', toType: 'dir' },
+            { from: './app/images/strawberry_logo.png', to: 'images/strawberry_logo.png' },
             { from: './app/favicon.ico', to: 'favicon.ico' }
         ]),
         new HtmlWebpackPlugin({
@@ -93,7 +97,6 @@ var webpackConfig = module.exports = {
             inject: true,
             hash: true
         }),
-
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, './dist/redirect.html'),
             template: './app/redirect.html',
@@ -108,14 +111,14 @@ var webpackConfig = module.exports = {
 };
 
 if (isGzip) {
-  var CompressionWebpackPlugin = require('compression-webpack-plugin');
-  webpackConfig.plugins.push(
-    new CompressionWebpackPlugin({
-      asset: '[path].gz[query]',
-      algorithm: 'gzip',
-      test: /\.js$|\.css$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
-  )
+    var CompressionWebpackPlugin = require('compression-webpack-plugin');
+    webpackConfig.plugins.push(
+        new CompressionWebpackPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.js$|\.css$/,
+            threshold: 10240,
+            minRatio: 0.8
+        })
+    )
 }

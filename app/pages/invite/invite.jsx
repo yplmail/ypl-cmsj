@@ -1,44 +1,67 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Share   from 'share/share';
+import {Share , Wechat}  from 'share/share';
 import common from 'common/common';
+import ServerRequest from 'server/serverRequest';
 import './invite.css';
 
 class Invite extends React.Component{
 	constructor(props){
 		super(props);
-		let tk = common.getcookies('token');
-		let shareId = tk ? tk.split("_")[1] : '';
 		this.state = {
-        	share:{
-				display : 'none',
-				title   : '草莓视界',
-				desc    : '草莓视界带你一起去发现创意的美',
-				link    : 'http://'+location.hostname+'/#/inviteRegister/'+shareId,
-				imgUrl  : 'http://'+location.hostname+'/images/strawberry_logo.png'
-        	}
-		}
-		this.shareHandle = this.shareHandle.bind(this);
+			display:'none',
+        	item   :{}
+		}		
 	}
 
-	shareHandle(event){
-        this.setState({
-        	share:{
-				display : 'block'
-        	}
-        });
+	componentWillMount(){
+		let server = new ServerRequest();
+		server.post({
+			url:'invite',
+			success:function(response){
+                this.setState({item:response});
+			}.bind(this)
+		})
+	}
+
+	componentDidMount(){
+		let href = 'https://'+location.hostname+'/multipage/invite.html';
+		if(common.getcookies('token')){
+			href = href + '?shareId=' + common.getcookies('token').split("_")[1];
+		}
+        Wechat.fetchWechatInfo({
+			title   : '草莓视频',
+			desc    : '草莓视频带你一起发现创意美',
+			link    : href,
+			imgUrl  : 'https://'+location.hostname+'/images/strawberry_logo.png'
+		})
+	}
+
+	shareHandle(d){
+        this.setState({display : d});
 	}
 
 	render(){
 		return(
            <div className="invite-wrapper">
-				<div className="invite-content" >
-					<h1>一起去发现创意的美</h1>
-					<h2><span>分享到微信</span></h2>
-					<i onClick={this.shareHandle}></i>
+				<div className="person-header">
+					<img src={common.joinImageUrl(this.state.item.avatar)} />
+					<h1>{this.state.item.nickName||'草莓看客' }</h1>
+					<p>邀请您一起发现创意美</p>
 				</div>
-				<Share {...this.state.share}/>
-           </div>
+
+				<div className="invite-qrcode">
+                    <img src={this.state.item.qrCode} alt="加载失败"/>
+				</div>
+
+				<div className="invite-share">
+					<h2><span>分享到微信</span></h2>
+					<p><img src={require('../../images/invite_wx_logo.png')} onClick={this.shareHandle.bind(this,'block')} /></p>
+				</div>
+
+				<Share display={this.state.display} handle={this.shareHandle.bind(this,'none')}/>
+				
+			</div>
 		)
 	}
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>红包分享</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link href="../reset/reset.css" rel="stylesheet">
+    <link href="../reset/data-flex.css" rel="stylesheet">
+    <link href="./common/common.css" rel="stylesheet">
+    <link href="./share.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="share-wrapper">
+        <div class="share-header">
+            <img id="header" src="./images/share_header.png">
+            <h3 id="nikename">草莓看客</h3>
+            <p  id="tips">创意视频集合地，红包多多就等你！</p>
+            <div class="share-winning">
+                <span id="winningAmt" class="amount"></span>
+                <p id="nowinning" class="nowinning">看视频 拼手气 抢红包 你也来试试吧！</p>
+            </div>
+        </div>
+
+
+        <div class="share-video">
+            <div class="video-outer">
+                <h1 class="ellipsis" id="video-title"></h1>
+                <div class="video-tool" data-flex="dir:left main:center cross:center box:mean">
+                    <div class="video-detail">
+                        <img src="./images/video_packet.png" />
+                        <span id="video_packet" class="value"></span>
+                    </div>
+                    <div class="video-detail">
+                        <img src="./images/video_max_packet.png" />
+                        <span id="video_max_packet" class="value"></span>
+                    </div>
+                    <div class="video-detail">
+                        <img src="./images/video_play.png" />
+                        <span id="video_play" class="value"></span>
+                    </div>
+                    <div style="text-align: right">
+                        <span id="video-time" class="time"></span>
+                    </div>
+                </div>               
+            </div>
+        </div>
+
+        <div class="share-bottom">
+            <div class="qrcode">
+                <img src="./images/sharepacket_bottom.png">
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../reset/reset.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="./common/zepto.js"></script>
+    <script type="text/javascript" src="./common/layer.js"></script>
+    <script type="text/javascript" src="./common/utils.js"></script>
+    <script type="text/javascript" src="./common/wechat.js"></script>
+    <script type="text/javascript" src="./share.js"></script>
+</body>
+
+</html>

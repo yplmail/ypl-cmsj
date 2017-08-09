@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>草莓视频</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link href="../reset/reset.css" rel="stylesheet">
+    <link href="../reset/data-flex.css" rel="stylesheet">
+    <link href="./common/player.css" rel="stylesheet">
+    <link href="./common/common.css" rel="stylesheet">
+    <link href="./video.css" rel="stylesheet">
+    <script type="text/javascript" src="../reset/reset.js"></script>
+    <script type="text/javascript" src="./common/zepto.js"></script>
+    <script type="text/javascript" src="./common/layer.js"></script>
+    <script type="text/javascript" src="./common/utils.js"></script>   
+    <script>
+    if(utils.iswechat() && location.host.indexOf('springrass.com') > -1){
+        var token  = utils.getcookies('token');
+        var serach = utils.getsearch();  
+        if(!token && !serach.code){
+            var params = '';
+            if (location.search) {
+                params = location.search + '&pathname=' + location.pathname
+            } else {
+                params = '?pathname=' + location.pathname
+            }
+            location = location.protocol + '//' + location.host + '/' + 'redirect.html' + params;              
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <div class="video-wrapper">
+        <div class="video-player">
+            <div id="player" class="prism-player"></div>
+            <div id="cover" class="player-cover"></div>
+        </div>
+        <div class="video-content">
+            <div class="video-info">
+                <div data-flex="main:justify cross:center box:mean">
+                    <div class="info-packet" data-flex="dir:left main:left cross:center">
+                        <img src="./images/video_packet.png">
+                        <span id="packetcount"></span>
+                    </div>
+                    <div class="info-share" data-flex="dir:right main:left cross:center">
+                        <img src="./images/share_icon.png" class="shareLogo">
+                        <span class="shareText">分享有礼</span>
+                    </div>
+                </div>
+                <div data-flex="main:justify cross:center box:mean">
+                    <div class="info-maxpacket" data-flex="dir:left main:left cross:center">
+                        <img src="./images/video_max_packet.png" style="margin-left:.44rem">
+                        <span id="packetamount"></span>
+                    </div>
+                    <div class="info-playcount" data-flex="dir:right main:left cross:center">
+                        <img src="./images/video_play.png" style="margin-right:.44rem">
+                        <span id="playTimes"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="center-packet"></div>
+            <ul class="packet-container"></ul>
+        </div>
+        <div class="mask">
+            <div class="content"></div>
+        </div>
+        <div class="packet-wrapper">
+            <div class="packet-content animation">
+                <p class="packet-close"></p>
+                <p class="packet-header"></p>
+                <p class="packet-title"></p>
+                <p class="packet-desprition"></p>
+                <p class="packet-wish"></p>
+                <p class="packet-open"></p>
+            </div>
+        </div>
+        <div class="tab-nav" data-flex="dir:left main:center cross:bottom box:mean">
+            <a href="../index.html#/" data-flex="dir:left main:center cross:center">
+                <img src="./images/f_nav_01_gray.png" alt="">
+                <span>发现</span>
+            </a>
+            <a href="../index.html#/enjoy" data-flex="dir:left main:center cross:center">
+                <img src="./images/f_nav_02_gray.png" alt="">
+                <span>懂你</span>
+            </a>
+            <a href="../index.html#/commonweal" data-flex="dir:left main:center cross:center">
+                <img src="./images/f_nav_03_gray.png" alt="">
+                <span>公益</span>
+            </a>
+            <a href="../index.html#/mine" data-flex="dir:left main:center cross:center">
+                <img src="./images/f_nav_04_gray.png" alt="">
+                <span>我的</span>
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="https://g.alicdn.com/de/prismplayer/1.5.7/prism-min.js"></script>
+    <script type="text/javascript" src="./common/wechat.js?v=1234954949"></script> 
+    <script type="text/javascript" src="./video.js?v=123456"></script>
+</body>
+
+</html>

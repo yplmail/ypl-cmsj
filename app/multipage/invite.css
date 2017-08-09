@@ -1,0 +1,195 @@
+    html,
+    body {
+        position: relative;
+        height: 100%;
+    }
+    
+    body {
+        background: #eee;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .swiper-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .swiper-slide {
+        position: relative;
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    
+    .swiper-container-vertical > .swiper-pagination-bullets {
+        left: 20px;
+        top: 90%;
+    }
+    
+    .swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+        margin: 15px 0;
+    }
+    
+    .swiper-pagination-bullet-active {
+        background: #ce1035;
+    }
+    
+    .swiper-slide img {
+        height: 100%;
+        width: 100%;
+    }
+    
+    .operator-outer {
+        position: fixed;
+        top: .35rem;
+        right: .44rem;
+        z-index: 2;
+    }
+    
+    .operator-outer a {
+        width: 1.35rem;
+        height: .58rem;
+        line-height: .6rem;
+        background-color: #ce1035;
+        font-size: 14px;
+        color: #fff;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        text-align: center;
+        display: block;
+    }
+    
+    .inviteRegister {
+        position: absolute;
+        top: 3.5rem;
+        left: 50%;
+        margin-left: -1.6rem;
+        display: block;
+        height: 0.8rem;
+        width: 3.2rem;
+    }
+    
+    .qrcode-outer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        background-color: rgba(0, 0, 0, 0.4)
+    }
+    
+    .qrcode {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        height: 8.99rem;
+        width: 4.86rem;
+        margin-top: -4.5rem;
+        margin-left: -2.43rem;
+    }
+    
+    .close {
+        position: absolute;
+        height: .41rem;
+        width: .41rem;
+        right: 1.4rem;
+        top: 2rem;
+    }
+    
+    .pre-outer {
+        position: absolute;
+        bottom: 0rem;
+        width: .44rem;
+        height: .22rem;
+        left: 50%;
+        margin-left: -.22rem;
+    }
+    
+    @-webkit-keyframes slideInUp {
+        from {
+            -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0);
+            visibility: visible;
+        }
+        to {
+            -webkit-transform: translate3d(0, -1000%, 0);
+            transform: translate3d(0, -1000%, 0);
+        }
+    }
+    
+    @keyframes slideInUp {
+        from {
+            -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0);
+            visibility: visible;
+        }
+        to {
+            -webkit-transform: translate3d(0, -1000%, 0);
+            transform: translate3d(0, -1000%, 0);
+        }
+    }
+
+    @-webkit-keyframes slideInUpAnroid {
+        from {
+            -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0);
+            visibility: visible;
+        }
+        to {
+            -webkit-transform: translate3d(0, -400%, 0);
+            transform: translate3d(0, -400%, 0);
+        }
+    }
+    
+    @keyframes slideInUpAnroid {
+        from {
+            -webkit-transform: translate3d(0, 0%, 0);
+            transform: translate3d(0, 0%, 0);
+            visibility: visible;
+        }
+        to {
+            -webkit-transform: translate3d(0, -400%, 0);
+            transform: translate3d(0, -400%, 0);
+        }
+    }
+    
+    .slideInUp {
+        -webkit-animation-name: slideInUp;
+        animation-name: slideInUp;
+        -webkit-animation-duration: 1.5s;
+        animation-duration: 1.5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+    }
+
+    .slideInUpAnroid {
+        -webkit-animation-name: slideInUpAnroid;
+        animation-name: slideInUpAnroid;
+        -webkit-animation-duration: 1.5s;
+        animation-duration: 1.5s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+    }
+

@@ -87,34 +87,64 @@ class Login extends React.Component{
               pwd    : md5(this.state.pwd),
             },
             success:function(response){
-                common.setcookies('refreshTokenTime',Date.now(),6);
+                common.setcookies('refreshTokenTime',Date.now(),2);
                 common.setcookies('token',response.token,7);
-                let params = this.props.params;
-                if(params.videoId && params.playId){
-                    location.hash="/detail/"+params.videoId+'/'+params.playId;
-                }else{
-                    if(common.isWechat() && /springrass.com$/.test(location.hostname)){
-                        location = './redirect.html';
+                if(common.isWechat() && /springrass.com$/.test(location.hostname)){
+                    let params = this.props.params;
+                    if(params.videoId && params.playId){
+                        var search = common.getsearch();
+                        if(search.source == 'video'){
+                            location = location.protocol + '//' + location.host + '/multipage/video.html?videoId='+params.videoId+'&playId='+params.playId;
+                        }
+                        if(search.source == 'detail'){
+                            location = location.protocol + '//' + location.host + '/multipage/detail.html?videoId='+params.videoId+'&playId='+params.playId;
+                        }
                     }else{
-                        location.hash = '/';
+                        location = location.protocol + '//' + location.host+'/#/';             
                     }
+                }else{
+                    location = location.protocol + '//' + location.host+'/#/';  
                 }
             }.bind(this)
         });
     }
 
+    wxLoginHandle(){
+        /**
+         *   关于微信授权登录绑定有三种情况 ：
+         *   1、平常从服务号里进入 ：静默登录
+         *   2、点击登录页微信登录 ：授权登录
+         *   3、微信绑定           ：授权绑定
+         **/
+        //location = location.protocol + '//' + location.hostname + '/?scope=snsapi_userinfo';      
+        let params = this.props.params;
+        if(params.videoId && params.playId){
+            var search = common.getsearch();
+            if(search.source == 'video'){
+                location = location.protocol + '//' + location.host + '/multipage/video.html?scope=snsapi_userinfo&videoId='+params.videoId+'&playId='+params.playId;
+            }
+            if(search.source == 'detail'){
+                location = location.protocol + '//' + location.host + '/multipage/detail.html?scope=snsapi_userinfo&videoId='+params.videoId+'&playId='+params.playId;              
+            }
+        }else{
+            location = location.protocol + '//' + location.hostname + '/?scope=snsapi_userinfo';               
+        }     
+    }
+
     render(){
           var linkPath = '/register';
+          var forgetPasswordLink = '/forgetPassword';
           var params = this.props.params;
           if(params.videoId && params.playId){
               linkPath = linkPath + '/' + params.videoId + '/' + params.playId;
+              forgetPasswordLink = forgetPasswordLink + '/' + params.videoId + '/' + params.playId;
           }
           return (
               <div className="login-wrapper">
                   <div className="login-content">
                       <div className="login-logo">
                           <span className="logo"></span>
-                          <h1 className="title">草莓视界</h1>
+                          <h1 className="title">草莓视频</h1>
                       </div>
                       <ul>
                           <li>
@@ -130,7 +160,7 @@ class Login extends React.Component{
                           </li>
 
                           <li>
-                          <Link to="forgetPassword">忘记密码?</Link>
+                          <Link to={forgetPasswordLink}>忘记密码?</Link>
                           </li>
 
                           <li>
@@ -141,6 +171,11 @@ class Login extends React.Component{
                           <Link to={linkPath}>没有账号、立即注册</Link>
                           </li>
                       </ul>
+                  </div>
+
+                  <div className="wechat-login">
+                      <h2><span>微信登录</span></h2>
+                      <p><a onClick={this.wxLoginHandle.bind(this)}></a></p>                      
                   </div>
               </div>
         )

@@ -20,7 +20,7 @@
 }
 
 .register-content li input{
-    appearance: none;   
+    appearance: none;
 }
 
 .register-content li:nth-child(1){
@@ -50,11 +50,38 @@
 }
 
 .register-content li:nth-child(2){
+    overflow: hidden;
+    margin-bottom: .3rem;
+}
+
+.register-content li:nth-child(2) img{
+    height:100%;
+    width: 25%;
+}
+
+.register-content li:nth-child(2) input{
+    width:50%;
+    height:100%;
+    padding-left:15px;
+    background-color: #eee;
+    color:#333;
+    font-size: 14px;
+}
+
+.register-content li:nth-child(2) span{
+    display: inline-block;
+    width:25%;
+    text-align: center;
+    border-left: 1px solid #999;    
+}
+
+
+.register-content li:nth-child(3){
     border:none;
     margin-bottom: .75rem;
 }
 
-.register-content li:nth-child(2) label{
+.register-content li:nth-child(3) label{
     display: inline-block;
     height:.86rem;
     line-height: .86rem;
@@ -68,7 +95,7 @@
     border-radius: 8px;
 }
 
-.register-content li:nth-child(2) input{
+.register-content li:nth-child(3) input{
     display: inline-block;
     height:.86rem;
     width:60%;
@@ -80,11 +107,11 @@
     border-radius: 8px;
 }
 
-.register-content li:nth-child(3){
+.register-content li:nth-child(4){
     margin-bottom: 1.65rem;
 }
 
-.register-content li:nth-child(3) span{
+.register-content li:nth-child(4) span{
     position: absolute;
     right:0;
     top:0;
@@ -97,7 +124,7 @@
     background-position: left center;
 }
 
-.register-content li:nth-child(3) input{
+.register-content li:nth-child(4) input{
     display: inline-block;
     height:100%;
     width:5.8rem;
@@ -108,12 +135,12 @@
     background-color: #eee;
 }
 
-.register-content li:nth-child(4){
+.register-content li:nth-child(5){
     border:none;
     overflow: hidden;
 }
 
-.register-content li:nth-child(4) a{
+.register-content li:nth-child(5) a{
     height:.86rem;
     line-height: .86rem;
     width:100%;

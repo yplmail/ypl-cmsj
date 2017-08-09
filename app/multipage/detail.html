@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>草莓视频</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <link href="../favicon.ico" rel="shortcut icon">
+    <link href="../reset/reset.css" rel="stylesheet">
+    <link href="../reset/data-flex.css" rel="stylesheet">
+    <link href="./common/common.css" rel="stylesheet">
+    <link href="./common/player.css" rel="stylesheet">
+    <link href="./detail.css" rel="stylesheet">
+    <script type="text/javascript" src="../reset/reset.js"></script>
+</head>
+
+<body>
+    <div class="detail-wrapper">
+        <div class="video-player">
+            <div id="player" class="prism-player"></div>
+            <div id="cover" class="player-cover"></div>            
+        </div>
+
+        <div class="video-content">
+            <div class="iscroll-outer">
+                <div class="scroll">
+                    <div class="video-detail" data-flex="dir:left main:center cross:center">
+                        <div>
+                            <img src="./images/videoplayer_count.png" />
+                            <span id="playcount"></span>
+                        </div>
+                        <div>
+                            <img style="margin-left: 0" src="./images/videopacket_count.png" />
+                            <span id="packetcount"></span>
+                        </div>
+                        <div>
+                            <img src="./images/videopacket_max.png" />
+                            <span id="maxpacket"></span>
+                        </div>
+                        <div data-flex="main:center">
+                            <a id="producturl">产品详情</a>
+                        </div>
+                    </div>
+
+                    <div class="video-winning" data-flex="dir:left main:center cross:center box:mean">
+                        <div class="lucky_sign">
+                            <img src="./images/luck_star_icon.png">
+                        </div>
+                        <div class="lucky-winning"></div>
+                    </div>
+
+                    <div class="video-description">
+                        <h1 class="description-header" data-flex="dir:left box:first">
+            	        	<span id="videotitle" class="ellipsis"></span>
+                            <span id="desarrowouter" ><img id="desarrow" class="down" src="./images/des_down.png" alt=""></span>
+                    	</h1>
+                        <div id="videodes" class="description-content"></div>
+                    </div>
+
+                    <div class="video-author" data-flex="dir:left cross:center">
+                        <div class="author-header">
+                            <img id="authorheader" src="./images/person_header.png">
+                        </div>
+                        <div class="author-detail">
+                            <h2 id="authorname"></h2>
+                            <p>
+                                <span>视频</span>
+                                <span id="videocount"></span>
+                            </p>
+                        </div>
+                        <a class="author-more">更多</a>
+                    </div>
+
+                    <div class="video-related">
+                        <h1 class="relatedvideo-header">相关视频</h1>
+                        <div class="slide-container">
+                            <div class="slide-outer">
+                                <ul class="slide-items" data-flex="dir:left">
+                                    
+                                </ul>               
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-comment">
+                        <ul id="comment-outer">
+                            
+                        </ul>
+                        <div class="scroll-loading">
+                            <div class="loading-box">
+                                <div class="loading-rond">
+                                    <div class="rond"></div>
+                                </div>
+                                <div class="loading-circle">
+                                    <p ref="loadingtips">下拉加载</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                            
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="video-tools" data-flex="dir:left box:mean main:center cross:center">
+        	<div id="praiseouter"><img src="./images/praise_icon.png"><span id="praisecount"></span></div>
+        	<div id="shareouter"><img src="./images/share_red_icon.png"><span id="sharecount" ></span></div>
+        	<div id="commentouter"><img src="./images/comment_icon.png" style="width:.44rem"><span id="commentcount"></span></div>
+        </div>
+
+        <div class="packet-wrapper">
+            <div class="packet-content animation">
+                <p class="packet-close"></p>
+                <p class="packet-header"></p>
+                <p class="packet-title"></p>
+                <p class="packet-desprition"></p>
+                <p class="packet-wish"></p>
+                <p class="packet-open"></p>
+            </div>
+        </div>        
+
+        <div class="mask">
+            <div class="content"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://g.alicdn.com/de/prismplayer/1.5.7/prism-min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="./common/zepto.js"></script>
+    <script type="text/javascript" src="./common/layer.js"></script>
+    <script type="text/javascript" src="./common/utils.js"></script>
+    <script type="text/javascript" src="./common/wechat.js"></script>
+    <script type="text/javascript" src="./common/iscroll-lite.js"></script>
+    <script type="text/javascript" src="./detail.js"></script>
+</body>
+
+</html>

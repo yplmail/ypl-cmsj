@@ -1,62 +1,115 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router,Route,hashHistory,IndexRoute,Redirect} from 'react-router';
+import {Router,Route,hashHistory,IndexRoute,Redirect,browserHistory} from 'react-router';
+import common from 'common/common';
+import ServerRequest from 'server/serverRequest';
 import Nav      from './nav.jsx';
-import List     from './adv/list.jsx';
+import Index    from './index/index.jsx';
 import Login    from './login/login.jsx';
-import Hot      from './hot/hot.jsx';
 import Mine     from './mine/mine.jsx';
-import Detail   from  './adv/detail.jsx';
-import VideoDetail   from  './adv/videoDetail.jsx';
 import Register from './register/register.jsx';
 import Wallet   from './wallet/wallet.jsx';
-import Transfer   from './wallet/transfer.jsx';
+import Withdraw   from './wallet/withdraw.jsx';
 import Feedback   from './feedback/feedback.jsx';
-import Setting   from './setting/setting.jsx';
+import Setting    from './setting/setting.jsx';
 import ModifyPassword   from './modifyPassword/modifyPassword.jsx';
 import ForgetPassword   from './modifyPassword/forgetPassword.jsx';
-import WechatAuth   from './wechatAuth/wechatAuth.jsx';
-import Invite   from './invite/invite.jsx';
-import About   from './about/about.jsx';
+import MobileAuth       from './auth/mobileAuth.jsx';
+import Invite           from './invite/invite.jsx';
+import InvitePacket     from './invite/invitePacket.jsx';
+import About            from './about/about.jsx';
+import Winning          from './packet/winning.jsx';
+import Share          from './packet/share.jsx';
+import WinningLevel   from './winningLevel/winningLevel.jsx';
+import Enjoy   from './enjoy/enjoy.jsx';
+import Commonweal   from './commonweal/commonweal.jsx';
+import Works   from './works/works.jsx';
 
-function change(pre, next) {  
-	if(next.routes[1].title){
-		document.title = next.routes[1].title;		
-	}
-	const iframe = document.createElement('iframe');
-	iframe.src = '../favicon.ico';
-	const listener = () => {
-	    setTimeout(() => {
-	        iframe.removeEventListener('load', listener);
-	        document.body.removeChild(iframe);
-	    }, 320);
-	};
-	iframe.addEventListener('load', listener);
-	document.body.appendChild(iframe);
+let search    = common.getsearch();
+let iswechat  = common.isWechat();
+let token     = common.getcookies('token');
+let isRefresh = common.getcookies('refreshTokenTime');
+let isspringrass    = /springrass.com$/.test(location.hostname);
+
+const authorize = (nextState, replace) => {
+    if(iswechat && isspringrass){
+         if(token){
+            if(!common.getcookies('refreshTokenTime')){
+            	refreshToken();
+            }
+         }else{
+         	if(search.code && search.isBind != 1){
+                wechatLogin(nextState.location.pathname);
+         	}else{
+				location = location.protocol + '//' + location.hostname + '/' + 'redirect.html' + location.search + location.hash.split('?')[0];         	        		
+         	}
+         }  
+    }
+}
+
+const refreshToken = () => {
+    let server = new ServerRequest();
+    server.post({
+        url:'refreshToken',
+        async: false,
+        maskLayer:true,
+        success:function(response){
+            common.setcookies('refreshTokenTime',Date.now(),2);
+            common.setcookies('token',response.token,7);
+        },
+        error:function(msg,response,xhr){
+            if (response.code == 900003) {
+                common.setcookies('refreshTokenTime', '', -1);
+                common.setcookies('token', '', -1);
+                location = location.protocol + '//' + location.hostname + '/' + 'redirect.html' + location.search + location.hash.split('?')[0];
+            }
+        }
+    });
+}
+
+const wechatLogin = (pathname) =>{
+    let server = new ServerRequest();
+    server.post({
+        url  : 'V2WechatLogin',
+        async: pathname=='/mine' ? false : true,
+        maskLayer:true,
+        data:{
+            code :search.code,
+            state:search.state,
+            recommendCode:search.shareId
+        },
+        success:function(response){
+            common.setcookies('refreshTokenTime',Date.now(),2);
+            common.setcookies('token',response.token,7);
+            common.setcookies('authorize_code', code, 7);                	
+        }
+    }); 	
 }
 
 ReactDOM.render(
 	<Router history={hashHistory}>
-		<Route path="/" component={Nav} onChange={change} >
-			<IndexRoute component={List} title="首页"/>
-			<Route path="register(/:videoId)(/:playId)"  component={Register} title="注册"/>
-			<Route path="login(/:videoId)(/:playId)"  component={Login} title="登录"/>
-			<Route path="forgetPassword"  component={ForgetPassword} title="重置密码"/>
-			<Route path="hot" component={Hot} title="热门"/>
-			<Route path="mine" component={Mine} title="草莓"/>
-			<Route path="detail/:videoId(/:playId)" component={Detail} />
-			<Route path="share/:videoId(/:shareId)" component={Detail} />
-			<Route path="video/:videoId(/:playId)" component={VideoDetail} />
-			<Route path="register(/:videoId)(/:playId)" component={Register} title="注册"/>
-			<Route path="inviteRegister(/:shareId)" component={Register} title="邀请注册"/>
-			<Route path="wallet(/:tab)" component={Wallet} title="草莓钱包"/>
-			<Route path="feedback" component={Feedback} title="意见反馈"/>
-			<Route path="setting" component={Setting} title="设置"/>
-			<Route path="modifyPassword" component={ModifyPassword} title="修改密码"/>
-			<Route path="wechatAuth" component={WechatAuth} title="微信认证"/>
-			<Route path="transfer" component={Transfer} title="转出金额"/>
-			<Route path="invite" component={Invite} title="邀请朋友"/>
-			<Route path="about" component={About} title="关于产品"/>
+		<Route path="/" component={Nav}>
+			<IndexRoute component={Index} onEnter={authorize}/>
+			<Route path="mine" component={Mine}  onEnter={authorize}/>
+			<Route path="register(/:videoId)(/:playId)"  component={Register}/>
+			<Route path="inviteRegister(/:shareId)" component={Register}/>
+			<Route path="login(/:videoId)(/:playId)"  component={Login}/>
+			<Route path="forgetPassword(/:videoId)(/:playId)"  component={ForgetPassword}/>
+			<Route path="wallet(/:tab)" component={Wallet}/>
+			<Route path="feedback" component={Feedback}/>
+			<Route path="setting" component={Setting}/>
+			<Route path="modifyPassword" component={ModifyPassword}/>
+			<Route path="mobileAuth" component={MobileAuth}/>
+			<Route path="withdraw" component={Withdraw}/>
+			<Route path="invite" component={Invite}/>
+			<Route path="invitePacket/:videoId" component={InvitePacket}/>
+			<Route path="about" component={About}/>
+			<Route path="packetShare/:videoId/:playId/:shareId" component={Share}/>
+			<Route path="result/:videoId/:playId" component={Winning}/>
+			<Route path="winningLevel/:videoId" component={WinningLevel}/>
+			<Route path="enjoy" component={Enjoy}/>
+            <Route path="commonweal" component={Commonweal}/>
+			<Route path="works(/:authorId)" component={Works}/>
 		</Route>
 	</Router>,
 	document.querySelector('.container-wrapper')

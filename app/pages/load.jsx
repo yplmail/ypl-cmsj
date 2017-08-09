@@ -37,7 +37,7 @@ class Load extends React.Component{
     render(){
         return (
            <div className="load-wrapper">
-
+           
            </div>
         )
     }

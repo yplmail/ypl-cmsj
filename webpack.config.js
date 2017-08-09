@@ -31,14 +31,16 @@ module.exports = {
         loaders: [{
                 test: /\.js$/,
                 exclude: /^node_modules$/,
-                loader: 'babel?presets=es2015&compact=false',
+                //loader: 'babel?presets=es2015&compact=false',
+                loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'
+
             }, {
                 test: /\.json$/,
                 use: 'json-loader'
             }, {
                 test: /\.jsx$/,
                 exclude: /^node_modules$/,
-                loaders: ['jsx', 'babel?presets[]=es2015,presets[]=react']
+                loaders: ['jsx', 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0']
             }, {
                 test: /\.css$/,
                 exclude: /^node_modules$/,
@@ -72,6 +74,8 @@ module.exports = {
             'server': path.resolve(__dirname, './app/components/server'),
             'share': path.resolve(__dirname, './app/components/share'),
             'md5'  : path.resolve(__dirname, './app/components/md5'),
+            'swipes'  : path.resolve(__dirname, './app/components/swipes'),
+            'toolbar': path.resolve(__dirname, './app/components/toolbar'),
             'common'  : path.resolve(__dirname, './app/common'),
             'config'  : path.resolve(__dirname, './app/config')
         }

@@ -1,4 +1,4 @@
-;
+var _hmt = _hmt || [];
 (function(window, document) {
     var setFontSize = function() {
         var clientWith = Math.min(window.innerWidth, 414);
@@ -7,23 +7,24 @@
         html.style.fontSize = (width / 7.5) * (1 / window.devicePixelRatio) + 'px';
     };
 
+    var statistics = function() {
+        if (location.hostname === "m.springrass.com") {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?23d0e0f9753f8bb965ee09e05d0063a2";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        }else{
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?28e9221d45d6e325eb730daf3fb67c16";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);            
+        }        
+    }
+
     window.addEventListener('load', function() {
         setFontSize();
+        statistics();
     }, false)
-
-    document.addEventListener('touchmove', preventDefault, false)    
-
-    document.addEventListener('orientationchange', function(event) {
-        if (window.orientation == 0) {       
-            document.addEventListener('touchmove', preventDefault, false);
-        } else {
-            document.removeEventListener('touchmove', preventDefault, false);
-        }
-    }, false);
-
-    function preventDefault(ev) {
-        ev.preventDefault()
-    }
 
     Date.prototype.Format = function(fmt) {
         var o = {

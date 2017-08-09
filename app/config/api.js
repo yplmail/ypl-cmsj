@@ -26,7 +26,28 @@ const API = {
     'withdrawList':'account/withdraw/list',
     'feedback':'mine/feedback',
     'checkMobile':'user/checkMobile',
-    'isValidplayId' : 'publish/videoPlayRecordValid'
+    'isValidplayId' : 'publish/videoPlayRecordValid',
+    'luckyRank' : 'reward/luckyRank',
+    'packetRecord':'reward/record',
+    'version':'config/app/version',
+    'getImageToken':'config/getCodeToken',
+    'getImageCode':'config/getCode',
+    'sharePacket':'share/redPacket',
+    'shareContent':'share/content',
+    'bindMobile':'user/bindMobile',
+    'checkCanBind':'user/checkCanBind',
+    'V2WechatLogin' : 'user/V2WechatLogin',
+    'V2BindWechat' : 'user/V2BindWechat',
+    'V2BindMobile':'user/V2BindMobile',
+    'inviteRecord':'invit/invitedList',
+    'subscribed':'user/subscribed',
+    'conversation':'feedback/conversation',
+    'invite':'mine/invit',
+    'myUploadList':'uservideo/myUploadList',
+    'ownerVideoList':'uservideo/ownerVideoList',
+    'ownerInfo':'uservideo/ownerInfo',
+    'rankings':'reward/rankings',
+    'banner':'publicity/indexBanner'
 }
 
 export default API
