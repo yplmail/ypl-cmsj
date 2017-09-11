@@ -7,7 +7,7 @@
     "lint": "eslint 'app/**/*.@(js|jsx)'",
     "lint:msg": "validate-commit-msg",
     "build": "webpack",
-    "start": "webpack-dev-server --devtool eval --progress --hot --colors --host 0.0.0.0 --content-base app",
+    "start":"webpack-dev-server --config webpack.config.js",
     "development": "webpack -p --config webpack.config.js",
     "test": "webpack -p --config webpack.test.config.js",
     "preventive": "webpack -p --config webpack.preventive.config.js",

@@ -10,6 +10,7 @@ module.exports = {
         inline: true,
         progress: true,
         contentBase: './app',
+        host:"0.0.0.0",
         port: 8080
     },
     //在控制台的sources下，点开可以看到webpack://目录，里面可以直接看到我们开发态的源代码，
